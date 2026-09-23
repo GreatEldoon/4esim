@@ -1,0 +1,7542 @@
+{
+ "_readme": "talentsforever.com data export for the Mage. Fan-made WoW Forever talent calculator; talents, racials, Legacy perks and the class spellbooks come from the WoW Forever beta client's own data files (the site began as frame-by-frame reads of the BlizzCon 2026 demo), so numbers can lag live tuning. talents: per class, trees with talents (row/col are 1-based grid positions, max is the rank cap, desc maps rank number to tooltip text, confirmed lists ranks read verbatim, others are estimates; classic shows the Classic-era equivalent for comparison). spellbooks: per class, every trainer spell to level 60 with every rank (levels = the level each rank is learned at; checked = that class's city trainer was read in game, the rest are from the files only; the General tab dates from the demo reads). spell_desc: tooltip text keyed class|spell|rank, s=beta means the beta client's text at level 60 with no gear, s=demo means read off footage, s=classic means Wowhead Classic fallback, nt=1 or 2 means the class trainer does not sell that rank (1 portal trainer, 2 tome, quest or drop). racials and legacy: racial abilities and the Legacy perk trees. changelog: what changed on the site. License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). You may copy, adapt and republish this data, including commercially, as long as you credit talentsforever.com with a link. Game names, icons and tooltip text belong to Blizzard Entertainment.",
+ "generated": "2026-09-19",
+ "class": "Mage",
+ "talents": {
+  "icon": "class_mage",
+  "trees": [
+   {
+    "name": "Arcane",
+    "bg": 81,
+    "icon": "spell_holy_magicalsentry",
+    "talents": [
+     {
+      "name": "Wand Specialization",
+      "max": 2,
+      "row": 1,
+      "col": 1,
+      "passive": true,
+      "icon": "inv_wand_01",
+      "desc": [
+       "Increases your damage with Wands by 13%.",
+       "Increases your damage with Wands by 25%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "moved",
+       "tree": "Arcane",
+       "row": 2,
+       "col": 1,
+       "max": 2,
+       "text": "Increases your damage with Wands by 13%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Arcane Focus",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_devotion",
+      "desc": [
+       "Improves your chance to hit with Arcane spells by 1%.",
+       "Improves your chance to hit with Arcane spells by 2%.",
+       "Improves your chance to hit with Arcane spells by 3%.",
+       "Improves your chance to hit with Arcane spells by 4%.",
+       "Improves your chance to hit with Arcane spells by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 1,
+       "col": 2,
+       "max": 5,
+       "text": "Reduces the chance that the opponent can resist your Arcane spells by 2%."
+      }
+     },
+     {
+      "name": "Improved Channeling",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_nature_starfall",
+      "desc": [
+       "Gives you a 20% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 14% chance while casting Arcane Blast.",
+       "Gives you a 40% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 28% chance while casting Arcane Blast.",
+       "Gives you a 60% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 42% chance while casting Arcane Blast.",
+       "Gives you a 80% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 56% chance while casting Arcane Blast.",
+       "Gives you a 100% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 70% chance while casting Arcane Blast."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Gives you a 20% chance to avoid interruption caused by damage while channeling Arcane Missiles.",
+       "renamed": "Improved Arcane Missiles"
+      }
+     },
+     {
+      "name": "Arcane Subtlety",
+      "max": 2,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_dispelmagic",
+      "desc": [
+       "Reduces your target's resistance to all your spells by 8 and reduces the threat caused by your Arcane spells by 15%.",
+       "Reduces your target's resistance to all your spells by 15 and reduces the threat caused by your Arcane spells by 30%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 1,
+       "col": 1,
+       "max": 2,
+       "text": "Reduces your target's resistance to all your spells by 5 and reduces the threat caused by your Arcane spells by 20%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Magic Absorption",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_nature_astralrecalgroup",
+      "desc": [
+       "Increases all your resistances by 5 and causes all spells you fully resist to restore 1% of your total mana. Cannot trigger more often than 1 time per sec.",
+       "Increases all your resistances by 10 and causes all spells you fully resist to restore 2% of your total mana. Cannot trigger more often than 1 time per sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 2,
+       "col": 2,
+       "max": 5,
+       "text": "Increases all resistances by 2 and causes all spells you fully resist to restore 1% of your total mana. 1 sec. cooldown."
+      }
+     },
+     {
+      "name": "Arcane Concentration",
+      "max": 5,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_shadow_manaburn",
+      "desc": [
+       "Gives you a 2% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+       "Gives you a 4% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+       "Gives you a 6% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+       "Gives you a 8% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+       "Gives you a 10% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Arcane",
+       "row": 2,
+       "col": 3,
+       "max": 5,
+       "text": "Gives you a 2% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+      }
+     },
+     {
+      "name": "Arcane Resilience",
+      "max": 2,
+      "row": 2,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_arcane_arcaneresilience",
+      "desc": [
+       "Increases your Armor by an amount equal to 25% of your Intellect.",
+       "Increases your Armor by an amount equal to 50% of your Intellect."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 3,
+       "col": 3,
+       "max": 1,
+       "text": "Increases your armor by an amount equal to 50% of your Intellect.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Arcane Geometry",
+      "max": 2,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "inv_ability_mage_radiantspark",
+      "desc": [
+       "Increases the range of your Arcane spells by 3 yards.",
+       "Increases the range of your Arcane spells by 6 yards."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Arcane Impact",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_nature_wispsplode",
+      "desc": [
+       "Increases the critical strike chance of your Arcane spells by 2%.",
+       "Increases the critical strike chance of your Arcane spells by 4%.",
+       "Increases the critical strike chance of your Arcane spells by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 3,
+       "col": 2,
+       "max": 3,
+       "text": "Increases the critical strike chance of your Arcane Explosion spell by an additional 2%.",
+       "renamed": "Improved Arcane Explosion"
+      }
+     },
+     {
+      "name": "Arcane Blast",
+      "max": 1,
+      "row": 3,
+      "col": 4,
+      "passive": false,
+      "icon": "spell_arcane_blast",
+      "desc": [
+       "Blasts the target with energy, dealing 57 to 65 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "15% of base mana | 30 yd range | 2.5 sec cast",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Arcane Shielding",
+      "max": 2,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_shadow_detectlesserinvisibility",
+      "desc": [
+       "Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 17% and increases the resistances granted by your Mage Armor spell by 25%.",
+       "Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 33% and increases the resistances granted by your Mage Armor spell by 50%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 4,
+       "col": 1,
+       "max": 2,
+       "text": "Decreases the mana lost per point of damage taken when Mana Shield is active by 10%.",
+       "renamed": "Improved Mana Shield"
+      }
+     },
+     {
+      "name": "Improved Counterspell",
+      "max": 2,
+      "row": 4,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_frost_iceshock",
+      "desc": [
+       "Your Counterspell also Silences the target for 2 sec.",
+       "Your Counterspell also Silences the target for 4 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 4,
+       "col": 2,
+       "max": 2,
+       "text": "Gives your Counterspell a 50% chance to silence the target for 4 sec."
+      }
+     },
+     {
+      "name": "Arcane Meditation",
+      "max": 3,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_shadow_siphonmana",
+      "desc": [
+       "Allows 17% of your Mana regeneration to continue while casting.",
+       "Allows 33% of your Mana regeneration to continue while casting.",
+       "Allows 50% of your Mana regeneration to continue while casting."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "req": "Arcane Concentration",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 4,
+       "col": 4,
+       "max": 3,
+       "text": "Allows 5% of your Mana regeneration to continue while casting."
+      }
+     },
+     {
+      "name": "Missile Barrage",
+      "max": 1,
+      "row": 4,
+      "col": 4,
+      "passive": true,
+      "icon": "ability_mage_missilebarrage",
+      "desc": [
+       "Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Presence of Mind",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_nature_enchantarmor",
+      "desc": [
+       "When activated, your next Mage spell with a casting time less than 10 sec becomes an instant cast spell."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "Instant | 3 min cooldown",
+      "classic": {
+       "status": "same",
+       "tree": "Arcane",
+       "row": 5,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, your next Mage spell with a casting time less than 10 sec becomes an instant cast spell."
+      }
+     },
+     {
+      "name": "Arcane Mind",
+      "max": 5,
+      "row": 5,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_shadow_charm",
+      "desc": [
+       "Increases your Intellect by 2% and increases the critical strike damage bonus of your Arcane spells by 20%.",
+       "Increases your Intellect by 4% and increases the critical strike damage bonus of your Arcane spells by 40%.",
+       "Increases your Intellect by 6% and increases the critical strike damage bonus of your Arcane spells by 60%.",
+       "Increases your Intellect by 8% and increases the critical strike damage bonus of your Arcane spells by 80%.",
+       "Increases your Intellect by 10% and increases the critical strike damage bonus of your Arcane spells by 100%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 5,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your maximum Mana by 2%."
+      }
+     },
+     {
+      "name": "Arcane Instability",
+      "max": 3,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_shadow_teleport",
+      "desc": [
+       "Increases the damage done by your spells by 1% and your critical strike chance by 1%.",
+       "Increases the damage done by your spells by 2% and your critical strike chance by 2%.",
+       "Increases the damage done by your spells by 3% and your critical strike chance by 3%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 6,
+       "col": 2,
+       "max": 3,
+       "text": "Increases your spell damage and critical strike chance by 1%."
+      }
+     },
+     {
+      "name": "Arcane Power",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_nature_lightning",
+      "desc": [
+       "For the next 15 sec, your spells deal 30% more damage while costing 30% more mana to cast."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Presence of Mind",
+      "cost": "Instant | 3 min cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Arcane",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, your spells deal 30% more damage while costing 30% more mana to cast. This effect lasts 15 sec."
+      }
+     }
+    ],
+    "removed": [
+     {
+      "name": "Magic Attunement",
+      "max": 2,
+      "text": "Increases the effect of your Amplify Magic and Dampen Magic spells by 25%.",
+      "row": 3
+     }
+    ]
+   },
+   {
+    "name": "Fire",
+    "bg": 41,
+    "icon": "spell_fire_firebolt02",
+    "talents": [
+     {
+      "name": "Wake of Fire",
+      "max": 2,
+      "row": 1,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_fire_lavaspawn",
+      "desc": [
+       "Reduces the cooldown of your Fire Blast spell by 1 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 20 sec by 25%.",
+       "Reduces the cooldown of your Fire Blast spell by 2 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 20 sec by 50%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 2,
+       "col": 3,
+       "max": 3,
+       "text": "Reduces the cooldown of your Fire Blast spell by 0.5 sec.",
+       "moved": true,
+       "renamed": "Improved Fire Blast"
+      }
+     },
+     {
+      "name": "Incineration",
+      "max": 3,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_fire_flameshock",
+      "desc": [
+       "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 2%.",
+       "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 4%.",
+       "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 3,
+       "col": 1,
+       "max": 2,
+       "text": "Increases the critical strike chance of your Fire Blast and Scorch spells by 2%.",
+       "moved": true,
+       "renamed": "Incinerate"
+      }
+     },
+     {
+      "name": "Improved Fireball",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_fire_flamebolt",
+      "desc": [
+       "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.1 sec.",
+       "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.2 sec.",
+       "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.3 sec.",
+       "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.4 sec.",
+       "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.5 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 1,
+       "col": 2,
+       "max": 5,
+       "text": "Reduces the casting time of your Fireball spell by 0.1 sec."
+      }
+     },
+     {
+      "name": "Ignite",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_fire_incinerate",
+      "desc": [
+       "Your critical strikes from Fire damage spells cause the target to burn for an additional 8% of your spell's damage over 4 sec.",
+       "Your critical strikes from Fire damage spells cause the target to burn for an additional 16% of your spell's damage over 4 sec.",
+       "Your critical strikes from Fire damage spells cause the target to burn for an additional 24% of your spell's damage over 4 sec.",
+       "Your critical strikes from Fire damage spells cause the target to burn for an additional 32% of your spell's damage over 4 sec.",
+       "Your critical strikes from Fire damage spells cause the target to burn for an additional 40% of your spell's damage over 4 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Fire",
+       "row": 2,
+       "col": 1,
+       "max": 5,
+       "text": "Your critical strikes from Fire damage spells cause the target to burn for an additional 8% of your spell's damage over 4 sec."
+      }
+     },
+     {
+      "name": "Flame Throwing",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_fire_flare",
+      "desc": [
+       "Increases the range of your Fire spells by 3 yards.",
+       "Increases the range of your Fire spells by 6 yards."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Fire",
+       "row": 2,
+       "col": 2,
+       "max": 2,
+       "text": "Increases the range of your Fire spells by 3 yards."
+      }
+     },
+     {
+      "name": "Impact",
+      "max": 3,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_fire_meteorstorm",
+      "desc": [
+       "Gives your Fire spells a 3% chance to stun the target for 2 sec.",
+       "Gives your Fire spells a 7% chance to stun the target for 2 sec.",
+       "Gives your Fire spells a 10% chance to stun the target for 2 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Gives your Fire spells a 2% chance to stun the target for 2 sec.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Burning Soul",
+      "max": 3,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_fire_fire",
+      "desc": [
+       "Gives your Fire spells a 23% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 10%.",
+       "Gives your Fire spells a 47% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 20%.",
+       "Gives your Fire spells a 70% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 30%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 3,
+       "col": 4,
+       "max": 2,
+       "text": "Gives your Fire spells a 35% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 15%."
+      }
+     },
+     {
+      "name": "Improved Flamestrike",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_fire_selfdestruct",
+      "desc": [
+       "Increases the critical strike chance of your Flamestrike spell by 5%.",
+       "Increases the critical strike chance of your Flamestrike spell by 10%.",
+       "Increases the critical strike chance of your Flamestrike spell by 15%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Fire",
+       "row": 3,
+       "col": 2,
+       "max": 3,
+       "text": "Increases the critical strike chance of your Flamestrike spell by 5%."
+      }
+     },
+     {
+      "name": "Pyroblast",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "passive": false,
+      "icon": "spell_fire_fireball02",
+      "desc": [
+       "Hurls an immense fiery boulder that causes 101 to 131 Fire damage and an additional 44 Fire damage over 12 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "125 Mana | 35 yd range | 6 sec cast",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 3,
+       "col": 3,
+       "max": 1,
+       "text": "Hurls an immense fiery boulder that causes 148 to 195 Fire damage and an additional 56 Fire damage over 12 sec."
+      }
+     },
+     {
+      "name": "Improved Scorch",
+      "max": 3,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_fire_windsofwoe",
+      "desc": [
+       "Your Scorch spell has a 33% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times.",
+       "Your Scorch spell has a 67% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times.",
+       "Your Scorch spell has a 100% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 4,
+       "col": 1,
+       "max": 3,
+       "text": "Your Scorch spells have a 33% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases the Fire damage dealt to your target by 3% and lasts 30 sec. Stacks up to 5 times."
+      }
+     },
+     {
+      "name": "Improved Fire Ward",
+      "max": 2,
+      "row": 4,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_fire_firearmor",
+      "desc": [
+       "Causes your Fire Ward to have a 10% chance to reflect Fire spells while active.",
+       "Causes your Fire Ward to have a 20% chance to reflect Fire spells while active."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Fire",
+       "row": 4,
+       "col": 2,
+       "max": 2,
+       "text": "Causes your Fire Ward to have a 10% chance to reflect Fire spells while active."
+      }
+     },
+     {
+      "name": "Hot Streak",
+      "max": 1,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_mage_hotstreak",
+      "desc": [
+       "Your non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch grant Hot Streak for 15 sec. Hot Streak reduces the cast time of Pyroblast by 25%, stacking up to 3 times."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Pyroblast",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Master of Elements",
+      "max": 3,
+      "row": 4,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_fire_masterofelements",
+      "desc": [
+       "Your Fire and Frost critical strikes will refund 10% of their base mana cost.",
+       "Your Fire and Frost critical strikes will refund 20% of their base mana cost.",
+       "Your Fire and Frost critical strikes will refund 30% of their base mana cost."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 4,
+       "col": 4,
+       "max": 3,
+       "text": "Your Fire and Frost spell criticals will refund 10% of their base mana cost."
+      }
+     },
+     {
+      "name": "Critical Mass",
+      "max": 3,
+      "row": 5,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_nature_wispheal",
+      "desc": [
+       "Increases the critical strike chance of your Fire spells by 2%.",
+       "Increases the critical strike chance of your Fire spells by 4%.",
+       "Increases the critical strike chance of your Fire spells by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Fire",
+       "row": 5,
+       "col": 2,
+       "max": 3,
+       "text": "Increases the critical strike chance of your Fire spells by 2%."
+      }
+     },
+     {
+      "name": "Blast Wave",
+      "max": 1,
+      "row": 5,
+      "col": 3,
+      "passive": false,
+      "icon": "spell_holy_excorcism_02",
+      "desc": [
+       "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 154 to 184 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "215 Mana | Instant | 45 sec cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 5,
+       "col": 3,
+       "max": 1,
+       "text": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 160 to 192 Fire damage, and dazing them for 6 sec."
+      }
+     },
+     {
+      "name": "Fire Power",
+      "max": 5,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_fire_immolation",
+      "desc": [
+       "Increases the damage done by your Fire spells by 2%.",
+       "Increases the damage done by your Fire spells by 4%.",
+       "Increases the damage done by your Fire spells by 6%.",
+       "Increases the damage done by your Fire spells by 8%.",
+       "Increases the damage done by your Fire spells by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Fire",
+       "row": 6,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the damage done by your Fire spells by 2%."
+      }
+     },
+     {
+      "name": "Combustion",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_fire_sealoffire",
+      "desc": [
+       "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until you have caused 4 non-periodic critical strikes with Fire spells."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Critical Mass",
+      "cost": "Instant | 3 min cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Fire",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until you have caused 3 critical strikes with Fire spells."
+      }
+     }
+    ],
+    "removed": []
+   },
+   {
+    "name": "Frost",
+    "bg": 61,
+    "icon": "spell_frost_frostbolt02",
+    "talents": [
+     {
+      "name": "Frost Warding",
+      "max": 2,
+      "row": 1,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_frost_frostward",
+      "desc": [
+       "Increases the Armor and resistance given by your Frost Armor and Ice Armor spells by 15%. In addition, gives your Frost Ward a 10% chance to reflect Frost spells and effects while active.",
+       "Increases the Armor and resistance given by your Frost Armor and Ice Armor spells by 30%. In addition, gives your Frost Ward a 20% chance to reflect Frost spells and effects while active."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 1,
+       "col": 1,
+       "max": 2,
+       "text": "Increases the armor and resistances given by your Frost Armor and Ice Armor spells by 15%. In addition, gives your Frost Ward a 10% chance to reflect Frost spells and effects while active."
+      }
+     },
+     {
+      "name": "Improved Frostbolt",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_frost_frostbolt02",
+      "desc": [
+       "Reduces the casting time of your Frostbolt spell by 0.1 sec.",
+       "Reduces the casting time of your Frostbolt spell by 0.2 sec.",
+       "Reduces the casting time of your Frostbolt spell by 0.3 sec.",
+       "Reduces the casting time of your Frostbolt spell by 0.4 sec.",
+       "Reduces the casting time of your Frostbolt spell by 0.5 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Frost",
+       "row": 1,
+       "col": 2,
+       "max": 5,
+       "text": "Reduces the casting time of your Frostbolt spell by 0.1 sec."
+      }
+     },
+     {
+      "name": "Elemental Precision",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_ice_magicdamage",
+      "desc": [
+       "Improves your chance to hit with Frost and Fire spells by 1%.",
+       "Improves your chance to hit with Frost and Fire spells by 2%.",
+       "Improves your chance to hit with Frost and Fire spells by 3%.",
+       "Improves your chance to hit with Frost and Fire spells by 4%.",
+       "Improves your chance to hit with Frost and Fire spells by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 1,
+       "col": 3,
+       "max": 3,
+       "text": "Reduces the chance that the opponent can resist your Frost and Fire spells by 2%."
+      }
+     },
+     {
+      "name": "Ice Shards",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_frost_iceshard",
+      "desc": [
+       "Increases the critical strike damage bonus of your Frost spells by 20%.",
+       "Increases the critical strike damage bonus of your Frost spells by 40%.",
+       "Increases the critical strike damage bonus of your Frost spells by 60%.",
+       "Increases the critical strike damage bonus of your Frost spells by 80%.",
+       "Increases the critical strike damage bonus of your Frost spells by 100%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Frost",
+       "row": 2,
+       "col": 1,
+       "max": 5,
+       "text": "Increases the critical strike damage bonus of your Frost spells by 20%."
+      }
+     },
+     {
+      "name": "Permafrost",
+      "max": 3,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_frost_wisp",
+      "desc": [
+       "Increases the duration of your Chill effects by 11% and reduces the target's speed by an additional 3%.",
+       "Increases the duration of your Chill effects by 22% and reduces the target's speed by an additional 7%.",
+       "Increases the duration of your Chill effects by 33% and reduces the target's speed by an additional 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 2,
+       "col": 4,
+       "max": 3,
+       "text": "Increases the duration of your Chill effects by 1 sec and reduces the target's speed by an additional 4%."
+      }
+     },
+     {
+      "name": "Improved Frost Nova",
+      "max": 2,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_frost_freezingbreath",
+      "desc": [
+       "Reduces the cooldown of your Frost Nova spell by 2 sec.",
+       "Reduces the cooldown of your Frost Nova spell by 4 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Frost",
+       "row": 2,
+       "col": 3,
+       "max": 2,
+       "text": "Reduces the cooldown of your Frost Nova spell by 2 sec."
+      }
+     },
+     {
+      "name": "Frostbite",
+      "max": 3,
+      "row": 2,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_frost_frostarmor",
+      "desc": [
+       "Gives your Chill effects a 5% chance to Freeze the target for 5 sec.",
+       "Gives your Chill effects a 10% chance to Freeze the target for 5 sec.",
+       "Gives your Chill effects a 15% chance to Freeze the target for 5 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Frost",
+       "row": 2,
+       "col": 2,
+       "max": 3,
+       "text": "Gives your Chill effects a 5% chance to freeze the target for 5 sec."
+      }
+     },
+     {
+      "name": "Piercing Ice",
+      "max": 3,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_frost_frostbolt",
+      "desc": [
+       "Increases the damage done by your Frost spells by 2%.",
+       "Increases the damage done by your Frost spells by 4%.",
+       "Increases the damage done by your Frost spells by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Frost",
+       "row": 3,
+       "col": 1,
+       "max": 3,
+       "text": "Increases the damage done by your Frost spells by 2%."
+      }
+     },
+     {
+      "name": "Frost Channeling",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_frost_stun",
+      "desc": [
+       "Reduces the mana cost of your Frost spells by 5% and reduces the threat caused by your Frost spells by 10%.",
+       "Reduces the mana cost of your Frost spells by 10% and reduces the threat caused by your Frost spells by 20%.",
+       "Reduces the mana cost of your Frost spells by 15% and reduces the threat caused by your Frost spells by 30%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "moved",
+       "tree": "Frost",
+       "row": 4,
+       "col": 2,
+       "max": 3,
+       "text": "Reduces the mana cost of your Frost spells by 5% and reduces the threat caused by your Frost spells by 10%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Ice Lance",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "passive": false,
+      "icon": "spell_frost_frostblast",
+      "desc": [
+       "Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "45 Mana | 30 yd range | Instant",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Improved Blizzard",
+      "max": 3,
+      "row": 3,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_frost_icestorm",
+      "desc": [
+       "Adds a Chill effect to your Blizzard spell. This effect lowers the target's movement speed by 15% for 1.5 sec.",
+       "Adds a Chill effect to your Blizzard spell. This effect lowers the target's movement speed by 25% for 1.5 sec.",
+       "Adds a Chill effect to your Blizzard spell. This effect lowers the target's movement speed by 40% for 1.5 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 3,
+       "col": 4,
+       "max": 3,
+       "text": "Adds a chill effect to your Blizzard spell. This effect lowers the target's movement speed by 30%. Lasts 1.50 sec."
+      }
+     },
+     {
+      "name": "Arctic Reach",
+      "max": 2,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_shadow_darkritual",
+      "desc": [
+       "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%.",
+       "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Frost",
+       "row": 4,
+       "col": 1,
+       "max": 2,
+       "text": "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%."
+      }
+     },
+     {
+      "name": "Ice Block",
+      "max": 1,
+      "row": 4,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_frost_frost",
+      "desc": [
+       "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "15 Mana | Instant | 5 min cooldown",
+      "classic": {
+       "status": "moved",
+       "tree": "Frost",
+       "row": 5,
+       "col": 2,
+       "max": 1,
+       "text": "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move or cast spells.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Shatter",
+      "max": 3,
+      "row": 4,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_frost_frostshock",
+      "desc": [
+       "Increases the critical strike chance of all your spells against Frozen targets by 17%.",
+       "Increases the critical strike chance of all your spells against Frozen targets by 33%.",
+       "Increases the critical strike chance of all your spells against Frozen targets by 50%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 4,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the critical strike chance of all your spells against frozen targets by 10%."
+      }
+     },
+     {
+      "name": "Improved Cone of Cold",
+      "max": 3,
+      "row": 5,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_frost_glacier",
+      "desc": [
+       "Increases the damage dealt by your Cone of Cold spell by 12%.",
+       "Increases the damage dealt by your Cone of Cold spell by 23%.",
+       "Increases the damage dealt by your Cone of Cold spell by 35%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 5,
+       "col": 3,
+       "max": 3,
+       "text": "Increases the damage dealt by your Cone of Cold spell by 15%."
+      }
+     },
+     {
+      "name": "Cold Snap",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_frost_wizardmark",
+      "desc": [
+       "Finishes the remaining cooldown on all your other Frost spells."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "Instant | 10 min cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 3,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, this spell finishes the cooldown on all of your Frost spells.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Fingers of Frost",
+      "max": 2,
+      "row": 5,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_mage_wintersgrasp",
+      "desc": [
+       "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 1 spell cast as if the target were Frozen. Lasts 15 sec.",
+       "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 2 spells cast as if the target were Frozen. Lasts 15 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "req": "Ice Lance",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Winter's Chill",
+      "max": 5,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_frost_chillingblast",
+      "desc": [
+       "Gives your Frost damage spells a 20% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 1 times.",
+       "Gives your Frost damage spells a 40% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 2 times.",
+       "Gives your Frost damage spells a 60% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 3 times.",
+       "Gives your Frost damage spells a 80% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 4 times.",
+       "Gives your Frost damage spells a 100% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 5 times."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 6,
+       "col": 3,
+       "max": 5,
+       "text": "Gives your Frost damage spells a 20% chance to apply the Winter's Chill effect, which increases the chance a Frost spell will critically hit the target by 2% for 15 sec. Stacks up to 5 times."
+      }
+     },
+     {
+      "name": "Ice Barrier",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_ice_lament",
+      "desc": [
+       "Instantly shields you, absorbing 447 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Cold Snap",
+      "cost": "305 Mana | Instant | 30 sec cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Frost",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "Instantly shields you, absorbing 455 damage. Lasts 1 min. While the shield holds, spells will not be interrupted."
+      }
+     }
+    ],
+    "removed": []
+   }
+  ],
+  "source": "Talent trees and every rank's text from the WoW Forever beta client, build 1.60.1.69876."
+ },
+ "spellbook": {
+  "race": "",
+  "level": 60,
+  "seen": "",
+  "missing": [],
+  "general": [
+   [
+    "Attack",
+    ""
+   ],
+   [
+    "Shoot",
+    ""
+   ],
+   [
+    "Comprehend Scroll",
+    ""
+   ],
+   [
+    "Armor Proficiency",
+    "Passive"
+   ],
+   [
+    "Dodge",
+    "Passive"
+   ],
+   [
+    "Languages",
+    "Passive"
+   ]
+  ],
+  "tabs": [
+   {
+    "name": "Arcane",
+    "spells": [
+     [
+      "Amplify Magic",
+      "Rank 1"
+     ],
+     [
+      "Amplify Magic",
+      "Rank 2"
+     ],
+     [
+      "Amplify Magic",
+      "Rank 3"
+     ],
+     [
+      "Amplify Magic",
+      "Rank 4"
+     ],
+     [
+      "Arcane Blast",
+      "Rank 1"
+     ],
+     [
+      "Arcane Blast",
+      "Rank 2"
+     ],
+     [
+      "Arcane Blast",
+      "Rank 3"
+     ],
+     [
+      "Arcane Blast",
+      "Rank 4"
+     ],
+     [
+      "Arcane Blast",
+      "Rank 5"
+     ],
+     [
+      "Arcane Brilliance",
+      "Rank 1"
+     ],
+     [
+      "Arcane Explosion",
+      "Rank 1"
+     ],
+     [
+      "Arcane Explosion",
+      "Rank 2"
+     ],
+     [
+      "Arcane Explosion",
+      "Rank 3"
+     ],
+     [
+      "Arcane Explosion",
+      "Rank 4"
+     ],
+     [
+      "Arcane Explosion",
+      "Rank 5"
+     ],
+     [
+      "Arcane Explosion",
+      "Rank 6"
+     ],
+     [
+      "Arcane Intellect",
+      "Rank 1"
+     ],
+     [
+      "Arcane Intellect",
+      "Rank 2"
+     ],
+     [
+      "Arcane Intellect",
+      "Rank 3"
+     ],
+     [
+      "Arcane Intellect",
+      "Rank 4"
+     ],
+     [
+      "Arcane Intellect",
+      "Rank 5"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 1"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 2"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 3"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 4"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 5"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 6"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 7"
+     ],
+     [
+      "Arcane Missiles",
+      "Rank 8"
+     ],
+     [
+      "Arcane Power",
+      ""
+     ],
+     [
+      "Blink",
+      ""
+     ],
+     [
+      "Conjure Food",
+      "Rank 1"
+     ],
+     [
+      "Conjure Food",
+      "Rank 2"
+     ],
+     [
+      "Conjure Food",
+      "Rank 3"
+     ],
+     [
+      "Conjure Food",
+      "Rank 4"
+     ],
+     [
+      "Conjure Food",
+      "Rank 5"
+     ],
+     [
+      "Conjure Food",
+      "Rank 6"
+     ],
+     [
+      "Conjure Food",
+      "Rank 7"
+     ],
+     [
+      "Conjure Mana Agate",
+      ""
+     ],
+     [
+      "Conjure Mana Citrine",
+      ""
+     ],
+     [
+      "Conjure Mana Jade",
+      ""
+     ],
+     [
+      "Conjure Mana Ruby",
+      ""
+     ],
+     [
+      "Conjure Water",
+      "Rank 1"
+     ],
+     [
+      "Conjure Water",
+      "Rank 2"
+     ],
+     [
+      "Conjure Water",
+      "Rank 3"
+     ],
+     [
+      "Conjure Water",
+      "Rank 4"
+     ],
+     [
+      "Conjure Water",
+      "Rank 5"
+     ],
+     [
+      "Conjure Water",
+      "Rank 6"
+     ],
+     [
+      "Conjure Water",
+      "Rank 7"
+     ],
+     [
+      "Counterspell",
+      ""
+     ],
+     [
+      "Dampen Magic",
+      "Rank 1"
+     ],
+     [
+      "Dampen Magic",
+      "Rank 2"
+     ],
+     [
+      "Dampen Magic",
+      "Rank 3"
+     ],
+     [
+      "Dampen Magic",
+      "Rank 4"
+     ],
+     [
+      "Dampen Magic",
+      "Rank 5"
+     ],
+     [
+      "Evocation",
+      ""
+     ],
+     [
+      "Mage Armor",
+      "Rank 1"
+     ],
+     [
+      "Mage Armor",
+      "Rank 2"
+     ],
+     [
+      "Mage Armor",
+      "Rank 3"
+     ],
+     [
+      "Mana Shield",
+      "Rank 1"
+     ],
+     [
+      "Mana Shield",
+      "Rank 2"
+     ],
+     [
+      "Mana Shield",
+      "Rank 3"
+     ],
+     [
+      "Mana Shield",
+      "Rank 4"
+     ],
+     [
+      "Mana Shield",
+      "Rank 5"
+     ],
+     [
+      "Mana Shield",
+      "Rank 6"
+     ],
+     [
+      "Polymorph",
+      "Turtle"
+     ],
+     [
+      "Polymorph",
+      "Pig"
+     ],
+     [
+      "Polymorph",
+      "Rank 1"
+     ],
+     [
+      "Polymorph",
+      "Rank 2"
+     ],
+     [
+      "Polymorph",
+      "Rank 3"
+     ],
+     [
+      "Polymorph",
+      "Rank 4"
+     ],
+     [
+      "Portal: Darnassus",
+      ""
+     ],
+     [
+      "Portal: Ironforge",
+      ""
+     ],
+     [
+      "Portal: Orgrimmar",
+      ""
+     ],
+     [
+      "Portal: Stormwind",
+      ""
+     ],
+     [
+      "Portal: Thunder Bluff",
+      ""
+     ],
+     [
+      "Portal: Undercity",
+      ""
+     ],
+     [
+      "Presence of Mind",
+      ""
+     ],
+     [
+      "Remove Lesser Curse",
+      ""
+     ],
+     [
+      "Slow Fall",
+      ""
+     ],
+     [
+      "Teleport: Dalaran",
+      ""
+     ],
+     [
+      "Teleport: Darnassus",
+      ""
+     ],
+     [
+      "Teleport: Ironforge",
+      ""
+     ],
+     [
+      "Teleport: Orgrimmar",
+      ""
+     ],
+     [
+      "Teleport: Stormwind",
+      ""
+     ],
+     [
+      "Teleport: Thunder Bluff",
+      ""
+     ],
+     [
+      "Teleport: Undercity",
+      ""
+     ]
+    ]
+   },
+   {
+    "name": "Fire",
+    "spells": [
+     [
+      "Blast Wave",
+      "Rank 1"
+     ],
+     [
+      "Blast Wave",
+      "Rank 2"
+     ],
+     [
+      "Blast Wave",
+      "Rank 3"
+     ],
+     [
+      "Blast Wave",
+      "Rank 4"
+     ],
+     [
+      "Blast Wave",
+      "Rank 5"
+     ],
+     [
+      "Combustion",
+      ""
+     ],
+     [
+      "Fire Blast",
+      "Rank 1"
+     ],
+     [
+      "Fire Blast",
+      "Rank 2"
+     ],
+     [
+      "Fire Blast",
+      "Rank 3"
+     ],
+     [
+      "Fire Blast",
+      "Rank 4"
+     ],
+     [
+      "Fire Blast",
+      "Rank 5"
+     ],
+     [
+      "Fire Blast",
+      "Rank 6"
+     ],
+     [
+      "Fire Blast",
+      "Rank 7"
+     ],
+     [
+      "Fire Ward",
+      "Rank 1"
+     ],
+     [
+      "Fire Ward",
+      "Rank 2"
+     ],
+     [
+      "Fire Ward",
+      "Rank 3"
+     ],
+     [
+      "Fire Ward",
+      "Rank 4"
+     ],
+     [
+      "Fire Ward",
+      "Rank 5"
+     ],
+     [
+      "Fireball",
+      "Rank 1"
+     ],
+     [
+      "Fireball",
+      "Rank 2"
+     ],
+     [
+      "Fireball",
+      "Rank 3"
+     ],
+     [
+      "Fireball",
+      "Rank 4"
+     ],
+     [
+      "Fireball",
+      "Rank 5"
+     ],
+     [
+      "Fireball",
+      "Rank 6"
+     ],
+     [
+      "Fireball",
+      "Rank 7"
+     ],
+     [
+      "Fireball",
+      "Rank 8"
+     ],
+     [
+      "Fireball",
+      "Rank 9"
+     ],
+     [
+      "Fireball",
+      "Rank 10"
+     ],
+     [
+      "Fireball",
+      "Rank 11"
+     ],
+     [
+      "Fireball",
+      "Rank 12"
+     ],
+     [
+      "Flamestrike",
+      "Rank 1"
+     ],
+     [
+      "Flamestrike",
+      "Rank 2"
+     ],
+     [
+      "Flamestrike",
+      "Rank 3"
+     ],
+     [
+      "Flamestrike",
+      "Rank 4"
+     ],
+     [
+      "Flamestrike",
+      "Rank 5"
+     ],
+     [
+      "Flamestrike",
+      "Rank 6"
+     ],
+     [
+      "Frostfire Bolt",
+      "Rank 1"
+     ],
+     [
+      "Frostfire Bolt",
+      "Rank 2"
+     ],
+     [
+      "Frostfire Bolt",
+      "Rank 3"
+     ],
+     [
+      "Pyroblast",
+      "Rank 1"
+     ],
+     [
+      "Pyroblast",
+      "Rank 2"
+     ],
+     [
+      "Pyroblast",
+      "Rank 3"
+     ],
+     [
+      "Pyroblast",
+      "Rank 4"
+     ],
+     [
+      "Pyroblast",
+      "Rank 5"
+     ],
+     [
+      "Pyroblast",
+      "Rank 6"
+     ],
+     [
+      "Pyroblast",
+      "Rank 7"
+     ],
+     [
+      "Pyroblast",
+      "Rank 8"
+     ],
+     [
+      "Scorch",
+      "Rank 1"
+     ],
+     [
+      "Scorch",
+      "Rank 2"
+     ],
+     [
+      "Scorch",
+      "Rank 3"
+     ],
+     [
+      "Scorch",
+      "Rank 4"
+     ],
+     [
+      "Scorch",
+      "Rank 5"
+     ],
+     [
+      "Scorch",
+      "Rank 6"
+     ],
+     [
+      "Scorch",
+      "Rank 7"
+     ]
+    ]
+   },
+   {
+    "name": "Frost",
+    "spells": [
+     [
+      "Blizzard",
+      "Rank 1"
+     ],
+     [
+      "Blizzard",
+      "Rank 2"
+     ],
+     [
+      "Blizzard",
+      "Rank 3"
+     ],
+     [
+      "Blizzard",
+      "Rank 4"
+     ],
+     [
+      "Blizzard",
+      "Rank 5"
+     ],
+     [
+      "Blizzard",
+      "Rank 6"
+     ],
+     [
+      "Cold Snap",
+      ""
+     ],
+     [
+      "Cone of Cold",
+      "Rank 1"
+     ],
+     [
+      "Cone of Cold",
+      "Rank 2"
+     ],
+     [
+      "Cone of Cold",
+      "Rank 3"
+     ],
+     [
+      "Cone of Cold",
+      "Rank 4"
+     ],
+     [
+      "Cone of Cold",
+      "Rank 5"
+     ],
+     [
+      "Frost Armor",
+      "Rank 1"
+     ],
+     [
+      "Frost Armor",
+      "Rank 2"
+     ],
+     [
+      "Frost Armor",
+      "Rank 3"
+     ],
+     [
+      "Frost Nova",
+      "Rank 1"
+     ],
+     [
+      "Frost Nova",
+      "Rank 2"
+     ],
+     [
+      "Frost Nova",
+      "Rank 3"
+     ],
+     [
+      "Frost Nova",
+      "Rank 4"
+     ],
+     [
+      "Frost Ward",
+      "Rank 1"
+     ],
+     [
+      "Frost Ward",
+      "Rank 2"
+     ],
+     [
+      "Frost Ward",
+      "Rank 3"
+     ],
+     [
+      "Frost Ward",
+      "Rank 4"
+     ],
+     [
+      "Frost Ward",
+      "Rank 5"
+     ],
+     [
+      "Frostbolt",
+      "Rank 1"
+     ],
+     [
+      "Frostbolt",
+      "Rank 2"
+     ],
+     [
+      "Frostbolt",
+      "Rank 3"
+     ],
+     [
+      "Frostbolt",
+      "Rank 4"
+     ],
+     [
+      "Frostbolt",
+      "Rank 5"
+     ],
+     [
+      "Frostbolt",
+      "Rank 6"
+     ],
+     [
+      "Frostbolt",
+      "Rank 7"
+     ],
+     [
+      "Frostbolt",
+      "Rank 8"
+     ],
+     [
+      "Frostbolt",
+      "Rank 9"
+     ],
+     [
+      "Frostbolt",
+      "Rank 10"
+     ],
+     [
+      "Frostbolt",
+      "Rank 11"
+     ],
+     [
+      "Ice Armor",
+      "Rank 1"
+     ],
+     [
+      "Ice Armor",
+      "Rank 2"
+     ],
+     [
+      "Ice Armor",
+      "Rank 3"
+     ],
+     [
+      "Ice Armor",
+      "Rank 4"
+     ],
+     [
+      "Ice Barrier",
+      "Rank 1"
+     ],
+     [
+      "Ice Barrier",
+      "Rank 2"
+     ],
+     [
+      "Ice Barrier",
+      "Rank 3"
+     ],
+     [
+      "Ice Barrier",
+      "Rank 4"
+     ],
+     [
+      "Ice Block",
+      ""
+     ],
+     [
+      "Ice Lance",
+      "Rank 1"
+     ],
+     [
+      "Ice Lance",
+      "Rank 2"
+     ],
+     [
+      "Ice Lance",
+      "Rank 3"
+     ],
+     [
+      "Ice Lance",
+      "Rank 4"
+     ],
+     [
+      "Ice Lance",
+      "Rank 5"
+     ],
+     [
+      "Ice Lance",
+      "Rank 6"
+     ]
+    ]
+   }
+  ],
+  "notes": [],
+  "source": "beta",
+  "build": "1.60.1.69876",
+  "levels": {
+   "Frostbolt": [
+    4,
+    8,
+    14,
+    20,
+    26,
+    32,
+    38,
+    44,
+    50,
+    56,
+    60
+   ],
+   "Fireball": [
+    1,
+    6,
+    12,
+    18,
+    24,
+    30,
+    36,
+    42,
+    48,
+    54,
+    60,
+    60
+   ],
+   "Frost Nova": [
+    10,
+    26,
+    40,
+    54
+   ],
+   "Flamestrike": [
+    16,
+    24,
+    32,
+    40,
+    48,
+    56
+   ],
+   "Fire Ward": [
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "Arcane Missiles": [
+    8,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56,
+    56
+   ],
+   "Arcane Intellect": [
+    1,
+    14,
+    28,
+    42,
+    56
+   ],
+   "Blizzard": [
+    20,
+    28,
+    36,
+    44,
+    52,
+    60
+   ],
+   "Frost Ward": [
+    22,
+    32,
+    42,
+    52,
+    60
+   ],
+   "Fire Blast": [
+    6,
+    14,
+    22,
+    30,
+    38,
+    46,
+    54
+   ],
+   "Frost Armor": [
+    1,
+    10,
+    20
+   ],
+   "Ice Armor": [
+    30,
+    40,
+    50,
+    60
+   ],
+   "Arcane Explosion": [
+    14,
+    22,
+    30,
+    38,
+    46,
+    54
+   ],
+   "Scorch": [
+    22,
+    28,
+    34,
+    40,
+    46,
+    52,
+    58
+   ],
+   "Dampen Magic": [
+    12,
+    24,
+    36,
+    48,
+    60
+   ],
+   "Amplify Magic": [
+    18,
+    30,
+    42,
+    54
+   ],
+   "Mana Shield": [
+    20,
+    28,
+    36,
+    44,
+    52,
+    60
+   ],
+   "Cone of Cold": [
+    26,
+    34,
+    42,
+    50,
+    58
+   ],
+   "Blast Wave": [
+    30,
+    36,
+    44,
+    52,
+    60
+   ],
+   "Pyroblast": [
+    20,
+    24,
+    30,
+    36,
+    42,
+    48,
+    54,
+    60
+   ],
+   "Ice Barrier": [
+    40,
+    46,
+    52,
+    58
+   ],
+   "Conjure Food": [
+    6,
+    12,
+    22,
+    32,
+    42,
+    52,
+    60
+   ],
+   "Conjure Water": [
+    4,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "Polymorph": [
+    8,
+    20,
+    40,
+    60,
+    60,
+    60
+   ],
+   "Mage Armor": [
+    34,
+    46,
+    58
+   ],
+   "Arcane Brilliance": [
+    56
+   ],
+   "Arcane Blast": [
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "Frostfire Bolt": [
+    40,
+    50,
+    60
+   ],
+   "Ice Lance": [
+    20,
+    28,
+    34,
+    42,
+    48,
+    56
+   ]
+  },
+  "talents": [
+   "Arcane Blast",
+   "Arcane Power",
+   "Blast Wave",
+   "Cold Snap",
+   "Combustion",
+   "Ice Barrier",
+   "Ice Block",
+   "Ice Lance",
+   "Impact",
+   "Magic Absorption",
+   "Master of Elements",
+   "Presence of Mind",
+   "Pyroblast"
+  ],
+  "icons": {
+   "Frostbolt": "spell_frost_frostbolt02",
+   "Fireball": "spell_fire_flamebolt",
+   "Frost Nova": "spell_frost_frostnova",
+   "Flamestrike": "spell_fire_selfdestruct",
+   "Fire Ward": "spell_fire_firearmor",
+   "Arcane Missiles": "spell_nature_starfall",
+   "Arcane Intellect": "spell_holy_magicalsentry",
+   "Counterspell": "spell_frost_iceshock",
+   "Remove Lesser Curse": "spell_nature_removecurse",
+   "Teleport: Darnassus": "spell_arcane_teleportdarnassus",
+   "Teleport: Ironforge": "spell_arcane_teleportironforge",
+   "Teleport: Orgrimmar": "spell_arcane_teleportorgrimmar",
+   "Teleport: Stormwind": "spell_arcane_teleportstormwind",
+   "Teleport: Thunder Bluff": "spell_arcane_teleportthunderbluff",
+   "Teleport: Undercity": "spell_arcane_teleportundercity",
+   "Blizzard": "spell_frost_icestorm",
+   "Frost Ward": "spell_frost_frostward",
+   "Fire Blast": "spell_fire_fireball",
+   "Frost Armor": "spell_frost_frostarmor02",
+   "Ice Armor": "spell_frost_frostarmor02",
+   "Arcane Explosion": "spell_nature_wispsplode",
+   "Scorch": "spell_fire_soulburn",
+   "Dampen Magic": "spell_nature_abolishmagic",
+   "Amplify Magic": "spell_holy_flashheal",
+   "Mana Shield": "spell_shadow_detectlesserinvisibility",
+   "Cone of Cold": "spell_frost_glacier",
+   "Slow Fall": "spell_magic_featherfall",
+   "Blast Wave": "spell_holy_excorcism_02",
+   "Pyroblast": "spell_fire_fireball02",
+   "Portal: Darnassus": "spell_arcane_portaldarnassus",
+   "Portal: Ironforge": "spell_arcane_portalironforge",
+   "Portal: Orgrimmar": "spell_arcane_portalorgrimmar",
+   "Portal: Stormwind": "spell_arcane_portalstormwind",
+   "Portal: Thunder Bluff": "spell_arcane_portalthunderbluff",
+   "Portal: Undercity": "spell_arcane_portalundercity",
+   "Ice Barrier": "spell_ice_lament",
+   "Conjure Food": "inv_misc_food_10",
+   "Conjure Food|Rank 2": "inv_misc_food_09",
+   "Conjure Food|Rank 3": "inv_misc_food_12",
+   "Conjure Food|Rank 4": "inv_misc_food_08",
+   "Conjure Food|Rank 5": "inv_misc_food_11",
+   "Conjure Food|Rank 6": "inv_misc_food_33",
+   "Conjure Food|Rank 7": "inv_misc_food_73cinnamonroll",
+   "Conjure Mana Agate": "inv_misc_gem_emerald_01",
+   "Conjure Mana Jade": "inv_misc_gem_emerald_02",
+   "Conjure Mana Citrine": "inv_misc_gem_opal_01",
+   "Conjure Mana Ruby": "inv_misc_gem_ruby_01",
+   "Conjure Water": "inv_drink_06",
+   "Conjure Water|Rank 2": "inv_drink_07",
+   "Conjure Water|Rank 3": "inv_drink_milk_02",
+   "Conjure Water|Rank 4": "inv_drink_10",
+   "Conjure Water|Rank 5": "inv_drink_09",
+   "Conjure Water|Rank 6": "inv_drink_11",
+   "Conjure Water|Rank 7": "inv_drink_18",
+   "Ice Block": "spell_frost_frost",
+   "Combustion": "spell_fire_sealoffire",
+   "Arcane Power": "spell_nature_lightning",
+   "Presence of Mind": "spell_nature_enchantarmor",
+   "Evocation": "spell_nature_purge",
+   "Cold Snap": "spell_frost_wizardmark",
+   "Polymorph": "spell_nature_polymorph",
+   "Polymorph|Turtle": "ability_hunter_pet_turtle",
+   "Polymorph|Pig": "spell_magic_polymorphpig",
+   "Blink": "spell_arcane_blink",
+   "Mage Armor": "spell_magearmor",
+   "Arcane Brilliance": "spell_holy_arcaneintellect",
+   "Arcane Blast": "spell_arcane_blast",
+   "Frostfire Bolt": "ability_mage_frostfirebolt",
+   "Ice Lance": "spell_frost_frostblast",
+   "Teleport: Dalaran": "spell_arcane_teleporthalloftheguardian"
+  },
+  "gone": [],
+  "checked": {
+   "npc": "Maginor Dumas",
+   "zone": "Stormwind City",
+   "date": "2026-09-18",
+   "rows": 158,
+   "game_build": "1.60.1.69913",
+   "lacked": 1,
+   "level_diffs": 0
+  }
+ },
+ "spell_desc": {
+  "Mage|Shoot|": {
+   "l": [
+    [
+     "30 yd range",
+     ""
+    ],
+    [
+     "Instant",
+     "1.3 sec cooldown"
+    ]
+   ],
+   "d": "Attack with an equipped wand.",
+   "s": "demo",
+   "src": "Soda's Gnome Warlock, 13 Sep",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Mage|Comprehend Scroll|": {
+   "l": [
+    [
+     "",
+     "5 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Decipher an untranslated scroll.",
+   "s": "beta",
+   "src": "read in game at Maginor Dumas, Stormwind City",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": null
+  },
+  "Mage|Armor Proficiency|Passive": {
+   "l": [
+    [
+     "Passive",
+     ""
+    ]
+   ],
+   "d": "You are proficient in the use of the following armor types: Cloth.",
+   "s": "demo",
+   "src": "Soda's Mage, 13 Sep",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Mage|Dodge|Passive": {
+   "l": [
+    [
+     "Passive",
+     ""
+    ]
+   ],
+   "d": "Gives a chance to dodge enemy melee attacks.",
+   "s": "demo",
+   "src": "Soda's Gnome Warlock, 13 Sep",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Mage|Amplify Magic|Rank 1": {
+   "l": [
+    [
+     "150 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 23 and healing spells by up to 45. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 1008,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 15 and healing spells by up to 30. Lasts 10 min."
+  },
+  "Mage|Amplify Magic|Rank 2": {
+   "l": [
+    [
+     "250 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 45 and healing spells by up to 90. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 8455,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 30 and healing spells by up to 60. Lasts 10 min."
+  },
+  "Mage|Amplify Magic|Rank 3": {
+   "l": [
+    [
+     "350 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 75 and healing spells by up to 150. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 10169,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 50 and healing spells by up to 100. Lasts 10 min."
+  },
+  "Mage|Amplify Magic|Rank 4": {
+   "l": [
+    [
+     "450 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 113 and healing spells by up to 225. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10170,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Amplifies magic used against the targeted party member, increasing damage taken from spells by up to 75 and healing spells by up to 150. Lasts 10 min."
+  },
+  "Mage|Arcane Blast|Rank 1": {
+   "l": [
+    [
+     "15% of base mana",
+     "30 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Blasts the target with energy, dealing 57 to 65 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 400574,
+   "co": "71.4% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "new"
+  },
+  "Mage|Arcane Blast|Rank 2": {
+   "l": [
+    [
+     "15% of base mana",
+     "30 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Blasts the target with energy, dealing 131 to 151 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1239696,
+   "co": "71.4% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "new"
+  },
+  "Mage|Arcane Blast|Rank 3": {
+   "l": [
+    [
+     "15% of base mana",
+     "30 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Blasts the target with energy, dealing 168 to 194 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 1239697,
+   "co": "71.4% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "new"
+  },
+  "Mage|Arcane Blast|Rank 4": {
+   "l": [
+    [
+     "15% of base mana",
+     "30 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Blasts the target with energy, dealing 269 to 311 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 1239699,
+   "co": "71.4% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "new"
+  },
+  "Mage|Arcane Blast|Rank 5": {
+   "l": [
+    [
+     "15% of base mana",
+     "30 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Blasts the target with energy, dealing 364 to 424 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 1239700,
+   "co": "71.4% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "note",
+   "cn": "Not in Classic Era. Season of Discovery had a rune with this name."
+  },
+  "Mage|Arcane Brilliance|Rank 1": {
+   "l": [
+    [
+     "3,400 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Arcane Powder",
+     ""
+    ]
+   ],
+   "d": "Infuses the target's party and raid with brilliance, increasing their Intellect by 31 for 1 hour.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 23028,
+   "sc": "Arcane",
+   "nt": 2,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Infuses the target's party with brilliance, increasing their Intellect by 31 for 1 hour."
+  },
+  "Mage|Arcane Explosion|Rank 1": {
+   "l": [
+    [
+     "75 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes an explosion of arcane magic around the caster, causing 32 to 36 Arcane damage to all targets within 10 yards.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 1449,
+   "co": "14.3% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes an explosion of arcane magic around the caster, causing 34 to 38 Arcane damage to all targets within 10 yards."
+  },
+  "Mage|Arcane Explosion|Rank 2": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes an explosion of arcane magic around the caster, causing 55 to 61 Arcane damage to all targets within 10 yards.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 8437,
+   "co": "14.3% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes an explosion of arcane magic around the caster, causing 60 to 66 Arcane damage to all targets within 10 yards."
+  },
+  "Mage|Arcane Explosion|Rank 3": {
+   "l": [
+    [
+     "185 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes an explosion of arcane magic around the caster, causing 94 to 102 Arcane damage to all targets within 10 yards.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 8438,
+   "co": "14.3% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes an explosion of arcane magic around the caster, causing 101 to 109 Arcane damage to all targets within 10 yards."
+  },
+  "Mage|Arcane Explosion|Rank 4": {
+   "l": [
+    [
+     "250 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes an explosion of arcane magic around the caster, causing 133 to 145 Arcane damage to all targets within 10 yards.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 8439,
+   "co": "14.3% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes an explosion of arcane magic around the caster, causing 143 to 155 Arcane damage to all targets within 10 yards."
+  },
+  "Mage|Arcane Explosion|Rank 5": {
+   "l": [
+    [
+     "315 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes an explosion of arcane magic around the caster, causing 180 to 196 Arcane damage to all targets within 10 yards.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 10201,
+   "co": "14.3% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes an explosion of arcane magic around the caster, causing 191 to 207 Arcane damage to all targets within 10 yards."
+  },
+  "Mage|Arcane Explosion|Rank 6": {
+   "l": [
+    [
+     "390 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes an explosion of arcane magic around the caster, causing 238 to 258 Arcane damage to all targets within 10 yards.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10202,
+   "co": "14.3% of spell power (direct)",
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes an explosion of arcane magic around the caster, causing 249 to 269 Arcane damage to all targets within 10 yards."
+  },
+  "Mage|Arcane Intellect|Rank 1": {
+   "l": [
+    [
+     "60 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases the target's Intellect by 2 for 1 hour.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 1459,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases the target's Intellect by 2 for 30 min."
+  },
+  "Mage|Arcane Intellect|Rank 2": {
+   "l": [
+    [
+     "185 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases the target's Intellect by 7 for 1 hour.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 1460,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases the target's Intellect by 7 for 30 min."
+  },
+  "Mage|Arcane Intellect|Rank 3": {
+   "l": [
+    [
+     "520 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases the target's Intellect by 15 for 1 hour.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 1461,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases the target's Intellect by 15 for 30 min."
+  },
+  "Mage|Arcane Intellect|Rank 4": {
+   "l": [
+    [
+     "945 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases the target's Intellect by 22 for 1 hour.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 10156,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases the target's Intellect by 22 for 30 min."
+  },
+  "Mage|Arcane Intellect|Rank 5": {
+   "l": [
+    [
+     "1,510 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases the target's Intellect by 31 for 1 hour.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 10157,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases the target's Intellect by 31 for 30 min."
+  },
+  "Mage|Arcane Missiles|Rank 1": {
+   "l": [
+    [
+     "85 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 25 Arcane damage each second for 3 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 5143,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Arcane Missiles|Rank 2": {
+   "l": [
+    [
+     "140 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 32 Arcane damage each second for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 16",
+   "id": 5144,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 37 Arcane damage each second for 4 sec."
+  },
+  "Mage|Arcane Missiles|Rank 3": {
+   "l": [
+    [
+     "235 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 46 Arcane damage each second for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 5145,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 58 Arcane damage each second for 5 sec."
+  },
+  "Mage|Arcane Missiles|Rank 4": {
+   "l": [
+    [
+     "320 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 68 Arcane damage each second for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 8416,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 85 Arcane damage each second for 5 sec."
+  },
+  "Mage|Arcane Missiles|Rank 5": {
+   "l": [
+    [
+     "410 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 97 Arcane damage each second for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 8417,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 117 Arcane damage each second for 5 sec."
+  },
+  "Mage|Arcane Missiles|Rank 6": {
+   "l": [
+    [
+     "500 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 133 Arcane damage each second for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 10211,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 154 Arcane damage each second for 5 sec."
+  },
+  "Mage|Arcane Missiles|Rank 7": {
+   "l": [
+    [
+     "595 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 174 Arcane damage each second for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 10212,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 195 Arcane damage each second for 5 sec."
+  },
+  "Mage|Arcane Missiles|Rank 8": {
+   "l": [
+    [
+     "655 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Launches Arcane Missiles at the enemy, causing 209 Arcane damage each second for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 25345,
+   "sc": "Arcane",
+   "nt": 2,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches Arcane Missiles at the enemy, causing 230 Arcane damage each second for 5 sec."
+  },
+  "Mage|Arcane Power|": {
+   "l": [
+    [
+     "Instant",
+     "3 min cooldown"
+    ]
+   ],
+   "d": "For the next 15 sec, your spells deal 30% more damage while costing 30% more mana to cast.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 12042,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "When activated, your spells deal 30% more damage while costing 30% more mana to cast. This effect lasts 15 sec."
+  },
+  "Mage|Blink|": {
+   "l": [
+    [
+     "35% of base mana",
+     ""
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Teleports the caster 20 yards forward, unless something is in the way. Also frees the caster from Stuns and Immobilizes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1953,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Teleports the caster 20 yards forward, unless something is in the way. Also frees the caster from stuns and bonds."
+  },
+  "Mage|Conjure Food|Rank 1": {
+   "l": [
+    [
+     "60 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 muffins, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 587,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Food|Rank 2": {
+   "l": [
+    [
+     "105 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 loaves of bread, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 597,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Food|Rank 3": {
+   "l": [
+    [
+     "180 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 loaves of rye, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 990,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Food|Rank 4": {
+   "l": [
+    [
+     "285 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 loaves of pumpernickel, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 6129,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Food|Rank 5": {
+   "l": [
+    [
+     "420 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 loaves of sourdough, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 10144,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Food|Rank 6": {
+   "l": [
+    [
+     "585 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 sweet rolls, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10145,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Conjures 18 sweet rolls, providing the mage and his allies with something to eat. Conjured items disappear if logged out for more than 15 minutes."
+  },
+  "Mage|Conjure Food|Rank 7": {
+   "l": [
+    [
+     "705 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 10 cinnamon rolls, providing the mage and his allies with something to eat.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 28612,
+   "sc": "Arcane",
+   "nt": 2,
+   "cs": "same"
+  },
+  "Mage|Conjure Mana Agate|": {
+   "l": [
+    [
+     "530 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures a mana agate that can be used to instantly restore 375 to 425 mana.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 759,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Mana Citrine|": {
+   "l": [
+    [
+     "1,130 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures a mana citrine that can be used to instantly restore 775 to 925 mana.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 10053,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Mana Jade|": {
+   "l": [
+    [
+     "800 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures a mana jade that can be used to instantly restore 550 to 650 mana.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 3552,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Mana Ruby|": {
+   "l": [
+    [
+     "1,470 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures a mana ruby that can be used to instantly restore 1,000 to 1,200 mana.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 10054,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 1": {
+   "l": [
+    [
+     "60 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 bottles of water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 5504,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 2": {
+   "l": [
+    [
+     "105 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 bottles of fresh water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 5505,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 3": {
+   "l": [
+    [
+     "180 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 bottles of purified water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 5506,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 4": {
+   "l": [
+    [
+     "285 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 bottles of spring water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 6127,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 5": {
+   "l": [
+    [
+     "420 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 bottles of mineral water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 10138,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 6": {
+   "l": [
+    [
+     "585 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 20 bottles of sparkling water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10139,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Conjure Water|Rank 7": {
+   "l": [
+    [
+     "780 Mana",
+     ""
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Conjures 10 bottles of crystal water, providing the mage and his allies with something to drink.\n\nConjured items disappear if logged out for more than 15 minutes.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10140,
+   "sc": "Arcane",
+   "nt": 2,
+   "cs": "same"
+  },
+  "Mage|Counterspell|": {
+   "l": [
+    [
+     "100 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Counters the enemy's spellcast, preventing any spell from that school of magic from being cast for 10 sec. Generates a high amount of threat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 2139,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Dampen Magic|Rank 1": {
+   "l": [
+    [
+     "100 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 15 and healing spells by up to 30. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 604,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 10 and healing spells by up to 20. Lasts 10 min."
+  },
+  "Mage|Dampen Magic|Rank 2": {
+   "l": [
+    [
+     "200 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 30 and healing spells by up to 60. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 8450,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 20 and healing spells by up to 40. Lasts 10 min."
+  },
+  "Mage|Dampen Magic|Rank 3": {
+   "l": [
+    [
+     "300 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 60 and healing spells by up to 120. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8451,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 40 and healing spells by up to 80. Lasts 10 min."
+  },
+  "Mage|Dampen Magic|Rank 4": {
+   "l": [
+    [
+     "400 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 90 and healing spells by up to 180. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 10173,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 60 and healing spells by up to 120. Lasts 10 min."
+  },
+  "Mage|Dampen Magic|Rank 5": {
+   "l": [
+    [
+     "500 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 135 and healing spells by up to 270. Lasts 10 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10174,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Dampens magic used against the targeted party member, decreasing damage taken from spells by up to 90 and healing spells by up to 180. Lasts 10 min."
+  },
+  "Mage|Evocation|": {
+   "l": [
+    [
+     "Channeled",
+     "8 min cooldown"
+    ]
+   ],
+   "d": "While channeling this spell, your mana regeneration is active and increased by 1,500%. Lasts 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 12051,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Mage Armor|Rank 1": {
+   "l": [
+    [
+     "270 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases your resistance to all magic by 5 and allows 50% of your mana regeneration to continue while casting. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 6117,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Increases your resistance to all magic by 5 and allows 30% of your mana regeneration to continue while casting. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min."
+  },
+  "Mage|Mage Armor|Rank 2": {
+   "l": [
+    [
+     "380 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases your resistance to all magic by 10 and allows 50% of your mana regeneration to continue while casting. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 22782,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Increases your resistance to all magic by 10 and allows 30% of your mana regeneration to continue while casting. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min."
+  },
+  "Mage|Mage Armor|Rank 3": {
+   "l": [
+    [
+     "490 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases your resistance to all magic by 15 and allows 50% of your mana regeneration to continue while casting. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 22783,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Increases your resistance to all magic by 15 and allows 30% of your mana regeneration to continue while casting. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min."
+  },
+  "Mage|Mana Shield|Rank 1": {
+   "l": [
+    [
+     "40 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Absorbs 120 physical damage, draining mana instead. Drains 2 mana per damage absorbed. Lasts 1 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1463,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Mana Shield|Rank 2": {
+   "l": [
+    [
+     "60 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Absorbs 210 physical damage, draining mana instead. Drains 2 mana per damage absorbed. Lasts 1 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 8494,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Mana Shield|Rank 3": {
+   "l": [
+    [
+     "80 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Absorbs 300 physical damage, draining mana instead. Drains 2 mana per damage absorbed. Lasts 1 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8495,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Mana Shield|Rank 4": {
+   "l": [
+    [
+     "100 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Absorbs 390 physical damage, draining mana instead. Drains 2 mana per damage absorbed. Lasts 1 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 10191,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Mana Shield|Rank 5": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Absorbs 480 physical damage, draining mana instead. Drains 2 mana per damage absorbed. Lasts 1 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10192,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Mana Shield|Rank 6": {
+   "l": [
+    [
+     "140 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Absorbs 570 physical damage, draining mana instead. Drains 2 mana per damage absorbed. Lasts 1 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10193,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Polymorph|Turtle": {
+   "l": [
+    [
+     "150 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Transforms the enemy into a turtle, forcing it to wander around for up to 50 sec. While wandering, the turtle cannot attack or cast spells but will regenerate very quickly. Any damage will transform the target back into its normal form. Only one target can be polymorphed at a time. Only works on Beasts, Humanoids and Critters.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 28271,
+   "sc": "Arcane",
+   "nt": 2,
+   "cs": "same"
+  },
+  "Mage|Polymorph|Pig": {
+   "l": [
+    [
+     "150 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Transforms the enemy into a pig, forcing it to wander around for up to 50 sec. While wandering, the pig cannot attack or cast spells but will regenerate very quickly. Any damage will transform the target back into its normal form. Only one target can be polymorphed at a time. Only works on Beasts, Humanoids and Critters.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 28272,
+   "sc": "Arcane",
+   "nt": 2,
+   "cs": "same"
+  },
+  "Mage|Polymorph|Rank 1": {
+   "l": [
+    [
+     "60 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Transforms the enemy into a sheep, forcing it to wander around for up to 20 sec. While wandering, the sheep cannot attack or cast spells but will regenerate very quickly. Any damage will transform the target back into its normal form. Only one target can be polymorphed at a time. Only works on Beasts, Humanoids and Critters.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 118,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Polymorph|Rank 2": {
+   "l": [
+    [
+     "90 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Transforms the enemy into a sheep, forcing it to wander around for up to 30 sec. While wandering, the sheep cannot attack or cast spells but will regenerate very quickly. Any damage will transform the target back into its normal form. Only one target can be polymorphed at a time. Only works on Beasts, Humanoids and Critters.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 12824,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Polymorph|Rank 3": {
+   "l": [
+    [
+     "120 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Transforms the enemy into a sheep, forcing it to wander around for up to 40 sec. While wandering, the sheep cannot attack or cast spells but will regenerate very quickly. Any damage will transform the target back into its normal form. Only one target can be polymorphed at a time. Only works on Beasts, Humanoids and Critters.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 12825,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Polymorph|Rank 4": {
+   "l": [
+    [
+     "150 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Transforms the enemy into a sheep, forcing it to wander around for up to 50 sec. While wandering, the sheep cannot attack or cast spells but will regenerate very quickly. Any damage will transform the target back into its normal form. Only one target can be polymorphed at a time. Only works on Beasts, Humanoids and Critters.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 12826,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Portal: Darnassus|": {
+   "l": [
+    [
+     "850 Mana",
+     "10 yd range"
+    ],
+    [
+     "10 sec cast",
+     "1 min cooldown"
+    ],
+    [
+     "Reagents: Rune of Portals",
+     ""
+    ]
+   ],
+   "d": "Creates a portal, teleporting group members that use it to Darnassus.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 11419,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Portal: Ironforge|": {
+   "l": [
+    [
+     "850 Mana",
+     "10 yd range"
+    ],
+    [
+     "10 sec cast",
+     "1 min cooldown"
+    ],
+    [
+     "Reagents: Rune of Portals",
+     ""
+    ]
+   ],
+   "d": "Creates a portal, teleporting group members that use it to Ironforge.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 11416,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Portal: Orgrimmar|": {
+   "l": [
+    [
+     "850 Mana",
+     "10 yd range"
+    ],
+    [
+     "10 sec cast",
+     "1 min cooldown"
+    ],
+    [
+     "Reagents: Rune of Portals",
+     ""
+    ]
+   ],
+   "d": "Creates a portal, teleporting group members that use it to Orgrimmar.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 11417,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Portal: Stormwind|": {
+   "l": [
+    [
+     "850 Mana",
+     "10 yd range"
+    ],
+    [
+     "10 sec cast",
+     "1 min cooldown"
+    ],
+    [
+     "Reagents: Rune of Portals",
+     ""
+    ]
+   ],
+   "d": "Creates a portal, teleporting group members that use it to Stormwind.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 10059,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Portal: Thunder Bluff|": {
+   "l": [
+    [
+     "850 Mana",
+     "10 yd range"
+    ],
+    [
+     "10 sec cast",
+     "1 min cooldown"
+    ],
+    [
+     "Reagents: Rune of Portals",
+     ""
+    ]
+   ],
+   "d": "Creates a portal, teleporting group members that use it to Thunder Bluff.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 11420,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Portal: Undercity|": {
+   "l": [
+    [
+     "850 Mana",
+     "10 yd range"
+    ],
+    [
+     "10 sec cast",
+     "1 min cooldown"
+    ],
+    [
+     "Reagents: Rune of Portals",
+     ""
+    ]
+   ],
+   "d": "Creates a portal, teleporting group members that use it to Undercity.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 11418,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Presence of Mind|": {
+   "l": [
+    [
+     "Instant",
+     "3 min cooldown"
+    ]
+   ],
+   "d": "When activated, your next Mage spell with a casting time less than 10 sec becomes an instant cast spell.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 12043,
+   "sc": "Physical",
+   "cs": "note",
+   "cn": "Baseline now. In Classic this was an Arcane talent."
+  },
+  "Mage|Remove Lesser Curse|": {
+   "l": [
+    [
+     "10% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Removes 1 Curse or Bane from a friendly target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 475,
+   "sc": "Arcane",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Removes 1 Curse from a friendly target."
+  },
+  "Mage|Slow Fall|": {
+   "l": [
+    [
+     "40 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Light Feather",
+     ""
+    ]
+   ],
+   "d": "Slows falling speed for 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 130,
+   "sc": "Arcane",
+   "cs": "same"
+  },
+  "Mage|Teleport: Dalaran|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Dalaran.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 1297659,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "new"
+  },
+  "Mage|Teleport: Darnassus|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Darnassus.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 3565,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Teleport: Ironforge|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Ironforge.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 3562,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Teleport: Orgrimmar|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Orgrimmar.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 3567,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Teleport: Stormwind|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Stormwind.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 3561,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Teleport: Thunder Bluff|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Thunder Bluff.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 3566,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Teleport: Undercity|": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "10 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Rune of Teleportation",
+     ""
+    ]
+   ],
+   "d": "Teleports the caster to Undercity.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 3563,
+   "sc": "Arcane",
+   "nt": 1,
+   "cs": "same"
+  },
+  "Mage|Blast Wave|Rank 1": {
+   "l": [
+    [
+     "215 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "45 sec cooldown"
+    ]
+   ],
+   "d": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 154 to 184 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 11113,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 160 to 192 Fire damage, and dazing them for 6 sec."
+  },
+  "Mage|Blast Wave|Rank 2": {
+   "l": [
+    [
+     "270 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "45 sec cooldown"
+    ]
+   ],
+   "d": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 200 to 238 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 13018,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 208 to 248 Fire damage, and dazing them for 6 sec."
+  },
+  "Mage|Blast Wave|Rank 3": {
+   "l": [
+    [
+     "355 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "45 sec cooldown"
+    ]
+   ],
+   "d": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 276 to 326 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 13019,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 285 to 337 Fire damage, and dazing them for 6 sec."
+  },
+  "Mage|Blast Wave|Rank 4": {
+   "l": [
+    [
+     "450 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "45 sec cooldown"
+    ]
+   ],
+   "d": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 365 to 431 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 13020,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 374 to 442 Fire damage, and dazing them for 6 sec."
+  },
+  "Mage|Blast Wave|Rank 5": {
+   "l": [
+    [
+     "545 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "45 sec cooldown"
+    ]
+   ],
+   "d": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 453 to 533 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 13021,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 462 to 544 Fire damage, and dazing them for 6 sec."
+  },
+  "Mage|Combustion|": {
+   "l": [
+    [
+     "Instant",
+     "3 min cooldown"
+    ]
+   ],
+   "d": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until you have caused 4 non-periodic critical strikes with Fire spells.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 11129,
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until you have caused 3 critical strikes with Fire spells."
+  },
+  "Mage|Fire Blast|Rank 1": {
+   "l": [
+    [
+     "40 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 27 to 35 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 2136,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "same"
+  },
+  "Mage|Fire Blast|Rank 2": {
+   "l": [
+    [
+     "75 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 57 to 69 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 2137,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts the enemy for 62 to 76 Fire damage."
+  },
+  "Mage|Fire Blast|Rank 3": {
+   "l": [
+    [
+     "115 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 96 to 116 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 2138,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts the enemy for 109 to 133 Fire damage."
+  },
+  "Mage|Fire Blast|Rank 4": {
+   "l": [
+    [
+     "165 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 156 to 186 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 8412,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts the enemy for 176 to 210 Fire damage."
+  },
+  "Mage|Fire Blast|Rank 5": {
+   "l": [
+    [
+     "220 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 226 to 268 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 8413,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts the enemy for 253 to 301 Fire damage."
+  },
+  "Mage|Fire Blast|Rank 6": {
+   "l": [
+    [
+     "280 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 315 to 371 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 10197,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts the enemy for 344 to 406 Fire damage."
+  },
+  "Mage|Fire Blast|Rank 7": {
+   "l": [
+    [
+     "340 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the enemy for 417 to 489 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10199,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts the enemy for 446 to 524 Fire damage."
+  },
+  "Mage|Fire Ward|Rank 1": {
+   "l": [
+    [
+     "85 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 162 Fire damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 543,
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 165 Fire damage. Lasts 30 sec."
+  },
+  "Mage|Fire Ward|Rank 2": {
+   "l": [
+    [
+     "135 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 285 Fire damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 8457,
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 290 Fire damage. Lasts 30 sec."
+  },
+  "Mage|Fire Ward|Rank 3": {
+   "l": [
+    [
+     "195 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 463 Fire damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 8458,
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 470 Fire damage. Lasts 30 sec."
+  },
+  "Mage|Fire Ward|Rank 4": {
+   "l": [
+    [
+     "255 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 668 Fire damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10223,
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 675 Fire damage. Lasts 30 sec."
+  },
+  "Mage|Fire Ward|Rank 5": {
+   "l": [
+    [
+     "320 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 913 Fire damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10225,
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 920 Fire damage. Lasts 30 sec."
+  },
+  "Mage|Fireball|Rank 1": {
+   "l": [
+    [
+     "30 Mana",
+     "35 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 16 to 24 Fire damage and an additional 2 Fire damage over 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 133,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "same"
+  },
+  "Mage|Fireball|Rank 2": {
+   "l": [
+    [
+     "45 Mana",
+     "35 yd range"
+    ],
+    [
+     "2 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 32 to 46 Fire damage and an additional 3 Fire damage over 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 143,
+   "co": "57.1% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 34 to 48 Fire damage and an additional 3 Fire damage over 6 sec."
+  },
+  "Mage|Fireball|Rank 3": {
+   "l": [
+    [
+     "65 Mana",
+     "35 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 48 to 64 Fire damage and an additional 6 Fire damage over 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 145,
+   "co": "71.4% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 57 to 77 Fire damage and an additional 6 Fire damage over 6 sec."
+  },
+  "Mage|Fireball|Rank 4": {
+   "l": [
+    [
+     "95 Mana",
+     "35 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 66 to 90 Fire damage and an additional 12 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 3140,
+   "co": "85.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 89 to 121 Fire damage and an additional 12 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 5": {
+   "l": [
+    [
+     "140 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 98 to 130 Fire damage and an additional 16 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 8400,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 146 to 194 Fire damage and an additional 20 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 6": {
+   "l": [
+    [
+     "185 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 138 to 182 Fire damage and an additional 24 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 8401,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 207 to 273 Fire damage and an additional 28 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 7": {
+   "l": [
+    [
+     "220 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 171 to 221 Fire damage and an additional 24 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8402,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 264 to 344 Fire damage and an additional 32 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 8": {
+   "l": [
+    [
+     "260 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 212 to 274 Fire damage and an additional 32 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 10148,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 328 to 424 Fire damage and an additional 40 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 9": {
+   "l": [
+    [
+     "305 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 271 to 347 Fire damage and an additional 40 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 10149,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 404 to 518 Fire damage and an additional 52 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 10": {
+   "l": [
+    [
+     "350 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 338 to 430 Fire damage and an additional 48 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10150,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 488 to 622 Fire damage and an additional 60 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 11": {
+   "l": [
+    [
+     "395 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 397 to 505 Fire damage and an additional 56 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10151,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 561 to 715 Fire damage and an additional 72 Fire damage over 8 sec."
+  },
+  "Mage|Fireball|Rank 12": {
+   "l": [
+    [
+     "410 Mana",
+     "35 yd range"
+    ],
+    [
+     "3.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls a fiery ball that causes 425 to 541 Fire damage and an additional 60 Fire damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25306,
+   "co": "100% of spell power (direct)",
+   "sc": "Fire",
+   "nt": 2,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a fiery ball that causes 596 to 760 Fire damage and an additional 76 Fire damage over 8 sec."
+  },
+  "Mage|Flamestrike|Rank 1": {
+   "l": [
+    [
+     "195 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Calls down a pillar of fire, burning all enemies within the area for 55 to 71 Fire damage and an additional 44 Fire damage over 8 sec. Only one Flamestrike can be active per Mage at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 16",
+   "id": 2120,
+   "co": "15.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Calls down a pillar of fire, burning all enemies within the area for 55 to 71 Fire damage and an additional 48 Fire damage over 8 sec."
+  },
+  "Mage|Flamestrike|Rank 2": {
+   "l": [
+    [
+     "330 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Calls down a pillar of fire, burning all enemies within the area for 100 to 126 Fire damage and an additional 84 Fire damage over 8 sec. Only one Flamestrike can be active per Mage at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 2121,
+   "co": "15.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Calls down a pillar of fire, burning all enemies within the area for 100 to 126 Fire damage and an additional 88 Fire damage over 8 sec."
+  },
+  "Mage|Flamestrike|Rank 3": {
+   "l": [
+    [
+     "490 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Calls down a pillar of fire, burning all enemies within the area for 159 to 197 Fire damage and an additional 132 Fire damage over 8 sec. Only one Flamestrike can be active per Mage at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 8422,
+   "co": "15.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Calls down a pillar of fire, burning all enemies within the area for 159 to 197 Fire damage and an additional 140 Fire damage over 8 sec."
+  },
+  "Mage|Flamestrike|Rank 4": {
+   "l": [
+    [
+     "650 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Calls down a pillar of fire, burning all enemies within the area for 226 to 278 Fire damage and an additional 188 Fire damage over 8 sec. Only one Flamestrike can be active per Mage at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 8423,
+   "co": "15.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Calls down a pillar of fire, burning all enemies within the area for 226 to 278 Fire damage and an additional 196 Fire damage over 8 sec."
+  },
+  "Mage|Flamestrike|Rank 5": {
+   "l": [
+    [
+     "815 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Calls down a pillar of fire, burning all enemies within the area for 298 to 366 Fire damage and an additional 256 Fire damage over 8 sec. Only one Flamestrike can be active per Mage at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 10215,
+   "co": "15.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Calls down a pillar of fire, burning all enemies within the area for 298 to 366 Fire damage and an additional 264 Fire damage over 8 sec."
+  },
+  "Mage|Flamestrike|Rank 6": {
+   "l": [
+    [
+     "990 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Calls down a pillar of fire, burning all enemies within the area for 381 to 465 Fire damage and an additional 332 Fire damage over 8 sec. Only one Flamestrike can be active per Mage at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 10216,
+   "co": "15.7% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Calls down a pillar of fire, burning all enemies within the area for 381 to 465 Fire damage and an additional 340 Fire damage over 8 sec."
+  },
+  "Mage|Frostfire Bolt|Rank 1": {
+   "l": [
+    [
+     "205 Mana",
+     "35 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frostfire at the enemy, causing 102 to 118 Frostfire damage, slowing movement speed by 40% and causing an additional 27 Frostfire damage over 9 sec. This spell will be checked against the lower of the target's Frost and Fire resists and counts as both Frost and Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 401502,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Fire, Frost",
+   "cs": "new"
+  },
+  "Mage|Frostfire Bolt|Rank 2": {
+   "l": [
+    [
+     "285 Mana",
+     "35 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frostfire at the enemy, causing 181 to 209 Frostfire damage, slowing movement speed by 40% and causing an additional 39 Frostfire damage over 9 sec. This spell will be checked against the lower of the target's Frost and Fire resists and counts as both Frost and Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 1237312,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Fire, Frost",
+   "cs": "new"
+  },
+  "Mage|Frostfire Bolt|Rank 3": {
+   "l": [
+    [
+     "370 Mana",
+     "35 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frostfire at the enemy, causing 270 to 314 Frostfire damage, slowing movement speed by 40% and causing an additional 57 Frostfire damage over 9 sec. This spell will be checked against the lower of the target's Frost and Fire resists and counts as both Frost and Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 1237313,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Fire, Frost",
+   "cs": "new"
+  },
+  "Mage|Pyroblast|Rank 1": {
+   "l": [
+    [
+     "125 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 101 to 131 Fire damage and an additional 44 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 11366,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 148 to 194 Fire damage and an additional 56 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 2": {
+   "l": [
+    [
+     "150 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 126 to 162 Fire damage and an additional 56 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 12505,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 193 to 249 Fire damage and an additional 72 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 3": {
+   "l": [
+    [
+     "195 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 179 to 227 Fire damage and an additional 76 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 12522,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 270 to 342 Fire damage and an additional 96 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 4": {
+   "l": [
+    [
+     "240 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 230 to 288 Fire damage and an additional 100 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 12523,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 347 to 437 Fire damage and an additional 124 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 5": {
+   "l": [
+    [
+     "285 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 291 to 363 Fire damage and an additional 124 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 12524,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 427 to 535 Fire damage and an additional 156 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 6": {
+   "l": [
+    [
+     "335 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 368 to 456 Fire damage and an additional 152 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 12525,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 525 to 653 Fire damage and an additional 188 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 7": {
+   "l": [
+    [
+     "385 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 448 to 554 Fire damage and an additional 184 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 12526,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 625 to 775 Fire damage and an additional 228 Fire damage over 12 sec."
+  },
+  "Mage|Pyroblast|Rank 8": {
+   "l": [
+    [
+     "440 Mana",
+     "35 yd range"
+    ],
+    [
+     "6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Hurls an immense fiery boulder that causes 520 to 646 Fire damage and an additional 212 Fire damage over 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 18809,
+   "co": "100% of spell power (direct), 15% of spell power (per tick)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls an immense fiery boulder that causes 716 to 890 Fire damage and an additional 268 Fire damage over 12 sec."
+  },
+  "Mage|Scorch|Rank 1": {
+   "l": [
+    [
+     "50 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 38 to 46 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 2948,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 56 to 68 Fire damage."
+  },
+  "Mage|Scorch|Rank 2": {
+   "l": [
+    [
+     "65 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 54 to 64 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 8444,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 81 to 97 Fire damage."
+  },
+  "Mage|Scorch|Rank 3": {
+   "l": [
+    [
+     "80 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 67 to 79 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 8445,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 105 to 125 Fire damage."
+  },
+  "Mage|Scorch|Rank 4": {
+   "l": [
+    [
+     "100 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 89 to 105 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 8446,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 139 to 165 Fire damage."
+  },
+  "Mage|Scorch|Rank 5": {
+   "l": [
+    [
+     "115 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 111 to 131 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 10205,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 168 to 198 Fire damage."
+  },
+  "Mage|Scorch|Rank 6": {
+   "l": [
+    [
+     "135 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 143 to 169 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10206,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 207 to 246 Fire damage."
+  },
+  "Mage|Scorch|Rank 7": {
+   "l": [
+    [
+     "150 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Scorch the enemy for 166 to 196 Fire damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 10207,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Fire",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Scorch the enemy for 237 to 279 Fire damage."
+  },
+  "Mage|Blizzard|Rank 1": {
+   "l": [
+    [
+     "320 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Ice shards pelt the target area doing 192 Frost damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 10,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Ice shards pelt the target area doing 200 Frost damage over 8 sec."
+  },
+  "Mage|Blizzard|Rank 2": {
+   "l": [
+    [
+     "520 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Ice shards pelt the target area doing 344 Frost damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 6141,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Ice shards pelt the target area doing 360 Frost damage over 8 sec."
+  },
+  "Mage|Blizzard|Rank 3": {
+   "l": [
+    [
+     "720 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Ice shards pelt the target area doing 504 Frost damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8427,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Ice shards pelt the target area doing 528 Frost damage over 8 sec."
+  },
+  "Mage|Blizzard|Rank 4": {
+   "l": [
+    [
+     "935 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Ice shards pelt the target area doing 704 Frost damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 10185,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Ice shards pelt the target area doing 728 Frost damage over 8 sec."
+  },
+  "Mage|Blizzard|Rank 5": {
+   "l": [
+    [
+     "1,160 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Ice shards pelt the target area doing 920 Frost damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10186,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Ice shards pelt the target area doing 944 Frost damage over 8 sec."
+  },
+  "Mage|Blizzard|Rank 6": {
+   "l": [
+    [
+     "1,400 Mana",
+     "30 yd range"
+    ],
+    [
+     "Channeled",
+     ""
+    ]
+   ],
+   "d": "Ice shards pelt the target area doing 1,168 Frost damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10187,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Ice shards pelt the target area doing 1,192 Frost damage over 8 sec."
+  },
+  "Mage|Cold Snap|": {
+   "l": [
+    [
+     "Instant",
+     "10 min cooldown"
+    ]
+   ],
+   "d": "Finishes the remaining cooldown on all your other Frost spells.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 12472,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "When activated, this spell finishes the cooldown on all of your Frost spells."
+  },
+  "Mage|Cone of Cold|Rank 1": {
+   "l": [
+    [
+     "210 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Targets in a cone in front of the caster take 96 to 106 Frost damage and are slowed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 120,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Targets in a cone in front of the caster take 102 to 112 Frost damage and are slowed by 50% for 8 sec."
+  },
+  "Mage|Cone of Cold|Rank 2": {
+   "l": [
+    [
+     "290 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Targets in a cone in front of the caster take 142 to 156 Frost damage and are slowed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 8492,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Targets in a cone in front of the caster take 151 to 165 Frost damage and are slowed by 50% for 8 sec."
+  },
+  "Mage|Cone of Cold|Rank 3": {
+   "l": [
+    [
+     "380 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Targets in a cone in front of the caster take 200 to 220 Frost damage and are slowed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 10159,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Targets in a cone in front of the caster take 209 to 229 Frost damage and are slowed by 50% for 8 sec."
+  },
+  "Mage|Cone of Cold|Rank 4": {
+   "l": [
+    [
+     "465 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Targets in a cone in front of the caster take 260 to 286 Frost damage and are slowed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10160,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Targets in a cone in front of the caster take 270 to 296 Frost damage and are slowed by 50% for 8 sec."
+  },
+  "Mage|Cone of Cold|Rank 5": {
+   "l": [
+    [
+     "555 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Targets in a cone in front of the caster take 328 to 358 Frost damage and are slowed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 10161,
+   "co": "12.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Targets in a cone in front of the caster take 338 to 368 Frost damage and are slowed by 50% for 8 sec."
+  },
+  "Mage|Frost Armor|Rank 1": {
+   "l": [
+    [
+     "60 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 30. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 168,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Frost Armor|Rank 2": {
+   "l": [
+    [
+     "110 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 110. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 7300,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Frost Armor|Rank 3": {
+   "l": [
+    [
+     "170 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 200. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 7301,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Frost Nova|Rank 1": {
+   "l": [
+    [
+     "55 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "25 sec cooldown"
+    ]
+   ],
+   "d": "Blasts enemies near the caster for 21 to 23 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 122,
+   "co": "2.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Frost Nova|Rank 2": {
+   "l": [
+    [
+     "85 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "25 sec cooldown"
+    ]
+   ],
+   "d": "Blasts enemies near the caster for 34 to 38 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 865,
+   "co": "2.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts enemies near the caster for 35 to 39 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect."
+  },
+  "Mage|Frost Nova|Rank 3": {
+   "l": [
+    [
+     "115 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "25 sec cooldown"
+    ]
+   ],
+   "d": "Blasts enemies near the caster for 52 to 58 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 6131,
+   "co": "2.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts enemies near the caster for 54 to 60 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect."
+  },
+  "Mage|Frost Nova|Rank 4": {
+   "l": [
+    [
+     "145 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "25 sec cooldown"
+    ]
+   ],
+   "d": "Blasts enemies near the caster for 71 to 79 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10230,
+   "co": "2.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Blasts enemies near the caster for 73 to 81 Frost damage and freezes them in place for up to 8 sec. Damage caused may interrupt the effect."
+  },
+  "Mage|Frost Ward|Rank 1": {
+   "l": [
+    [
+     "85 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 162 Frost damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 6143,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 165 Frost damage. Lasts 30 sec."
+  },
+  "Mage|Frost Ward|Rank 2": {
+   "l": [
+    [
+     "135 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 284 Frost damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 8461,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 290 Frost damage. Lasts 30 sec."
+  },
+  "Mage|Frost Ward|Rank 3": {
+   "l": [
+    [
+     "195 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 463 Frost damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 8462,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 470 Frost damage. Lasts 30 sec."
+  },
+  "Mage|Frost Ward|Rank 4": {
+   "l": [
+    [
+     "255 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 668 Frost damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10177,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 675 Frost damage. Lasts 30 sec."
+  },
+  "Mage|Frost Ward|Rank 5": {
+   "l": [
+    [
+     "320 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Absorbs 913 Frost damage. Lasts 30 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 28609,
+   "sc": "Frost",
+   "nt": 2,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Absorbs 920 Frost damage. Lasts 30 sec."
+  },
+  "Mage|Frostbolt|Rank 1": {
+   "l": [
+    [
+     "25 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 20 to 22 Frost damage and slowing movement speed by 40% for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 116,
+   "co": "40.7% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Frostbolt|Rank 2": {
+   "l": [
+    [
+     "35 Mana",
+     "30 yd range"
+    ],
+    [
+     "1.8 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 33 to 37 Frost damage and slowing movement speed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 205,
+   "co": "48.9% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Frostbolt|Rank 3": {
+   "l": [
+    [
+     "50 Mana",
+     "30 yd range"
+    ],
+    [
+     "2.2 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 46 to 52 Frost damage and slowing movement speed by 40% for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 837,
+   "co": "59.7% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 54 to 60 Frost damage and slowing movement speed by 40% for 6 sec."
+  },
+  "Mage|Frostbolt|Rank 4": {
+   "l": [
+    [
+     "65 Mana",
+     "30 yd range"
+    ],
+    [
+     "2.6 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 61 to 67 Frost damage and slowing movement speed by 40% for 7 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 7322,
+   "co": "70.6% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 78 to 86 Frost damage and slowing movement speed by 40% for 7 sec."
+  },
+  "Mage|Frostbolt|Rank 5": {
+   "l": [
+    [
+     "100 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 97 to 105 Frost damage and slowing movement speed by 40% for 7 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 8406,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 132 to 144 Frost damage and slowing movement speed by 40% for 7 sec."
+  },
+  "Mage|Frostbolt|Rank 6": {
+   "l": [
+    [
+     "130 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 134 to 146 Frost damage and slowing movement speed by 40% for 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 8407,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 180 to 196 Frost damage and slowing movement speed by 40% for 8 sec."
+  },
+  "Mage|Frostbolt|Rank 7": {
+   "l": [
+    [
+     "160 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 181 to 197 Frost damage and slowing movement speed by 40% for 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 8408,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 235 to 255 Frost damage and slowing movement speed by 40% for 8 sec."
+  },
+  "Mage|Frostbolt|Rank 8": {
+   "l": [
+    [
+     "195 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 243 to 263 Frost damage and slowing movement speed by 40% for 9 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 10179,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 301 to 325 Frost damage and slowing movement speed by 40% for 9 sec."
+  },
+  "Mage|Frostbolt|Rank 9": {
+   "l": [
+    [
+     "225 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 305 to 331 Frost damage and slowing movement speed by 40% for 9 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10180,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 363 to 393 Frost damage and slowing movement speed by 40% for 9 sec."
+  },
+  "Mage|Frostbolt|Rank 10": {
+   "l": [
+    [
+     "260 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 382 to 412 Frost damage and slowing movement speed by 40% for 9 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 10181,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 440 to 474 Frost damage and slowing movement speed by 40% for 9 sec."
+  },
+  "Mage|Frostbolt|Rank 11": {
+   "l": [
+    [
+     "290 Mana",
+     "30 yd range"
+    ],
+    [
+     "3 sec cast",
+     ""
+    ]
+   ],
+   "d": "Launches a bolt of frost at the enemy, causing 457 to 493 Frost damage and slowing movement speed by 40% for 9 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25304,
+   "co": "81.4% of spell power (direct)",
+   "sc": "Frost",
+   "nt": 2,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Launches a bolt of frost at the enemy, causing 515 to 555 Frost damage and slowing movement speed by 40% for 9 sec."
+  },
+  "Mage|Ice Armor|Rank 1": {
+   "l": [
+    [
+     "240 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 290 and frost resistance by 6. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 7302,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Ice Armor|Rank 2": {
+   "l": [
+    [
+     "320 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 380 and frost resistance by 9. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 7320,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Ice Armor|Rank 3": {
+   "l": [
+    [
+     "410 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 470 and frost resistance by 12. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10219,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Ice Armor|Rank 4": {
+   "l": [
+    [
+     "500 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases Armor by 560 and frost resistance by 15. If an enemy strikes the caster, they may have their movement slowed by 30% and the time between their attacks increased by 25% for 5 sec. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10220,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Ice Barrier|Rank 1": {
+   "l": [
+    [
+     "305 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Instantly shields you, absorbing 447 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 11426,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Instantly shields you, absorbing 454 damage. Lasts 1 min. While the shield holds, spells will not be interrupted."
+  },
+  "Mage|Ice Barrier|Rank 2": {
+   "l": [
+    [
+     "360 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Instantly shields you, absorbing 561 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 13031,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Instantly shields you, absorbing 568 damage. Lasts 1 min. While the shield holds, spells will not be interrupted."
+  },
+  "Mage|Ice Barrier|Rank 3": {
+   "l": [
+    [
+     "420 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Instantly shields you, absorbing 692 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 13032,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Instantly shields you, absorbing 699 damage. Lasts 1 min. While the shield holds, spells will not be interrupted."
+  },
+  "Mage|Ice Barrier|Rank 4": {
+   "l": [
+    [
+     "480 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Instantly shields you, absorbing 819 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 13033,
+   "sc": "Frost",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Instantly shields you, absorbing 826 damage. Lasts 1 min. While the shield holds, spells will not be interrupted."
+  },
+  "Mage|Ice Block|": {
+   "l": [
+    [
+     "15 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 11958,
+   "sc": "Frost",
+   "cs": "same"
+  },
+  "Mage|Ice Lance|Rank 1": {
+   "l": [
+    [
+     "45 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Deals 28 to 32 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1312002,
+   "sc": "Frost",
+   "cs": "new"
+  },
+  "Mage|Ice Lance|Rank 2": {
+   "l": [
+    [
+     "55 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Deals 34 to 40 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 400640,
+   "sc": "Frost",
+   "cs": "new"
+  },
+  "Mage|Ice Lance|Rank 3": {
+   "l": [
+    [
+     "70 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Deals 44 to 52 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 1240044,
+   "sc": "Frost",
+   "cs": "new"
+  },
+  "Mage|Ice Lance|Rank 4": {
+   "l": [
+    [
+     "105 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Deals 76 to 90 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 1240045,
+   "sc": "Frost",
+   "cs": "new"
+  },
+  "Mage|Ice Lance|Rank 5": {
+   "l": [
+    [
+     "120 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Deals 95 to 111 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 1240046,
+   "sc": "Frost",
+   "cs": "new"
+  },
+  "Mage|Ice Lance|Rank 6": {
+   "l": [
+    [
+     "160 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Deals 136 to 160 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+   "s": "beta",
+   "src": "beta client 1.60.1.69876",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 1240047,
+   "sc": "Frost",
+   "cs": "new"
+  }
+ },
+ "races": {
+  "Horde": [
+   "Orc",
+   "Undead",
+   "Troll"
+  ],
+  "Alliance": [
+   "Human",
+   "Gnome",
+   "Skyborne (High Order)"
+  ]
+ },
+ "racials": {
+  "Horde": [
+   {
+    "race": "Orc",
+    "icon": "race_orc_male",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Shaman",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Blood Fury",
+      "Instant, 2 min cooldown. Increases Attack Power and Spell Power by 10% for 15 sec.",
+      "racial_orc_berserkerstrength"
+     ],
+     [
+      "Hardiness",
+      "Duration of Stun effects on you reduced by 20%.",
+      "inv_helmet_23"
+     ],
+     [
+      "Axe Specialization",
+      "Increases your critical strike chance with all spells and abilities by 1% while you have an axe or a two-handed axe equipped.",
+      "inv_axe_02"
+     ],
+     [
+      "Shatter Curse",
+      "Instant, 3 min cooldown. Instantly removes and grants immunity to all Curses and Banes, and reduces all Magical damage taken by 15% for 8 sec.",
+      "spell_nature_removecurse"
+     ]
+    ]
+   },
+   {
+    "race": "Undead",
+    "icon": "race_scourge_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Underwater Breathing",
+      "Underwater breath lasts 300% longer than normal.",
+      "spell_shadow_demonbreath"
+     ],
+     [
+      "Will of the Forsaken",
+      "Instant, 2 min cooldown. Instantly removes all Charm, Fear and Sleep effects.",
+      "spell_shadow_raisedead"
+     ],
+     [
+      "Cannibalize",
+      "5 yd range, Instant, 2 min cooldown. When activated, regenerates 7% of total Health and 7% of total Mana every 2 sec for 10 sec. Only works on Humanoid or Undead corpses within 5 yds. Any movement, action, or damage taken while Cannibalizing will cancel the effect.",
+      "ability_racial_cannibalize"
+     ],
+     [
+      "Touch of the Grave",
+      "Your spells and attacks have a chance (5% for casters, 10% for melee) to drain Health from the target, up to 5% of your maximum Health. 1 sec internal cooldown.",
+      "spell_shadow_fingerofdeath"
+     ]
+    ]
+   },
+   {
+    "race": "Troll",
+    "icon": "race_troll_male",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Shaman",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Berserking",
+      "Instant, 3 min cooldown. Increases your spellcasting and attack speed by 10% for 10 sec.",
+      "racial_troll_berserk"
+     ],
+     [
+      "Regeneration",
+      "Health regeneration rate increased by 10%. In addition, 10% of total Health regeneration will continue during combat.",
+      "spell_nature_regenerate"
+     ],
+     [
+      "Beast Slaying",
+      "Damage dealt versus Beasts increased by 5%.",
+      "inv_misc_pelt_bear_ruin_02"
+     ],
+     [
+      "Rapid Regeneration",
+      "Channeled, 3 min cooldown. Regenerate 50% of your maximum Health over 6 sec. Any movement, action, or damage taken will cancel the effect.",
+      "ability_racial_regeneratin"
+     ]
+    ]
+   }
+  ],
+  "Alliance": [
+   {
+    "race": "Human",
+    "icon": "race_human_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Sword Specialization",
+      "Increases your critical strike chance with all spells and attacks by 2% while you have a sword or two-handed sword equipped.",
+      "ability_meleedamage"
+     ],
+     [
+      "The Human Spirit",
+      "Spirit increased by 5%.",
+      "inv_enchant_shardbrilliantsmall"
+     ],
+     [
+      "Perception",
+      "Instant, 3 min cooldown. Dramatically increases stealth detection for 20 sec.",
+      "spell_nature_sleep"
+     ],
+     [
+      "Will to Survive",
+      "Instant, 3 min cooldown. Instantly removes all Stun effects.",
+      "spell_shadow_charm"
+     ]
+    ]
+   },
+   {
+    "race": "Gnome",
+    "icon": "race_gnome_male",
+    "classes": [
+     "Warrior",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Escape Artist",
+      "Instant, 2 min cooldown. Instantly escape the effects of any movement impairing effect and gain immunity to those effects for 3 sec.",
+      "ability_rogue_trip"
+     ],
+     [
+      "Expansive Mind",
+      "Maximum Mana, Rage or Energy increased by 5%, whichever your class uses.",
+      "inv_enchant_essenceeternallarge"
+     ],
+     [
+      "Engineering Specialization",
+      "Your gnomish ingenuity reduces the rate of engineering devices failing or backfiring when you use them by 20%.",
+      "inv_misc_gear_01"
+     ],
+     [
+      "Eureka!",
+      "Instant, 2 min cooldown. Your next 3 damaging abilities cost less (50% less Mana, 40% less Rage, 20% less Energy; 15% less Mana for healers, who also heal 10% more) and deal 10% more damage.",
+      "inv_gnometoy"
+     ]
+    ]
+   },
+   {
+    "race": "Skyborne (High Order)",
+    "icon": "race_skyborne",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Mage",
+     "Druid"
+    ],
+    "abilities": [
+     [
+      "Walk on Air",
+      "Instant, 2 min cooldown. Glide downward through the air for 10 sec while controlling your direction of travel.",
+      "inv_elemental_primal_air"
+     ],
+     [
+      "Read Ley Line",
+      "2 sec cast, 2 min cooldown. Attempt to tap into the power of a nearby ley line, increasing your Health and Mana regeneration by 100%. Lasts 15 sec if no ley line is nearby, and 15 min if one is found.",
+      "ability_mage_incantersabsorbtion"
+     ],
+     [
+      "Elemental Insight",
+      "Damage dealt versus Elementals increased by 5%.",
+      "achievement_raidprimalist_windelemental"
+     ],
+     [
+      "Wind Blessed",
+      "Increases your spellcasting, melee, and ranged Haste by 1%.",
+      "inv_misc_volatileair"
+     ]
+    ]
+   }
+  ]
+ },
+ "class_racials": {},
+ "class_abilities": [
+  [
+   "Comprehend Scroll",
+   "New little ability: decipher an untranslated scroll. Seen on a Skyborne Mage.",
+   "inv_scroll_03"
+  ],
+  [
+   "Frostfire Bolt",
+   "A bolt that is both Fire and Frost. Four talents mention it.",
+   "ability_mage_frostfirebolt"
+  ]
+ ],
+ "legacy": {
+  "note": "Earned from challenges, spent across the account. 16 points at launch. Some perks need points in their tree first, a few need the perk before them. The ? slots are placeholders.",
+  "points": 16,
+  "source": "Forever beta client 1.60.1.69876",
+  "trees": [
+   {
+    "id": 1188,
+    "name": "Adventure",
+    "icon": "inv_misc_map_01",
+    "perks": [
+     {
+      "name": "High Alert",
+      "max": 2,
+      "row": 1,
+      "col": 2,
+      "icon": "spell_shadow_detectlesserinvisibility",
+      "ranks": [
+       "Increases your ability to detect nearby targets with Stealth as if your level were increased by 1. Ineffective in Battlegrounds.",
+       "Increases your ability to detect nearby targets with Stealth as if your level were increased by 2. Ineffective in Battlegrounds."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Well Rested",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "icon": "spell_nature_sleep",
+      "ranks": [
+       "Your rested experience accumulates 4% faster and your rested experience cap is increased by 4%.",
+       "Your rested experience accumulates 8% faster and your rested experience cap is increased by 8%.",
+       "Your rested experience accumulates 12% faster and your rested experience cap is increased by 12%.",
+       "Your rested experience accumulates 16% faster and your rested experience cap is increased by 16%.",
+       "Your rested experience accumulates 20% faster and your rested experience cap is increased by 20%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Talented",
+      "max": 5,
+      "row": 2,
+      "col": 2,
+      "icon": "ability_marksmanship",
+      "ranks": [
+       "You gain talent points every level starting at level 9 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 8 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 7 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 6 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 5 instead of starting at level 10, but you still may not have more than 51 total talent points."
+      ],
+      "gate": 5,
+      "req": "Well Rested"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Thrill of Adventure",
+      "max": 5,
+      "row": 3,
+      "col": 1,
+      "icon": "ability_hunter_huntervswild",
+      "ranks": [
+       "You gain 1% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 2% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 3% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 4% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 5% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Field Guide",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "icon": "inv_fishingchair",
+      "ranks": [
+       "Reduces your cooldown on adding Camp features by 8%",
+       "Reduces your cooldown on adding Camp features by 17%",
+       "Reduces your cooldown on adding Camp features by 25%"
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Frequent Flier",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "achievement_guild_ridelikethewind",
+      "ranks": [
+       "You receive a 50% discount on all flight paths, and your flight path mount flies 20% faster."
+      ],
+      "gate": 10,
+      "req": "Field Guide"
+     },
+     {
+      "name": "Field Medicine",
+      "max": 2,
+      "row": 4,
+      "col": 2,
+      "icon": "inv_misc_bandage_05",
+      "ranks": [
+       "Reduces the duration of the Recently Bandaged effect by 5 sec when you use a bandage. Ineffective in dungeons, raids, and battlegrounds.",
+       "Reduces the duration of the Recently Bandaged effect by 10 sec when you use a bandage. Ineffective in dungeons, raids, and battlegrounds."
+      ],
+      "gate": 5
+     }
+    ]
+   },
+   {
+    "id": 1189,
+    "name": "Resourcefulness",
+    "icon": "inv_misc_coin_01",
+    "perks": [
+     {
+      "name": "For Great Honor",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "icon": "achievement_bg_winwsg",
+      "ranks": [
+       "Increases Honor Points gained by 2%.",
+       "Increases Honor Points gained by 4%.",
+       "Increases Honor Points gained by 6%.",
+       "Increases Honor Points gained by 8%.",
+       "Increases Honor Points gained by 10%."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Gourmand",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "icon": "inv_misc_food_64",
+      "ranks": [
+       "Increases the duration of beneficial effects from eating food by 33%.",
+       "Increases the duration of beneficial effects from eating food by 67%.",
+       "Increases the duration of beneficial effects from eating food by 100%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Permanence",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "icon": "spell_misc_emotionhappy",
+      "ranks": [
+       "Your class abilities which grant long-duration stat or attribute benefits to all party or raid members last 50% longer, and the benefits you gain from resting at a camp last 50% longer.",
+       "Your class abilities which grant long-duration stat or attribute benefits to all party or raid members last 100% longer, and the benefits you gain from resting at a camp last 100% longer."
+      ],
+      "gate": 5,
+      "req": "Gourmand"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "The Quick and the Dead",
+      "max": 2,
+      "row": 3,
+      "col": 1,
+      "icon": "spell_shadow_deadofnight",
+      "ranks": [
+       "Increases movement speed while dead by 5% and your helpful spells and abilities cost no resources for 1 min after being resurrected or until you enter combat.",
+       "Increases movement speed while dead by 10% and your helpful spells and abilities cost no resources for 2 min after being resurrected or until you enter combat."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Reagent Economy",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "inv_misc_candle_02",
+      "ranks": [
+       "Your class abilities no longer require reagents purchaseable from vendors, and your Tier 1 camping features cost no reagents to craft."
+      ],
+      "gate": 10,
+      "req": "The Quick and the Dead"
+     },
+     {
+      "name": "Reinforce",
+      "max": 5,
+      "row": 4,
+      "col": 1,
+      "icon": "inv_misc_armorkit_17",
+      "ranks": [
+       "You take 8% less durability loss when you die.",
+       "You take 16% less durability loss when you die.",
+       "You take 24% less durability loss when you die.",
+       "You take 32% less durability loss when you die.",
+       "You take 40% less durability loss when you die."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Diplomat",
+      "max": 5,
+      "row": 4,
+      "col": 2,
+      "icon": "inv_scroll_03",
+      "ranks": [
+       "Increases your reputation gains by 2%.",
+       "Increases your reputation gains by 4%.",
+       "Increases your reputation gains by 6%.",
+       "Increases your reputation gains by 8%.",
+       "Increases your reputation gains by 10%."
+      ],
+      "gate": 5
+     }
+    ]
+   },
+   {
+    "id": 1187,
+    "name": "Professions",
+    "icon": "trade_engineering",
+    "perks": [
+     {
+      "name": "Master Chef",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "icon": "achievement_profession_chefhat",
+      "ranks": [
+       "Your cooking recipes have a 10% chance to create an extra result.",
+       "Your cooking recipes have a 20% chance to create an extra result.",
+       "Your cooking recipes have a 30% chance to create an extra result.",
+       "Your cooking recipes have a 40% chance to create an extra result.",
+       "Your cooking recipes have a 50% chance to create an extra result."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Working Overtime",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "icon": "inv_misc_pocketwatch_03",
+      "ranks": [
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 4%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 8%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 12%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 16%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 20%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Bartering",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "icon": "inv_misc_coin_06",
+      "ranks": [
+       "Reduces the gold price of items from all vendors by 5%.",
+       "Reduces the gold price of items from all vendors by 10%."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Dedicated Study",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_book_08",
+      "ranks": [
+       "Increases your skill by 1 in your lowest tradeskill among your Primary and Secondary tradeskills. If you have already reached 300 skill in your two current Primary Tradeskills and all three Secondary Tradeskills, you will gain 2 to 4 of a random Elemental Essence."
+      ],
+      "gate": 10,
+      "req": "Bartering"
+     },
+     {
+      "name": "Bountiful Harvest",
+      "max": 5,
+      "row": 3,
+      "col": 1,
+      "icon": "inv_misc_bag_18",
+      "ranks": [
+       "You discover 20% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 40% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 60% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 80% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 100% more Scarce materials from Mining, Herbalism, and Skinning."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Performance Bonus",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "icon": "racial_dwarf_findtreasure",
+      "ranks": [
+       "You have a 5% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics.",
+       "You have a 10% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics.",
+       "You have a 15% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics."
+      ],
+      "gate": 5,
+      "req": "Bountiful Harvest"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 3,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Luremaster",
+      "max": 2,
+      "row": 4,
+      "col": 3,
+      "icon": "inv_misc_basket_04",
+      "ranks": [
+       "While fishing with a Lure active, you have a 25% chance to catch an extra fish.",
+       "While fishing with a Lure active, you have a 50% chance to catch an extra fish."
+      ],
+      "gate": 5
+     }
+    ]
+   }
+  ]
+ }
+}
