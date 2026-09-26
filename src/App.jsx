@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import mage from './data/mage.json';
+import { classRegistry } from './data/classes.js';
 
 const siteBaseUrl = import.meta.env.BASE_URL;
 const numberFromText = value => Number(String(value || '').replace(/,/g, '').match(/[\d.]+/)?.[0] || 0);
@@ -96,7 +97,7 @@ const manaGems = [
 const manaGemForLevel = level => manaGems.filter(gem => gem.level <= level).at(-1) || null;
 function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHitChance, spellPower, manaOptions) {
   const mp5PerSecond = Math.max(0, mp5) / 5;
-  const spiritPerSecond = (Math.max(0, spirit) / 4 + 12.5) / 2;
+  const spiritPerSecond = (Math.max(0, spirit) / 4 + 13) / 2;
   const GCD = 1.5;
   let time = 0, mana = maxMana, gcdUntil = 0, castUntil = 0;
   let damage = 0, casts = 0, crits = 0, manaSpent = 0;
@@ -123,7 +124,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   let evocationStart = -1, evocationUntil = -1;
   let evocationReadyAt = 0;
   let manaGemUsed = false;
-  let lastManaSpendAt = -Infinity;
+  let lastSpellCastAt = -Infinity;
   const manaActions = { evocationUses: 0, evocationMana: 0, manaGemUses: 0, manaGemMana: 0, manaGemName: manaOptions.manaGem?.name || '' };
   const castLog = [];
   let randomState = seed >>> 0 || 1;
@@ -246,10 +247,10 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     const evocationElapsed = evocationUntil > previousTime ? Math.max(0, Math.min(time, evocationUntil) - Math.max(previousTime, evocationStart)) : 0;
     const regularElapsed = Math.max(0, elapsed - evocationElapsed);
     const regularCastingElapsed = Math.min(regularElapsed, castingElapsed);
-    const fullSpiritCastElapsed = Math.max(0, previousTime + regularCastingElapsed - Math.max(previousTime, lastManaSpendAt + 5));
+    const fullSpiritCastElapsed = Math.max(0, previousTime + regularCastingElapsed - Math.max(previousTime, lastSpellCastAt + 5));
     const underRuleSpiritCastElapsed = Math.max(0, regularCastingElapsed - fullSpiritCastElapsed);
     const regularSpiritIdleStart = previousTime + regularCastingElapsed;
-    const regularSpiritIdleElapsed = Math.max(0, time - evocationElapsed - Math.max(regularSpiritIdleStart, lastManaSpendAt + 5));
+    const regularSpiritIdleElapsed = Math.max(0, time - evocationElapsed - Math.max(regularSpiritIdleStart, lastSpellCastAt + 5));
     const regularSpiritGain = spiritPerSecond * (regularSpiritIdleElapsed + fullSpiritCastElapsed + underRuleSpiritCastElapsed * meditationRate);
     const evocationSpiritGain = spiritPerSecond * evocationElapsed * 16;
     const mp5ManaGain = mp5PerSecond * elapsed;
@@ -300,7 +301,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       const consumedBuffs = [];
       mana = Math.max(0, mana - cost);
       manaSpent += cost;
-      if (cost > 0) lastManaSpendAt = time;
+      lastSpellCastAt = time;
       if (usesClearcasting) {
         clearcasting.active = false;
         clearcasting.uses++;
@@ -476,7 +477,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       const manaWait = mana >= cost ? 0 : (() => {
         const deficit = cost - mana;
         if (mp5PerSecond <= 0 && spiritPerSecond <= 0) return Infinity;
-        const beforeSpirit = Math.max(0, lastManaSpendAt + 5 - time);
+        const beforeSpirit = Math.max(0, lastSpellCastAt + 5 - time);
         const manaAtSpiritStart = mana + beforeSpirit * mp5PerSecond;
         if (manaAtSpiritStart >= cost) return deficit / Math.max(mp5PerSecond, 0.000001);
         if (mp5PerSecond + spiritPerSecond <= 0) return Infinity;
@@ -486,7 +487,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       return Math.min(earliest, usableAt);
     }, Infinity);
     if (!Number.isFinite(wakeAt) || wakeAt <= time || wakeAt >= duration) break;
-    const idleSpiritStart = Math.max(time, lastManaSpendAt + 5);
+    const idleSpiritStart = Math.max(time, lastSpellCastAt + 5);
     const idleSpiritElapsed = Math.max(0, wakeAt - idleSpiritStart);
     mana = Math.min(maxMana, mana + (wakeAt - time) * mp5PerSecond + idleSpiritElapsed * spiritPerSecond);
     time = wakeAt;
@@ -529,7 +530,7 @@ function ResultsPage({ id }) {
   if (!report) return <div className="results-shell"><main className="results-main"><p>This simulation report isn’t available in this browser. Return to the simulator and run it again.</p><a className="run-btn" href={siteBaseUrl}>OPEN SIMULATOR</a></main></div>;
   const { metrics, medianRun, histogram, config, completedAt } = report;
   const maxEvents = Math.max(1, ...medianRun.events.map(event => event.damage));
-  return <div className="results-shell">
+  return <div className="results-shell" style={{ '--accent': config.accent || '#69CCF0' }}>
     <header className="results-topbar"><a href={siteBaseUrl} className="results-brand"><span>4e</span><b>4esim</b></a><div>SIMULATION REPORT <i/> {new Date(completedAt).toLocaleString()}</div><a className="results-back" href={siteBaseUrl}>BACK TO ROTATION LAB ↗</a></header>
     <main className="results-main">
       <div className="eyebrow">MONTE CARLO SIMULATION · {report.runs.toLocaleString()} ITERATIONS</div>
@@ -558,6 +559,8 @@ export default function App() {
 }
 
 function SimulatorApp() {
+  const [selectedClass, setSelectedClass] = useState('mage');
+  const activeClass = classRegistry.find(characterClass => characterClass.id === selectedClass) || classRegistry.find(characterClass => characterClass.available);
   const [duration, setDuration] = useState(180);
   const [startingMana, setStartingMana] = useState(5000);
   const [regen, setRegen] = useState(100);
@@ -618,7 +621,7 @@ function SimulatorApp() {
     const report = {
       runs: batchSize,
       completedAt: new Date().toISOString(),
-      config: { duration: Number(duration), startingMana: Number(startingMana), regenPer5s: Number(regen), spirit: Number(spirit), spellPower: Number(spellPower), baseHitChance: Number(baseHitChance), useEvocation, useManaGem, manaGem, build, priority: rotation.map(({ name, school, conditional, condition, offGcd }) => ({ name, school, conditional, condition, offGcd })) },
+      config: { accent: activeClass.accent, duration: Number(duration), startingMana: Number(startingMana), regenPer5s: Number(regen), spirit: Number(spirit), spellPower: Number(spellPower), baseHitChance: Number(baseHitChance), useEvocation, useManaGem, manaGem, build, priority: rotation.map(({ name, school, conditional, condition, offGcd }) => ({ name, school, conditional, condition, offGcd })) },
       metrics: { medianDps: medianOf(dpsSorted), meanDps: runs.reduce((sum, run) => sum + run.dps, 0) / runs.length, p10Dps: percentile(0.1), p90Dps: percentile(0.9), minDps: minimum, maxDps: maximum, medianHitRate, medianCritRate },
       medianRun,
       histogram: bins,
@@ -709,7 +712,7 @@ function SimulatorApp() {
     setHoveredTalent(null);
   };
 
-  return <div className="shell">
+  return <div className="shell" style={{ '--accent': activeClass.accent }}>
     <aside className="sidebar">
       <div className="brand"><div className="brand-mark">4e</div><div><strong>4esim</strong><span>FOREVER DPS LAB</span></div></div>
       <div className="side-label">WORKSPACE</div>
@@ -717,7 +720,7 @@ function SimulatorApp() {
       <div className="side-bottom"><div className="status-dot"/> DATA SNAPSHOT <b>{mage.generated}</b><p>Forever Beta · Mage</p></div>
     </aside>
     <main className="main">
-      <header className="topbar"><div><span className="crumb">SIMULATOR /</span> <b>{active.toUpperCase()}</b></div><div className="top-right"><span className="pill"><i/> MAGE</span><span className="build-label">BUILD 0.1</span></div></header>
+      <header className="topbar"><div><span className="crumb">SIMULATOR /</span> <b>{active.toUpperCase()}</b></div><div className="top-right"><details className="class-switcher"><summary className="pill"><i/> {activeClass.name.toUpperCase()} <span>▾</span></summary><div className="class-menu" role="listbox" aria-label="Select character class">{classRegistry.map(characterClass => <button key={characterClass.id} type="button" role="option" aria-selected={selectedClass === characterClass.id} disabled={!characterClass.available} className={characterClass.available ? 'class-option available' : 'class-option locked'} onClick={() => setSelectedClass(characterClass.id)}><span className="class-mark">{characterClass.mark}</span><span className="class-option-copy"><b>{characterClass.name}</b><small>{characterClass.available ? 'ACTIVE CLASS' : 'COMING LATER'}</small></span><span className="class-option-status">{characterClass.available ? '✓' : 'LOCKED'}</span></button>)}</div></details><span className="build-label">BUILD 0.1</span></div></header>
       {active === 'Rotation lab' && <>
         <section className="page-head"><div><div className="eyebrow">THEORYCRAFT WORKSPACE <span>·</span> PATCH FOREVER</div><h1>Find your <em>next best cast.</em></h1><p>Choose spells, set their priority and conditions, then run the encounter simulation.</p></div><button className="run-btn" disabled={!rotation.length} onClick={runSimulation}><span>▶</span> {rotation.length ? 'SIMULATE 1,000 RUNS ↗' : 'SELECT SPELLS FIRST'}</button></section>
         <section className="spec-manager" aria-label="Saved specs"><div className="spec-manager-title"><b>SAVED SPECS</b><span>Talent build · priority · stats</span></div><select aria-label="Load saved spec" value={selectedSpecId} onChange={event => { const spec = savedSpecs.find(item => item.id === event.target.value); if (spec) loadSpec(spec); else { setSelectedSpecId(''); setSpecName(''); } }}><option value="">Choose a saved spec…</option>{savedSpecs.map(spec => <option key={spec.id} value={spec.id}>{spec.name}</option>)}</select><input aria-label="Spec name" value={specName} onChange={event => setSpecName(event.target.value)} placeholder="Name this spec" maxLength={48}/><button className="spec-new" onClick={() => { setSelectedSpecId(''); setSpecName(''); }}>NEW</button><button onClick={saveSpec} disabled={!specName.trim()}>{savedSpecs.some(spec => spec.id === selectedSpecId) ? 'UPDATE SPEC' : 'SAVE SPEC'}</button><button className="spec-delete" onClick={deleteSpec} disabled={!selectedSpecId}>DELETE</button></section>
@@ -730,7 +733,7 @@ function SimulatorApp() {
             </div>
             <div className="rotation-foot"><span>GLOBAL COOLDOWN <b>1.5s</b></span><span>BUILD <b>{totalPoints} / 51 PTS</b></span><button onClick={()=>setRotation(initialPriority)}>CLEAR ROTATION ↺</button></div>
           </section>
-          <section className="panel encounter-panel"><PanelTitle kicker="02 / ENCOUNTER" title="Fight parameters"/><p className="panel-desc">Tune the conditions for this single-target test.</p><div className="field"><label>ENCOUNTER DURATION</label><NumInput value={duration} suffix="sec" onChange={setDuration}/><div className="range"><input type="range" min="30" max="600" step="15" value={duration} onChange={e=>setDuration(Number(e.target.value))}/><div><span>30 SEC</span><span>10 MIN</span></div></div></div><div className="field"><label>STARTING MANA</label><NumInput value={startingMana} suffix="mana" onChange={setStartingMana}/></div><div className="field"><label>GEAR MANA REGEN / 5 SEC</label><NumInput value={regen} suffix="MP5" onChange={setRegen}/><small className="field-hint">MP5 regenerates continuously and is not amplified by Evocation.</small></div><div className="field"><label>SPIRIT</label><NumInput value={spirit} suffix="Spirit" onChange={setSpirit}/><small className="field-hint">Classic Mage Spirit regen: (Spirit ÷ 4 + 12.5) mana per 2 sec.</small></div><div className="field mana-tool-field"><label>MANA TOOLS</label><div className="mana-tool-options"><label className="mana-tool-option"><input type="checkbox" checked={useEvocation} disabled={talentLevel < 20} onChange={event=>setUseEvocation(event.target.checked)}/> Use Evocation{talentLevel < 20 ? ' · available at level 20' : ''}</label><label className="mana-tool-option"><input type="checkbox" checked={useManaGem} disabled={!manaGemForLevel(talentLevel)} onChange={event=>setUseManaGem(event.target.checked)}/> Use {manaGemForLevel(talentLevel)?.name || 'Mana Gem'}{manaGemForLevel(talentLevel) ? ` · ${manaGemForLevel(talentLevel).minRestore}–${manaGemForLevel(talentLevel).maxRestore} mana` : ' · available at level 28'}</label><label className="mana-tool-option unavailable"><input type="checkbox" disabled/> Use mana potion · not implemented</label></div><small className="field-hint">Auto-used at full value when mana-starved: Evocation first, then one gem. Potion support is coming later.</small></div><div className="field"><label>GEAR SPELL POWER</label><NumInput value={spellPower} suffix="spell power" onChange={setSpellPower}/><small className="field-hint">Added by cast-time coefficient; instant spells use a 1.5s base.</small></div><div className="field"><label>BASE SPELL HIT PER SCHOOL (BOSS)</label><NumInput value={baseHitChance} suffix="%" max={100} step={0.1} onChange={setBaseHitChance}/></div><div className="model-note"><span>i</span><p><b>SIMULATION MODEL</b> Base spell hit defaults to 83% per school against the boss. Arcane Focus and Elemental Precision add their hit chance to this value (capped at 100%). Missile Barrage requires its talent and procs at 20% from Frostbolt, Fireball, or Frostfire Bolt and 40% from Arcane Blast. Fingers of Frost requires its talent and procs at 15% from Frost spells. Buffs persist until consumed; ready conditional spells spend them before filler spells. Critical hits use a 5% base chance and 1.5× damage before talent bonuses. Spell power adds to base spell damage at min(max(base cast time, 1.5s) ÷ 3.5, 100%), before damage talents; cast-time talents do not lower the coefficient. Evocation multiplies Spirit-based regen by 16× for 8 sec (8 min cooldown); MP5 continues at its normal rate. Spirit regen is (Spirit ÷ 4 + 12.5) per 2 sec, normally active outside the 5-second rule, with Arcane Meditation allowing its talent fraction while casting. The best level-available mana gem is used once when its full restore fits. Mana potion support is not implemented. Encounter-only effects such as stuns, threat, range, and incoming damage are outside this single-target model; mana, hit, damage, crit, and cooldown talents are simulated.</p></div></section>
+          <section className="panel encounter-panel"><PanelTitle kicker="02 / ENCOUNTER" title="Fight parameters"/><p className="panel-desc">Tune the conditions for this single-target test.</p><div className="field"><label>ENCOUNTER DURATION</label><NumInput value={duration} suffix="sec" onChange={setDuration}/><div className="range"><input type="range" min="30" max="600" step="15" value={duration} onChange={e=>setDuration(Number(e.target.value))}/><div><span>30 SEC</span><span>10 MIN</span></div></div></div><div className="field"><label>STARTING MANA</label><NumInput value={startingMana} suffix="mana" onChange={setStartingMana}/></div><div className="field"><label>GEAR MANA REGEN / 5 SEC</label><NumInput value={regen} suffix="MP5" onChange={setRegen}/><small className="field-hint">MP5 regenerates continuously and is not amplified by Evocation.</small></div><div className="field"><label>SPIRIT</label><NumInput value={spirit} suffix="Spirit" onChange={setSpirit}/><small className="field-hint">Mage Spirit regen: 13 + (Spirit ÷ 4) mana per 2-second tick, after the five-second rule.</small></div><div className="field mana-tool-field"><label>MANA TOOLS</label><div className="mana-tool-options"><label className="mana-tool-option"><input type="checkbox" checked={useEvocation} disabled={talentLevel < 20} onChange={event=>setUseEvocation(event.target.checked)}/> Use Evocation{talentLevel < 20 ? ' · available at level 20' : ''}</label><label className="mana-tool-option"><input type="checkbox" checked={useManaGem} disabled={!manaGemForLevel(talentLevel)} onChange={event=>setUseManaGem(event.target.checked)}/> Use {manaGemForLevel(talentLevel)?.name || 'Mana Gem'}{manaGemForLevel(talentLevel) ? ` · ${manaGemForLevel(talentLevel).minRestore}–${manaGemForLevel(talentLevel).maxRestore} mana` : ' · available at level 28'}</label><label className="mana-tool-option unavailable"><input type="checkbox" disabled/> Use mana potion · not implemented</label></div><small className="field-hint">Auto-used at full value when mana-starved: Evocation first, then one gem. Potion support is coming later.</small></div><div className="field"><label>GEAR SPELL POWER</label><NumInput value={spellPower} suffix="spell power" onChange={setSpellPower}/><small className="field-hint">Added by cast-time coefficient; instant spells use a 1.5s base.</small></div><div className="field"><label>BASE SPELL HIT PER SCHOOL (BOSS)</label><NumInput value={baseHitChance} suffix="%" max={100} step={0.1} onChange={setBaseHitChance}/></div><div className="model-note"><span>i</span><p><b>SIMULATION MODEL</b> Base spell hit defaults to 83% per school against the boss. Arcane Focus and Elemental Precision add their hit chance to this value (capped at 100%). Missile Barrage requires its talent and procs at 20% from Frostbolt, Fireball, or Frostfire Bolt and 40% from Arcane Blast. Fingers of Frost requires its talent and procs at 15% from Frost spells. Buffs persist until consumed; ready conditional spells spend them before filler spells. Critical hits use a 5% base chance and 1.5× damage before talent bonuses. Spell power adds to base spell damage at min(max(base cast time, 1.5s) ÷ 3.5, 100%), before damage talents; cast-time talents do not lower the coefficient. Evocation multiplies Spirit-based regen by 16× for 8 sec (8 min cooldown); MP5 continues at its normal rate. Mage Spirit regen is 13 + (Spirit ÷ 4) mana per 2-second tick, active after 5 seconds without a spell; Arcane Meditation allows its talent fraction while casting. The best level-available mana gem is used once when its full restore fits. Mana potion support is not implemented. Encounter-only effects such as stuns, threat, range, and incoming damage are outside this single-target model; mana, hit, damage, crit, and cooldown talents are simulated.</p></div></section>
         </div>
         <div className="lower-grid"><section className="panel talent-summary"><PanelTitle kicker="03 / BUILD CONTEXT" title="Talent allocation" right={<button className="text-action" onClick={()=>setActive('Mage talents')}>EDIT TALENTS ↗</button>}/><div className="tree-mini">{mage.talents.trees.map(t=><div key={t.name}><span>{t.name.toUpperCase()}</span><b>{Object.entries(build).filter(([name])=>t.talents.some(x=>x.name===name)).reduce((sum,[,v])=>sum+v,0)}</b></div>)}</div><div className="build-context"><span>Talent points allocated</span><strong>{totalPoints} <small>/ 51</small></strong></div></section><section className="panel chart-panel"><PanelTitle kicker="04 / DAMAGE PROFILE" title="Damage by priority" right={result && <label className="log-toggle"><input type="checkbox" checked={showCastTimeline} onChange={event=>setShowCastTimeline(event.target.checked)}/> CAST TIMELINE</label>}/>{result ? <><div className="simulation-summary"><span><b>{Math.round(result.dps).toLocaleString()}</b> DPS</span><span><b>{Math.round(result.damage).toLocaleString()}</b> DAMAGE</span><span><b>{result.casts}</b> CASTS</span><span><b>{result.crits}</b> CRITS</span></div><div className="buff-uptime"><div className="buff-uptime-heading">PROC BUFF UPTIME</div>{result.buffs.map(buff=><div className="buff-uptime-row" key={buff.id}><div className="buff-uptime-name"><b>{buff.name}</b>{buff.rank ? <small>{buff.procs} procs · {buff.uses} used{buff.activeAtEnd ? ' · active at end' : ''}</small> : <button className="buff-talent-link" onClick={()=>setActive('Mage talents')}>Talent not selected · SELECT TALENT ↗</button>}</div><div className="buff-uptime-track"><i style={{width:`${Math.min(100,buff.uptimePct)}%`}}/></div><span>{formatTime(buff.uptime)} <small>{buff.uptimePct.toFixed(1)}%</small></span></div>)}</div>{showCastTimeline ? <div className="cast-timeline" aria-label="Cast timeline"><div className="cast-timeline-head"><span>TIME</span><span>CAST</span><span>DAMAGE</span><span>MANA</span><span>ACTIVE BUFFS</span><span>ENEMY DEBUFFS</span><span>BUFF CHANGES</span></div>{result.castLog.map((entry,index)=><div className="cast-timeline-row" key={`${entry.time}-${entry.name}-${index}`}><time>{formatTime(entry.time)}</time><span className="cast-log-spell"><i className={`school-icon ${entry.school.toLowerCase()}`}>{entry.school === 'Frost' ? '❄' : entry.school === 'Fire' ? '♨' : '✧'}</i><b>{entry.name}</b>{entry.crit && <em>CRIT</em>}{!entry.hit && <em className="miss">MISS</em>}</span><span className="cast-log-damage">{Math.round(entry.damage ?? 0).toLocaleString()}</span><span className="cast-log-mana">{Math.round(entry.currentMana ?? 0).toLocaleString()}</span><span className="cast-log-buffs">{entry.activeBuffs.length ? entry.activeBuffs.map(buff => <EffectIcon key={buff.id} effect={buff}/>) : <small>—</small>}</span><span className="cast-log-debuffs">{entry.enemyDebuffs?.length ? entry.enemyDebuffs.map(debuff => <span className="debuff-effect" key={debuff.id}><EffectIcon effect={debuff}/><small>{debuff.remaining.toFixed(1)}s</small></span>) : <small>—</small>}</span><span className="cast-log-changes">{entry.procs.map((buff,procIndex)=><EffectChange key={`p${procIndex}`} label={buff} mode="proc"/>)}{entry.consumedBuffs.map((buff,useIndex)=><EffectChange key={`u${useIndex}`} label={buff} mode="used"/>)}{!entry.procs.length && !entry.consumedBuffs.length && <small>—</small>}</span></div>)}</div> : <div className="bars">{result.events.slice(0,7).map((spell,i)=>{const max=Math.max(1,...result.events.map(s=>s.damage));return <div className="bar-row" key={`${spell.name}-${i}`}><span>{spell.name} <small>{spell.ticks ? `${spell.ticks} ticks` : `${spell.crits}/${spell.casts}`}</small></span><div><i style={{width:`${Math.max(spell.damage ? 4 : 0,spell.damage/max*100)}%`}}/></div><b>{Math.round(spell.damage)}</b></div>})}</div>}</> : <p className="panel-desc">{rotation.length ? 'Ready when you are. Press Simulate Rotation to calculate this setup.' : 'Add spells to your priority list, then run a simulation to see results.'}</p>}</section></div>
         <footer>DATA FROM <a href="https://talentsforever.com/about" target="_blank" rel="noreferrer">TALENTS FOREVER</a> · CC BY 4.0 · BETA SNAPSHOT {mage.generated} · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">ATTRIBUTION</a></footer>
