@@ -1,4 +1,5 @@
 import { petAttackProfileFor, petAttackProfiles, rollPetMeleeDamage } from '../data/pet-attack-profiles.js';
+import { debuffRefreshWindow } from './debuff-conditions.js';
 
 const rank = (build, name) => Number(build[name]) || 0;
 const rankValue = (build, name, values) => values[Math.max(0, Math.min(values.length - 1, rank(build, name) - 1))] || 0;
@@ -12,7 +13,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
   let time = 0, mana = maxMana, damage = 0, casts = 0, crits = 0, manaSpent = 0, lastCastAt = -Infinity, soulFireProcUntil = -1;
   const maxManaCap = maxMana * (1 + 0.05 * rank(build, 'Fel Vitality'));
   const gcd = 1.5, baseCritChance = 0.05, cooldowns = new Map(), castLog = [], events = new Map(), dots = new Map(), debuffs = new Map();
-  let randomState = seed >>> 0 || 1, nightfallActive = false;
+  let randomState = seed >>> 0 || 1, nightfallActive = false, channel = null;
   let demonicBrandUntil = -1, demonicBrandAttacks = 0;
   const petSpell = options.petSpell || null;
   const summonedPet = Boolean(options.activePetId && !options.sacrificePet);
@@ -54,9 +55,11 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
   const manaCostFor = spell => Math.max(0, ((spell.mana || 0) + (spell.manaFraction || 0) * maxManaCap) * (1 - (spell.specialization === 'Destruction' ? rankValue(build, 'Cataclysm', [0.03, 0.06, 0.1]) : 0)));
   const activeBuffs = () => [];
   const activeEnemyDebuffs = at => [...debuffs].filter(([, until]) => until > at).map(([name, until]) => ({ id: name.toLowerCase().replaceAll(' ', ''), name, remaining: until - at }));
-  const pandemicRefreshReady = (spell, at) => {
+  const debuffRefreshReady = (spell, at) => {
+    const window = debuffRefreshWindow('warlock', spell, build);
     const dot = dots.get(spell.name);
-    if (dot && dot.until > at && dot.duration > 0 && dot.until - at <= dot.duration * 0.3) return true;
+    if (dot && dot.until > at && dot.duration > 0) return dot.until - at < window;
+    const isPeriodic = periodicSpell(spell);
     const talentDebuffs = spell.name === 'Shadow Bolt' && rank(build, 'Improved Shadow Bolt')
       ? [['Improved Shadow Bolt', 12]]
       : spell.name === 'Conflagrate' && rank(build, 'Shadow and Flame')
@@ -64,10 +67,10 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
         : spell.name === 'Shadowburn' && rank(build, 'Shadow and Flame')
           ? [['Shadow and Flame · Fire', 20]]
           : [];
-    return talentDebuffs.some(([name, durationSeconds]) => {
+    return isPeriodic || talentDebuffs.some(([name]) => {
       const until = debuffs.get(name) || 0;
       const remaining = until - at;
-      return remaining > 0 && remaining <= durationSeconds * 0.3;
+      return until <= at || remaining < window;
     });
   };
   const conditionsMet = (spell, at) => {
@@ -75,23 +78,21 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
     const conditions = Array.isArray(spell.conditions) ? spell.conditions : (spell.condition ? [spell.condition] : []);
     if (!conditions.length) return false;
     const immolate = dots.get('Immolate');
-    const immolateRemaining = immolate ? immolate.until - at : 0;
     return conditions.some(condition => {
-      if (condition === 'immolateInactive') return !immolate || immolateRemaining <= 0;
-      if (condition === 'immolateRefresh') return immolateRemaining > 0 && immolateRemaining < 5;
-      if (condition === 'pandemicRefresh') return pandemicRefreshReady(spell, at);
+      if (condition === 'immolateInactive') return !immolate || immolate.until <= at;
+      if (condition === 'debuffRefresh') return debuffRefreshReady(spell, at);
       return false;
     });
   };
 
-  const nextTick = () => Math.min(duration, nextPetAbilityAt, nextPetSwingAt, ...[...dots.values()].flatMap(dot => dot.ticks.filter(tick => tick.at <= duration).map(tick => tick.at)), ...priority.flatMap(spell => {
-    if (!spell.conditional || !spell.conditions?.includes('pandemicRefresh')) return spell.conditional && spell.conditions?.includes('immolateRefresh') && dots.has('Immolate') ? [dots.get('Immolate').until - 5].filter(at => at > time) : [];
+  const nextTick = () => Math.min(duration, nextPetAbilityAt, nextPetSwingAt, channel ? Math.min(channel.nextTickAt, channel.endsAt) : Infinity, ...[...dots.values()].flatMap(dot => dot.ticks.filter(tick => tick.at <= duration).map(tick => tick.at)), ...priority.flatMap(spell => {
+    if (!spell.conditional || !spell.conditions?.includes('debuffRefresh')) return [];
+    const window = debuffRefreshWindow('warlock', spell, build);
     const dot = dots.get(spell.name);
-    const times = dot?.duration ? [dot.until - dot.duration * 0.3] : [];
-    if (spell.name === 'Shadow Bolt' && rank(build, 'Improved Shadow Bolt')) times.push((debuffs.get('Improved Shadow Bolt') || 0) - 3.6);
-    if (spell.name === 'Conflagrate' && rank(build, 'Shadow and Flame')) times.push((debuffs.get('Shadow and Flame · Shadow') || 0) - 6);
-    if (spell.name === 'Shadowburn' && rank(build, 'Shadow and Flame')) times.push((debuffs.get('Shadow and Flame · Fire') || 0) - 6);
-    if (spell.name === 'Immolate' && spell.conditional && spell.conditions?.includes('immolateRefresh') && dots.has('Immolate')) times.push(dots.get('Immolate').until - 5);
+    const times = dot?.duration ? [dot.until - window] : [];
+    if (spell.name === 'Shadow Bolt' && rank(build, 'Improved Shadow Bolt')) times.push((debuffs.get('Improved Shadow Bolt') || 0) - window);
+    if (spell.name === 'Conflagrate' && rank(build, 'Shadow and Flame')) times.push((debuffs.get('Shadow and Flame · Shadow') || 0) - window);
+    if (spell.name === 'Shadowburn' && rank(build, 'Shadow and Flame')) times.push((debuffs.get('Shadow and Flame · Fire') || 0) - window);
     return times.filter(at => at > time);
   }));
   while (time < duration && casts < duration * 4) {
@@ -102,9 +103,9 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
     };
     const ready = priority.filter(spell => (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) <= mana && (spell.name !== 'Conflagrate' || (debuffs.get('Immolate') || 0) > time));
     const conditionalReady = ready.find(spell => spell.conditional && conditionsMet(spell, time));
-    const usable = (nightfallActive && ready.find(spell => spell.name === 'Shadow Bolt')) || conditionalReady || ready.find(spell => !spell.conditional);
+    const usable = channel ? null : (nightfallActive && ready.find(spell => spell.name === 'Shadow Bolt')) || conditionalReady || ready.find(spell => !spell.conditional);
     const unaffordable = priority.some(spell => (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) > mana && manaCostFor(spell) <= maxManaCap);
-    if (!usable && options.lifeTap && unaffordable && mana < maxManaCap) {
+    if (!channel && !usable && options.lifeTap && unaffordable && mana < maxManaCap) {
       const manaGained = Math.min(maxManaCap - mana, options.lifeTap.mana * (1 + 0.1 * rank(build, 'Improved Life Tap')));
       mana = Math.min(maxManaCap, mana + manaGained);
       lastCastAt = time;
@@ -122,7 +123,10 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       // before resolving impacts, which apply at cast completion.
       const debuffsAtCast = activeEnemyDebuffs(time);
       const usesNightfall = usable.name === 'Shadow Bolt' && nightfallActive;
-      const castTime = usesNightfall ? 0 : castTimeFor(usable), completion = time + castTime, nextActionAt = time + Math.max(gcd, castTime);
+      const castTime = usesNightfall ? 0 : castTimeFor(usable), completion = time + castTime;
+      const isWrackChannel = usable.name === 'Wrack';
+      const channelDuration = isWrackChannel ? (usable.periodicDuration || durationFromTooltip(usable.tooltip) || castTime) : 0;
+      const nextActionAt = time + (isWrackChannel ? Math.min(1, channelDuration) : Math.max(gcd, castTime));
       if (completion > duration) break;
       mana = Math.max(0, mana - manaCostFor(usable)); manaSpent += manaCostFor(usable); lastCastAt = time;
       const event = events.get(usable.name) || { name: usable.name, damage: 0, casts: 0, crits: 0, ticks: 0 };
@@ -148,7 +152,11 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       const periodicAmount = hit ? periodic * factor * executeMultiplier * critFactor : 0;
       const amount = directAmount + periodicAmount;
       if (amount) {
-        if (periodicSpell(usable) && periodicAmount > 0) {
+        if (isWrackChannel) {
+          const channelTicks = Math.max(1, Math.ceil(channelDuration / tickInterval));
+          channel = { name: usable.name, endsAt: time + channelDuration, nextTickAt: time + tickInterval, tickDamage: periodicAmount / channelTicks, ticksLeft: channelTicks, hit, school: usable.school, specialization: usable.specialization };
+          if (hit) debuffs.set('Wrack', channel.endsAt);
+        } else if (periodicSpell(usable) && periodicAmount > 0) {
           const dotDuration = usable.periodicDuration || durationFromTooltip(usable.tooltip) || usable.cast || 1;
           const dotTickCount = Math.max(1, Math.ceil(dotDuration / tickInterval));
           const ticks = Array.from({ length: dotTickCount }, (_, i) => ({ at: completion + Math.min(dotDuration, (i + 1) * tickInterval), amount: periodicAmount / dotTickCount }));
@@ -157,6 +165,10 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
         }
         if (directAmount) { damage += directAmount; event.damage += directAmount; }
       }
+      if (isWrackChannel && !channel) {
+        const channelTicks = Math.max(1, Math.ceil(channelDuration / tickInterval));
+        channel = { name: usable.name, endsAt: time + channelDuration, nextTickAt: time + tickInterval, tickDamage: 0, ticksLeft: channelTicks, hit, school: usable.school, specialization: usable.specialization };
+      }
       event.casts++; if (critical) event.crits++; events.set(usable.name, event); casts++;
       const procs = [];
       if (usable.name === 'Shadow Bolt' && critical && rank(build, 'Improved Shadow Bolt')) {
@@ -164,7 +176,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       }
       if (execute && hit) soulFireProcUntil = completion + 10;
       if (usesNightfall) { nightfallActive = false; procs.push('Shadow Trance consumed · instant Shadow Bolt'); }
-      if (usable.name === 'Wrack' && hit) debuffs.set('Wrack', completion + 6);
+      if (usable.name === 'Wrack' && !isWrackChannel && hit) debuffs.set('Wrack', completion + 6);
       if (usable.name === 'Conflagrate' && hit && rank(build, 'Shadow and Flame')) debuffs.set('Shadow and Flame · Shadow', completion + 20);
       if (usable.name === 'Shadowburn' && hit && rank(build, 'Shadow and Flame')) debuffs.set('Shadow and Flame · Fire', completion + 20);
       if (usable.name === 'Searing Pain' && hit && rank(build, 'Demonic Brand') && options.activePetId) {
@@ -175,8 +187,9 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       const cooldown = usable.name === 'Soul Fire' ? (usable.cooldown || 0) * (1 - 0.45 * rank(build, 'Decimation')) : (usable.cooldown || 0);
       cooldowns.set(usable.name, completion + cooldown);
       castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: critical, activeBuffs: activeBuffs(), enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs: [], procs, damage: directAmount, type: 'cast' });
-      mana = Math.min(maxManaCap, mana + (nextActionAt - time) * (passiveRegen + sacrificeManaPerSecond) + Math.max(0, nextActionAt - (time + 5)) * spiritPerSecond);
-      time = nextActionAt;
+      const advanceTo = isWrackChannel && channel ? Math.min(nextActionAt, nextTick()) : nextActionAt;
+      mana = Math.min(maxManaCap, mana + (advanceTo - time) * (passiveRegen + sacrificeManaPerSecond) + Math.max(0, advanceTo - (time + 5)) * spiritPerSecond);
+      time = advanceTo;
     }
     for (const [name, dot] of dots) {
       while (dot.ticks.length && dot.ticks[0].at <= time + 1e-7) {
@@ -195,6 +208,22 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
         castLog.push({ time: tick.at, name: `${name} tick`, school: dot.school, specialization: dot.specialization, hit: true, crit: false, activeBuffs: [], enemyDebuffs: activeEnemyDebuffs(tick.at), currentMana: mana, consumedBuffs: [], procs, damage: tickDamage, type: 'tick' });
       }
       if (!dot.ticks.length) dots.delete(name);
+    }
+    while (channel && channel.nextTickAt <= time + 1e-7 && channel.nextTickAt <= channel.endsAt + 1e-7 && channel.ticksLeft > 0) {
+      const tickAt = channel.nextTickAt;
+      let tickDamage = channel.tickDamage;
+      if (channel.school === 'Shadow' && debuffs.get('Improved Shadow Bolt') > tickAt) tickDamage *= 1 + 0.04 * rank(build, 'Improved Shadow Bolt');
+      if (channel.school === 'Shadow' && debuffs.get('Shadow and Flame · Shadow') > tickAt) tickDamage *= 1 + 0.02 * rank(build, 'Shadow and Flame');
+      damage += tickDamage;
+      const event = events.get(channel.name);
+      if (event) { event.damage += tickDamage; event.ticks++; }
+      const procs = [];
+      if (channel.hit && rank(build, 'Nightfall') && roll() < 0.02 * rank(build, 'Nightfall')) {
+        nightfallActive = true; procs.push('Nightfall · Shadow Trance');
+      }
+      castLog.push({ time: tickAt, name: `${channel.name} tick`, school: channel.school, specialization: channel.specialization, hit: channel.hit, crit: false, activeBuffs: [], enemyDebuffs: activeEnemyDebuffs(tickAt), currentMana: mana, consumedBuffs: [], procs, damage: tickDamage, type: 'tick' });
+      channel.nextTickAt += 1;
+      channel.ticksLeft--;
     }
     while (petSpell && nextPetAbilityAt <= time + 1e-7 && nextPetAbilityAt <= duration) {
       let petMultiplier = 1 + 0.02 * rank(build, 'Unholy Power');
@@ -234,6 +263,22 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       petEvent.damage += petDamage; petEvent.casts++; if (crit) petEvent.crits++; events.set(petName, petEvent);
       castLog.push({ time: nextPetSwingAt, name: petName, school: petProfile.school, specialization: 'Demons', hit, crit, activeBuffs: [], enemyDebuffs: activeEnemyDebuffs(nextPetSwingAt), currentMana: mana, consumedBuffs: [], procs: branded ? ['Demonic Brand · bonus damage'] : [], damage: petDamage, type: 'pet' });
       nextPetSwingAt += petProfile.swingSpeed;
+    }
+    if (channel) {
+      if (time >= channel.endsAt - 1e-7 || channel.ticksLeft <= 0) {
+        channel = null;
+      } else {
+        const channelIndex = priority.findIndex(spell => spell.name === channel.name);
+        const interruptingConditional = priority.slice(0, channelIndex < 0 ? priority.length : channelIndex).some(spell =>
+          spell.conditional
+          && (cooldowns.get(spell.name) || 0) <= time
+          && manaCostFor(spell) <= mana
+          && (spell.name !== 'Conflagrate' || (debuffs.get('Immolate') || 0) > time)
+          && conditionsMet(spell, time));
+        const interruptingNightfall = nightfallActive && priority.findIndex(spell => spell.name === 'Shadow Bolt') >= 0
+          && priority.findIndex(spell => spell.name === 'Shadow Bolt') < (channelIndex < 0 ? priority.length : channelIndex);
+        if (interruptingConditional || interruptingNightfall) channel = null;
+      }
     }
   }
   castLog.sort((a, b) => a.time - b.time);

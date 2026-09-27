@@ -3,6 +3,7 @@ import { classRegistry } from './data/classes.js';
 import { petsForClass } from './data/pets.js';
 import { simulateWarlock } from './sim/warlock.js';
 import { simulateGeneric } from './sim/generic.js';
+import { debuffRefreshBehavior, debuffRefreshWindow } from './sim/debuff-conditions.js';
 import { addSpellMetadata } from './data/spell-metadata.js';
 import { mageEffectIcons } from './data/mage-effect-icons.js';
 import { classTalentIcons, spellIcons } from './data/spell-icons.js';
@@ -20,7 +21,7 @@ function damageFromTooltip(text) {
     const duration = everyInterval ? Number(text.match(/lasts\s+(\d+)\s+sec/i)?.[1] || 0) : 0;
     return sum + amount * (Number(hit[3]) || (everyInterval ? Math.max(1, Math.floor(duration / everyInterval)) : 1));
   }, 0);
-  const drainMatches = [...text.matchAll(/transfers?\s+([\d,]+)\s+health(?:\s+from the target(?: to the caster)?)?\s+every\s+(\d+)\s+second(?:s)?(?:\s+from the target(?: to the caster)?)?/gi)];
+  const drainMatches = [...text.matchAll(/transfers?\s+([\d,]+)\s+health(?:\s+from the target(?: to the caster)?)?\s+every\s+(\d+)\s+(?:sec|seconds?)(?:\s+from the target(?: to the caster)?)?/gi)];
   const duration = Number(text.match(/lasts\s+(\d+)\s+sec/i)?.[1] || 0);
   return damage + drainMatches.reduce((sum, match) => sum + numberFromText(match[1]) * Math.max(1, Math.floor(duration / Number(match[2] || 1))), 0);
 }
@@ -28,7 +29,7 @@ function periodicDamageFromTooltip(text) {
   if (/absorbs?|damage taken|absorb(?:ed|ing)? damage/i.test(text)) return 0;
   const over = [...text.matchAll(/([\d,]+)(?:\s+to\s+([\d,]+))?\s+(?:(?:Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+)?damage\s+over\s+\d+\s+sec/gi)];
   const eachSecond = [...text.matchAll(/([\d,]+)(?:\s+to\s+([\d,]+))?\s+(?:(?:Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+)?damage\s+(?:each second|every (\d+) sec|per second)(?:\s+for\s+(\d+)\s+sec)?/gi)];
-  const health = [...text.matchAll(/transfers?\s+([\d,]+)\s+health(?:\s+from the target(?: to the caster)?)?\s+every\s+(\d+)\s+second(?:s)?(?:\s+from the target(?: to the caster)?)?/gi)];
+  const health = [...text.matchAll(/transfers?\s+([\d,]+)\s+health(?:\s+from the target(?: to the caster)?)?\s+every\s+(\d+)\s+(?:sec|seconds?)(?:\s+from the target(?: to the caster)?)?/gi)];
   const duration = Number(text.match(/(?:lasts|over|for)\s+(\d+)\s+sec/i)?.[1] || 0);
   return over.reduce((sum, hit) => sum + (numberFromText(hit[1]) + numberFromText(hit[2] || hit[1])) / 2, 0)
     + eachSecond.reduce((sum, hit) => {
@@ -146,29 +147,11 @@ const defaultCondition = spell => ({
 const conditionForSpell = spell => ['Arcane Missiles', 'Ice Lance', 'Pyroblast', 'Scorch'].includes(spell.name) ? defaultCondition(spell).condition : spell.condition;
 const immolateConditions = [
   { value: 'immolateInactive', label: 'Immolate is not active' },
-  { value: 'immolateRefresh', label: 'Immolate has less than 5 sec remaining' },
 ];
-function pandemicRefreshForSpell(classId, spell, build) {
-  if (classId === 'warlock') {
-    const naturalDebuff = (spell.periodicDamage > 0 && spell.periodicDuration > 0) || /damage (?:over|every|each second|per second)/i.test(spell.tooltip || '');
-    const talentedDebuff = (spell.name === 'Shadow Bolt' && build['Improved Shadow Bolt']) || (['Conflagrate', 'Shadowburn'].includes(spell.name) && build['Shadow and Flame']);
-    return { applies: naturalDebuff || ['Shadow Bolt', 'Conflagrate', 'Shadowburn'].includes(spell.name), enabled: naturalDebuff || Boolean(talentedDebuff) };
-  }
-  if (classId === 'mage') {
-    const fire = spell.school === 'Fire' || spell.name === 'Frostfire Bolt';
-    const frost = spell.school === 'Frost' || spell.name === 'Frostfire Bolt';
-    const naturalDebuff = /slow(?:s|ed|ing)?|freez(?:e|es|ed|ing)|chill/i.test(spell.tooltip || '');
-    const chills = naturalDebuff || spell.name === 'Blizzard';
-    const appliesDebuff = naturalDebuff || fire || frost || spell.name === 'Scorch';
-    const enabled = naturalDebuff || (fire && build.Ignite) || (frost && build["Winter's Chill"]) || (chills && build.Frostbite) || (spell.name === 'Blizzard' && build['Improved Blizzard']) || (spell.name === 'Scorch' && build['Improved Scorch']);
-    return { applies: appliesDebuff, enabled: Boolean(enabled) };
-  }
-  return { applies: false, enabled: false };
-}
-function MultiConditionDropdown({ selected = [], onChange, includeImmolate = false, pandemicDisabled = false }) {
+function MultiConditionDropdown({ selected = [], onChange, includeImmolate = false, refreshDisabled = false, refreshWindow = 3 }) {
   const toggle = value => onChange(selected.includes(value) ? selected.filter(item => item !== value) : [...selected, value]);
-  const conditions = [...(includeImmolate ? immolateConditions : []), { value: 'pandemicRefresh', label: 'Refresh debuff during Pandemic', disabled: pandemicDisabled }];
-  return <details className="multi-condition-dropdown"><summary>{selected.length ? `CONDITIONS · ${selected.length}` : 'ADD CONDITIONS'}</summary><div className="multi-condition-menu"><small>Cast when any selected condition is met. Pandemic refresh becomes ready when an active debuff has 30% or less of its duration remaining.</small>{conditions.map(condition => <label className={condition.disabled ? 'disabled' : ''} key={condition.value}><input type="checkbox" aria-label={condition.label} checked={selected.includes(condition.value)} disabled={condition.disabled} onChange={() => toggle(condition.value)}/><span>{condition.label}{condition.disabled ? ' · requires a debuff talent' : ''}</span></label>)}</div></details>;
+  const conditions = [...(includeImmolate ? immolateConditions : []), { value: 'debuffRefresh', label: `Apply/refresh debuff below ${refreshWindow} sec`, disabled: refreshDisabled }];
+  return <details className="multi-condition-dropdown"><summary>{selected.length ? `CONDITIONS · ${selected.length}` : 'ADD CONDITIONS'}</summary><div className="multi-condition-menu"><small>Apply the debuff if it is missing. Otherwise refresh below 3 seconds, or below 5 seconds for casts longer than 3 seconds and stacking debuffs, to allow another attempt after a miss.</small>{conditions.map(condition => <label className={condition.disabled ? 'disabled' : ''} key={condition.value}><input type="checkbox" aria-label={condition.label} checked={selected.includes(condition.value)} disabled={condition.disabled} onChange={() => toggle(condition.value)}/><span>{condition.label}{condition.disabled ? ' · requires a debuff talent' : ''}</span></label>)}</div></details>;
 }
 function limitBuildToPoints(build, maxPoints) {
   const next = { ...build };
@@ -227,6 +210,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   const scorchVulnerability = { stacks: 0, until: -1, procs: 0 };
   const hotStreak = { stacks: 0, until: -1, procs: 0 };
   const ignites = [];
+  const naturalDebuffs = new Map();
   let igniteDamage = 0, igniteTickCount = 0;
   let frozenUntil = -1;
   let arcaneBlastStacks = 0, arcaneBlastUntil = -1;
@@ -247,14 +231,38 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     randomState = (Math.imul(randomState, 1664525) + 1013904223) >>> 0;
     return randomState / 0x100000000;
   };
+  const naturalDebuffDuration = spell => {
+    if (spell.name === 'Blizzard' && talentRank(build, 'Improved Blizzard')) return 1.5;
+    if (!/slow(?:s|ed|ing)?|freez(?:e|es|ed|ing)|chill/i.test(spell.tooltip || '')) return 0;
+    return Number((spell.tooltip || '').match(/(?:for|up to)\s+(\d+)\s+sec/i)?.[1] || (spell.tooltip || '').match(/over\s+(\d+)\s+sec/i)?.[1] || 0);
+  };
+  const debuffRefreshReady = spell => {
+    const refreshWindow = debuffRefreshWindow('mage', spell, build);
+    const expiresSoon = until => until > time && until - time < refreshWindow;
+    const naturalDebuff = naturalDebuffs.get(spell.name);
+    if (naturalDebuffDuration(spell) > 0 && (!naturalDebuff || expiresSoon(naturalDebuff.until))) return true;
+    const fire = spell.school === 'Fire' || spell.name === 'Frostfire Bolt';
+    const frost = spell.school === 'Frost' || spell.name === 'Frostfire Bolt';
+    if (talentRank(build, 'Ignite') && fire && (!ignites.length || ignites.some(ignite => expiresSoon(ignite.expiresAt)))) return true;
+    if (talentRank(build, "Winter's Chill") && frost && (winterChill.stacks === 0 || expiresSoon(winterChill.until))) return true;
+    if (talentRank(build, 'Improved Scorch') && spell.name === 'Scorch' && (scorchVulnerability.stacks === 0 || expiresSoon(scorchVulnerability.until))) return true;
+    if (talentRank(build, 'Frostbite') && appliesChill(spell) && frozenUntil <= time) return true;
+    return false;
+  };
   const hasCondition = spell => {
     if (!spell.conditional) return true;
-    const condition = conditionForSpell(spell);
-    if (condition === 'missileBarrage') return missileBarrage.active;
-    if (condition === 'fingersOfFrost') return fingersOfFrost.charges > 0;
-    if (condition === 'hotStreak') return talentRank(build, 'Hot Streak') > 0 && hotStreak.until >= time && (hotStreak.stacks >= 3 || (hotStreak.stacks >= 2 && hotStreak.until - time < 4));
-    if (condition === 'improvedScorch') return talentRank(build, 'Improved Scorch') === 0 || scorchVulnerability.until < time || scorchVulnerability.stacks < 5 || scorchVulnerability.until - time < 5;
-    return true;
+    const selected = Array.isArray(spell.conditions) ? spell.conditions : [];
+    const legacy = conditionForSpell(spell) !== 'always' ? [conditionForSpell(spell)] : [];
+    const conditions = [...new Set([...selected, ...legacy])];
+    if (!conditions.length) return false;
+    return conditions.some(condition => {
+      if (condition === 'missileBarrage') return missileBarrage.active;
+      if (condition === 'fingersOfFrost') return fingersOfFrost.charges > 0;
+      if (condition === 'hotStreak') return talentRank(build, 'Hot Streak') > 0 && hotStreak.until >= time && (hotStreak.stacks >= 3 || (hotStreak.stacks >= 2 && hotStreak.until - time < 4));
+      if (condition === 'improvedScorch') return talentRank(build, 'Improved Scorch') === 0 || scorchVulnerability.until < time || scorchVulnerability.stacks < 5 || scorchVulnerability.until - time < 5;
+      if (condition === 'debuffRefresh') return debuffRefreshReady(spell);
+      return false;
+    });
   };
   const activeBuffs = () => [
     ...(missileBarrage.active ? [{ id: 'missileBarrage', name: 'Missile Barrage' }] : []),
@@ -270,6 +278,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   const activeEnemyDebuffs = at => [
     ...(winterChill.stacks > 0 && winterChill.until >= at ? [{ id: 'winterChill', name: "Winter's Chill", stacks: winterChill.stacks, remaining: Math.max(0, winterChill.until - at) }] : []),
     ...(scorchVulnerability.stacks > 0 && scorchVulnerability.until >= at ? [{ id: 'scorch', name: 'Improved Scorch', stacks: scorchVulnerability.stacks, remaining: Math.max(0, scorchVulnerability.until - at) }] : []),
+    ...[...naturalDebuffs].filter(([, effect]) => effect.until > at).map(([name, effect]) => ({ id: `natural-${name.toLowerCase().replaceAll(' ', '-')}`, name: `${name} slow`, remaining: effect.until - at })),
     ...(ignites.length ? [{ id: 'ignite', name: 'Ignite', applications: ignites.length, damage: ignites.reduce((sum, ignite) => sum + ignite.damage * Math.max(0, ignite.expiresAt - ignite.lastTickAt) / 4, 0), remaining: Math.max(0, ...ignites.map(ignite => ignite.expiresAt - at)) }] : []),
   ];
   const advanceIgnite = until => {
@@ -482,6 +491,11 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
         casts++;
         castCounts.set(usable, (castCounts.get(usable) || 0) + 1);
         const procs = [];
+        const naturalDuration = naturalDebuffDuration(usable);
+        if (hit && naturalDuration > 0) {
+          naturalDebuffs.set(usable.name, { until: completionTime + naturalDuration, duration: naturalDuration });
+          procs.push(`${usable.name} slow · ${naturalDuration}s`);
+        }
         let igniteApplied = 0;
         const ignitePct = rankValue(talentRank(build, 'Ignite'), [0.08, 0.16, 0.24, 0.32, 0.4]);
         if (hit && isCrit && hasFireComponent(usable) && ignitePct > 0) {
@@ -879,7 +893,7 @@ function SimulatorApp() {
     setBuild(limitBuildToPoints(config.build && typeof config.build === 'object' ? config.build : {}, Math.max(0, specLevel - 9)));
     const nextRotation = Array.isArray(config.rotation) ? config.rotation.map(entry => {
       const spell = entry.name === 'Combustion' && selectedClass === 'mage' ? combustionSpell : damageSpellCatalog.find(item => item.name === entry.name);
-      return spell ? { ...spell, conditional: entry.conditional ?? defaultCondition(spell).conditional, condition: entry.condition && entry.condition === defaultCondition(spell).condition ? entry.condition : defaultCondition(spell).condition, conditions: Array.isArray(entry.conditions) ? entry.conditions : [] } : null;
+      return spell ? { ...spell, conditional: entry.conditional ?? defaultCondition(spell).conditional, condition: entry.condition && entry.condition === defaultCondition(spell).condition ? entry.condition : defaultCondition(spell).condition, conditions: [...new Set([...(Array.isArray(entry.conditions) ? entry.conditions : []), ...(entry.condition ? [entry.condition] : [])].map(condition => ['pandemicRefresh', 'immolateRefresh'].includes(condition) ? 'debuffRefresh' : condition).filter(condition => condition !== 'always'))] } : null;
     }).filter(Boolean) : (selectedClass === 'mage' ? initialPriorityFor(classData, talentLevel) : []);
     setRotation(nextRotation);
     setSelectedSpecId(spec.id);
@@ -948,9 +962,9 @@ function SimulatorApp() {
           <section className="panel rotation-panel"><PanelTitle kicker="01 / ROTATION" title="Spell priority" right={<span className="loop-tag">READY CONDITIONALS FIRST · THEN PRIORITY ORDER</span>}/><p className="panel-desc">{selectedClass === 'mage' ? 'Add damage spells, set their priorities, and configure proc conditions. Ready conditional spells spend active buffs before the filler rotation.' : selectedClass === 'warlock' ? 'Add damage spells and order them by priority. Warlock uses the class specific talent model.' : 'Add damage spells and order them by priority. This class uses the neutral spell model; its talents are saved but do not modify results yet.'}</p>
             {selectedClass === 'warlock' && <section className="pet-planner" aria-label="Warlock active pet"><label htmlFor="active-pet">ACTIVE PET</label><select id="active-pet" value={activePetId} onChange={event => setActivePetId(event.target.value)}><option value="">No pet selected</option>{classPets.map(pet => <option key={pet.id} value={pet.id} disabled={talentLevel < pet.level}>{pet.name} · summon at level {pet.level}</option>)}</select>{build['Demonic Sacrifice'] > 0 && <label className="pet-sacrifice-toggle"><input type="checkbox" checked={sacrificePet} onChange={event => setSacrificePet(event.target.checked)}/> Sacrifice this demon for its talent effect</label>}<small>{activePet ? `${sacrificePet ? 'Sacrifice ' : activePet.summonSpell + ' · level '}${sacrificePet ? activePet.name : activePet.level}` : 'Choose the demon you plan to summon.'}</small>{petAttackProfile && <small className="pet-attack-profile">{petAttackProfile.kind === 'melee' ? `MELEE AUTO · ${petAttackProfile.swingSpeed.toFixed(1)}s · ${Math.round(petAttackProfile.damageMin + petAttackProfile.attackPower / 14 * petAttackProfile.swingSpeed)}–${Math.round(petAttackProfile.damageMax + petAttackProfile.attackPower / 14 * petAttackProfile.swingSpeed)} base damage per swing before armor; Forever stat scaling not yet calibrated.` : `RANGED AUTO · ${petAttackProfile.ability} · ${petAttackProfile.baseInterval.toFixed(1)}s base cast; damage and spell power scaling use the Forever spell rank.`}</small>}<PetAbilityKit classData={classData} pet={activePet} level={talentLevel}/><p className="pet-planner-note">The shared pet attack model runs alongside damage abilities such as Firebolt and Lash of Pain. Utility pet abilities remain reference only.</p></section>}
             <div className="table-head"><span>PRIORITY / SPELL</span><span>DAMAGE</span><span>CAST TIME</span><span>COOLDOWN</span><span>MANA COST</span><span/></div>
-            <div className="spell-list">{rotation.map((spell, i) => <div className={`spell-row priority-row ${spell.offGcd ? 'offgcd-priority-row' : ''} ${dragOverPriority === i && draggedPriority !== i ? 'drag-over' : ''} ${draggedPriority === i ? 'dragging' : ''}`} key={`${spell.name}-${i}`} draggable onDragStart={event => { setDraggedPriority(i); event.dataTransfer.effectAllowed = 'move'; event.dataTransfer.setData('text/plain', String(i)); }} onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = 'move'; setDragOverPriority(i); }} onDrop={event => { event.preventDefault(); movePriority(i); setDraggedPriority(null); setDragOverPriority(null); }} onDragEnd={() => { setDraggedPriority(null); setDragOverPriority(null); }}><div className="spell-select"><span className="drag-order"><span className="drag-grip" aria-hidden="true" title="Drag to reorder">⠿</span><span className="order">{String(i + 1).padStart(2, '0')}</span></span><span className={`school-icon ${spell.school.toLowerCase()}`}>{spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : '✧'}</span><span className="selected-spell"><b>{spell.name}</b><small>{spell.offGcd ? 'OFF GCD · Instant · 3 min cooldown' : `${spell.specialization} · ${spell.rank} · ${Math.round(spell.coefficient * 100)}% SP`}</small>{['mage','warlock'].includes(selectedClass) && pandemicRefreshForSpell(selectedClass, spell, build).applies && <MultiConditionDropdown selected={spell.conditions || []} includeImmolate={selectedClass === 'warlock' && spell.name === 'Immolate'} pandemicDisabled={!pandemicRefreshForSpell(selectedClass, spell, build).enabled} onChange={conditions => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditions, conditional: conditions.length > 0 || (entry.conditional && conditionForSpell(entry) !== 'always') } : entry))}/>}{['Arcane Missiles','Ice Lance','Pyroblast','Scorch'].includes(spell.name) && <span className="condition-control"><label><input type="checkbox" aria-label={`Enable conditional casting for ${spell.name}`} checked={spell.conditional ?? false} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditional: event.target.checked } : entry))}/><span>Enable conditional</span></label><select aria-label={`${spell.name} condition`} value={conditionForSpell(spell)} disabled={!spell.conditional} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, condition: event.target.value } : entry))}>{spell.name === 'Arcane Missiles' && <option value="missileBarrage">Missile Barrage active</option>}{spell.name === 'Ice Lance' && <option value="fingersOfFrost">Fingers of Frost active</option>}{spell.name === 'Pyroblast' && <option value="hotStreak">Hot Streak: 3 stacks, or 2 with &lt;4s</option>}{spell.name === 'Scorch' && <option value="improvedScorch">Build 5 stacks; refresh below 5s</option>}</select></span>}</span></div><SpellStat value={spell.offGcd ? '—' : spell.damage.toLocaleString()} suffix={spell.offGcd ? 'utility' : 'dmg'}/><SpellStat value={`${spell.cast}s`} suffix={spell.cast === 0 ? 'instant' : 'cast'}/><SpellStat value={spell.cooldown ? `${spell.cooldown}s` : '—'} suffix="cooldown"/><SpellStat value={spell.manaFraction ? `${spell.manaFraction * 100}%` : spell.mana.toLocaleString()} suffix={spell.manaFraction ? 'base mana' : 'mana'}/><button className="remove" draggable="false" onClick={() => setRotation(prev => prev.filter((_,n)=>n!==i))} aria-label={`Remove ${spell.name}`}>×</button></div>)}</div>
+            <div className="spell-list">{rotation.map((spell, i) => <div className={`spell-row priority-row ${spell.offGcd ? 'offgcd-priority-row' : ''} ${dragOverPriority === i && draggedPriority !== i ? 'drag-over' : ''} ${draggedPriority === i ? 'dragging' : ''}`} key={`${spell.name}-${i}`} draggable onDragStart={event => { setDraggedPriority(i); event.dataTransfer.effectAllowed = 'move'; event.dataTransfer.setData('text/plain', String(i)); }} onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = 'move'; setDragOverPriority(i); }} onDrop={event => { event.preventDefault(); movePriority(i); setDraggedPriority(null); setDragOverPriority(null); }} onDragEnd={() => { setDraggedPriority(null); setDragOverPriority(null); }}><div className="spell-select"><span className="drag-order"><span className="drag-grip" aria-hidden="true" title="Drag to reorder">⠿</span><span className="order">{String(i + 1).padStart(2, '0')}</span></span><span className={`school-icon ${spell.school.toLowerCase()}`}>{spellIcons[spell.name] ? <img src={`https://wow.zamimg.com/images/wow/icons/medium/${spellIcons[spell.name]}.jpg`} alt="" loading="lazy"/> : spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : spell.school === 'Shadow' ? '☾' : '✧'}</span><span className="selected-spell"><b>{spell.name}</b><small>{spell.offGcd ? 'OFF GCD · Instant · 3 min cooldown' : `${spell.specialization} · ${spell.rank} · ${Math.round(spell.coefficient * 100)}% SP`}</small>{['mage','warlock'].includes(selectedClass) && debuffRefreshBehavior(selectedClass, spell, build).applies && <MultiConditionDropdown selected={spell.conditions || []} includeImmolate={selectedClass === 'warlock' && spell.name === 'Immolate'} refreshDisabled={!debuffRefreshBehavior(selectedClass, spell, build).enabled} refreshWindow={debuffRefreshWindow(selectedClass, spell, build)} onChange={conditions => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditions, conditional: conditions.length > 0 || (entry.conditional && conditionForSpell(entry) !== 'always') } : entry))}/>}{['Arcane Missiles','Ice Lance','Pyroblast','Scorch'].includes(spell.name) && <span className="condition-control"><label><input type="checkbox" aria-label={`Enable conditional casting for ${spell.name}`} checked={spell.conditional ?? false} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditional: event.target.checked } : entry))}/><span>Enable conditional</span></label><select aria-label={`${spell.name} condition`} value={conditionForSpell(spell)} disabled={!spell.conditional} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, condition: event.target.value } : entry))}>{spell.name === 'Arcane Missiles' && <option value="missileBarrage">Missile Barrage active</option>}{spell.name === 'Ice Lance' && <option value="fingersOfFrost">Fingers of Frost active</option>}{spell.name === 'Pyroblast' && <option value="hotStreak">Hot Streak: 3 stacks, or 2 with &lt;4s</option>}{spell.name === 'Scorch' && <option value="improvedScorch">Build 5 stacks; refresh below 5s</option>}</select></span>}</span></div><SpellStat value={spell.offGcd ? '—' : spell.damage.toLocaleString()} suffix={spell.offGcd ? 'utility' : 'dmg'}/><SpellStat value={`${spell.cast}s`} suffix={spell.cast === 0 ? 'instant' : 'cast'}/><SpellStat value={spell.cooldown ? `${spell.cooldown}s` : '—'} suffix="cooldown"/><SpellStat value={spell.manaFraction ? `${spell.manaFraction * 100}%` : spell.mana.toLocaleString()} suffix={spell.manaFraction ? 'base mana' : 'mana'}/><button className="remove" draggable="false" onClick={() => setRotation(prev => prev.filter((_,n)=>n!==i))} aria-label={`Remove ${spell.name}`}>×</button></div>)}</div>
             <div className="add-spell-wrap"><button className="add-row" onClick={() => setAddMenuOpen(open => !open)}>＋ <span>ADD A SPELL</span></button>
-              {addMenuOpen && <div className="spell-picker"><input aria-label={`Search ${classData.class} spells`} placeholder={`Search ${classData.class} spells…`} value={spellSearch} onChange={event => setSpellSearch(event.target.value)}/><div className="spell-picker-options">{selectedClass === 'mage' && !rotation.some(entry => entry.name === 'Combustion') && 'combustion'.includes(spellSearch.toLowerCase()) && <button key="Combustion" onClick={() => addSpell(combustionSpell)}><span className="school-icon fire">♨</span><span><b>Combustion</b><small>Fire · OFF GCD · Instant · 180 sec cooldown · Requires talent</small></span></button>}{damageSpellCatalog.filter(spell => !rotation.some(entry => entry.name === spell.name) && spell.name.toLowerCase().includes(spellSearch.toLowerCase())).map(spell => <button key={spell.name} onClick={() => addSpell(spell)}><span className={`school-icon ${spell.school.toLowerCase()}`}>{spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : '✧'}</span><span><b>{spell.name}</b><small>{spell.specialization} · {spell.school} · {spell.rank} · {spell.damage.toLocaleString()} dmg · {Math.round(spell.coefficient * 100)}% SP</small></span></button>)}{damageSpellCatalog.every(spell => rotation.some(entry => entry.name === spell.name) || !spell.name.toLowerCase().includes(spellSearch.toLowerCase())) && (selectedClass !== 'mage' || rotation.some(entry => entry.name === 'Combustion') || !'combustion'.includes(spellSearch.toLowerCase())) && <p>No matching {classData.class} spells.</p>}</div></div>}
+              {addMenuOpen && <div className="spell-picker"><input aria-label={`Search ${classData.class} spells`} placeholder={`Search ${classData.class} spells…`} value={spellSearch} onChange={event => setSpellSearch(event.target.value)}/><div className="spell-picker-options">{selectedClass === 'mage' && !rotation.some(entry => entry.name === 'Combustion') && 'combustion'.includes(spellSearch.toLowerCase()) && <button key="Combustion" onClick={() => addSpell(combustionSpell)}><span className="school-icon fire">♨</span><span><b>Combustion</b><small>Fire · OFF GCD · Instant · 180 sec cooldown · Requires talent</small></span></button>}{damageSpellCatalog.filter(spell => !rotation.some(entry => entry.name === spell.name) && spell.name.toLowerCase().includes(spellSearch.toLowerCase())).map(spell => <button key={spell.name} onClick={() => addSpell(spell)}><span className={`school-icon ${spell.school.toLowerCase()}`}>{spellIcons[spell.name] ? <img src={`https://wow.zamimg.com/images/wow/icons/medium/${spellIcons[spell.name]}.jpg`} alt="" loading="lazy"/> : spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : spell.school === 'Shadow' ? '☾' : '✧'}</span><span><b>{spell.name}</b><small>{spell.specialization} · {spell.school} · {spell.rank} · {spell.damage.toLocaleString()} dmg · {Math.round(spell.coefficient * 100)}% SP</small></span></button>)}{damageSpellCatalog.every(spell => rotation.some(entry => entry.name === spell.name) || !spell.name.toLowerCase().includes(spellSearch.toLowerCase())) && (selectedClass !== 'mage' || rotation.some(entry => entry.name === 'Combustion') || !'combustion'.includes(spellSearch.toLowerCase())) && <p>No matching {classData.class} spells.</p>}</div></div>}
             </div>
             <div className="rotation-foot"><span>GLOBAL COOLDOWN <b>1.5s</b></span><span>BUILD <b>{totalPoints} / 51 PTS</b></span><button onClick={()=>setRotation(selectedClass === 'mage' ? initialPriorityFor(classData, talentLevel) : [])}>CLEAR ROTATION ↺</button></div>
           </section>
