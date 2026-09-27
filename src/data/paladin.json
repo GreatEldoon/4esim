@@ -1,0 +1,6649 @@
+{
+ "_readme": "talentsforever.com data export for the Paladin. Fan-made WoW Forever talent calculator; talents, racials, Legacy perks and the class spellbooks come from the WoW Forever beta client's own data files (the site began as frame-by-frame reads of the BlizzCon 2026 demo), so numbers can lag live tuning. talents: per class, trees with talents (row/col are 1-based grid positions, max is the rank cap, desc maps rank number to tooltip text, confirmed lists ranks read verbatim, others are estimates; classic shows the Classic-era equivalent for comparison). spellbooks: per class, every trainer spell to level 60 with every rank (levels = the level each rank is learned at; checked = that class's city trainer was read in game, the rest are from the files only; the General tab dates from the demo reads). spell_desc: tooltip text keyed class|spell|rank, s=beta means the beta client's text at level 60 with no gear, s=demo means read off footage, s=classic means Wowhead Classic fallback, nt=1 or 2 means the class trainer does not sell that rank (1 portal trainer, 2 tome, quest or drop). racials and legacy: racial abilities and the Legacy perk trees. changelog: what changed on the site. License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). You may copy, adapt and republish this data, including commercially, as long as you credit talentsforever.com with a link. Game names, icons and tooltip text belong to Blizzard Entertainment.",
+ "generated": "2026-09-26",
+ "class": "Paladin",
+ "talents": {
+  "icon": "class_paladin",
+  "trees": [
+   {
+    "name": "Holy",
+    "bg": 382,
+    "icon": "spell_holy_holybolt",
+    "talents": [
+     {
+      "name": "Divine Strength",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_golemthunderclap",
+      "desc": [
+       "Increases your Strength by 2%.",
+       "Increases your Strength by 4%.",
+       "Increases your Strength by 6%.",
+       "Increases your Strength by 8%.",
+       "Increases your Strength by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Holy",
+       "row": 1,
+       "col": 2,
+       "max": 5,
+       "text": "Increases your Strength by 2%."
+      }
+     },
+     {
+      "name": "Divine Intellect",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_nature_sleep",
+      "desc": [
+       "Increases your total Intellect by 2%.",
+       "Increases your total Intellect by 4%.",
+       "Increases your total Intellect by 6%.",
+       "Increases your total Intellect by 8%.",
+       "Increases your total Intellect by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Holy",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your total Intellect by 2%."
+      }
+     },
+     {
+      "name": "Healing Light",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_holybolt",
+      "desc": [
+       "Increases the amount healed by your Holy Light, Flash of Light, and Holy Shock spells by 4%.",
+       "Increases the amount healed by your Holy Light, Flash of Light, and Holy Shock spells by 8%.",
+       "Increases the amount healed by your Holy Light, Flash of Light, and Holy Shock spells by 12%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 3,
+       "col": 1,
+       "max": 3,
+       "text": "Increases the amount healed by your Holy Light and Flash of Light spells by 4%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Spiritual Focus",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_arcane_blink",
+      "desc": [
+       "Gives your Flash of Light, Holy Light, and Light's Vigil spells a 35% chance to not lose casting time when you take damage.",
+       "Gives your Flash of Light, Holy Light, and Light's Vigil spells a 70% chance to not lose casting time when you take damage."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 2,
+       "col": 2,
+       "max": 5,
+       "text": "Gives your Flash of Light and Holy Light spells a 14% chance to not lose casting time when you take damage."
+      }
+     },
+     {
+      "name": "Improved Seals",
+      "max": 3,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_thunderbolt",
+      "desc": [
+       "Increases the damage done by your Seals and Judgements by 5%.",
+       "Increases the damage done by your Seals and Judgements by 10%.",
+       "Increases the damage done by your Seals and Judgements by 15%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 2,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the damage done by your Seal of Righteousness and Judgement of Righteousness by 3%.",
+       "renamed": "Improved Seal of Righteousness"
+      }
+     },
+     {
+      "name": "Unyielding Faith",
+      "max": 2,
+      "row": 2,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_holy_unyieldingfaith",
+      "desc": [
+       "Reduces the duration of Fear and Disorient effects on you by 15%.",
+       "Reduces the duration of Fear and Disorient effects on you by 30%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 3,
+       "col": 4,
+       "max": 2,
+       "text": "Increases your chance to resist Fear and Disorient effects by an additional 5%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Voice of Truth",
+      "max": 1,
+      "row": 3,
+      "col": 1,
+      "passive": false,
+      "icon": "inv_misc_horn_03",
+      "desc": [
+       "Grants you immunity to Silence and Interrupt effects. Lasts 6 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "Instant | 3 min cooldown",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Reverence",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_divineillumination",
+      "desc": [
+       "Allows 10% of your Mana regeneration to continue while casting.",
+       "Allows 20% of your Mana regeneration to continue while casting.",
+       "Allows 30% of your Mana regeneration to continue while casting."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Purifying Power",
+      "max": 2,
+      "row": 3,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_purifyingpower",
+      "desc": [
+       "Reduces the mana cost of your Cleanse and Purify spells by 10% and reduces the cooldown of your Exorcism and Holy Wrath spells by 17%.",
+       "Reduces the mana cost of your Cleanse and Purify spells by 20% and reduces the cooldown of your Exorcism and Holy Wrath spells by 33%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Infusion of Light",
+      "max": 2,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_paladin_infusionoflight",
+      "desc": [
+       "Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by 0.5 sec.",
+       "Your Holy Shock and Flash of Light critical hits reduce the cast time of your next Holy Light cast within 15 sec by 1 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Illumination",
+      "max": 5,
+      "row": 4,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_greaterheal",
+      "desc": [
+       "After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 20% chance to gain Mana equal to 50% of the base cost of the spell.",
+       "After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 40% chance to gain Mana equal to 50% of the base cost of the spell.",
+       "After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 60% chance to gain Mana equal to 50% of the base cost of the spell.",
+       "After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 80% chance to gain Mana equal to 50% of the base cost of the spell.",
+       "After getting a critical effect from your Flash of Light, Holy Light, Light's Vigil, or Holy Shock heal spell you have a 100% chance to gain Mana equal to 50% of the base cost of the spell."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "req": "Reverence",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 4,
+       "col": 2,
+       "max": 5,
+       "text": "After getting a critical effect from your Flash of Light, Holy Light, or Holy Shock heal spell, gives you a 20% chance to gain Mana equal to the base cost of the spell."
+      }
+     },
+     {
+      "name": "Divine Favor",
+      "max": 1,
+      "row": 4,
+      "col": 3,
+      "passive": false,
+      "icon": "spell_holy_heal",
+      "desc": [
+       "When activated, gives your next Flash of Light, Holy Light, or Holy Shock spell a 100% critical effect chance."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "4% of base mana | Instant | 2 min cooldown",
+      "classic": {
+       "status": "moved",
+       "tree": "Holy",
+       "row": 5,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, gives your next Flash of Light, Holy Light, or Holy Shock spell a 100% critical effect chance.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Divine Precision",
+      "max": 3,
+      "row": 5,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_healingfocus",
+      "desc": [
+       "Improves your chance to hit with Holy spells by 6%.",
+       "Improves your chance to hit with Holy spells by 12%.",
+       "Improves your chance to hit with Holy spells by 18%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "req": "Holy Shock",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Holy Shock",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_holy_searinglight",
+      "desc": [
+       "Blasts the target with Holy energy, causing 129 to 139 Holy damage to an enemy, or 110 to 118 healing to an ally."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "160 Mana | 40 yd range | Instant | 10 sec cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "Blasts the target with Holy energy, causing 204 to 220 Holy damage to an enemy, or 204 to 220 healing to an ally.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Consecrated Ground",
+      "max": 2,
+      "row": 5,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_innerfire",
+      "desc": [
+       "Gives your Holy spells 5% increased damage against the first 4 enemies that enter your Consecration.",
+       "Gives your Holy spells 10% increased damage against the first 4 enemies that enter your Consecration."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Holy Power",
+      "max": 5,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_power",
+      "desc": [
+       "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 3%, and all other spells by 1%.",
+       "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 6%, and all other spells by 2%.",
+       "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 9%, and all other spells by 3%.",
+       "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 12%, and all other spells by 4%.",
+       "Increases the critical strike chance of your Holy Shock and Holy Strike spells by 15%, and all other spells by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Holy",
+       "row": 6,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the critical effect chance of your Holy spells by 1%."
+      }
+     },
+     {
+      "name": "Light's Vigil",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "ability_paladin_judgementofthepure",
+      "desc": [
+       "Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes enemy targets to suffer 175 to 189 Holy damage and refund 75% of Light's Vigil's Mana cost, or allied targets to heal their party for 325 to 343. The Paladin may only have one Light's Vigil active per party."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Holy Shock",
+      "cost": "730 Mana | 40 yd range | 1.5 sec cast | 6 sec cooldown",
+      "classic": {
+       "status": "new"
+      }
+     }
+    ],
+    "removed": [
+     {
+      "name": "Consecration",
+      "max": 1,
+      "text": "Consecrates the land beneath Paladin, doing 64 Holy damage over 8 sec to enemies who enter the area.",
+      "row": 3
+     },
+     {
+      "name": "Improved Lay on Hands",
+      "max": 2,
+      "text": "Gives the target of your Lay on Hands spell a 15% bonus to their armor value from items for 2 min. In addition, the cooldown for your Lay on Hands spell is reduced by 10 min.",
+      "row": 3
+     },
+     {
+      "name": "Improved Blessing of Wisdom",
+      "max": 2,
+      "text": "Increases the effect of your Blessing of Wisdom spell by 10%.",
+      "row": 4
+     },
+     {
+      "name": "Lasting Judgement",
+      "max": 3,
+      "text": "Increases the duration of your Judgement of Light and Judgement of Wisdom by 10 sec.",
+      "row": 5
+     }
+    ]
+   },
+   {
+    "name": "Protection",
+    "bg": 383,
+    "icon": "spell_holy_devotionaura",
+    "talents": [
+     {
+      "name": "Toughness",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_devotion",
+      "desc": [
+       "Increases your armor value from items by 2%.",
+       "Increases your armor value from items by 4%.",
+       "Increases your armor value from items by 6%.",
+       "Increases your armor value from items by 8%.",
+       "Increases your armor value from items by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "moved",
+       "tree": "Protection",
+       "row": 2,
+       "col": 4,
+       "max": 5,
+       "text": "Increases your armor value from items by 2%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Redoubt",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_defend",
+      "desc": [
+       "Damaging melee attacks against you have a 10% chance to increase your chance to block by 6%. Lasts 10 sec or 5 blocks.",
+       "Damaging melee attacks against you have a 10% chance to increase your chance to block by 12%. Lasts 10 sec or 5 blocks.",
+       "Damaging melee attacks against you have a 10% chance to increase your chance to block by 18%. Lasts 10 sec or 5 blocks.",
+       "Damaging melee attacks against you have a 10% chance to increase your chance to block by 24%. Lasts 10 sec or 5 blocks.",
+       "Damaging melee attacks against you have a 10% chance to increase your chance to block by 30%. Lasts 10 sec or 5 blocks."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your chance to block attacks with your shield by 6% after being the victim of a critical strike. Lasts 10 sec or 5 blocks."
+      }
+     },
+     {
+      "name": "Precision",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_rogue_ambush",
+      "desc": [
+       "Improves your chance to hit by 1%.",
+       "Improves your chance to hit by 2%.",
+       "Improves your chance to hit by 3%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 2,
+       "col": 1,
+       "max": 3,
+       "text": "Increases your chance to hit with melee weapons by 1%."
+      }
+     },
+     {
+      "name": "Guardian's Favor",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_sealofprotection",
+      "desc": [
+       "Reduces the cooldown of your Blessing of Protection by 1 min and increases the duration of your Blessing of Freedom by 3 sec.",
+       "Reduces the cooldown of your Blessing of Protection by 2 min and increases the duration of your Blessing of Freedom by 6 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 2,
+       "col": 2,
+       "max": 2,
+       "text": "Reduces the cooldown of your Blessing of Protection by 60 sec and increases the duration of your Blessing of Freedom by 3 sec."
+      }
+     },
+     {
+      "name": "Anticipation",
+      "max": 5,
+      "row": 2,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_magic_lesserinvisibilty",
+      "desc": [
+       "Increases your Defense Skill by 4.",
+       "Increases your Defense Skill by 8.",
+       "Increases your Defense Skill by 12.",
+       "Increases your Defense Skill by 16.",
+       "Increases your Defense Skill by 20."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 3,
+       "col": 4,
+       "max": 5,
+       "text": "Increases your Defense skill by 2.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Improved Seal of Fury",
+      "max": 1,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_righteousnessaura",
+      "desc": [
+       "When Seal of Fury's shield is fully absorbed, restore 60 Mana, increased by 15% per level the attacker is above you, up to 45%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Improved Righteous Fury",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_sealoffury",
+      "desc": [
+       "While Righteous Fury is active, all damage taken is reduced by 2%.",
+       "While Righteous Fury is active, all damage taken is reduced by 4%.",
+       "While Righteous Fury is active, all damage taken is reduced by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 3,
+       "col": 2,
+       "max": 3,
+       "text": "Increases the amount of threat generated by your Righteous Fury spell by 16%."
+      }
+     },
+     {
+      "name": "Shield Specialization",
+      "max": 3,
+      "row": 3,
+      "col": 3,
+      "passive": true,
+      "icon": "inv_shield_06",
+      "desc": [
+       "Increases the amount of damage absorbed by your shield by 10%, and gives your blocks a 33% chance to restore 6% of your maximum Mana. May only occur once every 3 sec.",
+       "Increases the amount of damage absorbed by your shield by 20%, and gives your blocks a 66% chance to restore 6% of your maximum Mana. May only occur once every 3 sec.",
+       "Increases the amount of damage absorbed by your shield by 30%, and gives your blocks a 100% chance to restore 6% of your maximum Mana. May only occur once every 3 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "req": "Redoubt",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 3,
+       "col": 3,
+       "max": 3,
+       "text": "Increases the amount of damage absorbed by your shield by 10%."
+      }
+     },
+     {
+      "name": "Sacred Duty",
+      "max": 2,
+      "row": 3,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_holy_divineintervention",
+      "desc": [
+       "Increases your total Stamina by 2% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 30 sec.",
+       "Increases your total Stamina by 4% and reduces the cooldown of your Divine Shield, Divine Protection, and Templar's Bulwark spells by 60 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Swift Judgement",
+      "max": 1,
+      "row": 4,
+      "col": 1,
+      "passive": false,
+      "icon": "ability_paladin_judgementred",
+      "desc": [
+       "Finishes the remaining cooldown on your Judgement ability and reduces the Mana cost of your next Judgement by 100%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Improved Seal of Fury",
+      "cost": "Instant | 1 min cooldown",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "One-Handed Weapon Specialization",
+      "max": 3,
+      "row": 4,
+      "col": 2,
+      "passive": true,
+      "icon": "inv_sword_20",
+      "desc": [
+       "Increases the damage you deal with one-handed melee weapons by 3%.",
+       "Increases the damage you deal with one-handed melee weapons by 7%.",
+       "Increases the damage you deal with one-handed melee weapons by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 6,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the damage you deal with one-handed melee weapons by 2%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Improved Hammer of Justice",
+      "max": 3,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_sealofmight",
+      "desc": [
+       "Decreases the cooldown of your Hammer of Justice spell by 5 sec.",
+       "Decreases the cooldown of your Hammer of Justice spell by 10 sec.",
+       "Decreases the cooldown of your Hammer of Justice spell by 15 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Protection",
+       "row": 4,
+       "col": 2,
+       "max": 3,
+       "text": "Decreases the cooldown of your Hammer of Justice spell by 5 sec."
+      }
+     },
+     {
+      "name": "Templar's Bulwark",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "ability_paladin_shieldofthetemplar",
+      "desc": [
+       "When activated, this ability grants you an absorb shield equal to 100% of your maximum health for 8 sec. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "110 Mana | Instant | 5 min cooldown",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Reckoning",
+      "max": 5,
+      "row": 5,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_blessingofstrength",
+      "desc": [
+       "Gives you a 8% chance to gain an extra attack after Blocking a melee attack and a 20% chance to gain an extra attack after being the victim of a non-periodic critical strike.",
+       "Gives you a 16% chance to gain an extra attack after Blocking a melee attack and a 40% chance to gain an extra attack after being the victim of a non-periodic critical strike.",
+       "Gives you a 24% chance to gain an extra attack after Blocking a melee attack and a 60% chance to gain an extra attack after being the victim of a non-periodic critical strike.",
+       "Gives you a 32% chance to gain an extra attack after Blocking a melee attack and a 80% chance to gain an extra attack after being the victim of a non-periodic critical strike.",
+       "Gives you a 40% chance to gain an extra attack after Blocking a melee attack and a 100% chance to gain an extra attack after being the victim of a non-periodic critical strike."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 5,
+       "col": 3,
+       "max": 5,
+       "text": "Gives you a 20% chance to gain an extra attack after being the victim of a critical strike."
+      }
+     },
+     {
+      "name": "Iron Creed",
+      "max": 5,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_improvedresistanceauras",
+      "desc": [
+       "Increases the threat generated by your Holy Strike ability 5%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 2% for 6 sec.",
+       "Increases the threat generated by your Holy Strike ability 10%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 4% for 6 sec.",
+       "Increases the threat generated by your Holy Strike ability 15%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 6% for 6 sec.",
+       "Increases the threat generated by your Holy Strike ability 20%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 8% for 6 sec.",
+       "Increases the threat generated by your Holy Strike ability 25%. While Righteous Fury is active, Holy Strike also reduces your damage taken by 10% for 6 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Holy Shield",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_holy_blessingofprotection",
+      "desc": [
+       "Increases chance to block by 20% for 10 sec, and deals 110 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Templar's Bulwark",
+      "cost": "150 Mana | Instant | 10 sec cooldown | Requires Shields",
+      "classic": {
+       "status": "changed",
+       "tree": "Protection",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "Increases chance to block by 30% for 10 sec, and deals 65 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges."
+      }
+     }
+    ],
+    "removed": [
+     {
+      "name": "Improved Devotion Aura",
+      "max": 5,
+      "text": "Increases the armor bonus of your Devotion Aura by 5%.",
+      "row": 1
+     },
+     {
+      "name": "Blessing of Kings",
+      "max": 1,
+      "text": "Places a Blessing on the friendly target, increasing total stats by 10% for 5 min. Players may only have one Blessing on them per Paladin at any one time.",
+      "row": 3
+     },
+     {
+      "name": "Improved Concentration Aura",
+      "max": 3,
+      "text": "Increases the effect of your Concentration Aura by an additional 5% and gives all group members affected by the aura an additional 5% chance to resist Silence and Interrupt effects.",
+      "row": 4
+     },
+     {
+      "name": "Blessing of Sanctuary",
+      "max": 1,
+      "text": "Places a Blessing on the friendly target, reducing damage dealt from all sources by up to 10 for 5 min. In addition, when the target blocks a melee attack the attacker will take 14 Holy damage. Players may only have one Blessing on them per Paladin at any one time.",
+      "row": 5
+     }
+    ]
+   },
+   {
+    "name": "Retribution",
+    "bg": 381,
+    "icon": "spell_holy_auraoflight",
+    "talents": [
+     {
+      "name": "Deflection",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_parry",
+      "desc": [
+       "Increases your Parry chance by 1%.",
+       "Increases your Parry chance by 2%.",
+       "Increases your Parry chance by 3%.",
+       "Increases your Parry chance by 4%.",
+       "Increases your Parry chance by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "moved",
+       "tree": "Retribution",
+       "row": 2,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your Parry chance by 1%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Benediction",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_frost_windwalkon",
+      "desc": [
+       "Reduces the Mana cost of all instant cast spells and abilities by 2%.",
+       "Reduces the Mana cost of all instant cast spells and abilities by 4%.",
+       "Reduces the Mana cost of all instant cast spells and abilities by 6%.",
+       "Reduces the Mana cost of all instant cast spells and abilities by 8%.",
+       "Reduces the Mana cost of all instant cast spells and abilities by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Reduces the Mana cost of your Judgement and Seal spells by 3%."
+      }
+     },
+     {
+      "name": "Improved Judgement",
+      "max": 2,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_righteousfury",
+      "desc": [
+       "Decreases the cooldown of your Judgement ability by 1 sec.",
+       "Decreases the cooldown of your Judgement ability by 2 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 2,
+       "col": 1,
+       "max": 2,
+       "text": "Decreases the cooldown of your Judgement spell by 1 sec."
+      }
+     },
+     {
+      "name": "Holy Conduit",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_devineaegis",
+      "desc": [
+       "Reduces the mana cost of your Consecration, Holy Wrath, Exorcism, and Hammer of Wrath spells by 20%.",
+       "Reduces the mana cost of your Consecration, Holy Wrath, Exorcism, and Hammer of Wrath spells by 40%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Conviction",
+      "max": 5,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_retributionaura",
+      "desc": [
+       "Improves your chance to get a critical strike with melee attacks by 1%.",
+       "Improves your chance to get a critical strike with melee attacks by 2%.",
+       "Improves your chance to get a critical strike with melee attacks by 3%.",
+       "Improves your chance to get a critical strike with melee attacks by 4%.",
+       "Improves your chance to get a critical strike with melee attacks by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 3,
+       "col": 2,
+       "max": 5,
+       "text": "Increases your chance to get a critical strike with melee weapons by 1%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Vindication",
+      "max": 3,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_vindication",
+      "desc": [
+       "Gives your damaging melee attacks a chance to reduce the target's Attack Power by 67, and increase your Attack Power by 1% for 30 sec.",
+       "Gives your damaging melee attacks a chance to reduce the target's Attack Power by 133, and increase your Attack Power by 2% for 30 sec.",
+       "Gives your damaging melee attacks a chance to reduce the target's Attack Power by 200, and increase your Attack Power by 3% for 30 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 3,
+       "col": 1,
+       "max": 3,
+       "text": "Gives the Paladin's damaging melee attacks a chance to reduce the target's Strength and Agility by 5%"
+      }
+     },
+     {
+      "name": "Sanctified Judgement",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_paladin_judgementblue",
+      "desc": [
+       "Gives your Judgement ability a 33% chance to return 20% of the Mana cost of the judged seal.",
+       "Gives your Judgement ability a 66% chance to return 40% of the Mana cost of the judged seal.",
+       "Gives your Judgement ability a 100% chance to return 60% of the Mana cost of the judged seal."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Seal of Command",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "passive": false,
+      "icon": "ability_warrior_innerrage",
+      "desc": [
+       "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 68 to 73 Holy damage, 137 to 145 if the target is stunned or incapacitated."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "65 Mana | Instant",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 3,
+       "col": 3,
+       "max": 1,
+       "text": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.Unleashing this Seal's energy will judge an enemy, instantly causing 68 to 73 Holy damage, 137 to 146 if the target is stunned or incapacitated."
+      }
+     },
+     {
+      "name": "Pursuit of Justice",
+      "max": 2,
+      "row": 3,
+      "col": 4,
+      "passive": true,
+      "icon": "spell_holy_persuitofjustice",
+      "desc": [
+       "Increases movement speed and mounted movement speed by 8%. This does not stack with other movement speed increasing effects.",
+       "Increases movement speed and mounted movement speed by 15%. This does not stack with other movement speed increasing effects."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 3,
+       "col": 4,
+       "max": 2,
+       "text": "Increases movement and mounted movement speed by 4%. This does not stack with other movement speed increasing effects."
+      }
+     },
+     {
+      "name": "Eye for an Eye",
+      "max": 2,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_holy_eyeforaneye",
+      "desc": [
+       "All critical strikes against you cause 5% of the damage taken to the attacker as well. The damage caused by Eye for an Eye will not exceed 50% of the Paladin's total health.",
+       "All critical strikes against you cause 10% of the damage taken to the attacker as well. The damage caused by Eye for an Eye will not exceed 50% of the Paladin's total health."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 4,
+       "col": 1,
+       "max": 2,
+       "text": "All spell criticals against you cause 15% of the damage taken to the caster as well. The damage caused by Eye for an Eye will not exceed 50% of the Paladin's total health."
+      }
+     },
+     {
+      "name": "Sacred Arbiter",
+      "max": 1,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "inv_sword_08",
+      "desc": [
+       "Increases the damage of your Holy Strike ability by 20% and causes it to refresh all Judgement effects on the target."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Two-Handed Weapon Specialization",
+      "max": 3,
+      "row": 5,
+      "col": 1,
+      "passive": true,
+      "icon": "inv_hammer_04",
+      "desc": [
+       "Increases the damage you deal with two-handed melee weapons by 2%.",
+       "Increases the damage you deal with two-handed melee weapons by 4%.",
+       "Increases the damage you deal with two-handed melee weapons by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Retribution",
+       "row": 5,
+       "col": 1,
+       "max": 3,
+       "text": "Increases the damage you deal with two-handed melee weapons by 2%."
+      }
+     },
+     {
+      "name": "Vengeance",
+      "max": 3,
+      "row": 5,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_racial_avatar",
+      "desc": [
+       "Increases your Physical and Holy damage dealt by 1% for 30 sec after landing a non-periodic critical strike. Stacks up to 3 times.",
+       "Increases your Physical and Holy damage dealt by 2% for 30 sec after landing a non-periodic critical strike. Stacks up to 3 times.",
+       "Increases your Physical and Holy damage dealt by 3% for 30 sec after landing a non-periodic critical strike. Stacks up to 3 times."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "req": "Sanctified Judgement",
+      "classic": {
+       "status": "changed",
+       "tree": "Retribution",
+       "row": 6,
+       "col": 2,
+       "max": 5,
+       "text": "Gives you a 3% bonus to Physical and Holy damage you deal for 8 sec after dealing a critical strike from a weapon swing, spell, or ability.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Repentance",
+      "max": 1,
+      "row": 5,
+      "col": 3,
+      "passive": false,
+      "icon": "spell_holy_prayerofhealing",
+      "desc": [
+       "Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. Any damage caused will awaken the target. Only works against Humanoids."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "60 Mana | 20 yd range | Instant | 1 min cooldown",
+      "classic": {
+       "status": "moved",
+       "tree": "Retribution",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. Any damage caused will awaken the target. Only works against Humanoids.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Champion of the Light",
+      "max": 3,
+      "row": 6,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_paladin_enlightenedjudgements",
+      "desc": [
+       "Increases your spell damage and healing by up to 33% of your Intellect.",
+       "Increases your spell damage and healing by up to 66% of your Intellect.",
+       "Increases your spell damage and healing by up to 100% of your Intellect."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Instrument of Law",
+      "max": 2,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_holy_divinepurpose",
+      "desc": [
+       "Reduces the cast time of your Hammer of Wrath by 0.5 sec, and reduces all threat you generate by 10% while Righteous Fury is not active.",
+       "Reduces the cast time of your Hammer of Wrath by 1 sec, and reduces all threat you generate by 20% while Righteous Fury is not active."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Twist of Light",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_blessedresillience",
+      "desc": [
+       "Reduces the Mana cost of your Seal spells by 20%, and when you replace your Seal of Command, Seal of Righteousness, Seal of Fury, or Seal of Justice with a different Seal, gain an Echo of that Seal. Your next melee attack applies the replaced Seal's effects, consuming the Echo."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     }
+    ],
+    "removed": [
+     {
+      "name": "Improved Blessing of Might",
+      "max": 5,
+      "text": "Increases the melee attack power bonus of your Blessing of Might by 4%.",
+      "row": 1
+     },
+     {
+      "name": "Improved Seal of the Crusader",
+      "max": 3,
+      "text": "Increases the melee attack power bonus of your Seal of the Crusader and the Holy damage increase of your Judgement of the Crusader by 5%.",
+      "row": 2
+     },
+     {
+      "name": "Improved Retribution Aura",
+      "max": 2,
+      "text": "Increases the damage done by your Retribution Aura by 25%.",
+      "row": 4
+     },
+     {
+      "name": "Sanctity Aura",
+      "max": 1,
+      "text": "Increases Holy damage done by party members within 30 yards by 10%. Players may only have one Aura on them per Paladin at any one time.",
+      "row": 5
+     }
+    ]
+   }
+  ],
+  "source": "Talent trees and every rank's text from the WoW Forever beta client, build 1.60.1.70009."
+ },
+ "spellbook": {
+  "race": "",
+  "level": 60,
+  "seen": "",
+  "missing": [],
+  "general": [
+   [
+    "Attack",
+    ""
+   ],
+   [
+    "Armor Proficiency",
+    "Passive"
+   ],
+   [
+    "Block",
+    "Passive"
+   ],
+   [
+    "Dodge",
+    "Passive"
+   ],
+   [
+    "Parry",
+    "Passive"
+   ],
+   [
+    "Languages",
+    "Passive"
+   ]
+  ],
+  "tabs": [
+   {
+    "name": "Holy",
+    "spells": [
+     [
+      "Blessing of Light",
+      "Rank 1"
+     ],
+     [
+      "Blessing of Light",
+      "Rank 2"
+     ],
+     [
+      "Blessing of Light",
+      "Rank 3"
+     ],
+     [
+      "Blessing of Wisdom",
+      "Rank 1"
+     ],
+     [
+      "Blessing of Wisdom",
+      "Rank 2"
+     ],
+     [
+      "Blessing of Wisdom",
+      "Rank 3"
+     ],
+     [
+      "Blessing of Wisdom",
+      "Rank 4"
+     ],
+     [
+      "Blessing of Wisdom",
+      "Rank 5"
+     ],
+     [
+      "Blessing of Wisdom",
+      "Rank 6"
+     ],
+     [
+      "Cleanse",
+      ""
+     ],
+     [
+      "Consecration",
+      "Rank 1"
+     ],
+     [
+      "Consecration",
+      "Rank 2"
+     ],
+     [
+      "Consecration",
+      "Rank 3"
+     ],
+     [
+      "Consecration",
+      "Rank 4"
+     ],
+     [
+      "Consecration",
+      "Rank 5"
+     ],
+     [
+      "Divine Favor",
+      ""
+     ],
+     [
+      "Exorcism",
+      "Rank 1"
+     ],
+     [
+      "Exorcism",
+      "Rank 2"
+     ],
+     [
+      "Exorcism",
+      "Rank 3"
+     ],
+     [
+      "Exorcism",
+      "Rank 4"
+     ],
+     [
+      "Exorcism",
+      "Rank 5"
+     ],
+     [
+      "Exorcism",
+      "Rank 6"
+     ],
+     [
+      "Flash of Light",
+      "Rank 1"
+     ],
+     [
+      "Flash of Light",
+      "Rank 2"
+     ],
+     [
+      "Flash of Light",
+      "Rank 3"
+     ],
+     [
+      "Flash of Light",
+      "Rank 4"
+     ],
+     [
+      "Flash of Light",
+      "Rank 5"
+     ],
+     [
+      "Flash of Light",
+      "Rank 6"
+     ],
+     [
+      "Greater Blessing of Light",
+      ""
+     ],
+     [
+      "Greater Blessing of Wisdom",
+      "Rank 1"
+     ],
+     [
+      "Greater Blessing of Wisdom",
+      "Rank 2"
+     ],
+     [
+      "Hammer of Wrath",
+      "Rank 1"
+     ],
+     [
+      "Hammer of Wrath",
+      "Rank 2"
+     ],
+     [
+      "Hammer of Wrath",
+      "Rank 3"
+     ],
+     [
+      "Holy Light",
+      "Rank 1"
+     ],
+     [
+      "Holy Light",
+      "Rank 2"
+     ],
+     [
+      "Holy Light",
+      "Rank 3"
+     ],
+     [
+      "Holy Light",
+      "Rank 4"
+     ],
+     [
+      "Holy Light",
+      "Rank 5"
+     ],
+     [
+      "Holy Light",
+      "Rank 6"
+     ],
+     [
+      "Holy Light",
+      "Rank 7"
+     ],
+     [
+      "Holy Light",
+      "Rank 8"
+     ],
+     [
+      "Holy Light",
+      "Rank 9"
+     ],
+     [
+      "Holy Shock",
+      "Rank 1"
+     ],
+     [
+      "Holy Shock",
+      "Rank 2"
+     ],
+     [
+      "Holy Shock",
+      "Rank 3"
+     ],
+     [
+      "Holy Shock",
+      "Rank 4"
+     ],
+     [
+      "Holy Wrath",
+      "Rank 1"
+     ],
+     [
+      "Holy Wrath",
+      "Rank 2"
+     ],
+     [
+      "Lay on Hands",
+      "Rank 1"
+     ],
+     [
+      "Lay on Hands",
+      "Rank 2"
+     ],
+     [
+      "Lay on Hands",
+      "Rank 3"
+     ],
+     [
+      "Light's Vigil",
+      "Rank 1"
+     ],
+     [
+      "Light's Vigil",
+      "Rank 2"
+     ],
+     [
+      "Light's Vigil",
+      "Rank 3"
+     ],
+     [
+      "Purify",
+      ""
+     ],
+     [
+      "Redemption",
+      "Rank 1"
+     ],
+     [
+      "Redemption",
+      "Rank 2"
+     ],
+     [
+      "Redemption",
+      "Rank 3"
+     ],
+     [
+      "Redemption",
+      "Rank 4"
+     ],
+     [
+      "Redemption",
+      "Rank 5"
+     ],
+     [
+      "Seal of Light",
+      "Rank 1"
+     ],
+     [
+      "Seal of Light",
+      "Rank 2"
+     ],
+     [
+      "Seal of Light",
+      "Rank 3"
+     ],
+     [
+      "Seal of Light",
+      "Rank 4"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 1"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 2"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 3"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 4"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 5"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 6"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 7"
+     ],
+     [
+      "Seal of Righteousness",
+      "Rank 8"
+     ],
+     [
+      "Seal of Wisdom",
+      "Rank 1"
+     ],
+     [
+      "Seal of Wisdom",
+      "Rank 2"
+     ],
+     [
+      "Seal of Wisdom",
+      "Rank 3"
+     ],
+     [
+      "Sense Undead",
+      ""
+     ],
+     [
+      "Turn Undead",
+      "Rank 1"
+     ],
+     [
+      "Turn Undead",
+      "Rank 2"
+     ],
+     [
+      "Turn Undead",
+      "Rank 3"
+     ],
+     [
+      "Voice of Truth",
+      ""
+     ]
+    ]
+   },
+   {
+    "name": "Protection",
+    "spells": [
+     [
+      "Blessing of Freedom",
+      ""
+     ],
+     [
+      "Blessing of Kings",
+      ""
+     ],
+     [
+      "Blessing of Protection",
+      "Rank 1"
+     ],
+     [
+      "Blessing of Protection",
+      "Rank 2"
+     ],
+     [
+      "Blessing of Protection",
+      "Rank 3"
+     ],
+     [
+      "Blessing of Sacrifice",
+      "Rank 1"
+     ],
+     [
+      "Blessing of Sacrifice",
+      "Rank 2"
+     ],
+     [
+      "Blessing of Salvation",
+      ""
+     ],
+     [
+      "Concentration Aura",
+      ""
+     ],
+     [
+      "Devotion Aura",
+      "Rank 1"
+     ],
+     [
+      "Devotion Aura",
+      "Rank 2"
+     ],
+     [
+      "Devotion Aura",
+      "Rank 3"
+     ],
+     [
+      "Devotion Aura",
+      "Rank 4"
+     ],
+     [
+      "Devotion Aura",
+      "Rank 5"
+     ],
+     [
+      "Devotion Aura",
+      "Rank 6"
+     ],
+     [
+      "Devotion Aura",
+      "Rank 7"
+     ],
+     [
+      "Divine Intervention",
+      ""
+     ],
+     [
+      "Divine Protection",
+      "Rank 1"
+     ],
+     [
+      "Divine Protection",
+      "Rank 2"
+     ],
+     [
+      "Divine Shield",
+      "Rank 1"
+     ],
+     [
+      "Divine Shield",
+      "Rank 2"
+     ],
+     [
+      "Fire Resistance Aura",
+      "Rank 1"
+     ],
+     [
+      "Fire Resistance Aura",
+      "Rank 2"
+     ],
+     [
+      "Fire Resistance Aura",
+      "Rank 3"
+     ],
+     [
+      "Frost Resistance Aura",
+      "Rank 1"
+     ],
+     [
+      "Frost Resistance Aura",
+      "Rank 2"
+     ],
+     [
+      "Frost Resistance Aura",
+      "Rank 3"
+     ],
+     [
+      "Greater Blessing of Kings",
+      ""
+     ],
+     [
+      "Greater Blessing of Salvation",
+      ""
+     ],
+     [
+      "Hammer of Justice",
+      "Rank 1"
+     ],
+     [
+      "Hammer of Justice",
+      "Rank 2"
+     ],
+     [
+      "Hammer of Justice",
+      "Rank 3"
+     ],
+     [
+      "Hammer of Justice",
+      "Rank 4"
+     ],
+     [
+      "Holy Shield",
+      "Rank 1"
+     ],
+     [
+      "Holy Shield",
+      "Rank 2"
+     ],
+     [
+      "Holy Shield",
+      "Rank 3"
+     ],
+     [
+      "Righteous Fury",
+      ""
+     ],
+     [
+      "Seal of Fury",
+      "Rank 1"
+     ],
+     [
+      "Seal of Fury",
+      "Rank 2"
+     ],
+     [
+      "Seal of Fury",
+      "Rank 3"
+     ],
+     [
+      "Seal of Fury",
+      "Rank 4"
+     ],
+     [
+      "Seal of Fury",
+      "Rank 5"
+     ],
+     [
+      "Seal of Fury",
+      "Rank 6"
+     ],
+     [
+      "Seal of Fury",
+      "Rank 7"
+     ],
+     [
+      "Seal of Justice",
+      ""
+     ],
+     [
+      "Shadow Resistance Aura",
+      "Rank 1"
+     ],
+     [
+      "Shadow Resistance Aura",
+      "Rank 2"
+     ],
+     [
+      "Shadow Resistance Aura",
+      "Rank 3"
+     ],
+     [
+      "Swift Judgement",
+      ""
+     ],
+     [
+      "Templar's Bulwark",
+      ""
+     ]
+    ]
+   },
+   {
+    "name": "Retribution",
+    "spells": [
+     [
+      "Blessing of Might",
+      "Rank 1"
+     ],
+     [
+      "Blessing of Might",
+      "Rank 2"
+     ],
+     [
+      "Blessing of Might",
+      "Rank 3"
+     ],
+     [
+      "Blessing of Might",
+      "Rank 4"
+     ],
+     [
+      "Blessing of Might",
+      "Rank 5"
+     ],
+     [
+      "Blessing of Might",
+      "Rank 6"
+     ],
+     [
+      "Blessing of Might",
+      "Rank 7"
+     ],
+     [
+      "Greater Blessing of Might",
+      "Rank 1"
+     ],
+     [
+      "Greater Blessing of Might",
+      "Rank 2"
+     ],
+     [
+      "Holy Strike",
+      "Rank 1"
+     ],
+     [
+      "Holy Strike",
+      "Rank 2"
+     ],
+     [
+      "Holy Strike",
+      "Rank 3"
+     ],
+     [
+      "Holy Strike",
+      "Rank 4"
+     ],
+     [
+      "Holy Strike",
+      "Rank 5"
+     ],
+     [
+      "Holy Strike",
+      "Rank 6"
+     ],
+     [
+      "Holy Strike",
+      "Rank 7"
+     ],
+     [
+      "Holy Strike",
+      "Rank 8"
+     ],
+     [
+      "Judgement",
+      ""
+     ],
+     [
+      "Repentance",
+      ""
+     ],
+     [
+      "Retribution Aura",
+      "Rank 1"
+     ],
+     [
+      "Retribution Aura",
+      "Rank 2"
+     ],
+     [
+      "Retribution Aura",
+      "Rank 3"
+     ],
+     [
+      "Retribution Aura",
+      "Rank 4"
+     ],
+     [
+      "Retribution Aura",
+      "Rank 5"
+     ],
+     [
+      "Seal of Command",
+      "Rank 1"
+     ],
+     [
+      "Seal of Command",
+      "Rank 2"
+     ],
+     [
+      "Seal of Command",
+      "Rank 3"
+     ],
+     [
+      "Seal of Command",
+      "Rank 4"
+     ],
+     [
+      "Seal of Command",
+      "Rank 5"
+     ],
+     [
+      "Seal of the Crusader",
+      "Rank 1"
+     ],
+     [
+      "Seal of the Crusader",
+      "Rank 2"
+     ],
+     [
+      "Seal of the Crusader",
+      "Rank 3"
+     ],
+     [
+      "Seal of the Crusader",
+      "Rank 4"
+     ],
+     [
+      "Seal of the Crusader",
+      "Rank 5"
+     ],
+     [
+      "Seal of the Crusader",
+      "Rank 6"
+     ]
+    ]
+   }
+  ],
+  "notes": [],
+  "source": "beta",
+  "build": "1.60.1.70009",
+  "levels": {
+   "Devotion Aura": [
+    1,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "Retribution Aura": [
+    16,
+    26,
+    36,
+    46,
+    56
+   ],
+   "Holy Light": [
+    1,
+    6,
+    14,
+    22,
+    30,
+    38,
+    46,
+    54,
+    60
+   ],
+   "Lay on Hands": [
+    10,
+    30,
+    50
+   ],
+   "Exorcism": [
+    20,
+    28,
+    36,
+    44,
+    52,
+    60
+   ],
+   "Holy Wrath": [
+    50,
+    60
+   ],
+   "Redemption": [
+    12,
+    24,
+    36,
+    48,
+    60
+   ],
+   "Turn Undead": [
+    24,
+    38,
+    52
+   ],
+   "Blessing of Protection": [
+    10,
+    24,
+    38
+   ],
+   "Divine Shield": [
+    34,
+    50
+   ],
+   "Blessing of Sacrifice": [
+    46,
+    54
+   ],
+   "Divine Protection": [
+    6,
+    18
+   ],
+   "Blessing of Might": [
+    4,
+    12,
+    22,
+    32,
+    42,
+    52,
+    60
+   ],
+   "Blessing of Wisdom": [
+    14,
+    24,
+    34,
+    44,
+    54,
+    60
+   ],
+   "Shadow Resistance Aura": [
+    28,
+    40,
+    52
+   ],
+   "Fire Resistance Aura": [
+    36,
+    48,
+    60
+   ],
+   "Frost Resistance Aura": [
+    32,
+    44,
+    56
+   ],
+   "Flash of Light": [
+    20,
+    26,
+    34,
+    42,
+    50,
+    58
+   ],
+   "Blessing of Light": [
+    40,
+    50,
+    60
+   ],
+   "Seal of Righteousness": [
+    1,
+    10,
+    18,
+    26,
+    34,
+    42,
+    50,
+    58
+   ],
+   "Seal of Light": [
+    30,
+    40,
+    50,
+    60
+   ],
+   "Seal of Wisdom": [
+    38,
+    48,
+    58
+   ],
+   "Seal of the Crusader": [
+    6,
+    12,
+    22,
+    32,
+    42,
+    52
+   ],
+   "Seal of Command": [
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "Holy Shock": [
+    30,
+    40,
+    48,
+    56
+   ],
+   "Holy Shield": [
+    40,
+    50,
+    60
+   ],
+   "Hammer of Wrath": [
+    44,
+    52,
+    60
+   ],
+   "Greater Blessing of Wisdom": [
+    54,
+    60
+   ],
+   "Greater Blessing of Might": [
+    52,
+    60
+   ],
+   "Consecration": [
+    20,
+    30,
+    40,
+    50,
+    60
+   ],
+   "Hammer of Justice": [
+    8,
+    24,
+    40,
+    54
+   ],
+   "Light's Vigil": [
+    40,
+    50,
+    60
+   ],
+   "Seal of Fury": [
+    10,
+    18,
+    25,
+    34,
+    42,
+    50,
+    58
+   ],
+   "Holy Strike": [
+    6,
+    12,
+    20,
+    28,
+    36,
+    44,
+    52,
+    60
+   ]
+  },
+  "talents": [
+   "Divine Favor",
+   "Holy Shield",
+   "Holy Shock",
+   "Light's Vigil",
+   "Repentance",
+   "Seal of Command",
+   "Swift Judgement",
+   "Templar's Bulwark",
+   "Voice of Truth"
+  ],
+  "icons": {
+   "Devotion Aura": "spell_holy_devotionaura",
+   "Retribution Aura": "spell_holy_auraoflight",
+   "Holy Light": "spell_holy_holybolt",
+   "Lay on Hands": "spell_holy_layonhands",
+   "Exorcism": "spell_holy_excorcism_02",
+   "Holy Wrath": "spell_holy_excorcism",
+   "Redemption": "spell_holy_resurrection",
+   "Turn Undead": "spell_holy_turnundead",
+   "Sense Undead": "spell_holy_senseundead",
+   "Cleanse": "spell_holy_renew",
+   "Purify": "spell_holy_purify",
+   "Blessing of Protection": "spell_holy_sealofprotection",
+   "Divine Shield": "spell_holy_divineintervention",
+   "Blessing of Salvation": "spell_holy_sealofsalvation",
+   "Blessing of Sacrifice": "spell_holy_sealofsacrifice",
+   "Divine Protection": "spell_holy_restoration",
+   "Blessing of Freedom": "spell_holy_sealofvalor",
+   "Blessing of Might": "spell_holy_fistofjustice",
+   "Blessing of Wisdom": "spell_holy_sealofwisdom",
+   "Shadow Resistance Aura": "spell_shadow_sealofkings",
+   "Fire Resistance Aura": "spell_fire_sealoffire",
+   "Frost Resistance Aura": "spell_frost_wizardmark",
+   "Flash of Light": "spell_holy_flashheal",
+   "Blessing of Light": "spell_holy_prayerofhealing02",
+   "Concentration Aura": "spell_holy_mindsooth",
+   "Divine Favor": "spell_holy_heal",
+   "Seal of Righteousness": "ability_thunderbolt",
+   "Seal of Light": "spell_holy_healingaura",
+   "Seal of Wisdom": "spell_holy_righteousnessaura",
+   "Seal of Justice": "spell_holy_sealofwrath",
+   "Seal of the Crusader": "spell_holy_holysmite",
+   "Judgement": "spell_holy_righteousfury",
+   "Seal of Command": "ability_warrior_innerrage",
+   "Holy Shock": "spell_holy_searinglight",
+   "Holy Shield": "spell_holy_blessingofprotection",
+   "Divine Intervention": "spell_nature_timestop",
+   "Hammer of Wrath": "ability_thunderclap",
+   "Righteous Fury": "spell_holy_sealoffury",
+   "Greater Blessing of Light": "spell_holy_greaterblessingoflight",
+   "Greater Blessing of Wisdom": "spell_holy_greaterblessingofwisdom",
+   "Greater Blessing of Salvation": "spell_holy_greaterblessingofsalvation",
+   "Greater Blessing of Might": "spell_holy_greaterblessingofkings",
+   "Consecration": "spell_holy_innerfire",
+   "Hammer of Justice": "spell_holy_sealofmight",
+   "Repentance": "spell_holy_prayerofhealing",
+   "Blessing of Kings": "spell_magic_magearmor",
+   "Greater Blessing of Kings": "spell_magic_greaterblessingofkings",
+   "Light's Vigil": "ability_paladin_judgementofthepure",
+   "Voice of Truth": "inv_misc_horn_03",
+   "Seal of Fury": "spell_holy_retributionaura",
+   "Swift Judgement": "ability_paladin_judgementred",
+   "Templar's Bulwark": "ability_paladin_shieldofthetemplar",
+   "Holy Strike": "classicon_paladin"
+  },
+  "gone": [
+   "Sanctity Aura"
+  ]
+ },
+ "spell_desc": {
+  "Paladin|Armor Proficiency|Passive": {
+   "l": [
+    [
+     "Passive",
+     ""
+    ]
+   ],
+   "d": "You are proficient in the use of the following armor types: the ones your class can wear.",
+   "s": "demo",
+   "src": "Wording read on Soda's Druid, Mage and Warlock; this class's own list hasn't been hovered on footage yet",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Paladin|Block|Passive": {
+   "l": [],
+   "d": "Gives a chance to block enemy melee and ranged attacks.",
+   "s": "classic",
+   "src": "",
+   "r": "",
+   "lv": "Requires level 1",
+   "id": 107
+  },
+  "Paladin|Dodge|Passive": {
+   "l": [
+    [
+     "Passive",
+     ""
+    ]
+   ],
+   "d": "Gives a chance to dodge enemy melee attacks.",
+   "s": "demo",
+   "src": "Soda's Gnome Warlock, 13 Sep",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Paladin|Parry|Passive": {
+   "l": [],
+   "d": "Gives a chance to parry enemy melee attacks.",
+   "s": "classic",
+   "src": "",
+   "r": "",
+   "lv": "Requires level 1",
+   "id": 3127
+  },
+  "Paladin|Blessing of Light|Rank 1": {
+   "l": [
+    [
+     "85 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing the effects of Holy Light spells used on the target by up to 210 and the effect Flash of Light spells used on the target by up to 60. Lasts 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 19977,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing the effects of Holy Light spells used on the target by up to 210 and the effect Flash of Light spells used on the target by up to 60. Lasts 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Light|Rank 2": {
+   "l": [
+    [
+     "110 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing the effects of Holy Light spells used on the target by up to 300 and the effect Flash of Light spells used on the target by up to 85. Lasts 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 19978,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing the effects of Holy Light spells used on the target by up to 300 and the effect Flash of Light spells used on the target by up to 85. Lasts 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Light|Rank 3": {
+   "l": [
+    [
+     "135 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing the effects of Holy Light spells used on the target by up to 400 and the effect Flash of Light spells used on the target by up to 115. Lasts 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 19979,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing the effects of Holy Light spells used on the target by up to 400 and the effect Flash of Light spells used on the target by up to 115. Lasts 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Wisdom|Rank 1": {
+   "l": [
+    [
+     "30 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, restoring 12 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 19742,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, restoring 10 mana every 5 seconds for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Wisdom|Rank 2": {
+   "l": [
+    [
+     "45 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, restoring 18 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 19850,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, restoring 15 mana every 5 seconds for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Wisdom|Rank 3": {
+   "l": [
+    [
+     "65 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, restoring 24 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 19852,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, restoring 20 mana every 5 seconds for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Wisdom|Rank 4": {
+   "l": [
+    [
+     "90 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, restoring 30 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 19853,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, restoring 25 mana every 5 seconds for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Wisdom|Rank 5": {
+   "l": [
+    [
+     "115 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, restoring 36 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 19854,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, restoring 30 mana every 5 seconds for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Wisdom|Rank 6": {
+   "l": [
+    [
+     "125 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, restoring 40 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25290,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, restoring 33 mana every 5 seconds for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Cleanse|": {
+   "l": [
+    [
+     "8% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Cleanses a friendly target, removing 1 poison effect, 1 disease effect, and 1 magic effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 4987,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Consecration|Rank 1": {
+   "l": [
+    [
+     "135 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Consecrates the land beneath the Paladin, doing 16 Holy damage over 8 sec to enemies who enter the area The first 4 enemies who enter the area will take an additional 32 damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 26573,
+   "co": "9.5% of spell power (per tick)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Consecrates the land beneath Paladin, doing 64 Holy damage over 8 sec to enemies who enter the area.",
+   "cc": "4.2% of spell power (per tick)",
+   "cl": [
+    [
+     "scales with 4.2% of spell power (per tick)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Consecration|Rank 2": {
+   "l": [
+    [
+     "235 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Consecrates the land beneath the Paladin, doing 24 Holy damage over 8 sec to enemies who enter the area The first 4 enemies who enter the area will take an additional 56 damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 20116,
+   "co": "9.5% of spell power (per tick)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Consecrates the land beneath Paladin, doing 120 Holy damage over 8 sec to enemies who enter the area.",
+   "cc": "4.2% of spell power (per tick)",
+   "cl": [
+    [
+     "scales with 4.2% of spell power (per tick)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Consecration|Rank 3": {
+   "l": [
+    [
+     "320 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Consecrates the land beneath the Paladin, doing 48 Holy damage over 8 sec to enemies who enter the area The first 4 enemies who enter the area will take an additional 88 damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 20922,
+   "co": "9.5% of spell power (per tick)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Consecrates the land beneath Paladin, doing 192 Holy damage over 8 sec to enemies who enter the area.",
+   "cc": "4.2% of spell power (per tick)",
+   "cl": [
+    [
+     "scales with 4.2% of spell power (per tick)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Consecration|Rank 4": {
+   "l": [
+    [
+     "435 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Consecrates the land beneath the Paladin, doing 64 Holy damage over 8 sec to enemies who enter the area The first 4 enemies who enter the area will take an additional 160 damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 20923,
+   "co": "9.5% of spell power (per tick)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Consecrates the land beneath Paladin, doing 280 Holy damage over 8 sec to enemies who enter the area.",
+   "cc": "4.2% of spell power (per tick)",
+   "cl": [
+    [
+     "scales with 4.2% of spell power (per tick)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Consecration|Rank 5": {
+   "l": [
+    [
+     "565 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "8 sec cooldown"
+    ]
+   ],
+   "d": "Consecrates the land beneath the Paladin, doing 96 Holy damage over 8 sec to enemies who enter the area The first 4 enemies who enter the area will take an additional 216 damage over 8 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 20924,
+   "co": "9.5% of spell power (per tick)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Consecrates the land beneath Paladin, doing 384 Holy damage over 8 sec to enemies who enter the area.",
+   "cc": "4.2% of spell power (per tick)",
+   "cl": [
+    [
+     "scales with 4.2% of spell power (per tick)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Divine Favor|": {
+   "l": [
+    [
+     "4% of base mana",
+     ""
+    ],
+    [
+     "Instant",
+     "2 min cooldown"
+    ]
+   ],
+   "d": "When activated, gives your next Flash of Light, Holy Light, or Holy Shock spell a 100% critical effect chance.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 25",
+   "id": 20216,
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "same"
+  },
+  "Paladin|Exorcism|Rank 1": {
+   "l": [
+    [
+     "85 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Causes 80 to 90 Holy damage to an Undead or Demon target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 879,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 90 to 102 Holy damage to an Undead or Demon target."
+  },
+  "Paladin|Exorcism|Rank 2": {
+   "l": [
+    [
+     "135 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Causes 140 to 158 Holy damage to an Undead or Demon target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 5614,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 160 to 180 Holy damage to an Undead or Demon target."
+  },
+  "Paladin|Exorcism|Rank 3": {
+   "l": [
+    [
+     "180 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Causes 200 to 224 Holy damage to an Undead or Demon target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 5615,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 227 to 255 Holy damage to an Undead or Demon target."
+  },
+  "Paladin|Exorcism|Rank 4": {
+   "l": [
+    [
+     "235 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Causes 286 to 320 Holy damage to an Undead or Demon target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 10312,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 316 to 354 Holy damage to an Undead or Demon target."
+  },
+  "Paladin|Exorcism|Rank 5": {
+   "l": [
+    [
+     "285 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Causes 376 to 418 Holy damage to an Undead or Demon target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10313,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 406 to 452 Holy damage to an Undead or Demon target."
+  },
+  "Paladin|Exorcism|Rank 6": {
+   "l": [
+    [
+     "345 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "15 sec cooldown"
+    ]
+   ],
+   "d": "Causes 475 to 529 Holy damage to an Undead or Demon target.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10314,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 505 to 563 Holy damage to an Undead or Demon target."
+  },
+  "Paladin|Flash of Light|Rank 1": {
+   "l": [
+    [
+     "35 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 48 to 54.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 19750,
+   "co": "42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 67 to 77."
+  },
+  "Paladin|Flash of Light|Rank 2": {
+   "l": [
+    [
+     "50 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 68 to 76.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 19939,
+   "co": "42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 102 to 116."
+  },
+  "Paladin|Flash of Light|Rank 3": {
+   "l": [
+    [
+     "70 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 103 to 115.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 19940,
+   "co": "42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 153 to 171."
+  },
+  "Paladin|Flash of Light|Rank 4": {
+   "l": [
+    [
+     "90 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 151 to 169.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 19941,
+   "co": "42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 206 to 230."
+  },
+  "Paladin|Flash of Light|Rank 5": {
+   "l": [
+    [
+     "115 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 221 to 247.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 19942,
+   "co": "42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 278 to 310."
+  },
+  "Paladin|Flash of Light|Rank 6": {
+   "l": [
+    [
+     "140 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 291 to 325.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 19943,
+   "co": "42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 348 to 388."
+  },
+  "Paladin|Greater Blessing of Light|": {
+   "l": [
+    [
+     "260 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Light, increasing the effects of Holy Light spells used on the target by up to 400 and the effect Flash of Light spells used on the target by up to 115. Lasts 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25890,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Light, increasing the effects of Holy Light spells used on the target by up to 400 and the effect Flash of Light spells used on the target by up to 115. Lasts 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Greater Blessing of Wisdom|Rank 1": {
+   "l": [
+    [
+     "230 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Wisdom, restoring 36 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 25894,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Wisdom, restoring 30 mana every 5 seconds for 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Greater Blessing of Wisdom|Rank 2": {
+   "l": [
+    [
+     "250 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Wisdom, restoring 40 mana every 5 seconds for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25918,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Wisdom, restoring 33 mana every 5 seconds for 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Hammer of Wrath|Rank 1": {
+   "l": [
+    [
+     "295 Mana",
+     "30 yd range"
+    ],
+    [
+     "1 sec cast",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "Hurls a hammer that strikes an enemy for 286 to 314 Holy damage. Only usable on enemies that have 20% or less health.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 24275,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a hammer that strikes an enemy for 316 to 348 Holy damage. Only usable on enemies that have 20% or less health."
+  },
+  "Paladin|Hammer of Wrath|Rank 2": {
+   "l": [
+    [
+     "360 Mana",
+     "30 yd range"
+    ],
+    [
+     "1 sec cast",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "Hurls a hammer that strikes an enemy for 382 to 420 Holy damage. Only usable on enemies that have 20% or less health.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 24274,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a hammer that strikes an enemy for 412 to 454 Holy damage. Only usable on enemies that have 20% or less health."
+  },
+  "Paladin|Hammer of Wrath|Rank 3": {
+   "l": [
+    [
+     "425 Mana",
+     "30 yd range"
+    ],
+    [
+     "1 sec cast",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "Hurls a hammer that strikes an enemy for 474 to 522 Holy damage. Only usable on enemies that have 20% or less health.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 24239,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Hurls a hammer that strikes an enemy for 504 to 556 Holy damage. Only usable on enemies that have 20% or less health."
+  },
+  "Paladin|Holy Light|Rank 1": {
+   "l": [
+    [
+     "35 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 42 to 50.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 635,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Holy Light|Rank 2": {
+   "l": [
+    [
+     "60 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 81 to 95.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 639,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Holy Light|Rank 3": {
+   "l": [
+    [
+     "110 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 150 to 176.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 647,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 167 to 195."
+  },
+  "Paladin|Holy Light|Rank 4": {
+   "l": [
+    [
+     "190 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 279 to 319.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 1026,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 322 to 368."
+  },
+  "Paladin|Holy Light|Rank 5": {
+   "l": [
+    [
+     "275 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 440 to 494.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1042,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 506 to 568."
+  },
+  "Paladin|Holy Light|Rank 6": {
+   "l": [
+    [
+     "365 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 628 to 700.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 3472,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 716 to 798."
+  },
+  "Paladin|Holy Light|Rank 7": {
+   "l": [
+    [
+     "465 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 872 to 970.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 10328,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Heals a friendly target for 967 to 1,075."
+  },
+  "Paladin|Holy Light|Rank 8": {
+   "l": [
+    [
+     "580 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 1,176 to 1,308.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10329,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 1,271 to 1,413."
+  },
+  "Paladin|Holy Light|Rank 9": {
+   "l": [
+    [
+     "660 Mana",
+     "40 yd range"
+    ],
+    [
+     "2.5 sec cast",
+     ""
+    ]
+   ],
+   "d": "Heals a friendly target for 1,495 to 1,665.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25292,
+   "co": "71.4% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Heals a friendly target for 1,590 to 1,770."
+  },
+  "Paladin|Holy Shock|Rank 1": {
+   "l": [
+    [
+     "160 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the target with Holy energy, causing 129 to 139 Holy damage to an enemy, or 110 to 118 healing to an ally.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1311606,
+   "co": "42.9% of spell power (direct), 42.9% of spell power (heal)",
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Blasts the target with Holy energy, causing 204 to 220 Holy damage to an enemy, or 204 to 220 healing to an ally.",
+   "cl": [
+    [
+     "225 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ]
+  },
+  "Paladin|Holy Shock|Rank 2": {
+   "l": [
+    [
+     "225 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the target with Holy energy, causing 175 to 189 Holy damage to an enemy, or 150 to 162 healing to an ally.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 20473,
+   "co": "42.9% of spell power (direct), 42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Blasts the target with Holy energy, causing 204 to 220 Holy damage to an enemy, or 204 to 220 healing to an ally.",
+   "cl": [
+    [
+     "225 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ]
+  },
+  "Paladin|Holy Shock|Rank 3": {
+   "l": [
+    [
+     "275 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the target with Holy energy, causing 248 to 268 Holy damage to an enemy, or 221 to 239 healing to an ally.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 20929,
+   "co": "42.9% of spell power (direct), 42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Blasts the target with Holy energy, causing 279 to 301 Holy damage to an enemy, or 279 to 301 healing to an ally.",
+   "cl": [
+    [
+     "275 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ]
+  },
+  "Paladin|Holy Shock|Rank 4": {
+   "l": [
+    [
+     "325 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Blasts the target with Holy energy, causing 334 to 362 Holy damage to an enemy, or 307 to 333 healing to an ally.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 20930,
+   "co": "42.9% of spell power (direct), 42.9% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Blasts the target with Holy energy, causing 365 to 395 Holy damage to an enemy, or 365 to 395 healing to an ally.",
+   "cl": [
+    [
+     "325 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ]
+  },
+  "Paladin|Holy Wrath|Rank 1": {
+   "l": [
+    [
+     "645 Mana",
+     ""
+    ],
+    [
+     "2 sec cast",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Sends bolts of holy power in all directions, causing 368 to 434 Holy damage to all Undead and Demon targets within 20 yds and stunning them for 2 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 2812,
+   "co": "19% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Sends bolts of holy power in all directions, causing 368 to 434 Holy damage to all Undead and Demon targets within 20 yds."
+  },
+  "Paladin|Holy Wrath|Rank 2": {
+   "l": [
+    [
+     "805 Mana",
+     ""
+    ],
+    [
+     "2 sec cast",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Sends bolts of holy power in all directions, causing 490 to 576 Holy damage to all Undead and Demon targets within 20 yds and stunning them for 2 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10318,
+   "co": "19% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Sends bolts of holy power in all directions, causing 490 to 576 Holy damage to all Undead and Demon targets within 20 yds."
+  },
+  "Paladin|Lay on Hands|Rank 1": {
+   "l": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "20 min cooldown"
+    ]
+   ],
+   "d": "Heals a friendly target for an amount equal to the Paladin's maximum health. Drains all of the Paladin's remaining Mana when used, but does not interrupt Mana regeneration.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 633,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Heals a friendly target for an amount equal to the Paladin's maximum health. Drains all of the Paladin's remaining mana when used.",
+   "cl": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "1 hour cooldown"
+    ]
+   ]
+  },
+  "Paladin|Lay on Hands|Rank 2": {
+   "l": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "20 min cooldown"
+    ]
+   ],
+   "d": "Heals a friendly target for an amount equal to the Paladin's maximum health and restores 250 of their mana. Drains all of the Paladin's remaining Mana when used, but does not interrupt Mana regeneration.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 2800,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Heals a friendly target for an amount equal to the Paladin's maximum health and restores 250 of their mana. Drains all of the Paladin's remaining mana when used.",
+   "cl": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "1 hour cooldown"
+    ]
+   ]
+  },
+  "Paladin|Lay on Hands|Rank 3": {
+   "l": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "20 min cooldown"
+    ]
+   ],
+   "d": "Heals a friendly target for an amount equal to the Paladin's maximum health and restores 550 of their mana. Drains all of the Paladin's remaining Mana when used, but does not interrupt Mana regeneration.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10310,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Heals a friendly target for an amount equal to the Paladin's maximum health and restores 550 of their mana. Drains all of the Paladin's remaining mana when used.",
+   "cl": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "1 hour cooldown"
+    ]
+   ]
+  },
+  "Paladin|Light's Vigil|Rank 1": {
+   "l": [
+    [
+     "730 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes enemy targets to suffer 175 to 189 Holy damage and refund 75% of Light's Vigil's Mana cost, or allied targets to heal their party for 325 to 343. The Paladin may only have one Light's Vigil active per party.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 1310911,
+   "co": "42.9% of spell power (direct), 14.3% of spell power (heal)",
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "new"
+  },
+  "Paladin|Light's Vigil|Rank 2": {
+   "l": [
+    [
+     "1,000 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes enemy targets to suffer 268 to 288 Holy damage and refund 75% of Light's Vigil's Mana cost, or allied targets to heal their party for 486 to 514. The Paladin may only have one Light's Vigil active per party.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 1311590,
+   "co": "42.9% of spell power (direct), 14.3% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Light's Vigil|Rank 3": {
+   "l": [
+    [
+     "1,340 Mana",
+     "40 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "Applies Light's Vigil to the target for 30 sec. Your next Holy Shock cast on them triggers no cooldown and causes enemy targets to suffer 380 to 410 Holy damage and refund 75% of Light's Vigil's Mana cost, or allied targets to heal their party for 684 to 724. The Paladin may only have one Light's Vigil active per party.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 1311595,
+   "co": "42.9% of spell power (direct), 14.3% of spell power (heal)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Purify|": {
+   "l": [
+    [
+     "8% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Purifies the friendly target, removing 1 disease effect and 1 poison effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 1152,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Redemption|Rank 1": {
+   "l": [
+    [
+     "80% of base mana",
+     "30 yd range"
+    ],
+    [
+     "10 sec cast",
+     ""
+    ]
+   ],
+   "d": "Brings a dead player back to life with 65 health and 120 mana. Cannot be cast when in combat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 7328,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Redemption|Rank 2": {
+   "l": [
+    [
+     "80% of base mana",
+     "30 yd range"
+    ],
+    [
+     "10 sec cast",
+     ""
+    ]
+   ],
+   "d": "Brings a dead player back to life with 150 health and 260 mana. Cannot be cast when in combat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 10322,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Redemption|Rank 3": {
+   "l": [
+    [
+     "80% of base mana",
+     "30 yd range"
+    ],
+    [
+     "10 sec cast",
+     ""
+    ]
+   ],
+   "d": "Brings a dead player back to life with 250 health and 420 mana. Cannot be cast when in combat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 10324,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Redemption|Rank 4": {
+   "l": [
+    [
+     "80% of base mana",
+     "30 yd range"
+    ],
+    [
+     "10 sec cast",
+     ""
+    ]
+   ],
+   "d": "Brings a dead player back to life with 400 health and 600 mana. Cannot be cast when in combat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 20772,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Redemption|Rank 5": {
+   "l": [
+    [
+     "80% of base mana",
+     "30 yd range"
+    ],
+    [
+     "10 sec cast",
+     ""
+    ]
+   ],
+   "d": "Brings a dead player back to life with 600 health and 800 mana. Cannot be cast when in combat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 20773,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Light|Rank 1": {
+   "l": [
+    [
+     "110 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 39. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 25. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 20165,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 39. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 25. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of Light|Rank 2": {
+   "l": [
+    [
+     "140 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 53. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 34. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 20347,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 53. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 34. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of Light|Rank 3": {
+   "l": [
+    [
+     "180 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 76. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 49. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 20348,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 76. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 49. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of Light|Rank 4": {
+   "l": [
+    [
+     "210 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 94. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 61. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 20349,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin for 94. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting melee attacks made against the judged enemy a chance of healing the attacker for 61. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of Righteousness|Rank 1": {
+   "l": [
+    [
+     "20 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 2 to 8 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 20154,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Righteousness|Rank 2": {
+   "l": [
+    [
+     "40 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 3 to 12 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 36 to 38 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 20287,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cc": "31.2% of spell power (direct)",
+   "cl": [
+    [
+     "scales with 31.2% of spell power (direct)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Seal of Righteousness|Rank 3": {
+   "l": [
+    [
+     "60 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 5 to 19 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 53 to 57 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 20288,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cc": "46.2% of spell power (direct)",
+   "cl": [
+    [
+     "scales with 46.2% of spell power (direct)",
+     ""
+    ]
+   ]
+  },
+  "Paladin|Seal of Righteousness|Rank 4": {
+   "l": [
+    [
+     "90 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 8 to 29 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 73 to 79 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 20289,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Righteousness|Rank 5": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 11 to 40 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 96 to 104 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 20290,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Righteousness|Rank 6": {
+   "l": [
+    [
+     "140 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 15 to 53 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 124 to 134 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 20291,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Righteousness|Rank 7": {
+   "l": [
+    [
+     "170 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 19 to 67 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 155 to 167 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 20292,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Righteousness|Rank 8": {
+   "l": [
+    [
+     "200 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional 21 to 75 Holy damage. Slower weapons cause more Holy damage per swing. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will cause 170 to 186 Holy damage to an enemy.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 20293,
+   "co": "50% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Wisdom|Rank 1": {
+   "l": [
+    [
+     "135 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore 50 of the Paladin's mana. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting attacks and spells used against the judged enemy a chance to restore 33 mana to the attacker. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 20166,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore 50 of the Paladin's mana. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting attacks and spells used against the judged enemy a chance to restore 33 mana to the attacker. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of Wisdom|Rank 2": {
+   "l": [
+    [
+     "170 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore 71 of the Paladin's mana. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting attacks and spells used against the judged enemy a chance to restore 46 mana to the attacker. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 20356,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore 71 of the Paladin's mana. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting attacks and spells used against the judged enemy a chance to restore 46 mana to the attacker. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of Wisdom|Rank 3": {
+   "l": [
+    [
+     "200 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore 90 of the Paladin's mana. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, granting attacks and spells used against the judged enemy a chance to restore 59 mana to the attacker. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 20357,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore 90 of the Paladin's mana. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, granting attacks and spells used against the judged enemy a chance to restore 59 mana to the attacker. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Sense Undead|": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Shows the location of all nearby undead on the minimap until cancelled. Only one type of tracking can be used at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 5502,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Turn Undead|Rank 1": {
+   "l": [
+    [
+     "35 Mana",
+     "20 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "The targeted undead enemy will be compelled to flee for up to 10 sec. Damage caused may interrupt the effect. Only one target can be turned at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 2878,
+   "sc": "Nature",
+   "cs": "same"
+  },
+  "Paladin|Turn Undead|Rank 2": {
+   "l": [
+    [
+     "50 Mana",
+     "20 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "The targeted undead enemy will be compelled to flee for up to 15 sec. Damage caused may interrupt the effect. Only one target can be turned at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 5627,
+   "sc": "Nature",
+   "cs": "same"
+  },
+  "Paladin|Turn Undead|Rank 3": {
+   "l": [
+    [
+     "75 Mana",
+     "20 yd range"
+    ],
+    [
+     "1.5 sec cast",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "The targeted undead enemy will be compelled to flee for up to 20 sec. Damage caused may interrupt the effect. Only one target can be turned at a time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10326,
+   "sc": "Nature",
+   "cs": "same"
+  },
+  "Paladin|Voice of Truth|": {
+   "l": [
+    [
+     "Instant",
+     "3 min cooldown"
+    ]
+   ],
+   "d": "Grants you immunity to Silence and Interrupt effects. Lasts 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1310897,
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "new"
+  },
+  "Paladin|Blessing of Freedom|": {
+   "l": [
+    [
+     "10% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "20 sec cooldown"
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, granting immunity to movement impairing effects for 10 sec. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 1044,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Blessing of Kings|": {
+   "l": [
+    [
+     "8% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing total stats by 10% for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 20217,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing total stats by 10% for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Protection|Rank 1": {
+   "l": [
+    [
+     "25 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "A targeted party member is protected from all physical attacks for 6 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 1022,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A targeted party member is protected from all physical attacks for 6 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Blessing of Protection|Rank 2": {
+   "l": [
+    [
+     "45 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "A targeted party member is protected from all physical attacks for 8 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 5599,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A targeted party member is protected from all physical attacks for 8 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Blessing of Protection|Rank 3": {
+   "l": [
+    [
+     "7% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "A targeted party member is protected from all physical attacks for 10 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 10278,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A targeted party member is protected from all physical attacks for 10 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Blessing of Sacrifice|Rank 1": {
+   "l": [
+    [
+     "80 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the party member, transfering 45 damage taken per hit to the caster. Lasts 30 sec. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 6940,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Blessing of Sacrifice|Rank 2": {
+   "l": [
+    [
+     "100 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the party member, transfering 55 damage taken per hit to the caster. Lasts 30 sec. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 20729,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Blessing of Salvation|": {
+   "l": [
+    [
+     "8% of base mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the party member, reducing the amount of all threat generated by 30% for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 1038,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the party member, reducing the amount of all threat generated by 30% for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Concentration Aura|": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives a 35% chance of ignoring spell interruption when damaged to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 19746,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 55 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 465,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 160 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 10290,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 275 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 643,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 4": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 390 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 10291,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 5": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 505 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 1032,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 6": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 620 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 10292,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Devotion Aura|Rank 7": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 735 additional armor to party members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10293,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Divine Intervention|": {
+   "l": [
+    [
+     "",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     "1 hour cooldown"
+    ],
+    [
+     "Reagents: Symbol of Divinity",
+     ""
+    ]
+   ],
+   "d": "The paladin sacrifices himself to remove the targeted party member from harms way. Enemies will stop attacking the protected party member, who will be immune to all harmful attacks but cannot take any action for 3 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 19752,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Divine Protection|Rank 1": {
+   "l": [
+    [
+     "15 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "You are protected from all physical attacks and spells for 6 sec, but during that time you cannot attack or use physical abilities yourself. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 498,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "You are protected from all physical attacks and spells for 6 sec, but during that time you cannot attack or use physical abilities yourself. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Divine Protection|Rank 2": {
+   "l": [
+    [
+     "35 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "You are protected from all physical attacks and spells for 8 sec, but during that time you cannot attack or use physical abilities yourself. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 5573,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "You are protected from all physical attacks and spells for 8 sec, but during that time you cannot attack or use physical abilities yourself. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Divine Shield|Rank 1": {
+   "l": [
+    [
+     "75 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "Protects the paladin from all damage and spells for 10 sec, but reduces all damage you deal by 50%. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 642,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Protects the paladin from all damage and spells for 10 sec, but increases the time between your attacks by 100%. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Divine Shield|Rank 2": {
+   "l": [
+    [
+     "110 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "Protects the paladin from all damage and spells for 12 sec, but reduces all damage you deal by 50%. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 1020,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Protects the paladin from all damage and spells for 12 sec, but increases the time between your attacks by 100%. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min."
+  },
+  "Paladin|Fire Resistance Aura|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 30 additional Fire resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 19891,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 30 additional Fire resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Fire Resistance Aura|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 45 additional Fire resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 19899,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 45 additional Fire resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Fire Resistance Aura|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 60 additional Fire resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 19900,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 60 additional Fire resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Frost Resistance Aura|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 30 additional Frost resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 19888,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 30 additional Frost resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Frost Resistance Aura|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 45 additional Frost resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 19897,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 45 additional Frost resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Frost Resistance Aura|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 60 additional Frost resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 19898,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 60 additional Frost resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Greater Blessing of Kings|": {
+   "l": [
+    [
+     "150 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Kings, increasing total stats by 10% for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25898,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Kings, increasing total stats by 10% for 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Greater Blessing of Salvation|": {
+   "l": [
+    [
+     "16% of base mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Salvation, reducing the amount of all threat generated by 30% for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25895,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Salvation, reducing the amount of all threat generated by 30% for 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Hammer of Justice|Rank 1": {
+   "l": [
+    [
+     "30 Mana",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Stuns the target for 3 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 853,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Hammer of Justice|Rank 2": {
+   "l": [
+    [
+     "50 Mana",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Stuns the target for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 5588,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Hammer of Justice|Rank 3": {
+   "l": [
+    [
+     "75 Mana",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Stuns the target for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 5589,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Hammer of Justice|Rank 4": {
+   "l": [
+    [
+     "100 Mana",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Stuns the target for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 10308,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Holy Shield|Rank 1": {
+   "l": [
+    [
+     "150 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ],
+    [
+     "Requires Shields",
+     ""
+    ]
+   ],
+   "d": "Increases chance to block by 20% for 10 sec, and deals 110 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 20925,
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Increases chance to block by 30% for 10 sec, and deals 65 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges."
+  },
+  "Paladin|Holy Shield|Rank 2": {
+   "l": [
+    [
+     "195 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ],
+    [
+     "Requires Shields",
+     ""
+    ]
+   ],
+   "d": "Increases chance to block by 20% for 10 sec, and deals 153 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 20927,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases chance to block by 30% for 10 sec, and deals 95 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges."
+  },
+  "Paladin|Holy Shield|Rank 3": {
+   "l": [
+    [
+     "240 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ],
+    [
+     "Requires Shields",
+     ""
+    ]
+   ],
+   "d": "Increases chance to block by 20% for 10 sec, and deals 221 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 20928,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases chance to block by 30% for 10 sec, and deals 130 Holy damage for each attack blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each block expends a charge. 4 charges."
+  },
+  "Paladin|Righteous Fury|": {
+   "l": [
+    [
+     "30% of base mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Increases the threat generated by your Holy attacks by 60%. Lasts 30 min.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 16",
+   "id": 25780,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Fury|Rank 1": {
+   "l": [
+    [
+     "40 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 6 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 32 to 34 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 1311649,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Fury|Rank 2": {
+   "l": [
+    [
+     "60 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 9 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 47 to 51 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 1311656,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Fury|Rank 3": {
+   "l": [
+    [
+     "90 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 14 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 66 to 72 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 25",
+   "id": 20163,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Fury|Rank 4": {
+   "l": [
+    [
+     "120 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 19 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 86 to 94 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 20419,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Fury|Rank 5": {
+   "l": [
+    [
+     "140 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 25 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 111 to 121 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 20421,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Fury|Rank 6": {
+   "l": [
+    [
+     "170 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 32 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 140 to 150 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 20422,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Fury|Rank 7": {
+   "l": [
+    [
+     "200 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with divine fury for 30 sec, causing melee attacks to deal an additional 35 Holy damage. While a shield is equipped, each attack also grants an absorb shield equal to 50% of the Holy damage dealt. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy causes 153 to 167 Holy damage to an enemy and taunts the target to attack you for 4 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 20423,
+   "co": "45% and 10% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Seal of Justice|": {
+   "l": [
+    [
+     "13% of base mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of justice for 30 sec, giving each melee attack a chance to stun for 2 sec. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 10 sec, preventing them from fleeing. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 20164,
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Shadow Resistance Aura|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 30 additional Shadow resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 19876,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 30 additional Shadow resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Shadow Resistance Aura|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 45 additional Shadow resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 19895,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 45 additional Shadow resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Shadow Resistance Aura|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives 60 additional Shadow resistance to all party and raid members within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 19896,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives 60 additional Shadow resistance to all party members within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Swift Judgement|": {
+   "l": [
+    [
+     "Instant",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Finishes the remaining cooldown on your Judgement ability and reduces the Mana cost of your next Judgement by 100%.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 25",
+   "id": 1310994,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "new"
+  },
+  "Paladin|Templar's Bulwark|": {
+   "l": [
+    [
+     "110 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "When activated, this ability grants you an absorb shield equal to 100% of your maximum health for 8 sec. Applies Forbearance for 1 min. Cannot be cast while Forbearance is active.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1311015,
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "new"
+  },
+  "Paladin|Blessing of Might|Rank 1": {
+   "l": [
+    [
+     "20 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 14 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 19740,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 20 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Might|Rank 2": {
+   "l": [
+    [
+     "30 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 25 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 19834,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 35 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Might|Rank 3": {
+   "l": [
+    [
+     "45 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 40 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 19835,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 55 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Might|Rank 4": {
+   "l": [
+    [
+     "60 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 61 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 19836,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 85 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Might|Rank 5": {
+   "l": [
+    [
+     "85 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 83 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 19837,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 115 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Might|Rank 6": {
+   "l": [
+    [
+     "110 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 112 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 19838,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 155 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Blessing of Might|Rank 7": {
+   "l": [
+    [
+     "130 Mana",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Places a Blessing on the friendly target, increasing melee attack power by 133 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25291,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Places a Blessing on the friendly target, increasing melee attack power by 185 for 5 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Greater Blessing of Might|Rank 1": {
+   "l": [
+    [
+     "220 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Might, increasing melee attack power by 112 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 25782,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Might, increasing melee attack power by 155 for 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Greater Blessing of Might|Rank 2": {
+   "l": [
+    [
+     "260 Mana",
+     "40 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Reagents: Symbol of Kings",
+     ""
+    ]
+   ],
+   "d": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Might, increasing melee attack power by 133 for 1 hour. Players may only have one Blessing on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25916,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Gives all members of the raid or group that share the same class with the target the Greater Blessing of Might, increasing melee attack power by 185 for 15 min. Players may only have one Blessing on them per Paladin at any one time."
+  },
+  "Paladin|Holy Strike|Rank 1": {
+   "l": [
+    [
+     "5 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 25% weapon damage plus an additional 2 to 4 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 679,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 2": {
+   "l": [
+    [
+     "9 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 29% weapon damage plus an additional 4 to 6 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 678,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 3": {
+   "l": [
+    [
+     "12 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 32% weapon damage plus an additional 5 to 8 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1866,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 4": {
+   "l": [
+    [
+     "14 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 36% weapon damage plus an additional 7 to 11 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 680,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 5": {
+   "l": [
+    [
+     "16 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 39% weapon damage plus an additional 12 to 16 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 2495,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 6": {
+   "l": [
+    [
+     "17 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 43% weapon damage plus an additional 22 to 29 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 5569,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 7": {
+   "l": [
+    [
+     "19 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 46% weapon damage plus an additional 33 to 42 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 10332,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Holy Strike|Rank 8": {
+   "l": [
+    [
+     "20 Mana",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "An instant strike that causes 50% weapon damage plus an additional 40 to 53 as Holy damage.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 10333,
+   "sc": "Holy",
+   "cs": "new"
+  },
+  "Paladin|Judgement|": {
+   "l": [
+    [
+     "6% of base mana",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Unleash the energy of a Seal spell upon an enemy. Does not consume the Seal. Refer to individual Seals for Judgement effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 20271,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Unleashes the energy of a Seal spell upon an enemy. Refer to individual Seals for Judgement effect."
+  },
+  "Paladin|Repentance|": {
+   "l": [
+    [
+     "60 Mana",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "1 min cooldown"
+    ]
+   ],
+   "d": "Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. Any damage caused will awaken the target. Only works against Humanoids.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 20066,
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "same"
+  },
+  "Paladin|Retribution Aura|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes 7 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 16",
+   "id": 7294,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 5 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Retribution Aura|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes 12 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 10298,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 8 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Retribution Aura|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes 18 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 10299,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 12 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Retribution Aura|Rank 4": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes 24 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 10300,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 16 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Retribution Aura|Rank 5": {
+   "l": [
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Causes 30 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 10301,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Causes 20 Holy damage to any creature that strikes a party member within 30 yards. Players may only have one Aura on them per Paladin at any one time."
+  },
+  "Paladin|Seal of Command|Rank 1": {
+   "l": [
+    [
+     "65 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 68 to 73 Holy damage, 137 to 145 if the target is stunned or incapacitated.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 20375,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "nt": 3,
+   "cs": "same"
+  },
+  "Paladin|Seal of Command|Rank 2": {
+   "l": [
+    [
+     "110 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 97 to 104 Holy damage, 194 to 208 if the target is stunned or incapacitated.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 20915,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Command|Rank 3": {
+   "l": [
+    [
+     "140 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 124 to 134 Holy damage, 248 to 268 if the target is stunned or incapacitated.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 20918,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Command|Rank 4": {
+   "l": [
+    [
+     "180 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 154 to 168 Holy damage, 309 to 335 if the target is stunned or incapacitated.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 20919,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of Command|Rank 5": {
+   "l": [
+    [
+     "210 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.\n\nUnleashing this Seal's energy will judge an enemy, instantly causing 169 to 187 Holy damage, 339 to 373 if the target is stunned or incapacitated.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 20920,
+   "co": "42.9% of spell power (direct)",
+   "sc": "Holy",
+   "cs": "same"
+  },
+  "Paladin|Seal of the Crusader|Rank 1": {
+   "l": [
+    [
+     "25 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 35 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, increasing Holy damage taken by up to 23. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 21082,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 35 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, increasing Holy damage taken by up to 20. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of the Crusader|Rank 2": {
+   "l": [
+    [
+     "40 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 59 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, increasing Holy damage taken by up to 35. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 20162,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 59 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, increasing Holy damage taken by up to 30. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of the Crusader|Rank 3": {
+   "l": [
+    [
+     "65 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 107 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, increasing Holy damage taken by up to 58. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 20305,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 107 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, increasing Holy damage taken by up to 50. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of the Crusader|Rank 4": {
+   "l": [
+    [
+     "90 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 161 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, increasing Holy damage taken by up to 92. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 20306,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 161 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, increasing Holy damage taken by up to 80. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of the Crusader|Rank 5": {
+   "l": [
+    [
+     "125 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 238 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, increasing Holy damage taken by up to 127. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 20307,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 238 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, increasing Holy damage taken by up to 110. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  },
+  "Paladin|Seal of the Crusader|Rank 6": {
+   "l": [
+    [
+     "160 Mana",
+     ""
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 325 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.\n\nUnleashing this Seal's energy will judge an enemy for 40 sec, increasing Holy damage taken by up to 161. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 20308,
+   "sc": "Holy",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Fills the Paladin with the spirit of a crusader for 30 sec, granting 325 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 10 sec, increasing Holy damage taken by up to 140. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time."
+  }
+ },
+ "races": {
+  "Horde": [
+   "Undead"
+  ],
+  "Alliance": [
+   "Human",
+   "Dwarf"
+  ]
+ },
+ "racials": {
+  "Horde": [
+   {
+    "race": "Undead",
+    "icon": "race_scourge_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Underwater Breathing",
+      "Underwater breath lasts 300% longer than normal.",
+      "spell_shadow_demonbreath"
+     ],
+     [
+      "Will of the Forsaken",
+      "Instant, 2 min cooldown. Instantly removes all Charm, Fear and Sleep effects.",
+      "spell_shadow_raisedead"
+     ],
+     [
+      "Cannibalize",
+      "5 yd range, Instant, 2 min cooldown. When activated, regenerates 7% of total Health and 7% of total Mana every 2 sec for 10 sec. Only works on Humanoid or Undead corpses within 5 yds. Any movement, action, or damage taken while Cannibalizing will cancel the effect.",
+      "ability_racial_cannibalize"
+     ],
+     [
+      "Touch of the Grave",
+      "Your spells and attacks with a damage part have a chance (10% for casters, 5% for melee) to drain Health from the target, up to 5% of your maximum Health. 1 sec internal cooldown. Does not break crowd control.",
+      "spell_shadow_fingerofdeath"
+     ]
+    ]
+   }
+  ],
+  "Alliance": [
+   {
+    "race": "Human",
+    "icon": "race_human_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Sword Specialization",
+      "Increases your critical strike chance with all spells and attacks by 2% while you have a sword or two-handed sword equipped.",
+      "ability_meleedamage"
+     ],
+     [
+      "The Human Spirit",
+      "Spirit increased by 5%.",
+      "inv_enchant_shardbrilliantsmall"
+     ],
+     [
+      "Perception",
+      "Instant, 3 min cooldown. Dramatically increases stealth detection for 20 sec.",
+      "spell_nature_sleep"
+     ],
+     [
+      "Will to Survive",
+      "Instant, 3 min cooldown. Instantly removes all Stun effects.",
+      "spell_shadow_charm"
+     ]
+    ]
+   },
+   {
+    "race": "Dwarf",
+    "icon": "race_dwarf_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Shaman"
+    ],
+    "abilities": [
+     [
+      "Find Treasure",
+      "Instant. Allows the dwarf to sense nearby treasure, making it appear on the minimap.  Lasts until canceled.",
+      "racial_dwarf_findtreasure"
+     ],
+     [
+      "Stoneform",
+      "Instant, 3 min cooldown. Instantly removes and grants immunity to all Bleed, Poison, and Disease effects, and reduces all Physical damage taken by 10% for 8 sec.",
+      "spell_shadow_unholystrength"
+     ],
+     [
+      "Mace Specialization",
+      "Increases your critical strike chance with all spells and attacks by 1% while you have a mace or two-handed mace equipped.",
+      "inv_hammer_05"
+     ],
+     [
+      "Big Game Hunter",
+      "Damage dealt versus Beasts increased by 5%.",
+      "inv_weapon_rifle_05"
+     ]
+    ]
+   }
+  ]
+ },
+ "class_racials": {},
+ "class_abilities": [
+  [
+   "Judgement",
+   "Changed. It no longer eats your seal. 10 yd range, 10 sec cooldown. Judging Seal of Fury taunts for 4 sec, so Paladins can tank pulls now.",
+   "spell_holy_righteousfury"
+  ],
+  [
+   "Seal of Fury",
+   "The tank seal. Every hit adds Holy damage, and with a shield up you get an absorb worth half of it. Rank 4 by level 38.",
+   "spell_holy_sealoffury"
+  ],
+  [
+   "Holy Strike",
+   "Baseline Ret strike on a 10 sec cooldown: weapon damage plus Holy. Rank 5 by 38. Several talents build on it.",
+   "spell_holy_crusaderstrike"
+  ],
+  [
+   "Blessing of Kings and Consecration",
+   "Both trainable now, not talents. Consecration comes at level 20.",
+   "spell_magic_greaterblessingofkings"
+  ]
+ ],
+ "legacy": {
+  "note": "Earned from challenges, spent across the account. 16 points at launch. Some perks need points in their tree first, a few need the perk before them. The ? slots are placeholders.",
+  "points": 16,
+  "source": "Forever beta client 1.60.1.69876",
+  "trees": [
+   {
+    "id": 1188,
+    "name": "Adventure",
+    "icon": "inv_misc_map_01",
+    "perks": [
+     {
+      "name": "High Alert",
+      "max": 2,
+      "row": 1,
+      "col": 2,
+      "icon": "spell_shadow_detectlesserinvisibility",
+      "ranks": [
+       "Increases your ability to detect nearby targets with Stealth as if your level were increased by 1. Ineffective in Battlegrounds.",
+       "Increases your ability to detect nearby targets with Stealth as if your level were increased by 2. Ineffective in Battlegrounds."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Well Rested",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "icon": "spell_nature_sleep",
+      "ranks": [
+       "Your rested experience accumulates 4% faster and your rested experience cap is increased by 4%.",
+       "Your rested experience accumulates 8% faster and your rested experience cap is increased by 8%.",
+       "Your rested experience accumulates 12% faster and your rested experience cap is increased by 12%.",
+       "Your rested experience accumulates 16% faster and your rested experience cap is increased by 16%.",
+       "Your rested experience accumulates 20% faster and your rested experience cap is increased by 20%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Talented",
+      "max": 5,
+      "row": 2,
+      "col": 2,
+      "icon": "ability_marksmanship",
+      "ranks": [
+       "You gain talent points every level starting at level 9 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 8 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 7 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 6 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 5 instead of starting at level 10, but you still may not have more than 51 total talent points."
+      ],
+      "gate": 5,
+      "req": "Well Rested"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Thrill of Adventure",
+      "max": 5,
+      "row": 3,
+      "col": 1,
+      "icon": "ability_hunter_huntervswild",
+      "ranks": [
+       "You gain 1% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 2% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 3% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 4% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 5% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Field Guide",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "icon": "inv_fishingchair",
+      "ranks": [
+       "Reduces your cooldown on adding Camp features by 8%",
+       "Reduces your cooldown on adding Camp features by 17%",
+       "Reduces your cooldown on adding Camp features by 25%"
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Frequent Flier",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "achievement_guild_ridelikethewind",
+      "ranks": [
+       "You receive a 50% discount on all flight paths, and your flight path mount flies 20% faster."
+      ],
+      "gate": 10,
+      "req": "Field Guide"
+     },
+     {
+      "name": "Field Medicine",
+      "max": 2,
+      "row": 4,
+      "col": 2,
+      "icon": "inv_misc_bandage_05",
+      "ranks": [
+       "Reduces the duration of the Recently Bandaged effect by 5 sec when you use a bandage. Ineffective in dungeons, raids, and battlegrounds.",
+       "Reduces the duration of the Recently Bandaged effect by 10 sec when you use a bandage. Ineffective in dungeons, raids, and battlegrounds."
+      ],
+      "gate": 5
+     }
+    ]
+   },
+   {
+    "id": 1189,
+    "name": "Resourcefulness",
+    "icon": "inv_misc_coin_01",
+    "perks": [
+     {
+      "name": "For Great Honor",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "icon": "achievement_bg_winwsg",
+      "ranks": [
+       "Increases Honor Points gained by 2%.",
+       "Increases Honor Points gained by 4%.",
+       "Increases Honor Points gained by 6%.",
+       "Increases Honor Points gained by 8%.",
+       "Increases Honor Points gained by 10%."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Gourmand",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "icon": "inv_misc_food_64",
+      "ranks": [
+       "Increases the duration of beneficial effects from eating food by 33%.",
+       "Increases the duration of beneficial effects from eating food by 67%.",
+       "Increases the duration of beneficial effects from eating food by 100%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Permanence",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "icon": "spell_misc_emotionhappy",
+      "ranks": [
+       "Your class abilities which grant long-duration stat or attribute benefits to all party or raid members last 50% longer, and the benefits you gain from resting at a camp last 50% longer.",
+       "Your class abilities which grant long-duration stat or attribute benefits to all party or raid members last 100% longer, and the benefits you gain from resting at a camp last 100% longer."
+      ],
+      "gate": 5,
+      "req": "Gourmand"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "The Quick and the Dead",
+      "max": 2,
+      "row": 3,
+      "col": 1,
+      "icon": "spell_shadow_deadofnight",
+      "ranks": [
+       "Increases movement speed while dead by 5% and your helpful spells and abilities cost no resources for 1 min after being resurrected or until you enter combat.",
+       "Increases movement speed while dead by 10% and your helpful spells and abilities cost no resources for 2 min after being resurrected or until you enter combat."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Reagent Economy",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "inv_misc_candle_02",
+      "ranks": [
+       "Your class abilities no longer require reagents purchaseable from vendors."
+      ],
+      "gate": 10,
+      "req": "The Quick and the Dead"
+     },
+     {
+      "name": "Reinforce",
+      "max": 5,
+      "row": 4,
+      "col": 1,
+      "icon": "inv_misc_armorkit_17",
+      "ranks": [
+       "You take 8% less durability loss when you die.",
+       "You take 16% less durability loss when you die.",
+       "You take 24% less durability loss when you die.",
+       "You take 32% less durability loss when you die.",
+       "You take 40% less durability loss when you die."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Diplomat",
+      "max": 5,
+      "row": 4,
+      "col": 2,
+      "icon": "inv_scroll_03",
+      "ranks": [
+       "Increases your reputation gains by 2%.",
+       "Increases your reputation gains by 4%.",
+       "Increases your reputation gains by 6%.",
+       "Increases your reputation gains by 8%.",
+       "Increases your reputation gains by 10%."
+      ],
+      "gate": 5
+     }
+    ]
+   },
+   {
+    "id": 1187,
+    "name": "Professions",
+    "icon": "trade_engineering",
+    "perks": [
+     {
+      "name": "Master Chef",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "icon": "achievement_profession_chefhat",
+      "ranks": [
+       "Your cooking recipes have a 10% chance to create an extra result.",
+       "Your cooking recipes have a 20% chance to create an extra result.",
+       "Your cooking recipes have a 30% chance to create an extra result.",
+       "Your cooking recipes have a 40% chance to create an extra result.",
+       "Your cooking recipes have a 50% chance to create an extra result."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Working Overtime",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "icon": "inv_misc_pocketwatch_03",
+      "ranks": [
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 4%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 8%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 12%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 16%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 20%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Bartering",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "icon": "inv_misc_coin_06",
+      "ranks": [
+       "Reduces the gold price of items from all vendors by 5%.",
+       "Reduces the gold price of items from all vendors by 10%."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Dedicated Study",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_book_08",
+      "ranks": [
+       "Increases your skill by 1 in your lowest tradeskill among your Primary and Secondary tradeskills. If you have already reached 300 skill in your two current Primary Tradeskills and all three Secondary Tradeskills, you will gain 2 to 4 of a random Elemental Essence."
+      ],
+      "gate": 10,
+      "req": "Bartering"
+     },
+     {
+      "name": "Bountiful Harvest",
+      "max": 5,
+      "row": 3,
+      "col": 1,
+      "icon": "inv_misc_bag_18",
+      "ranks": [
+       "You discover 20% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 40% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 60% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 80% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 100% more Scarce materials from Mining, Herbalism, and Skinning."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Performance Bonus",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "icon": "racial_dwarf_findtreasure",
+      "ranks": [
+       "You have a 5% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics.",
+       "You have a 10% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics.",
+       "You have a 15% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics."
+      ],
+      "gate": 5,
+      "req": "Bountiful Harvest"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 3,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Luremaster",
+      "max": 2,
+      "row": 4,
+      "col": 3,
+      "icon": "inv_misc_basket_04",
+      "ranks": [
+       "While fishing with a Lure active, you have a 25% chance to catch an extra fish.",
+       "While fishing with a Lure active, you have a 50% chance to catch an extra fish."
+      ],
+      "gate": 5
+     }
+    ]
+   }
+  ]
+ }
+}

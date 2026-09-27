@@ -1,0 +1,76 @@
+# Warlock talent simulation coverage
+
+This audit covers all 52 talents in the current Warlock data export. It describes the single-target Warlock model in `warlock.js`; “implemented” means a talent has an active calculation or event path, while “partial” identifies modeled parts and known omissions. Talent descriptions come from the checked-in class export.
+
+The simulator separates specialization from damage school. For example, Shadow Bolt is tagged Destruction specialization and Shadow school: Destruction talents can select it while school-based Shadow effects can also affect it.
+
+## Affliction
+
+| Talent | Effect in source data | Simulator interaction | Coverage |
+|---|---|---|---|
+| Improved Life Tap | Increases the amount of Mana awarded by your Life Tap spell by 20%. | Life Tap grants 10% more mana per rank when the rotation has no affordable priority spell; health cost and health-based constraints are omitted. | Partial |
+| Suppression | Improves your chance to hit by 5% and reduces all threat you generate by 20%. | Adds 1% spell hit per rank to all Warlock casts. | Implemented |
+| Improved Corruption | Reduces the casting time of your Corruption spell by 2 sec and increases the damage it deals by 10%. | Adds 2% Corruption damage and reduces its cast time by 0.4 seconds per rank. | Implemented |
+| Malediction | Increases all periodic damage done by your Warlock spells by 5%. | Adds 1% damage per rank to periodic spells. | Implemented |
+| Soul Harvesting | You gain Soul Harvest for 10 sec if a victim is killed while afflicted with your Drain Soul. Soul Harvest allows your Mana to regenerate at 100% of normal speed while you are casting spells, and grants a 100% increase to your Mana regeneration. | Mana regeneration on target death is outside the fixed-duration single-target model. | Not modeled |
+| Improved Drains | Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 20%. | Adds rank-scaled damage to Drain Life, Drain Soul, and Wrack. | Implemented |
+| Improved Bane of Agony | Increases the damage done by your Bane of Agony by 10%. | Adds 5% Bane of Agony damage per rank. | Implemented |
+| Fel Concentration | Gives you a 70% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells. | Pushback/interruption resistance is not represented. | Not modeled |
+| Amplify Curse | Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 20%. Lasts 30 sec. | No activated curse action, cooldown, or curse amplification state is modeled. | Not modeled |
+| Pandemic | Increases the critical strike damage bonus of your Corruption, Bane of Agony, Bane of Doom, Drain Soul, Drain Life, Siphon Life, and Wrack spells by 100%. | Adds up to 50 percentage points to eligible Affliction DoT critical damage (rank-scaled); DoT crits are applied at application in this model. | Implemented |
+| Malevolence | Increases the critical effect chance of your Shadow spells by 5%. | Adds 1% Shadow critical chance per rank. | Implemented |
+| Nightfall | Gives your Corruption, Drain Soul, Drain Life, and Wrack spells a 4% chance to cause you to enter a Shadow Trance after damaging the opponent. The Shadow Trance reduces the casting time of your next Shadow Bolt spell by 100%. | Each Corruption, Drain Soul, Drain Life, or Wrack tick can proc Shadow Trance at 2% per rank; next Shadow Bolt is instant. | Implemented |
+| Curse of Exhaustion | Reduces the target's movement speed by 30% for 12 sec. Only one Curse per Warlock can be active on any one target. | Movement and slow effects do not change target uptime in this stationary model. | Not modeled |
+| Siphon Life | Transfers 11 health from the target to the caster every 3 sec. Lasts 30 sec. | Its damage-over-time is simulated; its healing is not. | Partial |
+| Soul Siphon | Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 12% per each of your other Affliction effects active on the target, up to a maximum increase of 36%. | Drain Life, Drain Soul, and Wrack gain 4% damage per rank for up to three active Affliction DoTs. | Implemented |
+| Shadow Mastery | Increases the damage dealt or life drained by your Shadow spells by 5%. | Adds 1% Shadow damage per rank. | Implemented |
+| Wrack | Tears the target apart from within, dealing 36 Shadow damage every 1 sec and increasing the damage they take from your other Shadow damage over time effects by 10%. Lasts 6 sec. | Its periodic Shadow damage, tick events, Shadow vulnerability, and eligible Nightfall procs are modeled. | Implemented |
+
+## Demonology
+
+| Talent | Effect in source data | Simulator interaction | Coverage |
+|---|---|---|---|
+| Improved Health Funnel | Increases the amount of health transferred by your Health Funnel spell by 40%, reduces its health cost by 30%, and reduces all threat your Health Funnel generates by 100%. Allows Health Funnel to be used regardless of your demon's health. | Healing and channel costs for pet sustain are outside the DPS model. | Not modeled |
+| Improved Imp | Increases the damage of your Imp's Firebolt spell by 30% and the effect of its Fire Shield spell by 30%. | Increases the summoned Imp Firebolt damage by 10% per rank; Imp utility abilities are not simulated. | Partial |
+| Demonic Embrace | Increases your total Stamina by 15%. | Stamina and health changes do not affect this damage-only model. | Not modeled |
+| Unholy Power | Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 10%. | Adds 2% damage per rank to simulated pet attacks. | Implemented |
+| Demonic Aegis | Increases the effectiveness of your Demon Skin and Demon Armor spells by 30%. | Armor and defensive effects do not affect damage calculations here. | Not modeled |
+| Improved Voidwalker | Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice, and Suffering spells by 30%. | Torment, Consume Shadows, Sacrifice, and Suffering are utility abilities, so this talent does not change modeled auto attack damage. | Not modeled |
+| Fel Vitality | Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 15%, and increases your maximum Mana by 15%. | Increases the Warlock mana cap by 5% per rank. | Implemented |
+| Demonic Energies | You heal your pet for 15% of all spell damage you deal. When you gain Mana from Life Tap, your summoned demon gains 100% of the Mana you gain. | Pet mana/energy and resource-driven pet actions are not simulated. | Not modeled |
+| Improved Sayaad | Increases the effect of your Succubus' and Incubus' Lash of Pain and Soothing Kiss spells by 30%, and increases the duration of your Succubus' and Incubus' Seduction and Lesser Invisibility spells by 30%. | Increases simulated Succubus/Incubus Lash of Pain damage by 10% per rank; crowd control is omitted. | Partial |
+| Demonic Sacrifice | When activated, sacrifices your summoned Demon to enhance the opposing aspect of your power, granting you an effect that lasts 2 hrs. The effect is canceled if any Demon is summoned.  Imp: Increases your Shadow damage by 15%.  Voidwalker: Restores 2% of your total Mana every 4 sec.  Succubus/Incubus: Increases your Fire damage by 15%.  Felhunter: Restores 3% of your total Health every 4 sec. | The user-selected sacrificed pet provides its modeled passive: Imp boosts Shadow damage, Succubus/Incubus boosts Fire damage, Voidwalker restores mana. Other sacrifice effects and pet lifecycle are omitted. | Partial |
+| Master Summoner | Reduces the casting time of your Imp, Voidwalker, Succubus, Incubus, and Felhunter Summoning spells by 4 sec and the Mana cost by 40%. | Summon cast-time and mana costs are not represented. | Not modeled |
+| Decimation | Reduces the cooldown of your Soul Fire spell by 90%. When you cast Shadow Bolt or Searing Pain on an enemy below 35% health, they deal 6% increased damage, and for the next 10 sec your Soul Fire spell has its cast time reduced by 40% and costs no Soul Shards. | At target health below 35%, Shadow Bolt/Searing Pain damage increases and Soul Fire cast time/cooldown improve; Soul Shard requirements and proc-specific Soul Fire behavior are simplified. | Partial |
+| Fel Domination | Your next Imp, Voidwalker, Succubus, Incubus, or Felhunter Summon spell has its casting time reduced by 5.5 sec and its Mana cost reduced by 50%. | Summoning cooldown/cast-time effects are not represented. | Not modeled |
+| Demonic Brand | Your Searing Pain generates 50% less threat and brands the target for 10 sec. Your pet's next 6 attacks against the target generate high threat and deal 65 to 68 Fire or Shadow damage based on the pet. | A landed Searing Pain grants modeled bonus damage to a limited number of subsequent pet attacks; source values/effect duration are approximated. | Partial |
+| Improved Felhunter | Increases the Attack Power reduction of your Felhunter's Tainted Blood, the healing of its Devour Magic, and the detection level of its Paranoia by 30%, and reduces the cooldown of its Spell Lock by 6 sec. | Felhunter utility spells and their cooldown/resource interactions are not DPS actions. | Not modeled |
+| Soul Link | When active, 30% of all damage taken by the caster is taken by your Imp, Voidwalker, Succubus, Incubus, or Felhunter Demon instead. In addition, both the Demon and the master will inflict 3% more damage. Lasts as long as the Demon is active. | Adds 3% damage to Warlock and pet while a summoned pet is active; damage transfer and survivability are omitted. | Partial |
+| Demonic Knowledge | Increases your spell damage and your Demon pet's spell damage by up to 100% of your level while you have a summoned Demon pet active. | Adds a level/rank-derived spell-power amount while a pet is active, used by Warlock and pet damage; pet stats are approximated from level. | Partial |
+| Master Demonologist | Grants both the Warlock and the summoned demon an effect as long as that demon is active.  Imp - Increases Fire damage done by 10%.  Voidwalker - Reduces Physical damage taken by 10%.  Succubus/Incubus - Increases Shadow damage done by 10%.  Felhunter - Reduces Magic damage taken by 10%. | Imp boosts Warlock Fire damage; Succubus/Incubus boosts Shadow damage, plus their corresponding pet damage. Other pet-specific benefits are not modeled. | Partial |
+| Demonic Pact | Your Demonic Sacrifice effect is no longer cancelled by summoning a different Demon pet. Resummoning the sacrificed pet will still cancel the effect. | Its summon-triggered party spell-power proc and uptime are not represented. | Not modeled |
+
+## Destruction
+
+| Talent | Effect in source data | Simulator interaction | Coverage |
+|---|---|---|---|
+| Destructive Reach | Increases the range of your damaging spells by 20%. | Range has no effect in the stationary single-target simulation. | Not modeled |
+| Improved Shadow Bolt | Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 20% for 12 sec. | A critical Shadow Bolt applies a 12-second Shadow damage vulnerability; the modeled rank multiplier affects Shadow direct/periodic damage while active. | Implemented |
+| Bane | Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.5 sec and your Soul Fire spell by 2 sec. | Reduces cast time of Shadow Bolt, Immolate, Incinerate, and Soul Fire by 0.1 seconds per rank. | Implemented |
+| Molten Skin | Reduces all damage taken by 10%. | Damage reduction is outside the damage-only model. | Not modeled |
+| Cataclysm | Reduces the Mana cost of your Destruction spells by 10%. | Reduces mana cost of Destruction-specialization spells by rank-scaled 3/6/10%. | Implemented |
+| Aftermath | Increases the initial damage of your Immolate spell by 50% and your Conflagrate spell has a 100% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec. | Adds 10% per rank to Immolate direct damage; stun chance and control are omitted. | Partial |
+| Ruin | Increases the critical strike damage bonus of your Destruction spells by 100%. | Adds 10% Destruction spell critical damage per rank. | Implemented |
+| Shadowburn | Instantly blasts the target for 65 to 73 Shadow damage. If a non-trivial target dies within 8 sec of being hit with Shadowburn, the caster gains a Soul Shard. | Its direct damage, cooldown, and Shadow and Flame interaction are modeled; Soul Shard refund on target death is omitted. | Partial |
+| Intensity | Gives you a 70% chance to resist interruption caused by damage while casting or channeling any Destruction spell. | Pushback resistance for channels is not represented. | Not modeled |
+| Agonizing Flames | Increases the critical strike chance of your Searing Pain spell by 10% and the damage done by all your Destruction spells by 10%. | Adds rank-scaled damage to Destruction spells and rank-scaled critical chance to Searing Pain. | Implemented |
+| Conflagrate | Ignites a target that is already afflicted by your Immolate spell, dealing 88 to 110 Fire damage and consuming your Immolate effect. | Requires active Immolate and deals catalog damage; consumes Immolate unless Shadow and Flame is fully ranked. Other rank-dependent details may be simplified. | Partial |
+| Pyroclasm | Gives your Soul Fire spell a 26% chance to Stun the target for 3 sec, and your Rain of Fire and Hellfire spells a 26% chance over their duration to Stun targets they damage for 3 sec. | Stun proc/control effects are omitted. | Not modeled |
+| Bane of Havoc | Afflicts the target for 5 min, causing 15% of all damage done by the Warlock to other targets to also be dealt to the cursed target. Bane of Havoc is limited to 1 target, and only one Bane per Warlock can be active on any one target. | Its multi-target damage redirection is outside the single-target model. | Not modeled |
+| Fire and Brimstone | Increases the critical strike chance of your Conflagrate spell by 25%. | Adds rank-scaled critical chance to Conflagrate; conditional bonus damage effects are not fully represented. | Partial |
+| Shadow and Flame | Hitting an enemy with Conflagrate increases all Shadow damage you deal by 10% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 10% for 20 sec. In addition, Conflagrate has a 100% chance not to consume Immolate, and Shadowburn has a 100% chance to instantly refund a Soul Shard. | Conflagrate/Shadowburn apply the modeled temporary Shadow/Fire vulnerability; full talent effects may include additional spell-power scaling not represented. | Partial |
+| Incinerate | Deals 99 to 113 Fire damage to your target and an additional 25% damage if the target is afflicted by Immolate. | Gets a 25% damage increase while Immolate is active; all rank-specific secondary effects may be simplified. | Partial |
+
+## Model-wide limits
+
+The fight is stationary and single-target. It does not model movement, target death/kill triggers, incoming damage, threat, pushback, control, defensive value, raid-wide effects, or a full pet resource/summon lifecycle. See each row for the talent-specific impact.

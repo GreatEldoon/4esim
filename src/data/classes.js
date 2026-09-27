@@ -9,13 +9,13 @@ import warlockIcon from '../assets/classes/warlock.jpg';
 import druidIcon from '../assets/classes/druid.jpg';
 
 export const classRegistry = [
-  { id: 'warrior', icon: warriorIcon, name: 'Warrior', mark: 'W', accent: '#D6A66F', available: false },
-  { id: 'paladin', icon: paladinIcon, name: 'Paladin', mark: 'P', accent: '#F58CBA', available: false },
-  { id: 'hunter', icon: hunterIcon, name: 'Hunter', mark: 'H', accent: '#B4DB7A', available: false },
-  { id: 'rogue', icon: rogueIcon, name: 'Rogue', mark: 'R', accent: '#FFF080', available: false },
-  { id: 'priest', icon: priestIcon, name: 'Priest', mark: 'Pr', accent: '#F2F4F5', available: false },
-  { id: 'shaman', icon: shamanIcon, name: 'Shaman', mark: 'S', accent: '#55A4F0', available: false },
-  { id: 'mage', icon: mageIcon, name: 'Mage', mark: 'M', accent: '#69CCF0', available: true },
-  { id: 'warlock', icon: warlockIcon, name: 'Warlock', mark: 'Wl', accent: '#B39AE8', available: true },
   { id: 'druid', icon: druidIcon, name: 'Druid', mark: 'D', accent: '#FFA04B', available: false },
+  { id: 'hunter', icon: hunterIcon, name: 'Hunter', mark: 'H', accent: '#B4DB7A', available: false },
+  { id: 'mage', icon: mageIcon, name: 'Mage', mark: 'M', accent: '#69CCF0', available: true },
+  { id: 'paladin', icon: paladinIcon, name: 'Paladin', mark: 'P', accent: '#F58CBA', available: false },
+  { id: 'priest', icon: priestIcon, name: 'Priest', mark: 'Pr', accent: '#F2F4F5', available: false },
+  { id: 'rogue', icon: rogueIcon, name: 'Rogue', mark: 'R', accent: '#FFF080', available: false },
+  { id: 'shaman', icon: shamanIcon, name: 'Shaman', mark: 'S', accent: '#55A4F0', available: false },
+  { id: 'warlock', icon: warlockIcon, name: 'Warlock', mark: 'Wl', accent: '#B39AE8', available: true },
+  { id: 'warrior', icon: warriorIcon, name: 'Warrior', mark: 'W', accent: '#D6A66F', available: false },
 ];

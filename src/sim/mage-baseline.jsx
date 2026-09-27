@@ -1,43 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
+import mage from './data/mage.json';
+import warlock from './data/warlock.json';
 import { classRegistry } from './data/classes.js';
 import { petsForClass } from './data/pets.js';
-import { simulateWarlock } from './sim/warlock.js';
-import { simulateGeneric } from './sim/generic.js';
-import { addSpellMetadata } from './data/spell-metadata.js';
-import { mageEffectIcons } from './data/mage-effect-icons.js';
-import { classTalentIcons, spellIcons } from './data/spell-icons.js';
-import { petAttackProfileFor, petAttackProfiles } from './data/pet-attack-profiles.js';
 
 const siteBaseUrl = import.meta.env.BASE_URL;
 const numberFromText = value => Number(String(value || '').replace(/,/g, '').match(/[\d.]+/)?.[0] || 0);
 const formatTime = seconds => `${Math.floor(seconds / 60)}:${(seconds % 60).toFixed(2).padStart(5, '0')}`;
 function damageFromTooltip(text) {
   if (/absorbs?|damage taken|absorb(?:ed|ing)? damage/i.test(text)) return 0;
-  const hits = [...text.matchAll(/([\d,]+)(?:\s+to\s+([\d,]+))?\s+(?:(?:Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+)?damage(?:(?:\s+each second for\s+(\d+)\s+sec)|(?:\s+every\s+(\d+)\s+sec)|(?:\s+over\s+(\d+)\s+sec))?/gi)];
-  const damage = hits.reduce((sum, hit) => {
+  const hits = [...text.matchAll(/([\d,]+)(?:\s+to\s+([\d,]+))?\s+(?:(?:Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+)?damage(?:(?:\s+each second for\s+(\d+)\s+sec)|(?:\s+over\s+(\d+)\s+sec))?/gi)];
+  return hits.reduce((sum, hit) => {
     const amount = (numberFromText(hit[1]) + numberFromText(hit[2] || hit[1])) / 2;
-    const everyInterval = Number(hit[4]) || 0;
-    const duration = everyInterval ? Number(text.match(/lasts\s+(\d+)\s+sec/i)?.[1] || 0) : 0;
-    return sum + amount * (Number(hit[3]) || (everyInterval ? Math.max(1, Math.floor(duration / everyInterval)) : 1));
+    return sum + amount * (Number(hit[3]) || 1);
   }, 0);
-  const drainMatches = [...text.matchAll(/transfers?\s+([\d,]+)\s+health(?:\s+from the target(?: to the caster)?)?\s+every\s+(\d+)\s+second(?:s)?(?:\s+from the target(?: to the caster)?)?/gi)];
-  const duration = Number(text.match(/lasts\s+(\d+)\s+sec/i)?.[1] || 0);
-  return damage + drainMatches.reduce((sum, match) => sum + numberFromText(match[1]) * Math.max(1, Math.floor(duration / Number(match[2] || 1))), 0);
 }
-function periodicDamageFromTooltip(text) {
-  if (/absorbs?|damage taken|absorb(?:ed|ing)? damage/i.test(text)) return 0;
-  const over = [...text.matchAll(/([\d,]+)(?:\s+to\s+([\d,]+))?\s+(?:(?:Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+)?damage\s+over\s+\d+\s+sec/gi)];
-  const eachSecond = [...text.matchAll(/([\d,]+)(?:\s+to\s+([\d,]+))?\s+(?:(?:Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+)?damage\s+(?:each second|every (\d+) sec|per second)(?:\s+for\s+(\d+)\s+sec)?/gi)];
-  const health = [...text.matchAll(/transfers?\s+([\d,]+)\s+health(?:\s+from the target(?: to the caster)?)?\s+every\s+(\d+)\s+second(?:s)?(?:\s+from the target(?: to the caster)?)?/gi)];
-  const duration = Number(text.match(/(?:lasts|over|for)\s+(\d+)\s+sec/i)?.[1] || 0);
-  return over.reduce((sum, hit) => sum + (numberFromText(hit[1]) + numberFromText(hit[2] || hit[1])) / 2, 0)
-    + eachSecond.reduce((sum, hit) => {
-      const amount = (numberFromText(hit[1]) + numberFromText(hit[2] || hit[1])) / 2;
-      const interval = Number(hit[3]) || 1;
-      return sum + amount * (Number(hit[4]) || Math.max(1, Math.floor(duration / interval)));
-    }, 0) + health.reduce((sum, match) => sum + numberFromText(match[1]) * Math.max(1, Math.floor(duration / Number(match[2] || 1))), 0);
-}
-function buildDamageSpellCatalog(classData, level = 60) {
+function buildDamageSpellCatalog(classData) {
   const className = classData.class;
   return classData.spellbook.tabs.flatMap(tab => {
     const byName = new Map();
@@ -50,76 +28,41 @@ function buildDamageSpellCatalog(classData, level = 60) {
       byName.set(name, ranks);
     });
     return [...byName.values()].map(ranks => {
-      const spell = ranks.filter(entry => Number(entry.detail.lv?.match(/level\s+(\d+)/i)?.[1] || 1) <= level).sort((a, b) => a.rankNumber - b.rankNumber).at(-1);
-      if (!spell) return null;
+      const spell = ranks.sort((a, b) => a.rankNumber - b.rankNumber).at(-1);
       const tooltip = spell.detail.d || '';
       const metadata = spell.detail.l || [];
       const manaText = metadata[0]?.[0] || '';
       const castText = metadata[1]?.[0] || '';
       const cooldownText = metadata[1]?.[1] || '';
       const manaFraction = Number(manaText.match(/([\d.]+)%\s+of base mana/i)?.[1] || 0) / 100;
-      const resourceType = manaText.match(/\b(Mana|Rage|Energy|Focus)\b/i)?.[1] || (manaFraction ? 'Mana' : 'Mana');
       const castMatch = castText.match(/([\d.]+)\s*sec\s+cast/i);
-      const channelDuration = Number(tooltip.match(/(?:for|over|lasts)\s+(\d+)\s+sec/i)?.[1] || 0);
+      const channelDuration = Number(tooltip.match(/(?:for|over)\s+(\d+)\s+sec/i)?.[1] || 0);
       const cooldownSeconds = numberFromText(cooldownText) * (/min/i.test(cooldownText) ? 60 : 1);
       const damage = damageFromTooltip(tooltip);
-      const periodicDamage = periodicDamageFromTooltip(tooltip);
-      const periodicDuration = Number(tooltip.match(/(?:over|for|lasts)\s+(\d+)\s+sec/i)?.[1] || 0);
-      const periodInterval = Number(tooltip.match(/(?:every|each)\s+(\d+)\s+sec/i)?.[1] || (/every second|per second/i.test(tooltip) ? 1 : spell.name === 'Wrack' ? 1 : 3));
-      const periodicTicks = periodicDuration ? Math.ceil(periodicDuration / periodInterval) : 0;
-      const coefficientText = spell.detail.co || '';
-      const directCoefficient = Number(coefficientText.match(/([\d.]+)%\s+of spell power\s*\(direct\)/i)?.[1] || (!/per tick/i.test(coefficientText) ? coefficientText.match(/([\d.]+)%\s+of spell power/i)?.[1] : 0)) / 100;
-      const periodicCoefficient = [...coefficientText.matchAll(/([\d.]+)%\s+of spell power\s*\(per tick\)/gi)].reduce((sum, match) => sum + Number(match[1]) / 100, 0);
-      const fallbackCoefficient = Math.min(1, Math.max(1.5, castMatch ? Number(castMatch[1]) : /channeled/i.test(castText) ? channelDuration : 0) / 3.5);
-      const totalCoefficient = directCoefficient + periodicCoefficient * periodicTicks || fallbackCoefficient;
       const tooltipSchool = tooltip.match(/\b(Arcane|Fire|Frostfire|Frost|Shadow|Nature|Holy|Physical)\s+damage\b/i)?.[1];
-      const spellMetadata = classData.spellbook.spell_metadata?.[`${tab.name}|${spell.name}|${spell.rank}`];
-      const school = tooltipSchool || spellMetadata?.school || ({ Affliction: 'Shadow', Demonology: 'Shadow', Destruction: 'Fire', Demons: 'Shadow' }[tab.name] || tab.name);
+      const school = tooltipSchool || ({ Affliction: 'Shadow', Demonology: 'Shadow', Destruction: 'Fire', Demons: 'Shadow' }[tab.name] || tab.name);
       return {
         name: spell.name,
         rank: spell.rank,
-        // Keep the spellbook tab as a first-class tag. School describes the
-        // damage type; specialization controls which tree talents can affect it.
-        specialization: spellMetadata?.specialization || tab.name,
         damage: Math.round(damage),
-        directDamage: Math.max(0, Math.round(damage - periodicDamage)),
-        periodicDamage: Math.min(Math.round(damage), Math.round(periodicDamage)),
-        periodicDuration,
-        periodicTickInterval: periodInterval,
-        directCoefficient: directCoefficient || (periodicCoefficient ? 0 : fallbackCoefficient),
-        periodicCoefficient,
         cast: castMatch ? Number(castMatch[1]) : /channeled/i.test(castText) ? channelDuration : 0,
         mana: manaFraction ? 0 : numberFromText(manaText),
-        resourceType,
         manaFraction,
         cooldown: cooldownSeconds,
         school,
-        coefficient: totalCoefficient,
+        coefficient: Math.min(1, Math.max(1.5, castMatch ? Number(castMatch[1]) : /channeled/i.test(castText) ? channelDuration : 0) / 3.5),
         tooltip,
       };
-    }).filter(Boolean);
+    });
   }).sort((a, b) => a.school.localeCompare(b.school) || a.name.localeCompare(b.name));
 }
-const classDataLoaders = {
-  mage: () => import('./data/mage.json'), warlock: () => import('./data/warlock.json'),
-  warrior: () => import('./data/warrior.json'), paladin: () => import('./data/paladin.json'),
-  hunter: () => import('./data/hunter.json'), rogue: () => import('./data/rogue.json'),
-  priest: () => import('./data/priest.json'), shaman: () => import('./data/shaman.json'),
-  druid: () => import('./data/druid.json'),
-};
-const resourceTypeByClass = { warrior: 'Rage', rogue: 'Energy' };
-const resourceTypeForClass = classId => resourceTypeByClass[classId] || 'Mana';
-const resourceCapForClass = classId => ['warrior', 'rogue'].includes(classId) ? 100 : 5000;
+const damageSpellCatalogs = { mage: buildDamageSpellCatalog(mage), warlock: buildDamageSpellCatalog(warlock) };
 const combustionSpell = { name: 'Combustion', rank: 'Talent', damage: 0, cast: 0, cooldown: 180, mana: 0, manaFraction: 0, school: 'Fire', coefficient: 0, offGcd: true, tooltip: 'Increases your Fire critical strike chance. Off the global cooldown.' };
 const talentCookieName = classId => `4esim_${classId}_talents`;
 const specStorageKey = classId => `4esim_${classId}_specs`;
-const talentIcons = mageEffectIcons;
+const talentIcons = Object.fromEntries(mage.talents.trees.flatMap(tree => tree.talents.map(talent => [talent.name, talent.icon])));
 const effectTalentNames = { missileBarrage: 'Missile Barrage', fingersOfFrost: 'Fingers of Frost', clearcasting: 'Arcane Concentration', winterChill: "Winter's Chill", scorch: 'Improved Scorch', hotStreak: 'Hot Streak', arcaneBlast: 'Arcane Blast', frozen: 'Frostbite', arcanePower: 'Arcane Power', combustion: 'Combustion', presenceOfMind: 'Presence of Mind', ignite: 'Ignite' };
-const iconForEffect = effect => {
-  const name = effectTalentNames[effect.id] || effect.name;
-  const baseName = name.split(' · ')[0];
-  return talentIcons[name] || talentIcons[baseName] || classTalentIcons[name] || classTalentIcons[baseName] || spellIcons[name] || spellIcons[baseName] || null;
-};
+const iconForEffect = effect => talentIcons[effectTalentNames[effect.id] || effect.name];
 function readSavedSpecs(classId) {
   try {
     const value = JSON.parse(localStorage.getItem(specStorageKey(classId)) || '[]');
@@ -144,14 +87,6 @@ const defaultCondition = spell => ({
   condition: spell.name === 'Arcane Missiles' ? 'missileBarrage' : spell.name === 'Ice Lance' ? 'fingersOfFrost' : spell.name === 'Pyroblast' ? 'hotStreak' : spell.name === 'Scorch' ? 'improvedScorch' : 'always',
 });
 const conditionForSpell = spell => ['Arcane Missiles', 'Ice Lance', 'Pyroblast', 'Scorch'].includes(spell.name) ? defaultCondition(spell).condition : spell.condition;
-const immolateConditions = [
-  { value: 'immolateInactive', label: 'Immolate is not active' },
-  { value: 'immolateRefresh', label: 'Immolate has less than 5 sec remaining' },
-];
-function MultiConditionDropdown({ selected = [], onChange }) {
-  const toggle = value => onChange(selected.includes(value) ? selected.filter(item => item !== value) : [...selected, value]);
-  return <details className="multi-condition-dropdown"><summary>{selected.length ? `CONDITIONS · ${selected.length}` : 'ADD CONDITIONS'}</summary><div className="multi-condition-menu"><small>Cast when any selected condition is met. Forever has no 30% DoT rollover, so refresh when less than 5 sec remain.</small>{immolateConditions.map(condition => <label key={condition.value}><input type="checkbox" aria-label={condition.label} checked={selected.includes(condition.value)} onChange={() => toggle(condition.value)}/><span>{condition.label}</span></label>)}</div></details>;
-}
 function limitBuildToPoints(build, maxPoints) {
   const next = { ...build };
   let points = Object.values(next).reduce((sum, rank) => sum + rank, 0);
@@ -179,7 +114,7 @@ function PetAbilityKit({ classData, pet, level }) {
   })}</div></details>;
 }
 const defaultNames = ['Arcane Missiles', 'Ice Lance', 'Frostbolt'];
-const initialPriorityFor = (classData, level) => defaultNames.map(name => buildDamageSpellCatalog(classData, level).find(spell => spell.name === name)).filter(Boolean).map(spell => ({ ...spell, ...defaultCondition(spell) }));
+const initialPriority = defaultNames.map(name => damageSpellCatalogs.mage.find(spell => spell.name === name)).filter(Boolean).map(spell => ({ ...spell, ...defaultCondition(spell) }));
 const spellRankText = (classData, name, rank) => classData.spell_desc[`${classData.class}|${name}|${rank || ''}`]
   || Object.entries(classData.spell_desc).find(([key]) => key.startsWith(`${classData.class}|${name}|`))?.[1];
 const manaCost = (spell, maxMana) => Math.max(0, (Number(spell.mana) || 0) + (Number(spell.manaFraction) || 0) * maxMana);
@@ -524,7 +459,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
           if (isCrit) combustionFireCrits++;
           if (combustionFireCrits >= 4) combustionActive = false;
         }
-        castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: isCrit, activeBuffs: buffsAtCast, enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs, procs, damage: totalCastDamage, igniteApplied, manaRefund: masterOfElementsRefund });
+        castLog.push({ time, name: usable.name, school: usable.school, hit, crit: isCrit, activeBuffs: buffsAtCast, enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs, procs, damage: totalCastDamage, igniteApplied, manaRefund: masterOfElementsRefund });
       }
       continue;
     }
@@ -607,14 +542,12 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       { id: 'fingersOfFrost', name: 'Fingers of Frost', procs: fingersOfFrost.procs, uses: fingersOfFrost.uses, uptime: fingersOfFrost.uptime, uptimePct: duration ? fingersOfFrost.uptime / duration * 100 : 0, activeAtEnd: fingersOfFrost.charges > 0, chargesAtEnd: fingersOfFrost.charges, rank: build['Fingers of Frost'] || 0 },
     ],
     castLog,
-        events: [...priority.map(spell => ({ name: spell.name, specialization: spell.specialization, damage: spellDamage.get(spell) || 0, casts: castCounts.get(spell) || 0, crits: spellCrits.get(spell) || 0 })), ...(igniteTickCount ? [{ name: 'Ignite', specialization: 'Fire', damage: igniteDamage, casts: 0, crits: 0, ticks: igniteTickCount }] : [])],
+    events: [...priority.map(spell => ({ name: spell.name, damage: spellDamage.get(spell) || 0, casts: castCounts.get(spell) || 0, crits: spellCrits.get(spell) || 0 })), ...(igniteTickCount ? [{ name: 'Ignite', damage: igniteDamage, casts: 0, crits: 0, ticks: igniteTickCount }] : [])],
   };
 }
 
 const resultStoragePrefix = '4esim_sim_result_';
 const batchSize = 1000;
-// Add a class data bundle and a simulator here to make it selectable and runnable.
-const simulatorByClass = Object.fromEntries(Object.keys(classDataLoaders).map(id => [id, id === 'mage' ? simulate : id === 'warlock' ? simulateWarlock : simulateGeneric]));
 const readSimulationReport = id => {
   try { return JSON.parse(localStorage.getItem(`${resultStoragePrefix}${id}`) || 'null'); }
   catch { return null; }
@@ -626,10 +559,8 @@ const medianOf = values => {
 };
 function ResultsPage({ id }) {
   const [report] = useState(() => readSimulationReport(id));
-  const [showPetTimelineEvents, setShowPetTimelineEvents] = useState(true);
   if (!report) return <div className="results-shell"><main className="results-main"><p>This simulation report isn’t available in this browser. Return to the simulator and run it again.</p><a className="run-btn" href={siteBaseUrl}>OPEN SIMULATOR</a></main></div>;
   const { metrics, medianRun, histogram, config, completedAt } = report;
-  const reportTimeline = showPetTimelineEvents ? medianRun.castLog : medianRun.castLog.filter(entry => entry.type !== 'pet');
   const maxEvents = Math.max(1, ...medianRun.events.map(event => event.damage));
   return <div className="results-shell" style={{ '--accent': config.accent || '#69CCF0' }}>
     <header className="results-topbar"><a href={siteBaseUrl} className="results-brand"><span>4e</span><b>4esim</b></a><div>SIMULATION REPORT <i/> {new Date(completedAt).toLocaleString()}</div><a className="results-back" href={siteBaseUrl}>BACK TO ROTATION LAB ↗</a></header>
@@ -646,9 +577,9 @@ function ResultsPage({ id }) {
       <section className="report-panel"><div className="report-panel-heading"><div><span>OUTCOME SPREAD</span><h2>DPS distribution</h2></div><b>{report.runs.toLocaleString()} RUNS</b></div><div className="histogram">{histogram.map((bin, i) => <div className="histogram-bar" key={i} title={`${bin.count} runs · ${bin.from.toFixed(1)}–${bin.to.toFixed(1)} DPS`}><i style={{ height: `${Math.max(bin.count ? 3 : 0, bin.count / report.histogramMax * 100)}%` }}/></div>)}</div><div className="histogram-labels"><span>{metrics.minDps.toFixed(1)} DPS</span><span>MEDIAN {metrics.medianDps.toFixed(1)}</span><span>{metrics.maxDps.toFixed(1)} DPS</span></div></section>
       <div className="report-columns">
         <section className="report-panel"><div className="report-panel-heading"><div><span>MEDIAN RUN · {medianRun.casts} CASTS</span><h2>Damage by spell</h2></div><b>{Math.round(medianRun.damage).toLocaleString()} TOTAL</b></div><div className="report-spells"><div className="report-spell-head"><span>SPELL</span><span>CASTS / CRITS</span><span>DAMAGE</span></div>{medianRun.events.map(event => <div className="report-spell-row" key={event.name}><span>{event.name}</span><span>{event.ticks ? `${event.ticks} ticks` : `${event.casts} / ${event.crits}`}</span><div><i><b style={{ width: `${Math.max(event.damage ? 2 : 0, event.damage / maxEvents * 100)}%` }}/></i><strong>{Math.round(event.damage).toLocaleString()}</strong></div></div>)}</div></section>
-        <section className="report-panel"><div className="report-panel-heading"><div><span>MEDIAN RUN</span><h2>Encounter details</h2></div></div><div className="report-detail-grid"><div><span>HIT RATE</span><b>{(metrics.medianHitRate * 100).toFixed(1)}%</b></div><div><span>CRIT RATE</span><b>{(metrics.medianCritRate * 100).toFixed(1)}%</b></div><div><span>CRITICAL HITS</span><b>{medianRun.crits}</b></div><div><span>MANA SPENT</span><b>{Math.round(medianRun.manaSpent).toLocaleString()}</b></div></div><div className="report-buffs"><span>PROC BUFF ACTIVITY</span>{medianRun.buffs.map(buff => <div key={buff.id}><b>{buff.name}</b><small>{buff.procs} procs · {buff.uses} used · {buff.uptime.toFixed(1)}s uptime</small></div>)}</div>{config.classId === 'mage' && <div className="report-buffs"><span>MANA TOOL USE · MEDIAN RUN</span><div><b>Evocation</b><small>{medianRun.manaActions.evocationUses} uses · {Math.round(medianRun.manaActions.evocationMana).toLocaleString()} mana restored</small></div>{config.manaGem && <div><b>{config.manaGem.name}</b><small>{medianRun.manaActions.manaGemUses} uses · {Math.round(medianRun.manaActions.manaGemMana).toLocaleString()} mana restored</small></div>}</div>}<div className="report-build"><span>SELECTED TALENTS</span><p>{Object.entries(config.build).filter(([, rank]) => rank > 0).map(([name, rank]) => `${name} ${rank}`).join(' · ') || 'None'}</p></div></section>
+        <section className="report-panel"><div className="report-panel-heading"><div><span>MEDIAN RUN</span><h2>Encounter details</h2></div></div><div className="report-detail-grid"><div><span>HIT RATE</span><b>{(metrics.medianHitRate * 100).toFixed(1)}%</b></div><div><span>CRIT RATE</span><b>{(metrics.medianCritRate * 100).toFixed(1)}%</b></div><div><span>CRITICAL HITS</span><b>{medianRun.crits}</b></div><div><span>MANA SPENT</span><b>{Math.round(medianRun.manaSpent).toLocaleString()}</b></div></div><div className="report-buffs"><span>PROC BUFF ACTIVITY</span>{medianRun.buffs.map(buff => <div key={buff.id}><b>{buff.name}</b><small>{buff.procs} procs · {buff.uses} used · {buff.uptime.toFixed(1)}s uptime</small></div>)}</div><div className="report-buffs"><span>MANA TOOL USE · MEDIAN RUN</span><div><b>Evocation</b><small>{medianRun.manaActions.evocationUses} uses · {Math.round(medianRun.manaActions.evocationMana).toLocaleString()} mana restored</small></div>{config.manaGem && <div><b>{config.manaGem.name}</b><small>{medianRun.manaActions.manaGemUses} uses · {Math.round(medianRun.manaActions.manaGemMana).toLocaleString()} mana restored</small></div>}<div><b>Mana potion</b><small>Not implemented</small></div></div><div className="report-build"><span>SELECTED TALENTS</span><p>{Object.entries(config.build).filter(([, rank]) => rank > 0).map(([name, rank]) => `${name} ${rank}`).join(' · ') || 'None'}</p></div></section>
       </div>
-      <section className="report-panel report-timeline"><div className="report-panel-heading"><div><span>REPRESENTATIVE RUN · CLOSEST TO MEDIAN DPS</span><h2>Cast timeline</h2></div><div className="timeline-controls"><label className="log-toggle"><input type="checkbox" checked={showPetTimelineEvents} onChange={event => setShowPetTimelineEvents(event.target.checked)}/> SHOW PET EVENTS</label><b>{reportTimeline.filter(entry => entry.type !== 'tick').length} ACTIONS</b></div></div><div className="cast-timeline"><div className="cast-timeline-head"><span>TIME</span><span>CAST</span><span>DAMAGE</span><span>MANA</span><span>ACTIVE BUFFS</span><span>ENEMY DEBUFFS</span><span>BUFF CHANGES</span></div>{reportTimeline.map((entry, index) => <div className="cast-timeline-row" key={`${entry.time}-${entry.name}-${index}`}><time>{formatTime(entry.time)}</time><span className="cast-log-spell"><i className={`school-icon ${entry.school.toLowerCase()}`}>{entry.school === 'Frost' ? '❄' : entry.school === 'Fire' ? '♨' : '✧'}</i><b>{entry.name}</b>{entry.specialization && <small className="spell-specialization-tag">{entry.specialization}</small>}{entry.crit && <em>CRIT</em>}{!entry.hit && <em className="miss">MISS</em>}</span><span className="cast-log-damage">{Math.round(entry.damage ?? 0).toLocaleString()}</span><span className="cast-log-mana">{Math.round(entry.currentMana ?? 0).toLocaleString()}</span><span className="cast-log-buffs">{entry.activeBuffs.length ? entry.activeBuffs.map(buff => <EffectIcon key={buff.id} effect={buff}/>) : <small>—</small>}</span><span className="cast-log-debuffs">{entry.enemyDebuffs?.length ? entry.enemyDebuffs.map(debuff => <span className="debuff-effect" key={debuff.id}><EffectIcon effect={debuff}/><small>{debuff.remaining.toFixed(1)}s</small></span>) : <small>—</small>}</span><span className="cast-log-changes">{entry.procs.map((buff, i) => <EffectChange key={`p${i}`} label={buff} mode="proc"/> )}{entry.consumedBuffs.map((buff, i) => <EffectChange key={`u${i}`} label={buff} mode="used"/> )}{!entry.procs.length && !entry.consumedBuffs.length && <small>—</small>}</span></div>)}</div></section>
+      <section className="report-panel report-timeline"><div className="report-panel-heading"><div><span>REPRESENTATIVE RUN · CLOSEST TO MEDIAN DPS</span><h2>Cast timeline</h2></div><b>{medianRun.castLog.filter(entry => entry.type !== 'tick').length} ACTIONS</b></div><div className="cast-timeline"><div className="cast-timeline-head"><span>TIME</span><span>CAST</span><span>DAMAGE</span><span>MANA</span><span>ACTIVE BUFFS</span><span>ENEMY DEBUFFS</span><span>BUFF CHANGES</span></div>{medianRun.castLog.map((entry, index) => <div className="cast-timeline-row" key={`${entry.time}-${entry.name}-${index}`}><time>{formatTime(entry.time)}</time><span className="cast-log-spell"><i className={`school-icon ${entry.school.toLowerCase()}`}>{entry.school === 'Frost' ? '❄' : entry.school === 'Fire' ? '♨' : '✧'}</i><b>{entry.name}</b>{entry.crit && <em>CRIT</em>}{!entry.hit && <em className="miss">MISS</em>}</span><span className="cast-log-damage">{Math.round(entry.damage ?? 0).toLocaleString()}</span><span className="cast-log-mana">{Math.round(entry.currentMana ?? 0).toLocaleString()}</span><span className="cast-log-buffs">{entry.activeBuffs.length ? entry.activeBuffs.map(buff => <EffectIcon key={buff.id} effect={buff}/>) : <small>—</small>}</span><span className="cast-log-debuffs">{entry.enemyDebuffs?.length ? entry.enemyDebuffs.map(debuff => <span className="debuff-effect" key={debuff.id}><EffectIcon effect={debuff}/><small>{debuff.remaining.toFixed(1)}s</small></span>) : <small>—</small>}</span><span className="cast-log-changes">{entry.procs.map((buff, i) => <EffectChange key={`p${i}`} label={buff} mode="proc"/> )}{entry.consumedBuffs.map((buff, i) => <EffectChange key={`u${i}`} label={buff} mode="used"/> )}{!entry.procs.length && !entry.consumedBuffs.length && <small>—</small>}</span></div>)}</div></section>
       <p className="report-footnote">Statistics summarize {report.runs.toLocaleString()} independent random simulations. Spell damage, casts, crits, proc activity, and timeline are from the run closest to the median DPS.</p>
     </main>
   </div>;
@@ -667,7 +598,6 @@ function SimulatorApp() {
     } catch { /* Storage may be unavailable in private browsing. */ }
     return 'mage';
   });
-  const [loadedClasses, setLoadedClasses] = useState({});
   const [activePetId, setActivePetId] = useState(() => {
     try {
       const level = Math.min(60, Math.max(1, Number(localStorage.getItem('4esim_character_level')) || 60));
@@ -676,13 +606,13 @@ function SimulatorApp() {
       return unlocked.some(pet => pet.id === saved) ? saved : (unlocked.at(-1)?.id || '');
     } catch { return 'imp'; }
   });
-  const [sacrificePet, setSacrificePet] = useState(false);
-  const activeClass = classRegistry.find(characterClass => characterClass.id === selectedClass && characterClass.available && classDataLoaders[characterClass.id] && simulatorByClass[characterClass.id]) || classRegistry.find(characterClass => characterClass.available && classDataLoaders[characterClass.id] && simulatorByClass[characterClass.id]);
-  const classData = loadedClasses[selectedClass];
+  const activeClass = classRegistry.find(characterClass => characterClass.id === selectedClass && characterClass.available) || classRegistry.find(characterClass => characterClass.available);
+  const classData = activeClass.id === 'warlock' ? warlock : mage;
   const classPets = petsForClass(selectedClass);
   const activePet = classPets.find(pet => pet.id === activePetId) || null;
+  const damageSpellCatalog = damageSpellCatalogs[activeClass.id] || damageSpellCatalogs.mage;
   const activeTalentPage = `${activeClass.name} talents`;
-  const classBookTabs = classData ? [...(classData.spellbook.general?.length ? [{ name: 'General', spells: classData.spellbook.general }] : []), ...classData.spellbook.tabs] : [];
+  const classBookTabs = [...(classData.spellbook.general?.length ? [{ name: 'General', spells: classData.spellbook.general }] : []), ...classData.spellbook.tabs];
   const [duration, setDuration] = useState(180);
   const [startingMana, setStartingMana] = useState(5000);
   const [regen, setRegen] = useState(100);
@@ -691,29 +621,17 @@ function SimulatorApp() {
   const [useEvocation, setUseEvocation] = useState(true);
   const [useManaGem, setUseManaGem] = useState(true);
   const [baseHitChance, setBaseHitChance] = useState(83);
-  const [targetHealthPercent, setTargetHealthPercent] = useState(100);
   const [talentLevel, setTalentLevel] = useState(() => {
     try { return Math.min(60, Math.max(1, Number(localStorage.getItem('4esim_character_level')) || 60)); } catch { return 60; }
   });
-  const damageSpellCatalog = classData ? buildDamageSpellCatalog(classData, talentLevel) : [];
-  const petAttack = !sacrificePet && (activePet?.abilities.find(ability => ability.type === 'Attack' && damageSpellCatalog.some(spell => spell.name === ability.name))
-    || activePet?.abilities.find(ability => damageSpellCatalog.some(spell => spell.name === ability.name)));
-  const petSpell = petAttack ? damageSpellCatalog.find(spell => spell.name === petAttack.name) : null;
-  const petAttackProfile = selectedClass === 'warlock' && activePetId && !sacrificePet
-    ? petAttackProfileFor(petAttackProfiles, activePetId, talentLevel)
-    : null;
-  const lifeTapRanks = selectedClass === 'warlock' && classData ? Object.entries(classData.spell_desc).filter(([key, detail]) => key.startsWith('Warlock|Life Tap|') && Number(detail.lv?.match(/level\s+(\d+)/i)?.[1] || 1) <= talentLevel).sort((a, b) => numberFromText(a[0]) - numberFromText(b[0])) : [];
-  const lifeTapText = lifeTapRanks.at(-1)?.[1]?.d || '';
-  const lifeTap = lifeTapText.match(/Converts\s+([\d,]+)\s+Health into\s+([\d,]+)\s+Mana/i) ? { health: numberFromText(lifeTapText.match(/Converts\s+([\d,]+)\s+Health into\s+([\d,]+)\s+Mana/i)[1]), mana: numberFromText(lifeTapText.match(/Converts\s+([\d,]+)\s+Health into\s+([\d,]+)\s+Mana/i)[2]) } : null;
-  const [build, setBuild] = useState({});
+  const [build, setBuild] = useState(() => limitBuildToPoints(readSavedTalents(selectedClass, classData), Math.max(0, talentLevel - 9)));
   const [hoveredTalent, setHoveredTalent] = useState(null);
   const tooltipTimer = useRef(null);
-  const [rotation, setRotation] = useState([]);
+  const [rotation, setRotation] = useState(selectedClass === 'mage' ? initialPriority : []);
   const [draggedPriority, setDraggedPriority] = useState(null);
   const [dragOverPriority, setDragOverPriority] = useState(null);
   const [simulation, setSimulation] = useState(null);
   const [showCastTimeline, setShowCastTimeline] = useState(false);
-  const [showPetTimelineEvents, setShowPetTimelineEvents] = useState(true);
   const [addMenuOpen, setAddMenuOpen] = useState(false);
   const [spellSearch, setSpellSearch] = useState('');
   const [active, setActive] = useState('Rotation lab');
@@ -731,26 +649,12 @@ function SimulatorApp() {
     setActivePetId(current => unlockedPets.some(pet => pet.id === current) ? current : (unlockedPets.at(-1)?.id || ''));
   };
   useEffect(() => {
-    if (loadedClasses[selectedClass]) return;
-    let cancelled = false;
-    classDataLoaders[selectedClass]().then(module => {
-      if (!cancelled) setLoadedClasses(current => ({ ...current, [selectedClass]: addSpellMetadata(module.default) }));
-    });
-    return () => { cancelled = true; };
-  }, [selectedClass, loadedClasses]);
-  useEffect(() => {
-    if (!classData) return;
     document.cookie = `${talentCookieName(selectedClass)}=${encodeURIComponent(JSON.stringify(build))}; Max-Age=31536000; Path=/; SameSite=Lax`;
-  }, [build, selectedClass, classData]);
+  }, [build, selectedClass]);
   useEffect(() => {
     try { localStorage.setItem('4esim_selected_class', selectedClass); } catch { /* Storage may be unavailable in private browsing. */ }
-    if (!classData) return;
-    setStartingMana(selectedClass === 'warrior' ? 0 : resourceCapForClass(selectedClass));
-    setRegen(selectedClass === 'warrior' ? 0 : 100);
-    setSpirit(0);
     setBuild(limitBuildToPoints(readSavedTalents(selectedClass, classData), Math.max(0, talentLevel - 9)));
-    setRotation(selectedClass === 'mage' ? initialPriorityFor(classData, talentLevel) : []);
-    setSacrificePet(false);
+    setRotation(selectedClass === 'mage' ? initialPriority : []);
     if (selectedClass === 'warlock') {
       const unlockedPets = classPets.filter(pet => pet.level <= talentLevel);
       try {
@@ -763,7 +667,7 @@ function SimulatorApp() {
     setSpecName('');
     setSimulation(null);
     setActive('Rotation lab');
-  }, [selectedClass, classData]);
+  }, [selectedClass]);
   useEffect(() => {
     if (selectedClass === 'warlock' && classPets.some(pet => pet.id === activePetId)) {
       try { localStorage.setItem('4esim_active_pet_warlock', activePetId); } catch { /* Storage may be unavailable in private browsing. */ }
@@ -779,17 +683,15 @@ function SimulatorApp() {
       else localStorage.removeItem(key);
     } catch { /* Storage may be unavailable in private browsing. */ }
   }, [selectedSpecId, selectedClass]);
-  const configSignature = JSON.stringify({ rotation, duration, startingMana, regen, spirit, spellPower, baseHitChance, targetHealthPercent, sacrificePet, useEvocation, useManaGem, talentLevel, build });
+  const configSignature = JSON.stringify({ rotation, duration, startingMana, regen, spirit, spellPower, baseHitChance, useEvocation, useManaGem, talentLevel, build });
   const result = simulation?.signature === configSignature ? simulation.result : null;
   const runSimulation = () => {
-    if (!rotation.length) return;
+    if (selectedClass !== 'mage') return;
     const resultTab = window.open('about:blank', '_blank');
     if (!resultTab) return;
     const manaGem = manaGemForLevel(talentLevel);
     const manaOptions = { useEvocation: useEvocation && talentLevel >= 20, useManaGem, manaGem };
-    const simulateClass = simulatorByClass[selectedClass];
-    if (!simulateClass) return;
-    const runs = Array.from({ length: batchSize }, () => simulateClass(rotation, Number(duration), Number(startingMana), Number(regen), Number(spirit), build, Math.floor(Math.random() * 0xffffffff), Number(baseHitChance), Number(spellPower), manaOptions, { classId: selectedClass, resourceType: resourceTypeForClass(selectedClass), resourceCap: resourceCapForClass(selectedClass), activePetId, sacrificePet, talentLevel, petSpell, lifeTap, targetHealthPercent: Number(targetHealthPercent) }));
+    const runs = Array.from({ length: batchSize }, () => simulate(rotation, Number(duration), Number(startingMana), Number(regen), Number(spirit), build, Math.floor(Math.random() * 0xffffffff), Number(baseHitChance), Number(spellPower), manaOptions));
     const sorted = [...runs].sort((a, b) => a.dps - b.dps);
     const medianRun = sorted[Math.floor((sorted.length - 1) / 2)];
     const minimum = sorted[0].dps;
@@ -802,21 +704,13 @@ function SimulatorApp() {
     });
     const dpsSorted = sorted.map(run => run.dps);
     const percentile = p => dpsSorted[Math.round((dpsSorted.length - 1) * p)];
-    const medianHitRate = medianOf(runs.map(run => {
-      if (selectedClass !== 'warlock') return run.casts ? run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type) && entry.hit).length / run.casts : 0;
-      const attackAttempts = run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type));
-      return attackAttempts.length ? attackAttempts.filter(entry => entry.hit).length / attackAttempts.length : 0;
-    }));
-    const medianCritRate = medianOf(runs.map(run => {
-      if (selectedClass !== 'warlock') return run.casts ? run.crits / run.casts : 0;
-      const landedAttacks = run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type) && entry.hit);
-      return landedAttacks.length ? landedAttacks.filter(entry => entry.crit).length / landedAttacks.length : 0;
-    }));
+    const medianHitRate = medianOf(runs.map(run => run.casts ? run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type) && entry.hit).length / run.casts : 0));
+    const medianCritRate = medianOf(runs.map(run => run.casts ? run.crits / run.casts : 0));
     const id = `${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
     const report = {
       runs: batchSize,
       completedAt: new Date().toISOString(),
-      config: { classId: selectedClass, accent: activeClass.accent, duration: Number(duration), startingMana: Number(startingMana), regenPer5s: Number(regen), spirit: Number(spirit), spellPower: Number(spellPower), baseHitChance: Number(baseHitChance), targetHealthPercent: Number(targetHealthPercent), sacrificePet, useEvocation, useManaGem, manaGem, build, priority: rotation.map(({ name, school, specialization, conditional, condition, conditions, offGcd }) => ({ name, school, specialization, conditional, condition, conditions, offGcd })) },
+      config: { accent: activeClass.accent, duration: Number(duration), startingMana: Number(startingMana), regenPer5s: Number(regen), spirit: Number(spirit), spellPower: Number(spellPower), baseHitChance: Number(baseHitChance), useEvocation, useManaGem, manaGem, build, priority: rotation.map(({ name, school, conditional, condition, offGcd }) => ({ name, school, conditional, condition, offGcd })) },
       metrics: { medianDps: medianOf(dpsSorted), meanDps: runs.reduce((sum, run) => sum + run.dps, 0) / runs.length, p10Dps: percentile(0.1), p90Dps: percentile(0.9), minDps: minimum, maxDps: maximum, medianHitRate, medianCritRate },
       medianRun,
       histogram: bins,
@@ -838,7 +732,7 @@ function SimulatorApp() {
     next.splice(target, 0, movedSpell);
     return next;
   });
-  const currentSpecConfig = () => ({ classId: selectedClass, activePetId: selectedClass === 'warlock' ? activePetId : undefined, sacrificePet: selectedClass === 'warlock' && sacrificePet, duration, startingMana, regen, spirit, spellPower, useEvocation, useManaGem, baseHitChance, targetHealthPercent, talentLevel, build, rotation: rotation.map(({ name, school, specialization, conditional, condition, conditions, offGcd }) => ({ name, school, specialization, conditional, condition, conditions, offGcd })) });
+  const currentSpecConfig = () => ({ classId: selectedClass, activePetId: selectedClass === 'warlock' ? activePetId : undefined, duration, startingMana, regen, spirit, spellPower, useEvocation, useManaGem, baseHitChance, talentLevel, build, rotation: rotation.map(({ name, school, conditional, condition, offGcd }) => ({ name, school, conditional, condition, offGcd })) });
   const loadSpec = spec => {
     const config = spec?.config;
     if (!config) return;
@@ -850,8 +744,6 @@ function SimulatorApp() {
     setUseEvocation(config.useEvocation ?? true);
     setUseManaGem(config.useManaGem ?? true);
     setBaseHitChance(config.baseHitChance ?? 83);
-    setTargetHealthPercent(config.targetHealthPercent ?? 100);
-    setSacrificePet(config.sacrificePet ?? false);
     const specLevel = Math.min(60, Math.max(1, Number(config.talentLevel) || 60));
     setCharacterLevel(specLevel);
     if (selectedClass === 'warlock') {
@@ -861,8 +753,8 @@ function SimulatorApp() {
     setBuild(limitBuildToPoints(config.build && typeof config.build === 'object' ? config.build : {}, Math.max(0, specLevel - 9)));
     const nextRotation = Array.isArray(config.rotation) ? config.rotation.map(entry => {
       const spell = entry.name === 'Combustion' && selectedClass === 'mage' ? combustionSpell : damageSpellCatalog.find(item => item.name === entry.name);
-      return spell ? { ...spell, conditional: entry.conditional ?? defaultCondition(spell).conditional, condition: entry.condition && entry.condition === defaultCondition(spell).condition ? entry.condition : defaultCondition(spell).condition, conditions: Array.isArray(entry.conditions) ? entry.conditions : [] } : null;
-    }).filter(Boolean) : (selectedClass === 'mage' ? initialPriorityFor(classData, talentLevel) : []);
+      return spell ? { ...spell, conditional: entry.conditional ?? defaultCondition(spell).conditional, condition: entry.condition && entry.condition === defaultCondition(spell).condition ? entry.condition : defaultCondition(spell).condition } : null;
+    }).filter(Boolean) : (selectedClass === 'mage' ? initialPriority : []);
     setRotation(nextRotation);
     setSelectedSpecId(spec.id);
     setSpecName(spec.name);
@@ -913,7 +805,6 @@ function SimulatorApp() {
     setHoveredTalent(null);
   };
 
-  if (!classData) return <div className="shell" style={{ '--accent': activeClass.accent }}><main className="main"><p className="panel-desc">Loading {activeClass.name} spellbook and talents…</p></main></div>;
   return <div className="shell" style={{ '--accent': activeClass.accent }}>
     <aside className="sidebar">
       <div className="brand"><div className="brand-mark">4e</div><div><strong>4esim</strong><span>FOREVER DPS LAB</span></div></div>
@@ -924,21 +815,21 @@ function SimulatorApp() {
     <main className="main">
       <header className="topbar"><div><span className="crumb">SIMULATOR /</span> <b>{active.toUpperCase()}</b></div><div className="top-right"><details className="class-switcher"><summary className="pill"><i/> {activeClass.name.toUpperCase()} <span>▾</span></summary><div className="class-menu" role="listbox" aria-label="Select character class">{classRegistry.map(characterClass => <button key={characterClass.id} type="button" role="option" aria-selected={selectedClass === characterClass.id} disabled={!characterClass.available} className={characterClass.available ? 'class-option available' : 'class-option locked'} onClick={event => { event.currentTarget.closest('details').open = false; setSelectedClass(characterClass.id); }}><span className="class-mark"><img src={characterClass.icon} alt=""/></span><span className="class-option-copy"><b>{characterClass.name}</b><small>{characterClass.available ? 'ACTIVE CLASS' : 'COMING LATER'}</small></span><span className="class-option-status">{characterClass.available ? '✓' : 'LOCKED'}</span></button>)}</div></details><span className="build-label">BUILD 0.1</span></div></header>
       {active === 'Rotation lab' && <>
-        <section className="page-head"><div><div className="eyebrow">THEORYCRAFT WORKSPACE <span>·</span> PATCH FOREVER</div><h1>Find your <em>next best cast.</em></h1><p>Choose spells, set their priority and conditions, then run the encounter simulation.</p></div><button className="run-btn" disabled={!rotation.length} onClick={runSimulation}><span>▶</span> {rotation.length ? 'SIMULATE 1,000 RUNS ↗' : 'SELECT SPELLS FIRST'}</button></section>
+        <section className="page-head"><div><div className="eyebrow">THEORYCRAFT WORKSPACE <span>·</span> PATCH FOREVER</div><h1>Find your <em>next best cast.</em></h1><p>Choose spells, set their priority and conditions, then run the encounter simulation.</p></div><button className="run-btn" disabled={selectedClass !== 'mage' || !rotation.length} onClick={runSimulation}><span>▶</span> {selectedClass !== 'mage' ? 'WARLOCK SIMULATION COMING LATER' : rotation.length ? 'SIMULATE 1,000 RUNS ↗' : 'SELECT SPELLS FIRST'}</button></section>
         <section className="spec-manager" aria-label="Saved specs"><div className="spec-manager-title"><b>SAVED SPECS</b><span>Talent build · priority · stats</span></div><select aria-label="Load saved spec" value={selectedSpecId} onChange={event => { const spec = savedSpecs.find(item => item.id === event.target.value); if (spec) loadSpec(spec); else { setSelectedSpecId(''); setSpecName(''); } }}><option value="">Choose a saved spec…</option>{savedSpecs.map(spec => <option key={spec.id} value={spec.id}>{spec.name}</option>)}</select><input aria-label="Spec name" value={specName} onChange={event => setSpecName(event.target.value)} placeholder="Name this spec" maxLength={48}/><button className="spec-new" onClick={() => { setSelectedSpecId(''); setSpecName(''); }}>NEW</button><button onClick={saveSpec} disabled={!specName.trim()}>{savedSpecs.some(spec => spec.id === selectedSpecId) ? 'UPDATE SPEC' : 'SAVE SPEC'}</button><button className="spec-delete" onClick={deleteSpec} disabled={!selectedSpecId}>DELETE</button></section>
         <div className="grid-main">
-          <section className="panel rotation-panel"><PanelTitle kicker="01 / ROTATION" title="Spell priority" right={<span className="loop-tag">READY CONDITIONALS FIRST · THEN PRIORITY ORDER</span>}/><p className="panel-desc">{selectedClass === 'mage' ? 'Add damage spells, set their priorities, and configure proc conditions. Ready conditional spells spend active buffs before the filler rotation.' : selectedClass === 'warlock' ? 'Add damage spells and order them by priority. Warlock uses the class specific talent model.' : 'Add damage spells and order them by priority. This class uses the neutral spell model; its talents are saved but do not modify results yet.'}</p>
-            {selectedClass === 'warlock' && <section className="pet-planner" aria-label="Warlock active pet"><label htmlFor="active-pet">ACTIVE PET</label><select id="active-pet" value={activePetId} onChange={event => setActivePetId(event.target.value)}><option value="">No pet selected</option>{classPets.map(pet => <option key={pet.id} value={pet.id} disabled={talentLevel < pet.level}>{pet.name} · summon at level {pet.level}</option>)}</select>{build['Demonic Sacrifice'] > 0 && <label className="pet-sacrifice-toggle"><input type="checkbox" checked={sacrificePet} onChange={event => setSacrificePet(event.target.checked)}/> Sacrifice this demon for its talent effect</label>}<small>{activePet ? `${sacrificePet ? 'Sacrifice ' : activePet.summonSpell + ' · level '}${sacrificePet ? activePet.name : activePet.level}` : 'Choose the demon you plan to summon.'}</small>{petAttackProfile && <small className="pet-attack-profile">{petAttackProfile.kind === 'melee' ? `MELEE AUTO · ${petAttackProfile.swingSpeed.toFixed(1)}s · ${Math.round(petAttackProfile.damageMin + petAttackProfile.attackPower / 14 * petAttackProfile.swingSpeed)}–${Math.round(petAttackProfile.damageMax + petAttackProfile.attackPower / 14 * petAttackProfile.swingSpeed)} base damage per swing before armor; Forever stat scaling not yet calibrated.` : `RANGED AUTO · ${petAttackProfile.ability} · ${petAttackProfile.baseInterval.toFixed(1)}s base cast; damage and spell power scaling use the Forever spell rank.`}</small>}<PetAbilityKit classData={classData} pet={activePet} level={talentLevel}/><p className="pet-planner-note">The shared pet attack model runs alongside damage abilities such as Firebolt and Lash of Pain. Utility pet abilities remain reference only.</p></section>}
+          <section className="panel rotation-panel"><PanelTitle kicker="01 / ROTATION" title="Spell priority" right={<span className="loop-tag">READY CONDITIONALS FIRST · THEN PRIORITY ORDER</span>}/><p className="panel-desc">{selectedClass === 'mage' ? 'Add damage spells, set their priorities, and configure proc conditions. Ready conditional spells spend active buffs before the filler rotation.' : 'Warlock spells are available for priority planning. Warlock damage, mana, and talent calculations are not implemented yet, so simulation is disabled for this class.'}</p>
+            {selectedClass === 'warlock' && <section className="pet-planner" aria-label="Warlock active pet"><label htmlFor="active-pet">ACTIVE PET</label><select id="active-pet" value={activePetId} onChange={event => setActivePetId(event.target.value)}><option value="">No pet selected</option>{classPets.map(pet => <option key={pet.id} value={pet.id} disabled={talentLevel < pet.level}>{pet.name} · summon at level {pet.level}</option>)}</select><small>{activePet ? `${activePet.summonSpell} · level ${activePet.level}` : 'Choose the demon you plan to summon.'}</small><PetAbilityKit classData={classData} pet={activePet} level={talentLevel}/><p className="pet-planner-note">Pet and ability reference only; pet abilities are not yet simulated or inserted into the spell priority.</p></section>}
             <div className="table-head"><span>PRIORITY / SPELL</span><span>DAMAGE</span><span>CAST TIME</span><span>COOLDOWN</span><span>MANA COST</span><span/></div>
-            <div className="spell-list">{rotation.map((spell, i) => <div className={`spell-row priority-row ${spell.offGcd ? 'offgcd-priority-row' : ''} ${dragOverPriority === i && draggedPriority !== i ? 'drag-over' : ''} ${draggedPriority === i ? 'dragging' : ''}`} key={`${spell.name}-${i}`} draggable onDragStart={event => { setDraggedPriority(i); event.dataTransfer.effectAllowed = 'move'; event.dataTransfer.setData('text/plain', String(i)); }} onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = 'move'; setDragOverPriority(i); }} onDrop={event => { event.preventDefault(); movePriority(i); setDraggedPriority(null); setDragOverPriority(null); }} onDragEnd={() => { setDraggedPriority(null); setDragOverPriority(null); }}><div className="spell-select"><span className="drag-order"><span className="drag-grip" aria-hidden="true" title="Drag to reorder">⠿</span><span className="order">{String(i + 1).padStart(2, '0')}</span></span><span className={`school-icon ${spell.school.toLowerCase()}`}>{spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : '✧'}</span><span className="selected-spell"><b>{spell.name}</b><small>{spell.offGcd ? 'OFF GCD · Instant · 3 min cooldown' : `${spell.specialization} · ${spell.rank} · ${Math.round(spell.coefficient * 100)}% SP`}</small>{selectedClass === 'warlock' && spell.name === 'Immolate' && <MultiConditionDropdown selected={spell.conditions || []} onChange={conditions => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditions, conditional: conditions.length > 0 } : entry))}/>}{['Arcane Missiles','Ice Lance','Pyroblast','Scorch'].includes(spell.name) && <span className="condition-control"><label><input type="checkbox" aria-label={`Enable conditional casting for ${spell.name}`} checked={spell.conditional ?? false} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditional: event.target.checked } : entry))}/><span>Enable conditional</span></label><select aria-label={`${spell.name} condition`} value={conditionForSpell(spell)} disabled={!spell.conditional} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, condition: event.target.value } : entry))}>{spell.name === 'Arcane Missiles' && <option value="missileBarrage">Missile Barrage active</option>}{spell.name === 'Ice Lance' && <option value="fingersOfFrost">Fingers of Frost active</option>}{spell.name === 'Pyroblast' && <option value="hotStreak">Hot Streak: 3 stacks, or 2 with &lt;4s</option>}{spell.name === 'Scorch' && <option value="improvedScorch">Build 5 stacks; refresh below 5s</option>}</select></span>}</span></div><SpellStat value={spell.offGcd ? '—' : spell.damage.toLocaleString()} suffix={spell.offGcd ? 'utility' : 'dmg'}/><SpellStat value={`${spell.cast}s`} suffix={spell.cast === 0 ? 'instant' : 'cast'}/><SpellStat value={spell.cooldown ? `${spell.cooldown}s` : '—'} suffix="cooldown"/><SpellStat value={spell.manaFraction ? `${spell.manaFraction * 100}%` : spell.mana.toLocaleString()} suffix={spell.manaFraction ? 'base mana' : 'mana'}/><button className="remove" draggable="false" onClick={() => setRotation(prev => prev.filter((_,n)=>n!==i))} aria-label={`Remove ${spell.name}`}>×</button></div>)}</div>
+            <div className="spell-list">{rotation.map((spell, i) => <div className={`spell-row priority-row ${spell.offGcd ? 'offgcd-priority-row' : ''} ${dragOverPriority === i && draggedPriority !== i ? 'drag-over' : ''} ${draggedPriority === i ? 'dragging' : ''}`} key={`${spell.name}-${i}`} draggable onDragStart={event => { setDraggedPriority(i); event.dataTransfer.effectAllowed = 'move'; event.dataTransfer.setData('text/plain', String(i)); }} onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = 'move'; setDragOverPriority(i); }} onDrop={event => { event.preventDefault(); movePriority(i); setDraggedPriority(null); setDragOverPriority(null); }} onDragEnd={() => { setDraggedPriority(null); setDragOverPriority(null); }}><div className="spell-select"><span className="drag-order"><span className="drag-grip" aria-hidden="true" title="Drag to reorder">⠿</span><span className="order">{String(i + 1).padStart(2, '0')}</span></span><span className={`school-icon ${spell.school.toLowerCase()}`}>{spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : '✧'}</span><span className="selected-spell"><b>{spell.name}</b><small>{spell.offGcd ? 'OFF GCD · Instant · 3 min cooldown' : `${spell.rank} · ${Math.round(spell.coefficient * 100)}% SP`}</small>{['Arcane Missiles','Ice Lance','Pyroblast','Scorch'].includes(spell.name) && <span className="condition-control"><label><input type="checkbox" aria-label={`Enable conditional casting for ${spell.name}`} checked={spell.conditional ?? false} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, conditional: event.target.checked } : entry))}/><span>Enable conditional</span></label><select aria-label={`${spell.name} condition`} value={conditionForSpell(spell)} disabled={!spell.conditional} onChange={event => setRotation(prev => prev.map((entry,index) => index === i ? { ...entry, condition: event.target.value } : entry))}>{spell.name === 'Arcane Missiles' && <option value="missileBarrage">Missile Barrage active</option>}{spell.name === 'Ice Lance' && <option value="fingersOfFrost">Fingers of Frost active</option>}{spell.name === 'Pyroblast' && <option value="hotStreak">Hot Streak: 3 stacks, or 2 with &lt;4s</option>}{spell.name === 'Scorch' && <option value="improvedScorch">Build 5 stacks; refresh below 5s</option>}</select></span>}</span></div><SpellStat value={spell.offGcd ? '—' : spell.damage.toLocaleString()} suffix={spell.offGcd ? 'utility' : 'dmg'}/><SpellStat value={`${spell.cast}s`} suffix={spell.cast === 0 ? 'instant' : 'cast'}/><SpellStat value={spell.cooldown ? `${spell.cooldown}s` : '—'} suffix="cooldown"/><SpellStat value={spell.manaFraction ? `${spell.manaFraction * 100}%` : spell.mana.toLocaleString()} suffix={spell.manaFraction ? 'base mana' : 'mana'}/><button className="remove" draggable="false" onClick={() => setRotation(prev => prev.filter((_,n)=>n!==i))} aria-label={`Remove ${spell.name}`}>×</button></div>)}</div>
             <div className="add-spell-wrap"><button className="add-row" onClick={() => setAddMenuOpen(open => !open)}>＋ <span>ADD A SPELL</span></button>
-              {addMenuOpen && <div className="spell-picker"><input aria-label={`Search ${classData.class} spells`} placeholder={`Search ${classData.class} spells…`} value={spellSearch} onChange={event => setSpellSearch(event.target.value)}/><div className="spell-picker-options">{selectedClass === 'mage' && !rotation.some(entry => entry.name === 'Combustion') && 'combustion'.includes(spellSearch.toLowerCase()) && <button key="Combustion" onClick={() => addSpell(combustionSpell)}><span className="school-icon fire">♨</span><span><b>Combustion</b><small>Fire · OFF GCD · Instant · 180 sec cooldown · Requires talent</small></span></button>}{damageSpellCatalog.filter(spell => !rotation.some(entry => entry.name === spell.name) && spell.name.toLowerCase().includes(spellSearch.toLowerCase())).map(spell => <button key={spell.name} onClick={() => addSpell(spell)}><span className={`school-icon ${spell.school.toLowerCase()}`}>{spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : '✧'}</span><span><b>{spell.name}</b><small>{spell.specialization} · {spell.school} · {spell.rank} · {spell.damage.toLocaleString()} dmg · {Math.round(spell.coefficient * 100)}% SP</small></span></button>)}{damageSpellCatalog.every(spell => rotation.some(entry => entry.name === spell.name) || !spell.name.toLowerCase().includes(spellSearch.toLowerCase())) && (selectedClass !== 'mage' || rotation.some(entry => entry.name === 'Combustion') || !'combustion'.includes(spellSearch.toLowerCase())) && <p>No matching {classData.class} spells.</p>}</div></div>}
+              {addMenuOpen && <div className="spell-picker"><input aria-label={`Search ${classData.class} spells`} placeholder={`Search ${classData.class} spells…`} value={spellSearch} onChange={event => setSpellSearch(event.target.value)}/><div className="spell-picker-options">{selectedClass === 'mage' && !rotation.some(entry => entry.name === 'Combustion') && 'combustion'.includes(spellSearch.toLowerCase()) && <button key="Combustion" onClick={() => addSpell(combustionSpell)}><span className="school-icon fire">♨</span><span><b>Combustion</b><small>Fire · OFF GCD · Instant · 180 sec cooldown · Requires talent</small></span></button>}{damageSpellCatalog.filter(spell => !rotation.some(entry => entry.name === spell.name) && spell.name.toLowerCase().includes(spellSearch.toLowerCase())).map(spell => <button key={spell.name} onClick={() => addSpell(spell)}><span className={`school-icon ${spell.school.toLowerCase()}`}>{spell.school === 'Frost' ? '❄' : spell.school === 'Fire' ? '♨' : '✧'}</span><span><b>{spell.name}</b><small>{spell.school} · {spell.rank} · {spell.damage.toLocaleString()} dmg · {Math.round(spell.coefficient * 100)}% SP</small></span></button>)}{damageSpellCatalog.every(spell => rotation.some(entry => entry.name === spell.name) || !spell.name.toLowerCase().includes(spellSearch.toLowerCase())) && (selectedClass !== 'mage' || rotation.some(entry => entry.name === 'Combustion') || !'combustion'.includes(spellSearch.toLowerCase())) && <p>No matching {classData.class} spells.</p>}</div></div>}
             </div>
-            <div className="rotation-foot"><span>GLOBAL COOLDOWN <b>1.5s</b></span><span>BUILD <b>{totalPoints} / 51 PTS</b></span><button onClick={()=>setRotation(selectedClass === 'mage' ? initialPriorityFor(classData, talentLevel) : [])}>CLEAR ROTATION ↺</button></div>
+            <div className="rotation-foot"><span>GLOBAL COOLDOWN <b>1.5s</b></span><span>BUILD <b>{totalPoints} / 51 PTS</b></span><button onClick={()=>setRotation(selectedClass === 'mage' ? initialPriority : [])}>CLEAR ROTATION ↺</button></div>
           </section>
-          <section className="panel encounter-panel"><PanelTitle kicker="02 / ENCOUNTER" title="Fight parameters"/><p className="panel-desc">Tune the conditions for this single-target test.</p><div className="field"><label>CHARACTER LEVEL</label><NumInput value={talentLevel} suffix="level" min={1} max={60} onChange={setCharacterLevel}/><small className="field-hint">Controls talent points, summon availability, and each pet ability’s highest unlocked rank.</small></div><div className="field"><label>ENCOUNTER DURATION</label><NumInput value={duration} suffix="sec" onChange={setDuration}/><div className="range"><input type="range" min="30" max="600" step="15" value={duration} onChange={e=>setDuration(Number(e.target.value))}/><div><span>30 SEC</span><span>10 MIN</span></div></div></div><div className="field"><label>STARTING {resourceTypeForClass(selectedClass).toUpperCase()}</label><NumInput value={startingMana} suffix={resourceTypeForClass(selectedClass).toLowerCase()} onChange={setStartingMana}/></div><div className="field"><label>{resourceTypeForClass(selectedClass) === 'Energy' ? 'ENERGY REGENERATION' : `RESOURCE REGEN / 5 SEC`}</label><NumInput value={regen} suffix={resourceTypeForClass(selectedClass) === 'Energy' ? 'bonus / 5 sec' : `${resourceTypeForClass(selectedClass)} / 5 sec`} onChange={setRegen}/><small className="field-hint">{selectedClass === 'rogue' ? 'Energy also regenerates at 10 per second.' : 'This rate continues while the character casts.'}</small></div>{resourceTypeForClass(selectedClass) === 'Mana' && <div className="field"><label>SPIRIT</label><NumInput value={spirit} suffix="Spirit" onChange={setSpirit}/><small className="field-hint">Spirit regeneration follows the five second rule and uses this class’s standard mana formula.</small></div>}{selectedClass === 'mage' && <div className="field mana-tool-field"><label>MANA TOOLS</label><div className="mana-tool-options"><label className="mana-tool-option"><input type="checkbox" checked={useEvocation} disabled={talentLevel < 20} onChange={event=>setUseEvocation(event.target.checked)}/> Use Evocation{talentLevel < 20 ? ' · available at level 20' : ''}</label><label className="mana-tool-option"><input type="checkbox" checked={useManaGem} disabled={!manaGemForLevel(talentLevel)} onChange={event=>setUseManaGem(event.target.checked)}/> Use {manaGemForLevel(talentLevel)?.name || 'Mana Gem'}{manaGemForLevel(talentLevel) ? ` · ${manaGemForLevel(talentLevel).minRestore}–${manaGemForLevel(talentLevel).maxRestore} mana` : ' · available at level 28'}</label><label className="mana-tool-option unavailable"><input type="checkbox" disabled/> Use mana potion · not implemented</label></div><small className="field-hint">Auto-used at full value when mana-starved: Evocation first, then one gem. Potion support is coming later.</small></div>}<div className="field"><label>GEAR SPELL POWER</label><NumInput value={spellPower} suffix="spell power" onChange={setSpellPower}/><small className="field-hint">Added by cast-time coefficient; instant spells use a 1.5s base.</small></div><div className="field"><label>BASE SPELL HIT PER SCHOOL (BOSS)</label><NumInput value={baseHitChance} suffix="%" max={100} step={0.1} onChange={setBaseHitChance}/></div>{selectedClass === 'warlock' && <div className="field"><label>BOSS HEALTH FOR FULL FIGHT</label><NumInput value={targetHealthPercent} suffix="%" min={1} max={100} onChange={setTargetHealthPercent}/><small className="field-hint">Use below 35% to model Decimation execute effects for the full encounter.</small></div>}<div className="model-note"><span>i</span><p><b>SIMULATION MODEL</b> {selectedClass === 'mage' ? 'Mage uses the original simulator, saved at src/sim/mage-baseline.jsx. Its spell school and specialization tags are independent.' : selectedClass === 'warlock' ? 'Warlock models rank-available direct and periodic spells, coefficients, mana and Life Tap, hit/crit, supported Affliction and Destruction damage talents, execute health for Decimation, and pet melee auto attacks alongside selected damaging pet abilities. Melee damage uses Classic reference profiles; WoW Forever pet stat scaling is not yet calibrated. Threat, interruption, control, defense, pet survivability, summon cooldowns, and multi-target effects are outside the single-target model.' : `${classData.class} uses the neutral damage core with rank-available spells, specialization tags, damage school, spell power, hit/crit, periodic ticks, cooldowns and ${resourceTypeForClass(selectedClass)}. Class-specific talent effects are not modeled yet.`}</p></div></section>
+          <section className="panel encounter-panel"><PanelTitle kicker="02 / ENCOUNTER" title="Fight parameters"/><p className="panel-desc">Tune the conditions for this single-target test.</p><div className="field"><label>CHARACTER LEVEL</label><NumInput value={talentLevel} suffix="level" min={1} max={60} onChange={setCharacterLevel}/><small className="field-hint">Controls talent points, summon availability, and each pet ability’s highest unlocked rank.</small></div><div className="field"><label>ENCOUNTER DURATION</label><NumInput value={duration} suffix="sec" onChange={setDuration}/><div className="range"><input type="range" min="30" max="600" step="15" value={duration} onChange={e=>setDuration(Number(e.target.value))}/><div><span>30 SEC</span><span>10 MIN</span></div></div></div><div className="field"><label>STARTING MANA</label><NumInput value={startingMana} suffix="mana" onChange={setStartingMana}/></div><div className="field"><label>GEAR MANA REGEN / 5 SEC</label><NumInput value={regen} suffix="MP5" onChange={setRegen}/><small className="field-hint">MP5 regenerates continuously and is not amplified by Evocation.</small></div><div className="field"><label>SPIRIT</label><NumInput value={spirit} suffix="Spirit" onChange={setSpirit}/><small className="field-hint">{selectedClass === 'mage' ? 'Mage Spirit regen: 13 + (Spirit ÷ 4) mana per 2-second tick, after the five-second rule.' : 'Warlock Spirit regeneration will be calibrated as part of the Warlock simulation model.'}</small></div><div className="field mana-tool-field"><label>MANA TOOLS</label><div className="mana-tool-options"><label className="mana-tool-option"><input type="checkbox" checked={useEvocation} disabled={talentLevel < 20} onChange={event=>setUseEvocation(event.target.checked)}/> Use Evocation{talentLevel < 20 ? ' · available at level 20' : ''}</label><label className="mana-tool-option"><input type="checkbox" checked={useManaGem} disabled={!manaGemForLevel(talentLevel)} onChange={event=>setUseManaGem(event.target.checked)}/> Use {manaGemForLevel(talentLevel)?.name || 'Mana Gem'}{manaGemForLevel(talentLevel) ? ` · ${manaGemForLevel(talentLevel).minRestore}–${manaGemForLevel(talentLevel).maxRestore} mana` : ' · available at level 28'}</label><label className="mana-tool-option unavailable"><input type="checkbox" disabled/> Use mana potion · not implemented</label></div><small className="field-hint">Auto-used at full value when mana-starved: Evocation first, then one gem. Potion support is coming later.</small></div><div className="field"><label>GEAR SPELL POWER</label><NumInput value={spellPower} suffix="spell power" onChange={setSpellPower}/><small className="field-hint">Added by cast-time coefficient; instant spells use a 1.5s base.</small></div><div className="field"><label>BASE SPELL HIT PER SCHOOL (BOSS)</label><NumInput value={baseHitChance} suffix="%" max={100} step={0.1} onChange={setBaseHitChance}/></div><div className="model-note"><span>i</span><p><b>SIMULATION MODEL</b> Base spell hit defaults to 83% per school against the boss. Arcane Focus and Elemental Precision add their hit chance to this value (capped at 100%). Missile Barrage requires its talent and procs at 20% from Frostbolt, Fireball, or Frostfire Bolt and 40% from Arcane Blast. Fingers of Frost requires its talent and procs at 15% from Frost spells. Buffs persist until consumed; ready conditional spells spend them before filler spells. Critical hits use a 5% base chance and 1.5× damage before talent bonuses. Spell power adds to base spell damage at min(max(base cast time, 1.5s) ÷ 3.5, 100%), before damage talents; cast-time talents do not lower the coefficient. Evocation multiplies Spirit-based regen by 16× for 8 sec (8 min cooldown); MP5 continues at its normal rate. Mage Spirit regen is 13 + (Spirit ÷ 4) mana per 2-second tick, active after 5 seconds without a spell; Arcane Meditation allows its talent fraction while casting. The best level-available mana gem is used once when its full restore fits. Mana potion support is not implemented. Encounter-only effects such as stuns, threat, range, and incoming damage are outside this single-target model; mana, hit, damage, crit, and cooldown talents are simulated.</p></div></section>
         </div>
-        <div className="lower-grid"><section className="panel talent-summary"><PanelTitle kicker="03 / BUILD CONTEXT" title="Talent allocation" right={<button className="text-action" onClick={()=>setActive(activeTalentPage)}>EDIT TALENTS ↗</button>}/><div className="tree-mini">{classData.talents.trees.map(t=><div key={t.name}><span>{t.name.toUpperCase()}</span><b>{Object.entries(build).filter(([name])=>t.talents.some(x=>x.name===name)).reduce((sum,[,v])=>sum+v,0)}</b></div>)}</div><div className="build-context"><span>Talent points allocated</span><strong>{totalPoints} <small>/ 51</small></strong></div></section><section className="panel chart-panel"><PanelTitle kicker="04 / DAMAGE PROFILE" title="Damage by priority" right={result && <div className="timeline-controls"><label className="log-toggle"><input type="checkbox" checked={showCastTimeline} onChange={event=>setShowCastTimeline(event.target.checked)}/> CAST TIMELINE</label>{showCastTimeline && <label className="log-toggle"><input type="checkbox" checked={showPetTimelineEvents} onChange={event=>setShowPetTimelineEvents(event.target.checked)}/> SHOW PET EVENTS</label>}</div>}/>{result ? <><div className="simulation-summary"><span><b>{Math.round(result.dps).toLocaleString()}</b> DPS</span><span><b>{Math.round(result.damage).toLocaleString()}</b> DAMAGE</span><span><b>{result.casts}</b> CASTS</span><span><b>{result.crits}</b> CRITS</span></div><div className="buff-uptime"><div className="buff-uptime-heading">PROC BUFF UPTIME</div>{result.buffs.map(buff=><div className="buff-uptime-row" key={buff.id}><div className="buff-uptime-name"><b>{buff.name}</b>{buff.rank ? <small>{buff.procs} procs · {buff.uses} used{buff.activeAtEnd ? ' · active at end' : ''}</small> : <button className="buff-talent-link" onClick={()=>setActive(activeTalentPage)}>Talent not selected · SELECT TALENT ↗</button>}</div><div className="buff-uptime-track"><i style={{width:`${Math.min(100,buff.uptimePct)}%`}}/></div><span>{formatTime(buff.uptime)} <small>{buff.uptimePct.toFixed(1)}%</small></span></div>)}</div>{showCastTimeline ? <div className="cast-timeline" aria-label="Cast timeline"><div className="cast-timeline-head"><span>TIME</span><span>CAST</span><span>DAMAGE</span><span>MANA</span><span>ACTIVE BUFFS</span><span>ENEMY DEBUFFS</span><span>BUFF CHANGES</span></div>{(showPetTimelineEvents ? result.castLog : result.castLog.filter(entry => entry.type !== 'pet')).map((entry,index)=><div className="cast-timeline-row" key={`${entry.time}-${entry.name}-${index}`}><time>{formatTime(entry.time)}</time><span className="cast-log-spell"><i className={`school-icon ${entry.school.toLowerCase()}`}>{entry.school === 'Frost' ? '❄' : entry.school === 'Fire' ? '♨' : '✧'}</i><b>{entry.name}</b>{entry.specialization && <small className="spell-specialization-tag">{entry.specialization}</small>}{entry.crit && <em>CRIT</em>}{!entry.hit && <em className="miss">MISS</em>}</span><span className="cast-log-damage">{Math.round(entry.damage ?? 0).toLocaleString()}</span><span className="cast-log-mana">{Math.round(entry.currentMana ?? 0).toLocaleString()}</span><span className="cast-log-buffs">{entry.activeBuffs.length ? entry.activeBuffs.map(buff => <EffectIcon key={buff.id} effect={buff}/>) : <small>—</small>}</span><span className="cast-log-debuffs">{entry.enemyDebuffs?.length ? entry.enemyDebuffs.map(debuff => <span className="debuff-effect" key={debuff.id}><EffectIcon effect={debuff}/><small>{debuff.remaining.toFixed(1)}s</small></span>) : <small>—</small>}</span><span className="cast-log-changes">{entry.procs.map((buff,procIndex)=><EffectChange key={`p${procIndex}`} label={buff} mode="proc"/>)}{entry.consumedBuffs.map((buff,useIndex)=><EffectChange key={`u${useIndex}`} label={buff} mode="used"/>)}{!entry.procs.length && !entry.consumedBuffs.length && <small>—</small>}</span></div>)}</div> : <div className="bars">{result.events.slice(0,7).map((spell,i)=>{const max=Math.max(1,...result.events.map(s=>s.damage));return <div className="bar-row" key={`${spell.name}-${i}`}><span>{spell.name} <small>{spell.ticks ? `${spell.ticks} ticks` : `${spell.crits}/${spell.casts}`}</small></span><div><i style={{width:`${Math.max(spell.damage ? 4 : 0,spell.damage/max*100)}%`}}/></div><b>{Math.round(spell.damage)}</b></div>})}</div>}</> : <p className="panel-desc">{rotation.length ? 'Ready when you are. Press Simulate Rotation to calculate this setup.' : 'Add spells to your priority list, then run a simulation to see results.'}</p>}</section></div>
+        <div className="lower-grid"><section className="panel talent-summary"><PanelTitle kicker="03 / BUILD CONTEXT" title="Talent allocation" right={<button className="text-action" onClick={()=>setActive(activeTalentPage)}>EDIT TALENTS ↗</button>}/><div className="tree-mini">{classData.talents.trees.map(t=><div key={t.name}><span>{t.name.toUpperCase()}</span><b>{Object.entries(build).filter(([name])=>t.talents.some(x=>x.name===name)).reduce((sum,[,v])=>sum+v,0)}</b></div>)}</div><div className="build-context"><span>Talent points allocated</span><strong>{totalPoints} <small>/ 51</small></strong></div></section><section className="panel chart-panel"><PanelTitle kicker="04 / DAMAGE PROFILE" title="Damage by priority" right={result && <label className="log-toggle"><input type="checkbox" checked={showCastTimeline} onChange={event=>setShowCastTimeline(event.target.checked)}/> CAST TIMELINE</label>}/>{result ? <><div className="simulation-summary"><span><b>{Math.round(result.dps).toLocaleString()}</b> DPS</span><span><b>{Math.round(result.damage).toLocaleString()}</b> DAMAGE</span><span><b>{result.casts}</b> CASTS</span><span><b>{result.crits}</b> CRITS</span></div><div className="buff-uptime"><div className="buff-uptime-heading">PROC BUFF UPTIME</div>{result.buffs.map(buff=><div className="buff-uptime-row" key={buff.id}><div className="buff-uptime-name"><b>{buff.name}</b>{buff.rank ? <small>{buff.procs} procs · {buff.uses} used{buff.activeAtEnd ? ' · active at end' : ''}</small> : <button className="buff-talent-link" onClick={()=>setActive(activeTalentPage)}>Talent not selected · SELECT TALENT ↗</button>}</div><div className="buff-uptime-track"><i style={{width:`${Math.min(100,buff.uptimePct)}%`}}/></div><span>{formatTime(buff.uptime)} <small>{buff.uptimePct.toFixed(1)}%</small></span></div>)}</div>{showCastTimeline ? <div className="cast-timeline" aria-label="Cast timeline"><div className="cast-timeline-head"><span>TIME</span><span>CAST</span><span>DAMAGE</span><span>MANA</span><span>ACTIVE BUFFS</span><span>ENEMY DEBUFFS</span><span>BUFF CHANGES</span></div>{result.castLog.map((entry,index)=><div className="cast-timeline-row" key={`${entry.time}-${entry.name}-${index}`}><time>{formatTime(entry.time)}</time><span className="cast-log-spell"><i className={`school-icon ${entry.school.toLowerCase()}`}>{entry.school === 'Frost' ? '❄' : entry.school === 'Fire' ? '♨' : '✧'}</i><b>{entry.name}</b>{entry.crit && <em>CRIT</em>}{!entry.hit && <em className="miss">MISS</em>}</span><span className="cast-log-damage">{Math.round(entry.damage ?? 0).toLocaleString()}</span><span className="cast-log-mana">{Math.round(entry.currentMana ?? 0).toLocaleString()}</span><span className="cast-log-buffs">{entry.activeBuffs.length ? entry.activeBuffs.map(buff => <EffectIcon key={buff.id} effect={buff}/>) : <small>—</small>}</span><span className="cast-log-debuffs">{entry.enemyDebuffs?.length ? entry.enemyDebuffs.map(debuff => <span className="debuff-effect" key={debuff.id}><EffectIcon effect={debuff}/><small>{debuff.remaining.toFixed(1)}s</small></span>) : <small>—</small>}</span><span className="cast-log-changes">{entry.procs.map((buff,procIndex)=><EffectChange key={`p${procIndex}`} label={buff} mode="proc"/>)}{entry.consumedBuffs.map((buff,useIndex)=><EffectChange key={`u${useIndex}`} label={buff} mode="used"/>)}{!entry.procs.length && !entry.consumedBuffs.length && <small>—</small>}</span></div>)}</div> : <div className="bars">{result.events.slice(0,7).map((spell,i)=>{const max=Math.max(1,...result.events.map(s=>s.damage));return <div className="bar-row" key={`${spell.name}-${i}`}><span>{spell.name} <small>{spell.ticks ? `${spell.ticks} ticks` : `${spell.crits}/${spell.casts}`}</small></span><div><i style={{width:`${Math.max(spell.damage ? 4 : 0,spell.damage/max*100)}%`}}/></div><b>{Math.round(spell.damage)}</b></div>})}</div>}</> : <p className="panel-desc">{rotation.length ? 'Ready when you are. Press Simulate Rotation to calculate this setup.' : 'Add spells to your priority list, then run a simulation to see results.'}</p>}</section></div>
         <footer>DATA FROM <a href="https://talentsforever.com/about" target="_blank" rel="noreferrer">TALENTS FOREVER</a> · CC BY 4.0 · BETA SNAPSHOT {classData.generated} · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">ATTRIBUTION</a></footer>
       </>}
       {active === activeTalentPage && <section className="talent-page">
@@ -965,7 +856,7 @@ function SimulatorApp() {
         </div>}
         <footer>Talent and tooltip data: <a href="https://talentsforever.com/about" target="_blank" rel="noreferrer">Talents Forever</a> · CC BY 4.0</footer>
       </section>}
-      {active === 'Spell library' && <section className="library-page"><div className="eyebrow">BETA SPELLBOOK · {classBookTabs.reduce((n,t)=>n+t.spells.length,0)} RANK ENTRIES</div><h1>{classData.class} <em>spellbook.</em></h1><p className="panel-desc">Spell names and rank tooltips from the Forever Beta export. This library is informational; select spells in Rotation Lab to set simulation values.</p>{classBookTabs.map(tab=><section className="panel library-tab" key={tab.name}><PanelTitle kicker="SPELLBOOK TAB" title={tab.name}/><div className="library-spells">{tab.spells.map(([name, rank], index)=>{const detail=spellRankText(classData, name, rank);return <article key={`${name}-${rank}-${index}`}><b>{name}</b><span>{rank || detail?.r || 'Spell'} · {tab.name}{detail?.lv ? ` · ${detail.lv}` : ''}</span><p>{detail?.d || 'Tooltip not available in this snapshot.'}</p></article>})}</div></section>)}<footer>Spellbook and tooltip data: <a href="https://talentsforever.com/about" target="_blank" rel="noreferrer">Talents Forever</a> · CC BY 4.0</footer></section>}
+      {active === 'Spell library' && <section className="library-page"><div className="eyebrow">BETA SPELLBOOK · {classBookTabs.reduce((n,t)=>n+t.spells.length,0)} RANK ENTRIES</div><h1>{classData.class} <em>spellbook.</em></h1><p className="panel-desc">Spell names and rank tooltips from the Forever Beta export. This library is informational; select spells in Rotation Lab to set simulation values.</p>{classBookTabs.map(tab=><section className="panel library-tab" key={tab.name}><PanelTitle kicker="SPELLBOOK TAB" title={tab.name}/><div className="library-spells">{tab.spells.map(([name, rank], index)=>{const detail=spellRankText(classData, name, rank);return <article key={`${name}-${rank}-${index}`}><b>{name}</b><span>{rank || detail?.r || 'Spell'}{detail?.lv ? ` · ${detail.lv}` : ''}</span><p>{detail?.d || 'Tooltip not available in this snapshot.'}</p></article>})}</div></section>)}<footer>Spellbook and tooltip data: <a href="https://talentsforever.com/about" target="_blank" rel="noreferrer">Talents Forever</a> · CC BY 4.0</footer></section>}
     </main>
   </div>;
 }

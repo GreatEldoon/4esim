@@ -1,0 +1,5807 @@
+{
+ "_readme": "talentsforever.com data export for the Rogue. Fan-made WoW Forever talent calculator; talents, racials, Legacy perks and the class spellbooks come from the WoW Forever beta client's own data files (the site began as frame-by-frame reads of the BlizzCon 2026 demo), so numbers can lag live tuning. talents: per class, trees with talents (row/col are 1-based grid positions, max is the rank cap, desc maps rank number to tooltip text, confirmed lists ranks read verbatim, others are estimates; classic shows the Classic-era equivalent for comparison). spellbooks: per class, every trainer spell to level 60 with every rank (levels = the level each rank is learned at; checked = that class's city trainer was read in game, the rest are from the files only; the General tab dates from the demo reads). spell_desc: tooltip text keyed class|spell|rank, s=beta means the beta client's text at level 60 with no gear, s=demo means read off footage, s=classic means Wowhead Classic fallback, nt=1 or 2 means the class trainer does not sell that rank (1 portal trainer, 2 tome, quest or drop). racials and legacy: racial abilities and the Legacy perk trees. changelog: what changed on the site. License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). You may copy, adapt and republish this data, including commercially, as long as you credit talentsforever.com with a link. Game names, icons and tooltip text belong to Blizzard Entertainment.",
+ "generated": "2026-09-26",
+ "class": "Rogue",
+ "talents": {
+  "icon": "class_rogue",
+  "trees": [
+   {
+    "name": "Assassination",
+    "bg": 182,
+    "icon": "ability_rogue_eviscerate",
+    "talents": [
+     {
+      "name": "Improved Gouge",
+      "max": 3,
+      "row": 1,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_gouge",
+      "desc": [
+       "Increases the duration of your Gouge ability by 0.5 sec.",
+       "Increases the duration of your Gouge ability by 1 sec.",
+       "Increases the duration of your Gouge ability by 1.5 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 1,
+       "col": 1,
+       "max": 3,
+       "text": "Increases the effect duration of your Gouge ability by 0.5 sec.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Remorseless Attacks",
+      "max": 2,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_fiegndead",
+      "desc": [
+       "After killing a non-trivial enemy, gives you a 20% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec.",
+       "After killing a non-trivial enemy, gives you a 40% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 1,
+       "col": 2,
+       "max": 2,
+       "text": "After killing an opponent that yields experience or honor, gives you a 20% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, or Ghostly Strike. Lasts 20 sec."
+      }
+     },
+     {
+      "name": "Malice",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_racial_bloodrage",
+      "desc": [
+       "Increases your critical strike chance with all attacks and Poisons by 1%.",
+       "Increases your critical strike chance with all attacks and Poisons by 2%.",
+       "Increases your critical strike chance with all attacks and Poisons by 3%.",
+       "Increases your critical strike chance with all attacks and Poisons by 4%.",
+       "Increases your critical strike chance with all attacks and Poisons by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your critical strike chance by 1%."
+      }
+     },
+     {
+      "name": "Ruthlessness",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_druid_disembowel",
+      "desc": [
+       "Gives your finishing moves a 20% chance to add a Combo Point to your target.",
+       "Gives your finishing moves a 40% chance to add a Combo Point to your target.",
+       "Gives your finishing moves a 60% chance to add a Combo Point to your target."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Assassination",
+       "row": 2,
+       "col": 1,
+       "max": 3,
+       "text": "Gives your finishing moves a 20% chance to add a combo point to your target."
+      }
+     },
+     {
+      "name": "Murder",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_shadow_deathscream",
+      "desc": [
+       "Increases all damage dealt by 2% against Humanoid and Giant targets.",
+       "Increases all damage dealt by 4% against Humanoid and Giant targets."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 2,
+       "col": 2,
+       "max": 2,
+       "text": "Increases all damage caused against Humanoid, Giant, Beast and Dragonkin targets by 1%."
+      }
+     },
+     {
+      "name": "Improved Slice and Dice",
+      "max": 3,
+      "row": 2,
+      "col": 4,
+      "passive": true,
+      "icon": "ability_rogue_slicedice",
+      "desc": [
+       "Increases the duration of your Slice and Dice ability by 15%.",
+       "Increases the duration of your Slice and Dice ability by 30%.",
+       "Increases the duration of your Slice and Dice ability by 45%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Assassination",
+       "row": 2,
+       "col": 4,
+       "max": 3,
+       "text": "Increases the duration of your Slice and Dice ability by 15%."
+      }
+     },
+     {
+      "name": "Relentless Strikes",
+      "max": 1,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_warrior_decisivestrike",
+      "desc": [
+       "Your finishing moves have a 20% chance per Combo Point to restore 25 Energy."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Assassination",
+       "row": 3,
+       "col": 1,
+       "max": 1,
+       "text": "Your finishing moves have a 20% chance per combo point to restore 25 energy."
+      }
+     },
+     {
+      "name": "Improved Expose Armor",
+      "max": 2,
+      "row": 3,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_warrior_riposte",
+      "desc": [
+       "Reduces the Energy cost of your Expose Armor ability by 5, and refunds 1 Combo Point when cast with 5 Combo Points.",
+       "Reduces the Energy cost of your Expose Armor ability by 10, and refunds 2 Combo Points when cast with 5 Combo Points."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 3,
+       "col": 2,
+       "max": 2,
+       "text": "Increases the armor reduced by your Expose Armor ability by 25%."
+      }
+     },
+     {
+      "name": "Lethality",
+      "max": 5,
+      "row": 3,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_criticalstrike",
+      "desc": [
+       "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 4%.",
+       "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 8%.",
+       "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 12%.",
+       "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 16%.",
+       "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 20%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "req": "Malice",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 3,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Ghostly Strike, and Hemorrhage abilities by 6%."
+      }
+     },
+     {
+      "name": "Vile Poisons",
+      "max": 5,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_rogue_feigndeath",
+      "desc": [
+       "Increases the damage dealt by your poisons by 4% and gives your poisons an additional 8% chance to resist dispel effects.",
+       "Increases the damage dealt by your poisons by 8% and gives your poisons an additional 16% chance to resist dispel effects.",
+       "Increases the damage dealt by your poisons by 12% and gives your poisons an additional 24% chance to resist dispel effects.",
+       "Increases the damage dealt by your poisons by 16% and gives your poisons an additional 32% chance to resist dispel effects.",
+       "Increases the damage dealt by your poisons by 20% and gives your poisons an additional 40% chance to resist dispel effects."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Assassination",
+       "row": 4,
+       "col": 2,
+       "max": 5,
+       "text": "Increases the damage dealt by your poisons by 4% and gives your poisons an additional 8% chance to resist dispel effects."
+      }
+     },
+     {
+      "name": "Cold Blood",
+      "max": 1,
+      "row": 4,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_ice_lament",
+      "desc": [
+       "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, Eviscerate, or Mutilate by 100%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "Instant | 3 min cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 5,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, or Eviscerate by 100%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Improved Poisons",
+      "max": 5,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_poisons",
+      "desc": [
+       "Increases the chance to apply Poisons to your target by 2%, and gives Poison applications a 10% chance to not consume a charge.",
+       "Increases the chance to apply Poisons to your target by 4%, and gives Poison applications a 20% chance to not consume a charge.",
+       "Increases the chance to apply Poisons to your target by 6%, and gives Poison applications a 30% chance to not consume a charge.",
+       "Increases the chance to apply Poisons to your target by 8%, and gives Poison applications a 40% chance to not consume a charge.",
+       "Increases the chance to apply Poisons to your target by 10%, and gives Poison applications a 50% chance to not consume a charge."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 4,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the chance to apply poisons to your target by 2%."
+      }
+     },
+     {
+      "name": "Vigor",
+      "max": 2,
+      "row": 5,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_nature_earthbindtotem",
+      "desc": [
+       "Increases your maximum Energy by 5.",
+       "Increases your maximum Energy by 10."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "Increases your maximum Energy by 10.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Mutilate",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "ability_rogue_deadlybrew",
+      "desc": [
+       "Instantly attacks with both weapons for 75% weapon damage plus an additional 13 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "60 Energy | Melee Range | Instant | Requires Daggers",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Improved Kidney Shot",
+      "max": 2,
+      "row": 5,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_rogue_kidneyshot",
+      "desc": [
+       "Enemies Stunned by your Kidney Shot ability take 5% increased damage from your poisons and attacks.",
+       "Enemies Stunned by your Kidney Shot ability take 10% increased damage from your poisons and attacks."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 5,
+       "col": 3,
+       "max": 3,
+       "text": "While affected by your Kidney Shot ability, the target receives an additional 3% damage from all sources."
+      }
+     },
+     {
+      "name": "Seal Fate",
+      "max": 5,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_shadow_chilltouch",
+      "desc": [
+       "Your critical strikes from abilities that add Combo Points have a 20% chance to add an additional Combo Point.",
+       "Your critical strikes from abilities that add Combo Points have a 40% chance to add an additional Combo Point.",
+       "Your critical strikes from abilities that add Combo Points have a 60% chance to add an additional Combo Point.",
+       "Your critical strikes from abilities that add Combo Points have a 80% chance to add an additional Combo Point.",
+       "Your critical strikes from abilities that add Combo Points have a 100% chance to add an additional Combo Point."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Assassination",
+       "row": 6,
+       "col": 2,
+       "max": 5,
+       "text": "Your critical strikes from abilities that add combo points have a 20% chance to add an additional combo point."
+      }
+     },
+     {
+      "name": "Venom",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "inv_sword_31",
+      "desc": [
+       "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%. Lasts longer per combo point:\n 1 point : 9 seconds\n 2 points: 12 seconds\n 3 points: 15 seconds\n 4 points: 18 seconds\n 5 points: 21 seconds"
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Mutilate",
+      "cost": "25 Energy | 100 yd range | Instant",
+      "classic": {
+       "status": "new"
+      }
+     }
+    ],
+    "removed": []
+   },
+   {
+    "name": "Combat",
+    "bg": 181,
+    "icon": "ability_backstab",
+    "talents": [
+     {
+      "name": "Improved Eviscerate",
+      "max": 3,
+      "row": 1,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_rogue_eviscerate",
+      "desc": [
+       "Increases the damage done by your Eviscerate ability by 7%.",
+       "Increases the damage done by your Eviscerate ability by 13%.",
+       "Increases the damage done by your Eviscerate ability by 20%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Assassination",
+       "row": 1,
+       "col": 1,
+       "max": 3,
+       "text": "Increases the damage done by your Eviscerate ability by 5%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Improved Sinister Strike",
+      "max": 2,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_shadow_ritualofsacrifice",
+      "desc": [
+       "Reduces the Energy cost of your Sinister Strike ability by 3.",
+       "Reduces the Energy cost of your Sinister Strike ability by 5."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Combat",
+       "row": 1,
+       "col": 2,
+       "max": 2,
+       "text": "Reduces the Energy cost of your Sinister Strike ability by 3."
+      }
+     },
+     {
+      "name": "Lightning Reflexes",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "spell_nature_invisibilty",
+      "desc": [
+       "Increases your Dodge chance by 1%.",
+       "Increases your Dodge chance by 2%.",
+       "Increases your Dodge chance by 3%.",
+       "Increases your Dodge chance by 4%.",
+       "Increases your Dodge chance by 5%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Combat",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your Dodge chance by 1%."
+      }
+     },
+     {
+      "name": "Puncturing Wounds",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_backstab",
+      "desc": [
+       "Increases the critical strike chance of your Backstab by 10% and your Mutilate by 5%, and gives Backstab a 15% chance to add an additional Combo Point.",
+       "Increases the critical strike chance of your Backstab by 20% and your Mutilate by 10%, and gives Backstab a 30% chance to add an additional Combo Point.",
+       "Increases the critical strike chance of your Backstab by 30% and your Mutilate by 15%, and gives Backstab a 45% chance to add an additional Combo Point."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 2,
+       "col": 1,
+       "max": 3,
+       "text": "Increases the critical strike chance of your Backstab ability by 10%.",
+       "renamed": "Improved Backstab"
+      }
+     },
+     {
+      "name": "Deflection",
+      "max": 3,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_parry",
+      "desc": [
+       "Increases your Parry chance by 2%.",
+       "Increases your Parry chance by 4%.",
+       "Increases your Parry chance by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 2,
+       "col": 2,
+       "max": 5,
+       "text": "Increases your Parry chance by 1%."
+      }
+     },
+     {
+      "name": "Precision",
+      "max": 3,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_marksmanship",
+      "desc": [
+       "Improves your chance to hit by 1%.",
+       "Improves your chance to hit by 2%.",
+       "Improves your chance to hit by 3%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 2,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your chance to hit with melee weapons by 1%."
+      }
+     },
+     {
+      "name": "Endurance",
+      "max": 2,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_shadow_shadowward",
+      "desc": [
+       "Reduces the cooldown of your Sprint and Evasion abilities by 30%.",
+       "Reduces the cooldown of your Sprint and Evasion abilities by 60%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 3,
+       "col": 1,
+       "max": 2,
+       "text": "Reduces the cooldown of your Sprint and Evasion abilities by 45 sec."
+      }
+     },
+     {
+      "name": "Riposte",
+      "max": 1,
+      "row": 3,
+      "col": 2,
+      "passive": false,
+      "icon": "ability_warrior_challange",
+      "desc": [
+       "A strike that becomes active after parrying an opponent's attack. This attack deals 150% weapon damage and disarms the target for 6 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Deflection",
+      "cost": "10 Energy | Melee Range | Instant | 6 sec cooldown",
+      "classic": {
+       "status": "same",
+       "tree": "Combat",
+       "row": 3,
+       "col": 2,
+       "max": 1,
+       "text": "A strike that becomes active after parrying an opponent's attack. This attack deals 150% weapon damage and disarms the target for 6 sec."
+      }
+     },
+     {
+      "name": "Improved Sprint",
+      "max": 2,
+      "row": 3,
+      "col": 4,
+      "passive": true,
+      "icon": "ability_rogue_sprint",
+      "desc": [
+       "Gives a 50% chance to remove all movement impairing effects when you activate your Sprint ability.",
+       "Gives a 100% chance to remove all movement impairing effects when you activate your Sprint ability."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Combat",
+       "row": 3,
+       "col": 4,
+       "max": 2,
+       "text": "Gives a 50% chance to remove all movement impairing effects when you activate your Sprint ability."
+      }
+     },
+     {
+      "name": "Improved Kick",
+      "max": 2,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_kick",
+      "desc": [
+       "Gives your Kick ability a 50% chance to Silence the target for 2 sec.",
+       "Gives your Kick ability a 100% chance to Silence the target for 2 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Combat",
+       "row": 4,
+       "col": 1,
+       "max": 2,
+       "text": "Gives your Kick ability a 50% chance to silence the target for 2 sec."
+      }
+     },
+     {
+      "name": "Flawless Execution",
+      "max": 1,
+      "row": 4,
+      "col": 2,
+      "passive": true,
+      "icon": "inv_sword_35",
+      "desc": [
+       "Reduces the Energy cost of your Eviscerate ability by 10."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Dual Wield Specialization",
+      "max": 5,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_dualwield",
+      "desc": [
+       "Increases the damage done by your off-hand weapon by 5%.",
+       "Increases the damage done by your off-hand weapon by 10%.",
+       "Increases the damage done by your off-hand weapon by 15%.",
+       "Increases the damage done by your off-hand weapon by 20%.",
+       "Increases the damage done by your off-hand weapon by 25%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "req": "Precision",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 4,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the damage done by your offhand weapon by 10%."
+      }
+     },
+     {
+      "name": "Blade Flurry",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "ability_warrior_punishingblow",
+      "desc": [
+       "Increases your melee attack speed by 20% and your melee attacks strike an additional nearby opponent. Lasts 15 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "25 Energy | Instant | 2 min cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 5,
+       "col": 2,
+       "max": 1,
+       "text": "Increases your attack speed by 20%. In addition, attacks strike an additional nearby opponent. Lasts 15 sec."
+      }
+     },
+     {
+      "name": "Hack and Slash",
+      "max": 5,
+      "row": 5,
+      "col": 3,
+      "passive": true,
+      "icon": "inv_sword_27",
+      "desc": [
+       "Gives your melee weapon attacks a benefit depending on the weapon.\n\n Axe/Sword: Your successful\n melee attacks have a 1% chance\n to trigger an extra attack on the \n target.\n\n Dagger/Fist: Increases your\n critical strike chance by 1%.\n\n Mace: Your attacks ignore 3% of\n your target's armor.",
+       "Gives your melee weapon attacks a benefit depending on the weapon.\n\n Axe/Sword: Your successful\n melee attacks have a 2% chance\n to trigger an extra attack on the \n target.\n\n Dagger/Fist: Increases your\n critical strike chance by 2%.\n\n Mace: Your attacks ignore 6% of\n your target's armor.",
+       "Gives your melee weapon attacks a benefit depending on the weapon.\n\n Axe/Sword: Your successful\n melee attacks have a 3% chance\n to trigger an extra attack on the \n target.\n\n Dagger/Fist: Increases your\n critical strike chance by 3%.\n\n Mace: Your attacks ignore 9% of\n your target's armor.",
+       "Gives your melee weapon attacks a benefit depending on the weapon.\n\n Axe/Sword: Your successful\n melee attacks have a 4% chance\n to trigger an extra attack on the \n target.\n\n Dagger/Fist: Increases your\n critical strike chance by 4%.\n\n Mace: Your attacks ignore 12% of\n your target's armor.",
+       "Gives your melee weapon attacks a benefit depending on the weapon.\n\n Axe/Sword: Your successful\n melee attacks have a 5% chance\n to trigger an extra attack on the \n target.\n\n Dagger/Fist: Increases your\n critical strike chance by 5%.\n\n Mace: Your attacks ignore 15% of\n your target's armor."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Weapon Expertise",
+      "max": 2,
+      "row": 6,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_holy_blessingofstrength",
+      "desc": [
+       "Reduces the chance for your attacks to be Dodged or Parried by 1%.",
+       "Reduces the chance for your attacks to be Dodged or Parried by 2%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "req": "Blade Flurry",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 6,
+       "col": 2,
+       "max": 2,
+       "text": "Increases your skill with Sword, Fist and Dagger weapons by 3."
+      }
+     },
+     {
+      "name": "Aggression",
+      "max": 3,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_racial_avatar",
+      "desc": [
+       "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 2%.",
+       "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 4%.",
+       "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 6%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Combat",
+       "row": 6,
+       "col": 3,
+       "max": 3,
+       "text": "Increases the damage of your Sinister Strike and Eviscerate abilities by 2%."
+      }
+     },
+     {
+      "name": "Adrenaline Rush",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_shadow_shadowworddominate",
+      "desc": [
+       "Increases your Energy regeneration rate by 100% for 15 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "Instant | 5 min cooldown",
+      "classic": {
+       "status": "same",
+       "tree": "Combat",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "Increases your Energy regeneration rate by 100% for 15 sec."
+      }
+     }
+    ],
+    "removed": [
+     {
+      "name": "Dagger Specialization",
+      "max": 5,
+      "text": "Increases your chance to get a critical strike with Daggers by 1%.",
+      "row": 4
+     },
+     {
+      "name": "Mace Specialization",
+      "max": 5,
+      "text": "Increases your skill with Maces by 1, and gives you a 1% chance to stun your target for 3 sec with a mace.",
+      "row": 5
+     },
+     {
+      "name": "Sword Specialization",
+      "max": 5,
+      "text": "Gives you a 1% chance to get an extra attack on the same target after dealing damage with your Sword.",
+      "row": 5
+     },
+     {
+      "name": "Fist Weapon Specialization",
+      "max": 5,
+      "text": "Increases your chance to get a critical strike with Fist Weapons by 1%.",
+      "row": 5
+     }
+    ]
+   },
+   {
+    "name": "Subtlety",
+    "bg": 183,
+    "icon": "ability_stealth",
+    "talents": [
+     {
+      "name": "Camouflage",
+      "max": 5,
+      "row": 1,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_stealth",
+      "desc": [
+       "Reduces your speed penalty from your Stealth ability by 3% and reduces its cooldown by 2 sec.",
+       "Reduces your speed penalty from your Stealth ability by 6% and reduces its cooldown by 3 sec.",
+       "Reduces your speed penalty from your Stealth ability by 9% and reduces its cooldown by 4 sec.",
+       "Reduces your speed penalty from your Stealth ability by 12% and reduces its cooldown by 5 sec.",
+       "Reduces your speed penalty from your Stealth ability by 15% and reduces its cooldown by 6 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 2,
+       "col": 3,
+       "max": 5,
+       "text": "Increases your speed while stealthed by 3% and reduces the cooldown of your Stealth ability by 1 sec.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Master of Deception",
+      "max": 3,
+      "row": 1,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_shadow_charm",
+      "desc": [
+       "Reduces the chance enemies have to detect you while in Stealth mode as if you were 1 level higher.",
+       "Reduces the chance enemies have to detect you while in Stealth mode as if you were 2 levels higher.",
+       "Reduces the chance enemies have to detect you while in Stealth mode as if you were 3 levels higher."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 1,
+       "col": 2,
+       "max": 5,
+       "text": "Reduces the chance enemies have to detect you while in Stealth mode."
+      }
+     },
+     {
+      "name": "Opportunity",
+      "max": 2,
+      "row": 1,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_warrior_warcry",
+      "desc": [
+       "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 5%.",
+       "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 10%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 1,
+       "col": 3,
+       "max": 5,
+       "text": "Increases the damage dealt when striking from behind with your Backstab, Garrote, or Ambush abilities by 4%."
+      }
+     },
+     {
+      "name": "Setup",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_nature_mirrorimage",
+      "desc": [
+       "Gives you a 33% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell.",
+       "Gives you a 67% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell.",
+       "Gives you a 100% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 4,
+       "col": 1,
+       "max": 3,
+       "text": "Gives you a 15% chance to add a combo point to your target after dodging their attack or fully resisting one of their spells.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Elusiveness",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "passive": true,
+      "icon": "spell_magic_lesserinvisibilty",
+      "desc": [
+       "Reduces the cooldown of your Vanish and Blind abilities by 45 sec.",
+       "Reduces the cooldown of your Vanish and Blind abilities by 90 sec."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "same",
+       "tree": "Subtlety",
+       "row": 2,
+       "col": 2,
+       "max": 2,
+       "text": "Reduces the cooldown of your Vanish and Blind abilities by 45 sec."
+      }
+     },
+     {
+      "name": "Dirty Tricks",
+      "max": 2,
+      "row": 2,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_sap",
+      "desc": [
+       "Reduces the Energy cost of your Sap and Blind abilities by 25%.",
+       "Reduces the Energy cost of your Sap and Blind abilities by 50%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Improved Ambush",
+      "max": 3,
+      "row": 2,
+      "col": 4,
+      "passive": true,
+      "icon": "ability_rogue_ambush",
+      "desc": [
+       "Increases the critical strike chance of your Ambush ability by 15%.",
+       "Increases the critical strike chance of your Ambush ability by 30%.",
+       "Increases the critical strike chance of your Ambush ability by 45%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "moved",
+       "tree": "Subtlety",
+       "row": 3,
+       "col": 3,
+       "max": 3,
+       "text": "Increases the critical strike chance of your Ambush ability by 15%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Initiative",
+      "max": 3,
+      "row": 3,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_shadow_fumble",
+      "desc": [
+       "Gives you a 33% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+       "Gives you a 67% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+       "Gives you a 100% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 3,
+       "col": 1,
+       "max": 3,
+       "text": "Gives you a 25% chance to add an additional combo point to your target when using your Ambush, Garrote, or Cheap Shot ability."
+      }
+     },
+     {
+      "name": "Ghostly Strike",
+      "max": 1,
+      "row": 3,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_shadow_curse",
+      "desc": [
+       "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 combo point."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "40 Energy | Melee Range | Instant | 20 sec cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 3,
+       "col": 2,
+       "max": 1,
+       "text": "A strike that deals 125% weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 combo point."
+      }
+     },
+     {
+      "name": "Improved Distract",
+      "max": 2,
+      "row": 3,
+      "col": 3,
+      "passive": true,
+      "icon": "ability_rogue_distract",
+      "desc": [
+       "Increases the radius of your Distract ability by 3 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 1 level lower.",
+       "Increases the radius of your Distract ability by 5 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 2 levels lower."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Heightened Senses",
+      "max": 2,
+      "row": 4,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_ambush",
+      "desc": [
+       "Increases your Stealth detection as if you were 1 level higher and reduces your chance to be hit by spells and ranged attacks by 2%.",
+       "Increases your Stealth detection as if you were 3 levels higher and reduces your chance to be hit by spells and ranged attacks by 4%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 5,
+       "col": 1,
+       "max": 2,
+       "text": "Increases your Stealth detection and reduces the chance you are hit by spells and ranged attacks by 2%.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Premeditation",
+      "max": 1,
+      "row": 4,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_shadow_possession",
+      "desc": [
+       "Adds 2 Combo Points to your target. You must add to or use those combo points within 20 sec or the combo points are lost."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "20 yd range | Instant | 2 min cooldown",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 7,
+       "col": 2,
+       "max": 1,
+       "text": "When used, adds 2 combo points to your target. You must add to or use those combo points within 10 sec or the combo points are lost.",
+       "moved": true
+      }
+     },
+     {
+      "name": "Serrated Blades",
+      "max": 3,
+      "row": 4,
+      "col": 3,
+      "passive": true,
+      "icon": "inv_sword_17",
+      "desc": [
+       "Causes your attacks to ignore 3% of your target's Armor and increases the damage dealt by your Rupture ability by 10%.",
+       "Causes your attacks to ignore 6% of your target's Armor and increases the damage dealt by your Rupture ability by 20%.",
+       "Causes your attacks to ignore 9% of your target's Armor and increases the damage dealt by your Rupture ability by 30%."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 4,
+       "col": 3,
+       "max": 3,
+       "text": "Causes your attacks to ignore 0 of your target's Armor and increases the damage dealt by your Rupture ability by 10%. The amount of Armor reduced increases with your level."
+      }
+     },
+     {
+      "name": "Dirty Deeds",
+      "max": 2,
+      "row": 5,
+      "col": 1,
+      "passive": true,
+      "icon": "spell_shadow_summonsuccubus",
+      "desc": [
+       "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 10, and your Garrote ability no longer requires you to be behind your target.",
+       "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 20, and your Garrote ability no longer requires you to be behind your target."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 5,
+       "col": 3,
+       "max": 2,
+       "text": "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 10."
+      }
+     },
+     {
+      "name": "Preparation",
+      "max": 1,
+      "row": 5,
+      "col": 2,
+      "passive": false,
+      "icon": "spell_shadow_antishadow",
+      "desc": [
+       "When activated, this ability immediately finishes the cooldown on your other Rogue abilities."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "cost": "Instant | 10 min cooldown",
+      "classic": {
+       "status": "same",
+       "tree": "Subtlety",
+       "row": 5,
+       "col": 2,
+       "max": 1,
+       "text": "When activated, this ability immediately finishes the cooldown on your other Rogue abilities."
+      }
+     },
+     {
+      "name": "Hemorrhage",
+      "max": 1,
+      "row": 5,
+      "col": 3,
+      "passive": false,
+      "icon": "spell_shadow_lifedrain",
+      "desc": [
+       "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo Point."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Serrated Blades",
+      "cost": "35 Energy | Melee Range | Instant",
+      "classic": {
+       "status": "changed",
+       "tree": "Subtlety",
+       "row": 5,
+       "col": 4,
+       "max": 1,
+       "text": "An instant strike that damages the opponent and causes the target to hemorrhage, increasing any Physical damage dealt to the target by up to 3. Lasts 30 charges or 15 sec. Awards 1 combo point."
+      }
+     },
+     {
+      "name": "Quietus",
+      "max": 5,
+      "row": 6,
+      "col": 1,
+      "passive": true,
+      "icon": "ability_rogue_garrote",
+      "desc": [
+       "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 2% more damage against targets below 35% health.",
+       "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 4% more damage against targets below 35% health.",
+       "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 6% more damage against targets below 35% health.",
+       "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 8% more damage against targets below 35% health.",
+       "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 10% more damage against targets below 35% health."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "req": "Dirty Deeds",
+      "fixed": [
+       "35%"
+      ],
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Cutthroat",
+      "max": 5,
+      "row": 6,
+      "col": 3,
+      "passive": true,
+      "icon": "classicon_rogue",
+      "desc": [
+       "Your Backstab has a 3% chance to cause your next Ambush within 10 sec to not require Stealth.",
+       "Your Backstab has a 6% chance to cause your next Ambush within 10 sec to not require Stealth.",
+       "Your Backstab has a 9% chance to cause your next Ambush within 10 sec to not require Stealth.",
+       "Your Backstab has a 12% chance to cause your next Ambush within 10 sec to not require Stealth.",
+       "Your Backstab has a 15% chance to cause your next Ambush within 10 sec to not require Stealth."
+      ],
+      "complete": true,
+      "confirmed": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "src": "beta",
+      "classic": {
+       "status": "new"
+      }
+     },
+     {
+      "name": "Thousand Cuts",
+      "max": 1,
+      "row": 7,
+      "col": 2,
+      "passive": true,
+      "icon": "ability_rogue_rupture",
+      "desc": [
+       "When your Rupture ability deals periodic damage, the Energy cost of your next Hemorrhage or Backstab ability within 10 sec is reduced by 3, stacking up to 5 times."
+      ],
+      "complete": true,
+      "confirmed": [
+       1
+      ],
+      "src": "beta",
+      "req": "Preparation",
+      "classic": {
+       "status": "new"
+      }
+     }
+    ],
+    "removed": [
+     {
+      "name": "Sleight of Hand",
+      "max": 2,
+      "text": "Reduces the chance you are critically hit by melee and ranged attacks by 1% and increases the threat reduction of your Feint ability by 10%.",
+      "row": 2
+     },
+     {
+      "name": "Improved Sap",
+      "max": 3,
+      "text": "Gives you a 30% chance to return to stealth mode after using your Sap ability.",
+      "row": 4
+     },
+     {
+      "name": "Deadliness",
+      "max": 5,
+      "text": "Increases your Attack Power by 2%.",
+      "row": 6
+     }
+    ]
+   }
+  ],
+  "source": "Talent trees and every rank's text from the WoW Forever beta client, build 1.60.1.70009."
+ },
+ "spellbook": {
+  "race": "",
+  "level": 60,
+  "seen": "",
+  "missing": [],
+  "general": [
+   [
+    "Attack",
+    ""
+   ],
+   [
+    "Pick Lock",
+    ""
+   ],
+   [
+    "Shoot Bow",
+    ""
+   ],
+   [
+    "Shoot Crossbow",
+    ""
+   ],
+   [
+    "Shoot Gun",
+    ""
+   ],
+   [
+    "Throw",
+    ""
+   ],
+   [
+    "Dual Wield",
+    "Passive"
+   ],
+   [
+    "Armor Proficiency",
+    "Passive"
+   ],
+   [
+    "Dodge",
+    "Passive"
+   ],
+   [
+    "Parry",
+    "Passive"
+   ],
+   [
+    "Languages",
+    "Passive"
+   ]
+  ],
+  "tabs": [
+   {
+    "name": "Assassination",
+    "spells": [
+     [
+      "Ambush",
+      "Rank 1"
+     ],
+     [
+      "Ambush",
+      "Rank 2"
+     ],
+     [
+      "Ambush",
+      "Rank 3"
+     ],
+     [
+      "Ambush",
+      "Rank 4"
+     ],
+     [
+      "Ambush",
+      "Rank 5"
+     ],
+     [
+      "Ambush",
+      "Rank 6"
+     ],
+     [
+      "Cheap Shot",
+      ""
+     ],
+     [
+      "Cold Blood",
+      ""
+     ],
+     [
+      "Eviscerate",
+      "Rank 1"
+     ],
+     [
+      "Eviscerate",
+      "Rank 2"
+     ],
+     [
+      "Eviscerate",
+      "Rank 3"
+     ],
+     [
+      "Eviscerate",
+      "Rank 4"
+     ],
+     [
+      "Eviscerate",
+      "Rank 5"
+     ],
+     [
+      "Eviscerate",
+      "Rank 6"
+     ],
+     [
+      "Eviscerate",
+      "Rank 7"
+     ],
+     [
+      "Eviscerate",
+      "Rank 8"
+     ],
+     [
+      "Eviscerate",
+      "Rank 9"
+     ],
+     [
+      "Expose Armor",
+      "Rank 1"
+     ],
+     [
+      "Expose Armor",
+      "Rank 2"
+     ],
+     [
+      "Expose Armor",
+      "Rank 3"
+     ],
+     [
+      "Expose Armor",
+      "Rank 4"
+     ],
+     [
+      "Expose Armor",
+      "Rank 5"
+     ],
+     [
+      "Garrote",
+      "Rank 1"
+     ],
+     [
+      "Garrote",
+      "Rank 2"
+     ],
+     [
+      "Garrote",
+      "Rank 3"
+     ],
+     [
+      "Garrote",
+      "Rank 4"
+     ],
+     [
+      "Garrote",
+      "Rank 5"
+     ],
+     [
+      "Garrote",
+      "Rank 6"
+     ],
+     [
+      "Kidney Shot",
+      "Rank 1"
+     ],
+     [
+      "Kidney Shot",
+      "Rank 2"
+     ],
+     [
+      "Mutilate",
+      "Rank 1"
+     ],
+     [
+      "Mutilate",
+      "Rank 2"
+     ],
+     [
+      "Mutilate",
+      "Rank 3"
+     ],
+     [
+      "Mutilate",
+      "Rank 4"
+     ],
+     [
+      "Rupture",
+      "Rank 1"
+     ],
+     [
+      "Rupture",
+      "Rank 2"
+     ],
+     [
+      "Rupture",
+      "Rank 3"
+     ],
+     [
+      "Rupture",
+      "Rank 4"
+     ],
+     [
+      "Rupture",
+      "Rank 5"
+     ],
+     [
+      "Rupture",
+      "Rank 6"
+     ],
+     [
+      "Slice and Dice",
+      "Rank 1"
+     ],
+     [
+      "Slice and Dice",
+      "Rank 2"
+     ],
+     [
+      "Venom",
+      ""
+     ]
+    ]
+   },
+   {
+    "name": "Combat",
+    "spells": [
+     [
+      "Adrenaline Rush",
+      ""
+     ],
+     [
+      "Backstab",
+      "Rank 1"
+     ],
+     [
+      "Backstab",
+      "Rank 2"
+     ],
+     [
+      "Backstab",
+      "Rank 3"
+     ],
+     [
+      "Backstab",
+      "Rank 4"
+     ],
+     [
+      "Backstab",
+      "Rank 5"
+     ],
+     [
+      "Backstab",
+      "Rank 6"
+     ],
+     [
+      "Backstab",
+      "Rank 7"
+     ],
+     [
+      "Backstab",
+      "Rank 8"
+     ],
+     [
+      "Backstab",
+      "Rank 9"
+     ],
+     [
+      "Blade Flurry",
+      ""
+     ],
+     [
+      "Evasion",
+      ""
+     ],
+     [
+      "Feint",
+      "Rank 1"
+     ],
+     [
+      "Feint",
+      "Rank 2"
+     ],
+     [
+      "Feint",
+      "Rank 3"
+     ],
+     [
+      "Feint",
+      "Rank 4"
+     ],
+     [
+      "Feint",
+      "Rank 5"
+     ],
+     [
+      "Gouge",
+      "Rank 1"
+     ],
+     [
+      "Gouge",
+      "Rank 2"
+     ],
+     [
+      "Gouge",
+      "Rank 3"
+     ],
+     [
+      "Gouge",
+      "Rank 4"
+     ],
+     [
+      "Gouge",
+      "Rank 5"
+     ],
+     [
+      "Kick",
+      "Rank 1"
+     ],
+     [
+      "Kick",
+      "Rank 2"
+     ],
+     [
+      "Kick",
+      "Rank 3"
+     ],
+     [
+      "Kick",
+      "Rank 4"
+     ],
+     [
+      "Riposte",
+      ""
+     ],
+     [
+      "Sinister Strike",
+      "Rank 1"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 2"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 3"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 4"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 5"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 6"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 7"
+     ],
+     [
+      "Sinister Strike",
+      "Rank 8"
+     ],
+     [
+      "Sprint",
+      "Rank 1"
+     ],
+     [
+      "Sprint",
+      "Rank 2"
+     ],
+     [
+      "Sprint",
+      "Rank 3"
+     ]
+    ]
+   },
+   {
+    "name": "Subtlety",
+    "spells": [
+     [
+      "Blind",
+      ""
+     ],
+     [
+      "Detect Traps",
+      "Passive"
+     ],
+     [
+      "Disarm Trap",
+      ""
+     ],
+     [
+      "Distract",
+      ""
+     ],
+     [
+      "Ghostly Strike",
+      ""
+     ],
+     [
+      "Hemorrhage",
+      ""
+     ],
+     [
+      "Pick Pocket",
+      ""
+     ],
+     [
+      "Premeditation",
+      ""
+     ],
+     [
+      "Preparation",
+      ""
+     ],
+     [
+      "Safe Fall",
+      "Passive"
+     ],
+     [
+      "Sap",
+      "Rank 1"
+     ],
+     [
+      "Sap",
+      "Rank 2"
+     ],
+     [
+      "Sap",
+      "Rank 3"
+     ],
+     [
+      "Stealth",
+      "Rank 1"
+     ],
+     [
+      "Stealth",
+      "Rank 2"
+     ],
+     [
+      "Stealth",
+      "Rank 3"
+     ],
+     [
+      "Stealth",
+      "Rank 4"
+     ],
+     [
+      "Vanish",
+      "Rank 1"
+     ],
+     [
+      "Vanish",
+      "Rank 2"
+     ]
+    ]
+   },
+   {
+    "name": "Poisons",
+    "icon": "trade_brewpoison",
+    "note": "recipes: each one makes the poison you put on a weapon",
+    "spells": [
+     [
+      "Crippling Poison",
+      "Rank 1"
+     ],
+     [
+      "Crippling Poison",
+      "Rank 2"
+     ],
+     [
+      "Instant Poison",
+      "Rank 1"
+     ],
+     [
+      "Instant Poison",
+      "Rank 2"
+     ],
+     [
+      "Instant Poison",
+      "Rank 3"
+     ],
+     [
+      "Instant Poison",
+      "Rank 4"
+     ],
+     [
+      "Instant Poison",
+      "Rank 5"
+     ],
+     [
+      "Instant Poison",
+      "Rank 6"
+     ],
+     [
+      "Mind-numbing Poison",
+      "Rank 1"
+     ],
+     [
+      "Mind-numbing Poison",
+      "Rank 2"
+     ],
+     [
+      "Mind-numbing Poison",
+      "Rank 3"
+     ],
+     [
+      "Deadly Poison",
+      "Rank 1"
+     ],
+     [
+      "Deadly Poison",
+      "Rank 2"
+     ],
+     [
+      "Deadly Poison",
+      "Rank 3"
+     ],
+     [
+      "Deadly Poison",
+      "Rank 4"
+     ],
+     [
+      "Deadly Poison",
+      "Rank 5"
+     ],
+     [
+      "Wound Poison",
+      "Rank 1"
+     ],
+     [
+      "Wound Poison",
+      "Rank 2"
+     ],
+     [
+      "Wound Poison",
+      "Rank 3"
+     ],
+     [
+      "Wound Poison",
+      "Rank 4"
+     ],
+     [
+      "Blinding Powder",
+      ""
+     ]
+    ]
+   }
+  ],
+  "notes": [],
+  "source": "beta",
+  "build": "1.60.1.70009",
+  "levels": {
+   "Gouge": [
+    6,
+    18,
+    32,
+    46,
+    60
+   ],
+   "Sinister Strike": [
+    1,
+    6,
+    14,
+    22,
+    30,
+    38,
+    46,
+    54
+   ],
+   "Eviscerate": [
+    1,
+    8,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56,
+    60
+   ],
+   "Rupture": [
+    20,
+    28,
+    36,
+    44,
+    52,
+    60
+   ],
+   "Garrote": [
+    14,
+    22,
+    30,
+    38,
+    46,
+    54
+   ],
+   "Kick": [
+    12,
+    26,
+    42,
+    58
+   ],
+   "Ambush": [
+    18,
+    26,
+    34,
+    42,
+    50,
+    58
+   ],
+   "Stealth": [
+    1,
+    20,
+    40,
+    60
+   ],
+   "Vanish": [
+    22,
+    42
+   ],
+   "Backstab": [
+    4,
+    12,
+    20,
+    28,
+    36,
+    44,
+    52,
+    60,
+    60
+   ],
+   "Feint": [
+    16,
+    28,
+    40,
+    52,
+    60
+   ],
+   "Sap": [
+    10,
+    28,
+    48
+   ],
+   "Slice and Dice": [
+    10,
+    42
+   ],
+   "Kidney Shot": [
+    30,
+    50
+   ],
+   "Sprint": [
+    10,
+    34,
+    58
+   ],
+   "Detect Traps": [
+    24
+   ],
+   "Safe Fall": [
+    40
+   ],
+   "Expose Armor": [
+    14,
+    26,
+    36,
+    46,
+    56
+   ],
+   "Mutilate": [
+    30,
+    40,
+    50,
+    60
+   ],
+   "Crippling Poison": [
+    20,
+    50
+   ],
+   "Instant Poison": [
+    20,
+    28,
+    36,
+    44,
+    52,
+    60
+   ],
+   "Mind-numbing Poison": [
+    24,
+    38,
+    52
+   ],
+   "Deadly Poison": [
+    30,
+    38,
+    46,
+    54,
+    60
+   ],
+   "Wound Poison": [
+    32,
+    40,
+    48,
+    56
+   ],
+   "Blinding Powder": [
+    34
+   ]
+  },
+  "talents": [
+   "Adrenaline Rush",
+   "Blade Flurry",
+   "Cold Blood",
+   "Ghostly Strike",
+   "Hemorrhage",
+   "Mutilate",
+   "Premeditation",
+   "Preparation",
+   "Riposte",
+   "Venom"
+  ],
+  "icons": {
+   "Distract": "ability_rogue_distract",
+   "Gouge": "ability_gouge",
+   "Sinister Strike": "spell_shadow_ritualofsacrifice",
+   "Blind": "spell_shadow_mindsteal",
+   "Eviscerate": "ability_rogue_eviscerate",
+   "Rupture": "ability_rogue_rupture",
+   "Garrote": "ability_rogue_garrote",
+   "Kick": "ability_kick",
+   "Ambush": "ability_rogue_ambush",
+   "Pick Pocket": "inv_misc_bag_11",
+   "Stealth": "ability_stealth",
+   "Vanish": "ability_vanish",
+   "Backstab": "ability_backstab",
+   "Feint": "ability_rogue_feint",
+   "Evasion": "spell_shadow_shadowward",
+   "Sap": "ability_sap",
+   "Slice and Dice": "ability_rogue_slicedice",
+   "Kidney Shot": "ability_rogue_kidneyshot",
+   "Cheap Shot": "ability_cheapshot",
+   "Adrenaline Rush": "spell_shadow_shadowworddominate",
+   "Blade Flurry": "ability_warrior_punishingblow",
+   "Sprint": "ability_rogue_sprint",
+   "Cold Blood": "spell_ice_lament",
+   "Preparation": "spell_shadow_antishadow",
+   "Riposte": "ability_warrior_challange",
+   "Ghostly Strike": "spell_shadow_curse",
+   "Detect Traps": "ability_spy",
+   "Disarm Trap": "spell_shadow_grimward",
+   "Premeditation": "spell_shadow_possession",
+   "Hemorrhage": "spell_shadow_lifedrain",
+   "Safe Fall": "inv_feather_01",
+   "Expose Armor": "ability_warrior_riposte",
+   "Mutilate": "ability_rogue_deadlybrew",
+   "Venom": "inv_sword_31",
+   "Crippling Poison": "ability_poisonsting",
+   "Instant Poison": "ability_poisons",
+   "Mind-numbing Poison": "spell_nature_nullifydisease",
+   "Deadly Poison": "ability_rogue_dualweild",
+   "Wound Poison": "inv_misc_herb_16",
+   "Blinding Powder": "inv_misc_ammo_gunpowder_02"
+  },
+  "gone": []
+ },
+ "spell_desc": {
+  "Rogue|Pick Lock|": {
+   "l": [
+    [
+     "5 yd range",
+     ""
+    ],
+    [
+     "5 sec cast",
+     ""
+    ],
+    [
+     "Tools: Thieves' Tools",
+     ""
+    ]
+   ],
+   "d": "Allows opening of locked chests and doors.",
+   "s": "demo",
+   "src": "Savix's Rogue, 12 Sep",
+   "r": "",
+   "lv": "",
+   "id": null,
+   "cs": "changed",
+   "ck": "r",
+   "cl": [
+    [
+     "5 yd range",
+     ""
+    ],
+    [
+     "5 sec cast",
+     ""
+    ]
+   ]
+  },
+  "Rogue|Shoot Bow|": {
+   "l": [
+    [
+     "8-30 yd range",
+     ""
+    ],
+    [
+     "1 sec cast",
+     "1.7 sec cooldown"
+    ]
+   ],
+   "d": "",
+   "s": "demo",
+   "src": "Soda's Warrior, 13 Sep (the tooltip has no description line)",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Rogue|Shoot Crossbow|": {
+   "l": [],
+   "d": "Attack with an equipped wand.",
+   "s": "classic",
+   "src": "",
+   "r": "",
+   "lv": "Requires level 1",
+   "id": 5019
+  },
+  "Rogue|Shoot Gun|": {
+   "l": [
+    [
+     "8-30 yd range",
+     ""
+    ],
+    [
+     "1 sec cast",
+     "1.7 sec cooldown"
+    ],
+    [
+     "Requires Guns",
+     ""
+    ]
+   ],
+   "d": "",
+   "s": "demo",
+   "src": "Soda's Warrior, 13 Sep (no description line on the tooltip)",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Rogue|Throw|": {
+   "l": [
+    [
+     "8-30 yd range",
+     ""
+    ],
+    [
+     "0.5 sec cast",
+     "1.7 sec cooldown"
+    ],
+    [
+     "Requires Thrown",
+     ""
+    ]
+   ],
+   "d": "Hurl a thrown weapon at the target.",
+   "s": "demo",
+   "src": "Savix's Rogue, 12 Sep",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Rogue|Dual Wield|Passive": {
+   "l": [],
+   "d": "Allows one-hand and off-hand weapons to be equipped in the off-hand.",
+   "s": "classic",
+   "src": "",
+   "r": "",
+   "lv": "",
+   "id": 674
+  },
+  "Rogue|Armor Proficiency|Passive": {
+   "l": [
+    [
+     "Passive",
+     ""
+    ]
+   ],
+   "d": "You are proficient in the use of the following armor types: Cloth, Leather.",
+   "s": "demo",
+   "src": "Not hovered on a Rogue yet; Rogues wear the same two types as the Druid whose tooltip we read.",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Rogue|Dodge|Passive": {
+   "l": [
+    [
+     "Passive",
+     ""
+    ]
+   ],
+   "d": "Gives a chance to dodge enemy melee attacks.",
+   "s": "demo",
+   "src": "Soda's Gnome Warlock, 13 Sep",
+   "r": "",
+   "lv": "",
+   "id": null
+  },
+  "Rogue|Parry|Passive": {
+   "l": [],
+   "d": "Gives a chance to parry enemy melee attacks.",
+   "s": "classic",
+   "src": "",
+   "r": "",
+   "lv": "Requires level 1",
+   "id": 3127
+  },
+  "Rogue|Ambush|Rank 1": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Ambush the target, causing 250% weapon damage plus 70 to the target. Must be stealthed and behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 8676,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Ambush|Rank 2": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Ambush the target, causing 250% weapon damage plus 100 to the target. Must be stealthed and behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 8724,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Ambush|Rank 3": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Ambush the target, causing 250% weapon damage plus 125 to the target. Must be stealthed and behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 8725,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Ambush|Rank 4": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Ambush the target, causing 250% weapon damage plus 185 to the target. Must be stealthed and behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 11267,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Ambush|Rank 5": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Ambush the target, causing 250% weapon damage plus 230 to the target. Must be stealthed and behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 11268,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Ambush|Rank 6": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Ambush the target, causing 250% weapon damage plus 290 to the target. Must be stealthed and behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 11269,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Cheap Shot|": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Stuns the target for 4 sec. Must be stealthed. Awards 2 combo points.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 1833,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Cold Blood|": {
+   "l": [
+    [
+     "Instant",
+     "3 min cooldown"
+    ]
+   ],
+   "d": "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, Eviscerate, or Mutilate by 100%.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 25",
+   "id": 14177,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, or Eviscerate by 100%."
+  },
+  "Rogue|Eviscerate|Rank 1": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 6-10 damage\n 2 points: 11-15 damage\n 3 points: 16-20 damage\n 4 points: 21-25 damage\n 5 points: 26-30 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 2098,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 2": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 14-22 damage\n 2 points: 25-33 damage\n 3 points: 36-44 damage\n 4 points: 47-55 damage\n 5 points: 58-66 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 6760,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 3": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 25-39 damage\n 2 points: 44-58 damage\n 3 points: 63-77 damage\n 4 points: 82-96 damage\n 5 points: 101-115 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 16",
+   "id": 6761,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 4": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 41-61 damage\n 2 points: 72-92 damage\n 3 points: 103-123 damage\n 4 points: 134-154 damage\n 5 points: 165-185 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 6762,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 5": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 60-90 damage\n 2 points: 105-135 damage\n 3 points: 150-180 damage\n 4 points: 195-225 damage\n 5 points: 240-270 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 8623,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 6": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 93-137 damage\n 2 points: 164-208 damage\n 3 points: 235-279 damage\n 4 points: 306-350 damage\n 5 points: 377-421 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 8624,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage per combo point, increased by Attack Power: 1 point : 99-143 damage 2 points: 176-220 damage 3 points: 253-297 damage 4 points: 330-374 damage 5 points: 407-451 damage"
+  },
+  "Rogue|Eviscerate|Rank 7": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 144-212 damage\n 2 points: 254-322 damage\n 3 points: 364-432 damage\n 4 points: 474-542 damage\n 5 points: 584-652 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 11299,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 8": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 199-295 damage\n 2 points: 350-446 damage\n 3 points: 501-597 damage\n 4 points: 652-748 damage\n 5 points: 803-899 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 11300,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Eviscerate|Rank 9": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage per combo point, increased by Attack Power:\n 1 point : 224-332 damage\n 2 points: 394-502 damage\n 3 points: 564-672 damage\n 4 points: 734-842 damage\n 5 points: 904-1,012 damage",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 31016,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Finishing move that causes damage per combo point, increased by Attack Power: 1 point : 224-332 damage 2 points: 394-502 damage 3 points: 564-672 damage 4 points: 734-842 damage 5 points: 904-1012 damage"
+  },
+  "Rogue|Expose Armor|Rank 1": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that exposes the target for 30 sec, reducing armor per combo point:\n 1 point : 90 armor\n 2 points: 180 armor\n 3 points: 270 armor\n 4 points: 360 armor\n 5 points: 450 armor",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 8647,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that exposes the target for 30 sec, reducing armor per combo point: 1 point : 80 armor 2 points: 160 armor 3 points: 240 armor 4 points: 320 armor 5 points: 400 armor"
+  },
+  "Rogue|Expose Armor|Rank 2": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that exposes the target for 30 sec, reducing armor per combo point:\n 1 point : 180 armor\n 2 points: 360 armor\n 3 points: 540 armor\n 4 points: 720 armor\n 5 points: 900 armor",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 8649,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that exposes the target for 30 sec, reducing armor per combo point: 1 point : 145 armor 2 points: 290 armor 3 points: 435 armor 4 points: 580 armor 5 points: 725 armor"
+  },
+  "Rogue|Expose Armor|Rank 3": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that exposes the target for 30 sec, reducing armor per combo point:\n 1 point : 270 armor\n 2 points: 540 armor\n 3 points: 810 armor\n 4 points: 1,080 armor\n 5 points: 1,350 armor",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8650,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Finishing move that exposes the target for 30 sec, reducing armor per combo point: 1 point : 210 armor 2 points: 420 armor 3 points: 630 armor 4 points: 840 armor 5 points: 1050 armor"
+  },
+  "Rogue|Expose Armor|Rank 4": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that exposes the target for 30 sec, reducing armor per combo point:\n 1 point : 360 armor\n 2 points: 720 armor\n 3 points: 1,080 armor\n 4 points: 1,440 armor\n 5 points: 1,800 armor",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 11197,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Finishing move that exposes the target for 30 sec, reducing armor per combo point: 1 point : 275 armor 2 points: 550 armor 3 points: 825 armor 4 points: 1100 armor 5 points: 1375 armor"
+  },
+  "Rogue|Expose Armor|Rank 5": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that exposes the target for 30 sec, reducing armor per combo point:\n 1 point : 450 armor\n 2 points: 900 armor\n 3 points: 1,350 armor\n 4 points: 1,800 armor\n 5 points: 2,250 armor",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 11198,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Finishing move that exposes the target for 30 sec, reducing armor per combo point: 1 point : 340 armor 2 points: 680 armor 3 points: 1020 armor 4 points: 1360 armor 5 points: 1700 armor"
+  },
+  "Rogue|Garrote|Rank 1": {
+   "l": [
+    [
+     "50 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Garrote the enemy, causing 144 damage over 18 sec, increased by your Attack Power. Must be stealthed and behind the target. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 703,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Garrote|Rank 2": {
+   "l": [
+    [
+     "50 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Garrote the enemy, causing 204 damage over 18 sec, increased by your Attack Power. Must be stealthed and behind the target. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 8631,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Garrote|Rank 3": {
+   "l": [
+    [
+     "50 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Garrote the enemy, causing 282 damage over 18 sec, increased by your Attack Power. Must be stealthed and behind the target. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 8632,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Garrote|Rank 4": {
+   "l": [
+    [
+     "50 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Garrote the enemy, causing 354 damage over 18 sec, increased by your Attack Power. Must be stealthed and behind the target. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 8633,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Garrote|Rank 5": {
+   "l": [
+    [
+     "50 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Garrote the enemy, causing 444 damage over 18 sec, increased by your Attack Power. Must be stealthed and behind the target. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 11289,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Garrote|Rank 6": {
+   "l": [
+    [
+     "50 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Garrote the enemy, causing 552 damage over 18 sec, increased by your Attack Power. Must be stealthed and behind the target. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 11290,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Kidney Shot|Rank 1": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "20 sec cooldown"
+    ]
+   ],
+   "d": "Finishing move that stuns the target. Lasts longer per combo point:\n 1 point : 1 second\n 2 points: 2 seconds\n 3 points: 3 seconds\n 4 points: 4 seconds\n 5 points: 5 seconds",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 408,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Kidney Shot|Rank 2": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "20 sec cooldown"
+    ]
+   ],
+   "d": "Finishing move that stuns the target. Lasts longer per combo point:\n 1 point : 2 seconds\n 2 points: 3 seconds\n 3 points: 4 seconds\n 4 points: 5 seconds\n 5 points: 6 seconds",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 8643,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Mutilate|Rank 1": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Daggers",
+     ""
+    ]
+   ],
+   "d": "Instantly attacks with both weapons for 75% weapon damage plus an additional 13 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1310707,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "new"
+  },
+  "Rogue|Mutilate|Rank 2": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Daggers",
+     ""
+    ]
+   ],
+   "d": "Instantly attacks with both weapons for 75% weapon damage plus an additional 19 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 399956,
+   "sc": "Physical",
+   "cs": "new"
+  },
+  "Rogue|Mutilate|Rank 3": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Daggers",
+     ""
+    ]
+   ],
+   "d": "Instantly attacks with both weapons for 75% weapon damage plus an additional 27 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 1241582,
+   "sc": "Physical",
+   "cs": "new"
+  },
+  "Rogue|Mutilate|Rank 4": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Daggers",
+     ""
+    ]
+   ],
+   "d": "Instantly attacks with both weapons for 75% weapon damage plus an additional 38 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 1241584,
+   "sc": "Physical",
+   "cs": "new"
+  },
+  "Rogue|Rupture|Rank 1": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point:\n 1 point : 25 damage over 8 secs\n 2 points: 37 damage over 10 secs\n 3 points: 51 damage over 12 secs\n 4 points: 68 damage over 14 secs\n 5 points: 87 damage over 16 secs",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1943,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point: 1 point : 40 damage over 8 secs 2 points: 60 damage over 10 secs 3 points: 84 damage over 12 secs 4 points: 112 damage over 14 secs 5 points: 144 damage over 16 secs"
+  },
+  "Rogue|Rupture|Rank 2": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point:\n 1 point : 35 damage over 8 secs\n 2 points: 53 damage over 10 secs\n 3 points: 74 damage over 12 secs\n 4 points: 99 damage over 14 secs\n 5 points: 127 damage over 16 secs",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 8639,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point: 1 point : 60 damage over 8 secs 2 points: 90 damage over 10 secs 3 points: 126 damage over 12 secs 4 points: 168 damage over 14 secs 5 points: 216 damage over 16 secs"
+  },
+  "Rogue|Rupture|Rank 3": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point:\n 1 point : 53 damage over 8 secs\n 2 points: 79 damage over 10 secs\n 3 points: 109 damage over 12 secs\n 4 points: 143 damage over 14 secs\n 5 points: 183 damage over 16 secs",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8640,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point: 1 point : 88 damage over 8 secs 2 points: 130 damage over 10 secs 3 points: 180 damage over 12 secs 4 points: 238 damage over 14 secs 5 points: 304 damage over 16 secs"
+  },
+  "Rogue|Rupture|Rank 4": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point:\n 1 point : 76 damage over 8 secs\n 2 points: 110 damage over 10 secs\n 3 points: 149 damage over 12 secs\n 4 points: 195 damage over 14 secs\n 5 points: 246 damage over 16 secs",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 11273,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point: 1 point : 128 damage over 8 secs 2 points: 185 damage over 10 secs 3 points: 252 damage over 12 secs 4 points: 329 damage over 14 secs 5 points: 416 damage over 16 secs"
+  },
+  "Rogue|Rupture|Rank 5": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point:\n 1 point : 105 damage over 8 secs\n 2 points: 151 damage over 10 secs\n 3 points: 207 damage over 12 secs\n 4 points: 270 damage over 14 secs\n 5 points: 342 damage over 16 secs",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 11274,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point: 1 point : 176 damage over 8 secs 2 points: 255 damage over 10 secs 3 points: 348 damage over 12 secs 4 points: 455 damage over 14 secs 5 points: 576 damage over 16 secs"
+  },
+  "Rogue|Rupture|Rank 6": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point:\n 1 point : 159 damage over 8 secs\n 2 points: 222 damage over 10 secs\n 3 points: 295 damage over 12 secs\n 4 points: 377 damage over 14 secs\n 5 points: 469 damage over 16 secs",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 11275,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Finishing move that causes damage over time, increased by your Attack Power. Lasts longer per combo point: 1 point : 272 damage over 8 secs 2 points: 380 damage over 10 secs 3 points: 504 damage over 12 secs 4 points: 644 damage over 14 secs 5 points: 800 damage over 16 secs"
+  },
+  "Rogue|Slice and Dice|Rank 1": {
+   "l": [
+    [
+     "25 Energy",
+     "100 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that increases melee attack speed by 20%. Lasts longer per combo point:\n 1 point : 9 seconds\n 2 points: 12 seconds\n 3 points: 15 seconds\n 4 points: 18 seconds\n 5 points: 21 seconds",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 5171,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Slice and Dice|Rank 2": {
+   "l": [
+    [
+     "25 Energy",
+     "100 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that increases melee attack speed by 30%. Lasts longer per combo point:\n 1 point : 9 seconds\n 2 points: 12 seconds\n 3 points: 15 seconds\n 4 points: 18 seconds\n 5 points: 21 seconds",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 6774,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Venom|": {
+   "l": [
+    [
+     "25 Energy",
+     "100 yd range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%. Lasts longer per combo point:\n 1 point : 9 seconds\n 2 points: 12 seconds\n 3 points: 15 seconds\n 4 points: 18 seconds\n 5 points: 21 seconds",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 1310703,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "new"
+  },
+  "Rogue|Adrenaline Rush|": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "Increases your Energy regeneration rate by 100% for 15 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 13750,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 1": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 15 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 53,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 2": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 30 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 2589,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 3": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 48 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 2590,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 4": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 69 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 2591,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 5": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 90 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8721,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 6": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 135 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 11279,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 7": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 165 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 11280,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 8": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 210 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 11281,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Backstab|Rank 9": {
+   "l": [
+    [
+     "60 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "Backstab the target, causing 150% weapon damage plus 225 to the target. Must be behind the target. Requires a dagger in the main hand. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25300,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Blade Flurry|": {
+   "l": [
+    [
+     "25 Energy",
+     ""
+    ],
+    [
+     "Instant",
+     "2 min cooldown"
+    ]
+   ],
+   "d": "Increases your melee attack speed by 20% and your melee attacks strike an additional nearby opponent. Lasts 15 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 13877,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Increases your attack speed by 20%. In addition, attacks strike an additional nearby opponent. Lasts 15 sec."
+  },
+  "Rogue|Evasion|": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "The rogue's dodge chance will increase by 50% for 15 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 8",
+   "id": 5277,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Feint|Rank 1": {
+   "l": [
+    [
+     "20 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Performs a feint, causing no damage but lowering your threat by a small amount, making the enemy less likely to attack you.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 16",
+   "id": 1966,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Feint|Rank 2": {
+   "l": [
+    [
+     "20 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Performs a feint, causing no damage but lowering your threat by a medium amount, making the enemy less likely to attack you.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 6768,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Feint|Rank 3": {
+   "l": [
+    [
+     "20 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Performs a feint, causing no damage but lowering your threat by a large amount, making the enemy less likely to attack you.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 8637,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Feint|Rank 4": {
+   "l": [
+    [
+     "20 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Performs a feint, causing no damage but lowering your threat by a large amount, making the enemy less likely to attack you.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 11303,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Feint|Rank 5": {
+   "l": [
+    [
+     "20 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Performs a feint, causing no damage but lowering your threat by a large amount, making the enemy less likely to attack you.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25302,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Gouge|Rank 1": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Causes 10 damage, stops your attack, and incapacitates the target for 4 sec. The target must be facing you. Any damage taken will break the effect. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 1776,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Causes 10 damage, incapacitating the opponent for 4 sec, and turns off your attack. Target must be facing you. Any damage caused will revive the target. Awards 1 combo point."
+  },
+  "Rogue|Gouge|Rank 2": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Causes 20 damage, stops your attack, and incapacitates the target for 4 sec. The target must be facing you. Any damage taken will break the effect. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 18",
+   "id": 1777,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Causes 20 damage, incapacitating the opponent for 4 sec, and turns off your attack. Target must be facing you. Any damage caused will revive the target. Awards 1 combo point."
+  },
+  "Rogue|Gouge|Rank 3": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Causes 32 damage, stops your attack, and incapacitates the target for 4 sec. The target must be facing you. Any damage taken will break the effect. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 8629,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Causes 32 damage, incapacitating the opponent for 4 sec, and turns off your attack. Target must be facing you. Any damage caused will revive the target. Awards 1 combo point."
+  },
+  "Rogue|Gouge|Rank 4": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Causes 55 damage, stops your attack, and incapacitates the target for 4 sec. The target must be facing you. Any damage taken will break the effect. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 11285,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Causes 55 damage, incapacitating the opponent for 4 sec, and turns off your attack. Target must be facing you. Any damage caused will revive the target. Awards 1 combo point."
+  },
+  "Rogue|Gouge|Rank 5": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Causes 75 damage, stops your attack, and incapacitates the target for 4 sec. The target must be facing you. Any damage taken will break the effect. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 11286,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Causes 75 damage, incapacitating the opponent for 4 sec, and turns off your attack. Target must be facing you. Any damage caused will revive the target. Awards 1 combo point."
+  },
+  "Rogue|Kick|Rank 1": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "A quick kick that injures a single foe for 15 damage. It also interrupts spellcasting and prevents any spell in that school from being cast for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 12",
+   "id": 1766,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Kick|Rank 2": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "A quick kick that injures a single foe for 30 damage. It also interrupts spellcasting and prevents any spell in that school from being cast for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 26",
+   "id": 1767,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Kick|Rank 3": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "A quick kick that injures a single foe for 45 damage. It also interrupts spellcasting and prevents any spell in that school from being cast for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 1768,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Kick|Rank 4": {
+   "l": [
+    [
+     "25 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "A quick kick that injures a single foe for 80 damage. It also interrupts spellcasting and prevents any spell in that school from being cast for 5 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 1769,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Riposte|": {
+   "l": [
+    [
+     "10 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "6 sec cooldown"
+    ]
+   ],
+   "d": "A strike that becomes active after parrying an opponent's attack. This attack deals 150% weapon damage and disarms the target for 6 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 14251,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 1": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 3 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 1752,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 2": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 6 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 6",
+   "id": 1757,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 3": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 10 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 14",
+   "id": 1758,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 4": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 15 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 1759,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 5": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 22 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1760,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 6": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 33 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 8621,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 7": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 52 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 11293,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sinister Strike|Rank 8": {
+   "l": [
+    [
+     "45 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that causes 68 damage in addition to your normal weapon damage. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 11294,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sprint|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "Increases the rogue's movement speed by 50% for 15 sec. Does not break stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 2983,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sprint|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "Increases the rogue's movement speed by 60% for 15 sec. Does not break stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 8696,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sprint|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ]
+   ],
+   "d": "Increases the rogue's movement speed by 70% for 15 sec. Does not break stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 58",
+   "id": 11305,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Blind|": {
+   "l": [
+    [
+     "30 Energy",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ],
+    [
+     "Reagents: Blinding Powder",
+     ""
+    ]
+   ],
+   "d": "Blinds the target, causing it to wander disoriented for up to 10 sec. Any damage caused will remove the effect.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 2094,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "r",
+   "cl": [
+    [
+     "30 Energy",
+     "10 yd range"
+    ],
+    [
+     "Instant",
+     "5 min cooldown"
+    ],
+    [
+     "ing Powder",
+     ""
+    ]
+   ]
+  },
+  "Rogue|Detect Traps|Passive": {
+   "l": [],
+   "d": "Greatly increased chance to detect traps.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 2836,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Disarm Trap|": {
+   "l": [
+    [
+     "",
+     "5 yd range"
+    ],
+    [
+     "2 sec cast",
+     ""
+    ]
+   ],
+   "d": "Sneak up on the trap in order to disarm it. Don't get too close or the trap will go off.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 1842,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Distract|": {
+   "l": [
+    [
+     "30 Energy",
+     "30 yd range"
+    ],
+    [
+     "Instant",
+     "30 sec cooldown"
+    ]
+   ],
+   "d": "Throws a distraction, attracting the attention of all nearby enemies and reducing their Stealth detection as if they were 1 level lower for 10 seconds. Does not break stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 1725,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Throws a distraction, attracting the attention of all nearby monsters for 10 seconds. Does not break stealth."
+  },
+  "Rogue|Ghostly Strike|": {
+   "l": [
+    [
+     "40 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     "20 sec cooldown"
+    ]
+   ],
+   "d": "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 combo point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 14278,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "A strike that deals 125% weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 combo point."
+  },
+  "Rogue|Hemorrhage|": {
+   "l": [
+    [
+     "35 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ]
+   ],
+   "d": "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo Point.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 16511,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "An instant strike that damages the opponent and causes the target to hemorrhage, increasing any Physical damage dealt to the target by up to 3. Lasts 30 charges or 15 sec. Awards 1 combo point."
+  },
+  "Rogue|Pick Pocket|": {
+   "l": [
+    [
+     "",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Pick the target's pocket.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 4",
+   "id": 921,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Premeditation|": {
+   "l": [
+    [
+     "",
+     "20 yd range"
+    ],
+    [
+     "Instant",
+     "2 min cooldown"
+    ]
+   ],
+   "d": "Adds 2 Combo Points to your target. You must add to or use those combo points within 20 sec or the combo points are lost.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 25",
+   "id": 14183,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "When used, adds 2 combo points to your target. You must add to or use those combo points within 10 sec or the combo points are lost."
+  },
+  "Rogue|Preparation|": {
+   "l": [
+    [
+     "Instant",
+     "10 min cooldown"
+    ]
+   ],
+   "d": "When activated, this ability immediately finishes the cooldown on your other Rogue abilities.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 14185,
+   "sc": "Physical",
+   "nt": 3,
+   "cs": "same"
+  },
+  "Rogue|Safe Fall|Passive": {
+   "l": [],
+   "d": "Reduces damage from falling.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 1860,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Sap|Rank 1": {
+   "l": [
+    [
+     "65 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Incapacitates the target for up to 25 sec. Only works on Humanoids that are not in combat. Any damage taken will break the effect. Only 1 target may be sapped at a time. Does not break Stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 10",
+   "id": 6770,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Incapacitates the target for up to 25 sec. Must be stealthed. Only works on Humanoids that are not in combat. Any damage caused will revive the target. Only 1 target may be sapped at a time."
+  },
+  "Rogue|Sap|Rank 2": {
+   "l": [
+    [
+     "65 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Incapacitates the target for up to 35 sec. Only works on Humanoids that are not in combat. Any damage taken will break the effect. Only 1 target may be sapped at a time. Does not break Stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 2070,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Incapacitates the target for up to 35 sec. Must be stealthed. Only works on Humanoids that are not in combat. Any damage caused will revive the target. Only 1 target may be sapped at a time."
+  },
+  "Rogue|Sap|Rank 3": {
+   "l": [
+    [
+     "65 Energy",
+     "Melee Range"
+    ],
+    [
+     "Instant",
+     ""
+    ],
+    [
+     "Requires Stealth",
+     ""
+    ]
+   ],
+   "d": "Incapacitates the target for up to 45 sec. Only works on Humanoids that are not in combat. Any damage taken will break the effect. Only 1 target may be sapped at a time. Does not break Stealth.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 11297,
+   "sc": "Physical",
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Incapacitates the target for up to 45 sec. Must be stealthed. Only works on Humanoids that are not in combat. Any damage caused will revive the target. Only 1 target may be sapped at a time."
+  },
+  "Rogue|Stealth|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Allows the rogue to sneak around, but reduces your speed by 50%. Lasts until cancelled.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 1",
+   "id": 1784,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Stealth|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Allows the rogue to sneak around, but reduces your speed by 40%. Lasts until cancelled.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 1785,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Stealth|Rank 3": {
+   "l": [
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Allows the rogue to sneak around, but reduces your speed by 35%. Lasts until cancelled.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 1786,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Stealth|Rank 4": {
+   "l": [
+    [
+     "Instant",
+     "10 sec cooldown"
+    ]
+   ],
+   "d": "Allows the rogue to sneak around, but reduces your speed by 30%. Lasts until cancelled.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 1787,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Vanish|Rank 1": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ],
+    [
+     "Reagents: Flash Powder",
+     ""
+    ]
+   ],
+   "d": "Allows the rogue to vanish from sight, entering an improved stealth mode for 10 sec. Also breaks movement impairing effects.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 22",
+   "id": 1856,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Vanish|Rank 2": {
+   "l": [
+    [
+     "Instant",
+     "5 min cooldown"
+    ],
+    [
+     "Reagents: Flash Powder",
+     ""
+    ]
+   ],
+   "d": "Allows the rogue to vanish from sight, entering an improved stealth mode for 10 sec. Also breaks movement impairing effects. More effective than Vanish (Rank 1).",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 42",
+   "id": 1857,
+   "sc": "Physical",
+   "cs": "same"
+  },
+  "Rogue|Crippling Poison|Rank 1": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Essence of Pain, Empty Vial",
+     ""
+    ],
+    [
+     "Makes: Crippling Poison",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, slowing their movement speed by 50% for 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 3420,
+   "cs": "same"
+  },
+  "Rogue|Crippling Poison|Rank 2": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Essence of Agony x3, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Crippling Poison II",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, slowing their movement speed by 70% for 12 sec.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 50",
+   "id": 3421,
+   "cs": "same"
+  },
+  "Rogue|Instant Poison|Rank 1": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Decay, Empty Vial",
+     ""
+    ],
+    [
+     "Makes: Instant Poison",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 13 to 17 Nature damage. 60 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 20",
+   "id": 8681,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 19 to 25 Nature damage. 40 charges."
+  },
+  "Rogue|Instant Poison|Rank 2": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Decay x3, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Instant Poison II",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 20 to 26 Nature damage. 85 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 28",
+   "id": 8687,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 30 to 38 Nature damage. 55 charges."
+  },
+  "Rogue|Instant Poison|Rank 3": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Deterioration, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Instant Poison III",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 29 to 37 Nature damage. 105 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 36",
+   "id": 8691,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 44 to 56 Nature damage. 70 charges."
+  },
+  "Rogue|Instant Poison|Rank 4": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Deterioration x2, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Instant Poison IV",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 45 to 57 Nature damage. 130 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 44",
+   "id": 11341,
+   "sc": "Nature",
+   "fx": "The beta's own tooltip reads 1,800 charges here. That is the 30 minute duration in seconds, a slip in the game's text; the recipe's data says 130.",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 67 to 85 Nature damage. 85 charges."
+  },
+  "Rogue|Instant Poison|Rank 5": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Deterioration x3, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Instant Poison V",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 62 to 80 Nature damage. 150 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 11342,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 92 to 118 Nature damage. 100 charges."
+  },
+  "Rogue|Instant Poison|Rank 6": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Deterioration x4, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Instant Poison VI",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 76 to 100 Nature damage. 175 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 11343,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy which instantly inflicts 112 to 148 Nature damage. 115 charges."
+  },
+  "Rogue|Mind-numbing Poison|Rank 1": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Decay, Essence of Pain, Empty Vial",
+     ""
+    ],
+    [
+     "Makes: Mind-numbing Poison",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy, increasing their casting time by 40% for 10 sec. 75 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 24",
+   "id": 5763,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy, increasing their casting time by 40% for 10 sec. 50 charges."
+  },
+  "Rogue|Mind-numbing Poison|Rank 2": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Decay x4, Essence of Pain x4, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Mind-numbing Poison II",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy, increasing their casting time by 50% for 12 sec. 115 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 8694,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy, increasing their casting time by 50% for 12 sec. 75 charges."
+  },
+  "Rogue|Mind-numbing Poison|Rank 3": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Dust of Deterioration x2, Essence of Agony x2, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Mind-numbing Poison III",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy, increasing their casting time by 60% for 14 sec. 150 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 52",
+   "id": 11400,
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 20% chance of poisoning the enemy, increasing their casting time by 60% for 14 sec. 100 charges."
+  },
+  "Rogue|Deadly Poison|Rank 1": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Deathweed, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Deadly Poison",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 24 Nature damage over 12 sec. Stacks up to 5 times on a single target. 90 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 30",
+   "id": 2835,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 36 Nature damage over 12 sec. Stacks up to 5 times on a single target. 60 charges."
+  },
+  "Rogue|Deadly Poison|Rank 2": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Deathweed x2, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Deadly Poison II",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 36 Nature damage over 12 sec. Stacks up to 5 times on a single target. 115 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 38",
+   "id": 2837,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 52 Nature damage over 12 sec. Stacks up to 5 times on a single target. 75 charges."
+  },
+  "Rogue|Deadly Poison|Rank 3": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Deathweed x3, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Deadly Poison III",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 56 Nature damage over 12 sec. Stacks up to 5 times on a single target. 135 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 46",
+   "id": 11357,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 80 Nature damage over 12 sec. Stacks up to 5 times on a single target. 90 charges."
+  },
+  "Rogue|Deadly Poison|Rank 4": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Deathweed x5, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Deadly Poison IV",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 72 Nature damage over 12 sec. Stacks up to 5 times on a single target. 160 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 54",
+   "id": 11358,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 108 Nature damage over 12 sec. Stacks up to 5 times on a single target. 105 charges."
+  },
+  "Rogue|Deadly Poison|Rank 5": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Deathweed x7, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Deadly Poison V",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 92 Nature damage over 12 sec. Stacks up to 5 times on a single target. 180 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 60",
+   "id": 25347,
+   "sc": "Nature",
+   "cs": "changed",
+   "ck": "n",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy for 136 Nature damage over 12 sec. Stacks up to 5 times on a single target. 105 charges."
+  },
+  "Rogue|Wound Poison|Rank 1": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Essence of Pain, Deathweed, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Wound Poison",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 67 for 15 sec. Stacks up to 5 times on a single target. 90 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 32",
+   "id": 13220,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 55 for 15 sec."
+  },
+  "Rogue|Wound Poison|Rank 2": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Essence of Pain, Deathweed x2, Leaded Vial",
+     ""
+    ],
+    [
+     "Makes: Wound Poison II",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 92 for 15 sec. Stacks up to 5 times on a single target. 115 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 40",
+   "id": 13228,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 75 for 15 sec."
+  },
+  "Rogue|Wound Poison|Rank 3": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Essence of Agony, Deathweed x2, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Wound Poison III",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 128 for 15 sec. Stacks up to 5 times on a single target. 135 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 48",
+   "id": 13229,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 105 for 15 sec."
+  },
+  "Rogue|Wound Poison|Rank 4": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Essence of Agony x2, Deathweed x2, Crystal Vial",
+     ""
+    ],
+    [
+     "Makes: Wound Poison IV",
+     ""
+    ]
+   ],
+   "d": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 165 for 15 sec. Stacks up to 5 times on a single target. 160 charges.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 56",
+   "id": 13230,
+   "cs": "changed",
+   "ck": "r",
+   "cd": "Coats a weapon with poison that lasts for 30 minutes. Each strike has a 30% chance of poisoning the enemy, reducing all healing effects used on them by 135 for 15 sec."
+  },
+  "Rogue|Blinding Powder|": {
+   "l": [
+    [
+     "3 sec cast",
+     ""
+    ],
+    [
+     "Reagents: Fadeleaf",
+     ""
+    ],
+    [
+     "Makes: 3 Blinding Powder",
+     ""
+    ]
+   ],
+   "d": "Create the reagent for the Blind ability.",
+   "s": "beta",
+   "src": "beta client 1.60.1.70009",
+   "r": "",
+   "lv": "Learned at level 34",
+   "id": 6510,
+   "cs": "same"
+  }
+ },
+ "races": {
+  "Horde": [
+   "Orc",
+   "Undead",
+   "Troll",
+   "Skyborne (Windshaper)"
+  ],
+  "Alliance": [
+   "Human",
+   "Dwarf",
+   "Night Elf",
+   "Gnome",
+   "Skyborne (High Order)"
+  ]
+ },
+ "racials": {
+  "Horde": [
+   {
+    "race": "Orc",
+    "icon": "race_orc_male",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Shaman",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Blood Fury",
+      "Instant, 2 min cooldown. Increases Attack Power and Spell Power by 10% for 15 sec.",
+      "racial_orc_berserkerstrength"
+     ],
+     [
+      "Hardiness",
+      "Duration of Stun effects on you reduced by 20%.",
+      "inv_helmet_23"
+     ],
+     [
+      "Axe Specialization",
+      "Increases your critical strike chance with all spells and abilities by 1% while you have an axe or a two-handed axe equipped.",
+      "inv_axe_02"
+     ],
+     [
+      "Shatter Curse",
+      "Instant, 3 min cooldown. Instantly removes and grants immunity to all Curses and Banes, and reduces all Magical damage taken by 15% for 8 sec.",
+      "spell_nature_removecurse"
+     ]
+    ]
+   },
+   {
+    "race": "Undead",
+    "icon": "race_scourge_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Underwater Breathing",
+      "Underwater breath lasts 300% longer than normal.",
+      "spell_shadow_demonbreath"
+     ],
+     [
+      "Will of the Forsaken",
+      "Instant, 2 min cooldown. Instantly removes all Charm, Fear and Sleep effects.",
+      "spell_shadow_raisedead"
+     ],
+     [
+      "Cannibalize",
+      "5 yd range, Instant, 2 min cooldown. When activated, regenerates 7% of total Health and 7% of total Mana every 2 sec for 10 sec. Only works on Humanoid or Undead corpses within 5 yds. Any movement, action, or damage taken while Cannibalizing will cancel the effect.",
+      "ability_racial_cannibalize"
+     ],
+     [
+      "Touch of the Grave",
+      "Your spells and attacks with a damage part have a chance (10% for casters, 5% for melee) to drain Health from the target, up to 5% of your maximum Health. 1 sec internal cooldown. Does not break crowd control.",
+      "spell_shadow_fingerofdeath"
+     ]
+    ]
+   },
+   {
+    "race": "Troll",
+    "icon": "race_troll_male",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Shaman",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Berserking",
+      "Instant, 3 min cooldown. Increases your spellcasting and attack speed by 10% for 10 sec.",
+      "racial_troll_berserk"
+     ],
+     [
+      "Regeneration",
+      "Health regeneration rate increased by 10%. In addition, 10% of total Health regeneration will continue during combat.",
+      "spell_nature_regenerate"
+     ],
+     [
+      "Beast Slaying",
+      "Damage dealt versus Beasts increased by 5%.",
+      "inv_misc_pelt_bear_ruin_02"
+     ],
+     [
+      "Rapid Regeneration",
+      "Channeled, 3 min cooldown. Regenerate 50% of your maximum Health over 6 sec. Any movement, action, or damage taken will cancel the effect.",
+      "ability_racial_regeneratin"
+     ]
+    ]
+   },
+   {
+    "race": "Skyborne (Windshaper)",
+    "icon": "race_skyborne",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Shaman",
+     "Druid"
+    ],
+    "abilities": [
+     [
+      "Walk on Air",
+      "Instant, 2 min cooldown. Glide downward through the air for 10 sec while controlling your direction of travel.",
+      "inv_elemental_primal_air"
+     ],
+     [
+      "Skysight",
+      "0.5 sec cast, 2 min cooldown. Attempt to draw power from a convergence of elements and receive its blessing, increasing your movement and mounted movement speeds by 10%. Lasts 30 sec if no elemental convergence is nearby, and 15 min if one is found.",
+      "ability_skyreach_lens_flare"
+     ],
+     [
+      "Elemental Insight",
+      "Damage dealt versus Elementals increased by 5%.",
+      "achievement_raidprimalist_windelemental"
+     ],
+     [
+      "Wind Blessed",
+      "Increases your spellcasting, melee, and ranged Haste by 1%.",
+      "inv_misc_volatileair"
+     ]
+    ]
+   }
+  ],
+  "Alliance": [
+   {
+    "race": "Human",
+    "icon": "race_human_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Sword Specialization",
+      "Increases your critical strike chance with all spells and attacks by 2% while you have a sword or two-handed sword equipped.",
+      "ability_meleedamage"
+     ],
+     [
+      "The Human Spirit",
+      "Spirit increased by 5%.",
+      "inv_enchant_shardbrilliantsmall"
+     ],
+     [
+      "Perception",
+      "Instant, 3 min cooldown. Dramatically increases stealth detection for 20 sec.",
+      "spell_nature_sleep"
+     ],
+     [
+      "Will to Survive",
+      "Instant, 3 min cooldown. Instantly removes all Stun effects.",
+      "spell_shadow_charm"
+     ]
+    ]
+   },
+   {
+    "race": "Dwarf",
+    "icon": "race_dwarf_male",
+    "classes": [
+     "Warrior",
+     "Paladin",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Shaman"
+    ],
+    "abilities": [
+     [
+      "Find Treasure",
+      "Instant. Allows the dwarf to sense nearby treasure, making it appear on the minimap.  Lasts until canceled.",
+      "racial_dwarf_findtreasure"
+     ],
+     [
+      "Stoneform",
+      "Instant, 3 min cooldown. Instantly removes and grants immunity to all Bleed, Poison, and Disease effects, and reduces all Physical damage taken by 10% for 8 sec.",
+      "spell_shadow_unholystrength"
+     ],
+     [
+      "Mace Specialization",
+      "Increases your critical strike chance with all spells and attacks by 1% while you have a mace or two-handed mace equipped.",
+      "inv_hammer_05"
+     ],
+     [
+      "Big Game Hunter",
+      "Damage dealt versus Beasts increased by 5%.",
+      "inv_weapon_rifle_05"
+     ]
+    ]
+   },
+   {
+    "race": "Night Elf",
+    "icon": "race_nightelf_male",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Priest",
+     "Druid"
+    ],
+    "abilities": [
+     [
+      "Shadowmeld",
+      "Instant, 10 sec cooldown. Activate to slip into the shadows, reducing the chance for enemies to detect your presence. Lasts until cancelled or upon moving. Using this ability in combat discourages enemies from attacking you, but increases the cooldown to 2 min.",
+      "ability_ambush"
+     ],
+     [
+      "Quickness",
+      "Dodge chance increased by 1% and movement speed increased by 2%. Night Elf Rogues and Druids are harder to detect in Stealth as if they were 1 level higher.",
+      "ability_racial_shadowmeld"
+     ],
+     [
+      "Wisp Spirit",
+      "Transform into a wisp upon death, increasing movement speed by 75%.",
+      "spell_nature_wispsplode"
+     ],
+     [
+      "Elune's Light",
+      "Instant, 3 min cooldown. Increases your critical strike chance with all spells and attacks by 10% for 15 sec.",
+      "spell_nature_moonglow"
+     ]
+    ]
+   },
+   {
+    "race": "Gnome",
+    "icon": "race_gnome_male",
+    "classes": [
+     "Warrior",
+     "Rogue",
+     "Priest",
+     "Mage",
+     "Warlock"
+    ],
+    "abilities": [
+     [
+      "Escape Artist",
+      "Instant, 2 min cooldown. Instantly escape the effects of any movement impairing effect and gain immunity to those effects for 3 sec.",
+      "ability_rogue_trip"
+     ],
+     [
+      "Expansive Mind",
+      "Maximum Mana, Rage or Energy increased by 5%, whichever your class uses.",
+      "inv_enchant_essenceeternallarge"
+     ],
+     [
+      "Engineering Specialization",
+      "Your gnomish ingenuity reduces the rate of engineering devices failing or backfiring when you use them by 20%.",
+      "inv_misc_gear_01"
+     ],
+     [
+      "Eureka!",
+      "Instant, 2 min cooldown. Your next 3 damaging abilities cost 10% less (Mana, Rage or Energy) and deal 10% more damage. For healers, your next 3 damaging or healing abilities cost 10% less Mana and do 10% more.",
+      "inv_gnometoy"
+     ]
+    ]
+   },
+   {
+    "race": "Skyborne (High Order)",
+    "icon": "race_skyborne",
+    "classes": [
+     "Warrior",
+     "Hunter",
+     "Rogue",
+     "Mage",
+     "Druid"
+    ],
+    "abilities": [
+     [
+      "Walk on Air",
+      "Instant, 2 min cooldown. Glide downward through the air for 10 sec while controlling your direction of travel.",
+      "inv_elemental_primal_air"
+     ],
+     [
+      "Read Ley Line",
+      "2 sec cast, 2 min cooldown. Attempt to tap into the power of a nearby ley line, increasing your Health and Mana regeneration by 100%. Lasts 15 sec if no ley line is nearby, and 15 min if one is found.",
+      "ability_mage_incantersabsorbtion"
+     ],
+     [
+      "Elemental Insight",
+      "Damage dealt versus Elementals increased by 5%.",
+      "achievement_raidprimalist_windelemental"
+     ],
+     [
+      "Wind Blessed",
+      "Increases your spellcasting, melee, and ranged Haste by 1%.",
+      "inv_misc_volatileair"
+     ]
+    ]
+   }
+  ]
+ },
+ "class_racials": {},
+ "class_abilities": [
+  [
+   "Mutilate",
+   "New talent, Assassination row 5. Hits with both weapons for 75% damage each, 20% more on poisoned targets, and gives 2 combo points. Nine other talents feed it.",
+   "ability_rogue_shadowstrikes"
+  ],
+  [
+   "Venom",
+   "New finisher at the bottom of Assassination. Your poisons do 30% more and apply 10% more often, longer per combo point.",
+   "ability_rogue_deadlybrew"
+  ],
+  [
+   "Thousand Cuts",
+   "New Subtlety capstone. Each Rupture tick takes 3 Energy off your next Hemorrhage or Backstab, stacking to 5.",
+   "ability_rogue_slaughterfromtheshadows"
+  ],
+  [
+   "Axes",
+   "Rogues can use one-handed axes now. The Hack and Slash talent lists Axe/Sword as a weapon group.",
+   "inv_axe_09"
+  ]
+ ],
+ "legacy": {
+  "note": "Earned from challenges, spent across the account. 16 points at launch. Some perks need points in their tree first, a few need the perk before them. The ? slots are placeholders.",
+  "points": 16,
+  "source": "Forever beta client 1.60.1.69876",
+  "trees": [
+   {
+    "id": 1188,
+    "name": "Adventure",
+    "icon": "inv_misc_map_01",
+    "perks": [
+     {
+      "name": "High Alert",
+      "max": 2,
+      "row": 1,
+      "col": 2,
+      "icon": "spell_shadow_detectlesserinvisibility",
+      "ranks": [
+       "Increases your ability to detect nearby targets with Stealth as if your level were increased by 1. Ineffective in Battlegrounds.",
+       "Increases your ability to detect nearby targets with Stealth as if your level were increased by 2. Ineffective in Battlegrounds."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Well Rested",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "icon": "spell_nature_sleep",
+      "ranks": [
+       "Your rested experience accumulates 4% faster and your rested experience cap is increased by 4%.",
+       "Your rested experience accumulates 8% faster and your rested experience cap is increased by 8%.",
+       "Your rested experience accumulates 12% faster and your rested experience cap is increased by 12%.",
+       "Your rested experience accumulates 16% faster and your rested experience cap is increased by 16%.",
+       "Your rested experience accumulates 20% faster and your rested experience cap is increased by 20%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Talented",
+      "max": 5,
+      "row": 2,
+      "col": 2,
+      "icon": "ability_marksmanship",
+      "ranks": [
+       "You gain talent points every level starting at level 9 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 8 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 7 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 6 instead of starting at level 10, but you still may not have more than 51 total talent points.",
+       "You gain talent points every level starting at level 5 instead of starting at level 10, but you still may not have more than 51 total talent points."
+      ],
+      "gate": 5,
+      "req": "Well Rested"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Thrill of Adventure",
+      "max": 5,
+      "row": 3,
+      "col": 1,
+      "icon": "ability_hunter_huntervswild",
+      "ranks": [
+       "You gain 1% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 2% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 3% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 4% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds.",
+       "You gain 5% of your maximum Health and Mana over 10 sec each time you deliver the killing blow to a non-trivial enemy. Ineffective in dungeons, raids, and battlegrounds."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Field Guide",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "icon": "inv_fishingchair",
+      "ranks": [
+       "Reduces your cooldown on adding Camp features by 8%",
+       "Reduces your cooldown on adding Camp features by 17%",
+       "Reduces your cooldown on adding Camp features by 25%"
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Frequent Flier",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "achievement_guild_ridelikethewind",
+      "ranks": [
+       "You receive a 50% discount on all flight paths, and your flight path mount flies 20% faster."
+      ],
+      "gate": 10,
+      "req": "Field Guide"
+     },
+     {
+      "name": "Field Medicine",
+      "max": 2,
+      "row": 4,
+      "col": 2,
+      "icon": "inv_misc_bandage_05",
+      "ranks": [
+       "Reduces the duration of the Recently Bandaged effect by 5 sec when you use a bandage. Ineffective in dungeons, raids, and battlegrounds.",
+       "Reduces the duration of the Recently Bandaged effect by 10 sec when you use a bandage. Ineffective in dungeons, raids, and battlegrounds."
+      ],
+      "gate": 5
+     }
+    ]
+   },
+   {
+    "id": 1189,
+    "name": "Resourcefulness",
+    "icon": "inv_misc_coin_01",
+    "perks": [
+     {
+      "name": "For Great Honor",
+      "max": 5,
+      "row": 1,
+      "col": 2,
+      "icon": "achievement_bg_winwsg",
+      "ranks": [
+       "Increases Honor Points gained by 2%.",
+       "Increases Honor Points gained by 4%.",
+       "Increases Honor Points gained by 6%.",
+       "Increases Honor Points gained by 8%.",
+       "Increases Honor Points gained by 10%."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Gourmand",
+      "max": 3,
+      "row": 2,
+      "col": 1,
+      "icon": "inv_misc_food_64",
+      "ranks": [
+       "Increases the duration of beneficial effects from eating food by 33%.",
+       "Increases the duration of beneficial effects from eating food by 67%.",
+       "Increases the duration of beneficial effects from eating food by 100%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Permanence",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "icon": "spell_misc_emotionhappy",
+      "ranks": [
+       "Your class abilities which grant long-duration stat or attribute benefits to all party or raid members last 50% longer, and the benefits you gain from resting at a camp last 50% longer.",
+       "Your class abilities which grant long-duration stat or attribute benefits to all party or raid members last 100% longer, and the benefits you gain from resting at a camp last 100% longer."
+      ],
+      "gate": 5,
+      "req": "Gourmand"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 2,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "The Quick and the Dead",
+      "max": 2,
+      "row": 3,
+      "col": 1,
+      "icon": "spell_shadow_deadofnight",
+      "ranks": [
+       "Increases movement speed while dead by 5% and your helpful spells and abilities cost no resources for 1 min after being resurrected or until you enter combat.",
+       "Increases movement speed while dead by 10% and your helpful spells and abilities cost no resources for 2 min after being resurrected or until you enter combat."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Reagent Economy",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "inv_misc_candle_02",
+      "ranks": [
+       "Your class abilities no longer require reagents purchaseable from vendors."
+      ],
+      "gate": 10,
+      "req": "The Quick and the Dead"
+     },
+     {
+      "name": "Reinforce",
+      "max": 5,
+      "row": 4,
+      "col": 1,
+      "icon": "inv_misc_armorkit_17",
+      "ranks": [
+       "You take 8% less durability loss when you die.",
+       "You take 16% less durability loss when you die.",
+       "You take 24% less durability loss when you die.",
+       "You take 32% less durability loss when you die.",
+       "You take 40% less durability loss when you die."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Diplomat",
+      "max": 5,
+      "row": 4,
+      "col": 2,
+      "icon": "inv_scroll_03",
+      "ranks": [
+       "Increases your reputation gains by 2%.",
+       "Increases your reputation gains by 4%.",
+       "Increases your reputation gains by 6%.",
+       "Increases your reputation gains by 8%.",
+       "Increases your reputation gains by 10%."
+      ],
+      "gate": 5
+     }
+    ]
+   },
+   {
+    "id": 1187,
+    "name": "Professions",
+    "icon": "trade_engineering",
+    "perks": [
+     {
+      "name": "Master Chef",
+      "max": 5,
+      "row": 1,
+      "col": 3,
+      "icon": "achievement_profession_chefhat",
+      "ranks": [
+       "Your cooking recipes have a 10% chance to create an extra result.",
+       "Your cooking recipes have a 20% chance to create an extra result.",
+       "Your cooking recipes have a 30% chance to create an extra result.",
+       "Your cooking recipes have a 40% chance to create an extra result.",
+       "Your cooking recipes have a 50% chance to create an extra result."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Working Overtime",
+      "max": 5,
+      "row": 2,
+      "col": 1,
+      "icon": "inv_misc_pocketwatch_03",
+      "ranks": [
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 4%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 8%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 12%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 16%.",
+       "Increases your chance to gain a skill increase from using any primary, secondary, or class-based tradeskill by 20%."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Bartering",
+      "max": 2,
+      "row": 2,
+      "col": 2,
+      "icon": "inv_misc_coin_06",
+      "ranks": [
+       "Reduces the gold price of items from all vendors by 5%.",
+       "Reduces the gold price of items from all vendors by 10%."
+      ],
+      "gate": 5
+     },
+     {
+      "name": "Dedicated Study",
+      "max": 1,
+      "row": 2,
+      "col": 3,
+      "icon": "inv_misc_book_08",
+      "ranks": [
+       "Increases your skill by 1 in your lowest tradeskill among your Primary and Secondary tradeskills. If you have already reached 300 skill in your two current Primary Tradeskills and all three Secondary Tradeskills, you will gain 2 to 4 of a random Elemental Essence."
+      ],
+      "gate": 10,
+      "req": "Bartering"
+     },
+     {
+      "name": "Bountiful Harvest",
+      "max": 5,
+      "row": 3,
+      "col": 1,
+      "icon": "inv_misc_bag_18",
+      "ranks": [
+       "You discover 20% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 40% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 60% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 80% more Scarce materials from Mining, Herbalism, and Skinning.",
+       "You discover 100% more Scarce materials from Mining, Herbalism, and Skinning."
+      ],
+      "gate": 0
+     },
+     {
+      "name": "Performance Bonus",
+      "max": 3,
+      "row": 3,
+      "col": 2,
+      "icon": "racial_dwarf_findtreasure",
+      "ranks": [
+       "You have a 5% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics.",
+       "You have a 10% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics.",
+       "You have a 15% chance to receive 100% increased Merchant's Favor when you turn in a crate to the Azeroth Commerce Authority or Durotar Supply and Logistics."
+      ],
+      "gate": 5,
+      "req": "Bountiful Harvest"
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 3,
+      "col": 3,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Unknown",
+      "max": 1,
+      "row": 3,
+      "col": 4,
+      "icon": "inv_misc_questionmark",
+      "ranks": [
+       "To be added in a future update."
+      ],
+      "gate": 0,
+      "placeholder": true
+     },
+     {
+      "name": "Luremaster",
+      "max": 2,
+      "row": 4,
+      "col": 3,
+      "icon": "inv_misc_basket_04",
+      "ranks": [
+       "While fishing with a Lure active, you have a 25% chance to catch an extra fish.",
+       "While fishing with a Lure active, you have a 50% chance to catch an extra fish."
+      ],
+      "gate": 5
+     }
+    ]
+   }
+  ]
+ }
+}
