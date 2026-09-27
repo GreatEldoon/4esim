@@ -54,6 +54,22 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
   const manaCostFor = spell => Math.max(0, ((spell.mana || 0) + (spell.manaFraction || 0) * maxManaCap) * (1 - (spell.specialization === 'Destruction' ? rankValue(build, 'Cataclysm', [0.03, 0.06, 0.1]) : 0)));
   const activeBuffs = () => [];
   const activeEnemyDebuffs = at => [...debuffs].filter(([, until]) => until > at).map(([name, until]) => ({ id: name.toLowerCase().replaceAll(' ', ''), name, remaining: until - at }));
+  const pandemicRefreshReady = (spell, at) => {
+    const dot = dots.get(spell.name);
+    if (dot && dot.until > at && dot.duration > 0 && dot.until - at <= dot.duration * 0.3) return true;
+    const talentDebuffs = spell.name === 'Shadow Bolt' && rank(build, 'Improved Shadow Bolt')
+      ? [['Improved Shadow Bolt', 12]]
+      : spell.name === 'Conflagrate' && rank(build, 'Shadow and Flame')
+        ? [['Shadow and Flame · Shadow', 20]]
+        : spell.name === 'Shadowburn' && rank(build, 'Shadow and Flame')
+          ? [['Shadow and Flame · Fire', 20]]
+          : [];
+    return talentDebuffs.some(([name, durationSeconds]) => {
+      const until = debuffs.get(name) || 0;
+      const remaining = until - at;
+      return remaining > 0 && remaining <= durationSeconds * 0.3;
+    });
+  };
   const conditionsMet = (spell, at) => {
     if (!spell.conditional) return true;
     const conditions = Array.isArray(spell.conditions) ? spell.conditions : (spell.condition ? [spell.condition] : []);
@@ -63,11 +79,21 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
     return conditions.some(condition => {
       if (condition === 'immolateInactive') return !immolate || immolateRemaining <= 0;
       if (condition === 'immolateRefresh') return immolateRemaining > 0 && immolateRemaining < 5;
-      return true;
+      if (condition === 'pandemicRefresh') return pandemicRefreshReady(spell, at);
+      return false;
     });
   };
 
-  const nextTick = () => Math.min(duration, nextPetAbilityAt, nextPetSwingAt, ...[...dots.values()].flatMap(dot => dot.ticks.filter(tick => tick.at <= duration).map(tick => tick.at)), ...priority.flatMap(spell => spell.conditional && spell.conditions?.includes('immolateRefresh') && dots.has('Immolate') ? [dots.get('Immolate').until - 5].filter(at => at > time) : []));
+  const nextTick = () => Math.min(duration, nextPetAbilityAt, nextPetSwingAt, ...[...dots.values()].flatMap(dot => dot.ticks.filter(tick => tick.at <= duration).map(tick => tick.at)), ...priority.flatMap(spell => {
+    if (!spell.conditional || !spell.conditions?.includes('pandemicRefresh')) return spell.conditional && spell.conditions?.includes('immolateRefresh') && dots.has('Immolate') ? [dots.get('Immolate').until - 5].filter(at => at > time) : [];
+    const dot = dots.get(spell.name);
+    const times = dot?.duration ? [dot.until - dot.duration * 0.3] : [];
+    if (spell.name === 'Shadow Bolt' && rank(build, 'Improved Shadow Bolt')) times.push((debuffs.get('Improved Shadow Bolt') || 0) - 3.6);
+    if (spell.name === 'Conflagrate' && rank(build, 'Shadow and Flame')) times.push((debuffs.get('Shadow and Flame · Shadow') || 0) - 6);
+    if (spell.name === 'Shadowburn' && rank(build, 'Shadow and Flame')) times.push((debuffs.get('Shadow and Flame · Fire') || 0) - 6);
+    if (spell.name === 'Immolate' && spell.conditional && spell.conditions?.includes('immolateRefresh') && dots.has('Immolate')) times.push(dots.get('Immolate').until - 5);
+    return times.filter(at => at > time);
+  }));
   while (time < duration && casts < duration * 4) {
     const next = nextTick();
     const manaWait = (spell, now) => {
@@ -92,6 +118,9 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       mana = Math.min(maxManaCap, mana + (wakeAt - time) * (passiveRegen + sacrificeManaPerSecond) + regenSeconds * spiritPerSecond);
       time = wakeAt;
     } else {
+      // The timeline's cast timestamp is the cast start. Snapshot enemy debuffs
+      // before resolving impacts, which apply at cast completion.
+      const debuffsAtCast = activeEnemyDebuffs(time);
       const usesNightfall = usable.name === 'Shadow Bolt' && nightfallActive;
       const castTime = usesNightfall ? 0 : castTimeFor(usable), completion = time + castTime, nextActionAt = time + Math.max(gcd, castTime);
       if (completion > duration) break;
@@ -123,7 +152,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
           const dotDuration = usable.periodicDuration || durationFromTooltip(usable.tooltip) || usable.cast || 1;
           const dotTickCount = Math.max(1, Math.ceil(dotDuration / tickInterval));
           const ticks = Array.from({ length: dotTickCount }, (_, i) => ({ at: completion + Math.min(dotDuration, (i + 1) * tickInterval), amount: periodicAmount / dotTickCount }));
-          dots.set(usable.name, { until: completion + dotDuration, ticks, specialization: usable.specialization, school: usable.school });
+          dots.set(usable.name, { until: completion + dotDuration, duration: dotDuration, ticks, specialization: usable.specialization, school: usable.school });
           if (usable.name === 'Immolate') debuffs.set('Immolate', completion + dotDuration);
         }
         if (directAmount) { damage += directAmount; event.damage += directAmount; }
@@ -145,7 +174,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       if (usable.name === 'Conflagrate' && hit && rank(build, 'Shadow and Flame') < 5) debuffs.delete('Immolate');
       const cooldown = usable.name === 'Soul Fire' ? (usable.cooldown || 0) * (1 - 0.45 * rank(build, 'Decimation')) : (usable.cooldown || 0);
       cooldowns.set(usable.name, completion + cooldown);
-      castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: critical, activeBuffs: activeBuffs(), enemyDebuffs: activeEnemyDebuffs(time), currentMana: mana, consumedBuffs: [], procs, damage: directAmount, type: 'cast' });
+      castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: critical, activeBuffs: activeBuffs(), enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs: [], procs, damage: directAmount, type: 'cast' });
       mana = Math.min(maxManaCap, mana + (nextActionAt - time) * (passiveRegen + sacrificeManaPerSecond) + Math.max(0, nextActionAt - (time + 5)) * spiritPerSecond);
       time = nextActionAt;
     }

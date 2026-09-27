@@ -144,6 +144,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   const scorchVulnerability = { stacks: 0, until: -1, procs: 0 };
   const hotStreak = { stacks: 0, until: -1, procs: 0 };
   const ignites = [];
+  const naturalDebuffs = new Map();
   let igniteDamage = 0, igniteTickCount = 0;
   let frozenUntil = -1;
   let arcaneBlastStacks = 0, arcaneBlastUntil = -1;
@@ -164,14 +165,29 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     randomState = (Math.imul(randomState, 1664525) + 1013904223) >>> 0;
     return randomState / 0x100000000;
   };
+  const pandemicRefreshReady = spell => {
+    const inPandemic = durationSeconds => remaining => remaining > 0 && remaining <= durationSeconds * 0.3;
+    const naturalDebuff = naturalDebuffs.get(spell.name);
+    if (naturalDebuff && inPandemic(naturalDebuff.duration)(naturalDebuff.until - time)) return true;
+    if (talentRank(build, 'Ignite') && (spell.school === 'Fire' || spell.name === 'Frostfire Bolt') && ignites.some(ignite => inPandemic(4)(ignite.expiresAt - time))) return true;
+    if (talentRank(build, "Winter's Chill") && (spell.school === 'Frost' || spell.name === 'Frostfire Bolt') && inPandemic(15)(winterChill.until - time)) return true;
+    if (talentRank(build, 'Improved Scorch') && spell.name === 'Scorch' && scorchVulnerability.stacks > 0 && inPandemic(30)(scorchVulnerability.until - time)) return true;
+    if (talentRank(build, 'Frostbite') && appliesChill(spell) && inPandemic(5)(frozenUntil - time)) return true;
+    return false;
+  };
   const hasCondition = spell => {
-    if (!spell.conditional) return true;
-    const condition = conditionForSpell(spell);
-    if (condition === 'missileBarrage') return missileBarrage.active;
-    if (condition === 'fingersOfFrost') return fingersOfFrost.charges > 0;
-    if (condition === 'hotStreak') return talentRank(build, 'Hot Streak') > 0 && hotStreak.until >= time && (hotStreak.stacks >= 3 || (hotStreak.stacks >= 2 && hotStreak.until - time < 4));
-    if (condition === 'improvedScorch') return talentRank(build, 'Improved Scorch') === 0 || scorchVulnerability.until < time || scorchVulnerability.stacks < 5 || scorchVulnerability.until - time < 5;
-    return true;
+    const selected = Array.isArray(spell.conditions) ? spell.conditions : [];
+    const legacy = spell.conditional && conditionForSpell(spell) !== 'always' ? [conditionForSpell(spell)] : [];
+    const conditions = [...selected, ...legacy];
+    if (!conditions.length) return true;
+    return conditions.some(condition => {
+      if (condition === 'pandemicRefresh') return pandemicRefreshReady(spell);
+      if (condition === 'missileBarrage') return missileBarrage.active;
+      if (condition === 'fingersOfFrost') return fingersOfFrost.charges > 0;
+      if (condition === 'hotStreak') return talentRank(build, 'Hot Streak') > 0 && hotStreak.until >= time && (hotStreak.stacks >= 3 || (hotStreak.stacks >= 2 && hotStreak.until - time < 4));
+      if (condition === 'improvedScorch') return talentRank(build, 'Improved Scorch') === 0 || scorchVulnerability.until < time || scorchVulnerability.stacks < 5 || scorchVulnerability.until - time < 5;
+      return false;
+    });
   };
   const activeBuffs = () => [
     ...(missileBarrage.active ? [{ id: 'missileBarrage', name: 'Missile Barrage' }] : []),
@@ -187,6 +203,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   const activeEnemyDebuffs = at => [
     ...(winterChill.stacks > 0 && winterChill.until >= at ? [{ id: 'winterChill', name: "Winter's Chill", stacks: winterChill.stacks, remaining: Math.max(0, winterChill.until - at) }] : []),
     ...(scorchVulnerability.stacks > 0 && scorchVulnerability.until >= at ? [{ id: 'scorch', name: 'Improved Scorch', stacks: scorchVulnerability.stacks, remaining: Math.max(0, scorchVulnerability.until - at) }] : []),
+    ...[...naturalDebuffs].filter(([, effect]) => effect.until > at).map(([name, effect]) => ({ id: `natural-${name.toLowerCase().replaceAll(' ', '-')}`, name: `${name} slow`, remaining: effect.until - at })),
     ...(ignites.length ? [{ id: 'ignite', name: 'Ignite', applications: ignites.length, damage: ignites.reduce((sum, ignite) => sum + ignite.damage * Math.max(0, ignite.expiresAt - ignite.lastTickAt) / 4, 0), remaining: Math.max(0, ...ignites.map(ignite => ignite.expiresAt - at)) }] : []),
   ];
   const advanceIgnite = until => {
@@ -224,6 +241,11 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   const hasFireComponent = spell => spell.school === 'Fire' || spell.name === 'Frostfire Bolt';
   const hasFrostComponent = spell => spell.school === 'Frost' || spell.name === 'Frostfire Bolt';
   const appliesChill = spell => (spell.name === 'Blizzard' && talentRank(build, 'Improved Blizzard') > 0) || /slow|chill|freez/i.test(spell.tooltip || '');
+  const naturalDebuffDuration = spell => {
+    if (spell.name === 'Blizzard' && talentRank(build, 'Improved Blizzard')) return 1.5;
+    if (!/slow(?:s|ed|ing)?|freez(?:e|es|ed|ing)|chill/i.test(spell.tooltip || '')) return 0;
+    return Number(spell.tooltip.match(/(?:for|up to)\s+(\d+)\s+sec/i)?.[1] || spell.tooltip.match(/over\s+(\d+)\s+sec/i)?.[1] || 0);
+  };
   const frozen = at => fingersOfFrost.charges > 0 || frozenUntil >= at;
   const currentManaCost = (spell, at, max) => {
     let cost = manaCost(spell, max);
@@ -399,6 +421,8 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
         casts++;
         castCounts.set(usable, (castCounts.get(usable) || 0) + 1);
         const procs = [];
+        const naturalDuration = naturalDebuffDuration(usable);
+        if (hit && naturalDuration > 0) naturalDebuffs.set(usable.name, { until: completionTime + naturalDuration, duration: naturalDuration });
         let igniteApplied = 0;
         const ignitePct = rankValue(talentRank(build, 'Ignite'), [0.08, 0.16, 0.24, 0.32, 0.4]);
         if (hit && isCrit && hasFireComponent(usable) && ignitePct > 0) {
