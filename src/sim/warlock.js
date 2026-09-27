@@ -1,3 +1,5 @@
+import { targetHealthAt } from './target-health.js';
+import { warlockPetState } from './warlock-pets.js';
 import { createEffectTracker } from './effect-uptime.js';
 import { isDamageChannel, channelTickInterval } from './channels.js';
 import { petAttackProfileFor, petAttackProfiles, rollPetMeleeDamage } from '../data/pet-attack-profiles.js';
@@ -17,12 +19,18 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
   const maxManaCap = maxMana * (1 + 0.05 * rank(build, 'Fel Vitality'));
   const gcd = 1.5, baseCritChance = 0.05, cooldowns = new Map(), castLog = [], events = new Map(), dots = new Map(), debuffs = new Map();
   let randomState = seed >>> 0 || 1, nightfallActive = false, channel = null;
-  let demonicBrandUntil = -1, demonicBrandAttacks = 0;
-  const petSpell = options.petSpell || null;
-  const summonedPet = Boolean(options.activePetId && !options.sacrificePet);
-  const sacrificedPet = rank(build, 'Demonic Sacrifice') && options.sacrificePet ? options.activePetId : '';
+  let demonicBrandUntil = -1, demonicBrandAttacks = 0, demonicBrandAppliedAt = -1;
+  const petState = warlockPetState(build, options);
+  const summonedPet = Boolean(petState.activePetId);
+  const petSpell = summonedPet ? options.petSpell || null : null;
+  const sacrificedPet = petState.sacrificedPetId;
+  let soulShards = Math.max(0, Math.floor(Number(options.soulShards) || 0));
+  const startingSoulShards = soulShards;
+  let soulShardsSpent = 0, soulShardsRefunded = 0;
+  const decimationActive = at => rank(build, 'Decimation') > 0 && soulFireProcUntil > at;
+  const shardCostFor = (spell, at) => spell.name === 'Soul Fire' ? (decimationActive(at) ? 0 : 1) : spell.name === 'Shadowburn' ? (rank(build, 'Shadow and Flame') >= 5 ? 0 : 1) : 0;
   const sacrificeManaPerSecond = sacrificedPet === 'voidwalker' ? maxManaCap * 0.005 : 0;
-  const petProfile = options.activePetId && !options.sacrificePet
+  const petProfile = summonedPet
     ? petAttackProfileFor(petAttackProfiles, options.activePetId, options.talentLevel, options.petProfileOverrides)
     : null;
   const petAbilityInterval = petSpell ? Math.max(1, petSpell.cast || petSpell.cooldown || 2) : Infinity;
@@ -54,11 +62,22 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
     if (spell.school === 'Fire' && !periodicSpell(spell) && debuffs.get('Shadow and Flame · Fire') > at) factor *= 1 + 0.02 * rank(build, 'Shadow and Flame');
     return factor;
   };
-  const castTimeFor = spell => Math.max(0, spell.cast * (spell.name === 'Soul Fire' && soulFireProcUntil >= time ? 1 - rankValue(build, 'Decimation', [0.2, 0.4]) : 1) - (spell.name === 'Corruption' ? 0.4 * rank(build, 'Improved Corruption') : 0) - (spell.specialization === 'Destruction' && ['Shadow Bolt', 'Immolate', 'Incinerate'].includes(spell.name) ? 0.1 * rank(build, 'Bane') : 0) - (spell.name === 'Soul Fire' ? 0.4 * rank(build, 'Bane') : 0));
+  const castTimeFor = spell => Math.max(0, spell.cast * (spell.name === 'Soul Fire' && decimationActive(time) ? 1 - rankValue(build, 'Decimation', [0.2, 0.4]) : 1) - (spell.name === 'Corruption' ? 0.4 * rank(build, 'Improved Corruption') : 0) - (spell.specialization === 'Destruction' && ['Shadow Bolt', 'Immolate', 'Incinerate'].includes(spell.name) ? 0.1 * rank(build, 'Bane') : 0) - (spell.name === 'Soul Fire' ? 0.4 * rank(build, 'Bane') : 0));
   const manaCostFor = spell => Math.max(0, ((spell.mana || 0) + (spell.manaFraction || 0) * maxManaCap) * (1 - (spell.specialization === 'Destruction' ? rankValue(build, 'Cataclysm', [0.03, 0.06, 0.1]) : 0)));
   const activeBuffs = () => effects.active('buff', time);
   const applyDebuff = (name, start, end) => { debuffs.set(name, end); effects.apply(name, 'debuff', start, end); };
-  const activeEnemyDebuffs = at => effects.active('debuff', at);
+  const activeEnemyDebuffs = at => effects.active('debuff', at).map(effect => effect.name === 'Demonic Brand' ? { ...effect, stacks: demonicBrandAttacks } : effect);
+  const triggerDemonicBrand = (at, hit) => {
+    if (!hit || demonicBrandAttacks <= 0 || at < demonicBrandAppliedAt || at >= demonicBrandUntil) return;
+    const debuffsAtHit = activeEnemyDebuffs(at);
+    const bonusDamage = 65 + roll() * 3;
+    demonicBrandAttacks--;
+    if (demonicBrandAttacks === 0) effects.remove('Demonic Brand', 'debuff', at);
+    damage += bonusDamage;
+    const event = events.get('Demonic Brand') || { name: 'Demonic Brand', specialization: 'Demonology', damage: 0, casts: 0, crits: 0, ticks: 0 };
+    event.damage += bonusDamage; event.ticks++; events.set(event.name, event);
+    castLog.push({ time: at, name: 'Demonic Brand', school: options.activePetId === 'imp' ? 'Fire' : 'Shadow', specialization: 'Demonology', hit: true, crit: false, activeBuffs: [], enemyDebuffs: debuffsAtHit, currentMana: mana, consumedBuffs: [], procs: [`Demonic Brand · ${demonicBrandAttacks} stacks remaining`], damage: bonusDamage, type: 'pet' });
+  };
   const debuffRefreshReady = (spell, at) => {
     const window = debuffRefreshWindow('warlock', spell, build);
     const dot = dots.get(spell.name);
@@ -83,6 +102,8 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
     if (!conditions.length) return false;
     const immolate = dots.get('Immolate');
     return conditions.some(condition => {
+      if (['demonicBrand', 'demonicBrandBurst'].includes(condition)) return spell.name === 'Searing Pain' && rank(build, 'Demonic Brand') > 0 && summonedPet && (demonicBrandUntil <= at || demonicBrandAttacks <= 0);
+      if (condition === 'decimation') return spell.name === 'Soul Fire' && decimationActive(at);
       if (condition === 'immolateInactive') return !immolate || immolate.until <= at;
       if (condition === 'debuffRefresh') return debuffRefreshReady(spell, at);
       return false;
@@ -93,7 +114,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
   const needsDot = spell => maintainedDots.has(spell.name) && conditionsMet(spell, time) && debuffRefreshReady(spell, time);
   const canLifeTap = Number(options.lifeTap?.mana) > 0;
 
-  const nextTick = () => Math.min(duration, nextPetAbilityAt, nextPetSwingAt, channel ? Math.min(channel.nextTickAt, channel.endsAt) : Infinity, ...[...dots.values()].flatMap(dot => dot.ticks.filter(tick => tick.at <= duration).map(tick => tick.at)), ...priority.flatMap(spell => {
+  const nextTick = () => Math.min(duration, demonicBrandAttacks > 0 && demonicBrandUntil > time ? demonicBrandUntil : Infinity, nextPetAbilityAt, nextPetSwingAt, channel ? Math.min(channel.nextTickAt, channel.endsAt) : Infinity, ...[...dots.values()].flatMap(dot => dot.ticks.filter(tick => tick.at <= duration).map(tick => tick.at)), ...priority.flatMap(spell => {
     if (!spell.conditional || !spell.conditions?.includes('debuffRefresh')) return [];
     const window = debuffRefreshWindow('warlock', spell, build);
     const dot = dots.get(spell.name);
@@ -109,7 +130,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       const rate = passiveRegen + sacrificeManaPerSecond + (now >= lastCastAt + 5 ? spiritPerSecond : 0);
       return rate > 0 ? Math.max(0, manaCostFor(spell) - mana) / rate : Infinity;
     };
-    const ready = priority.filter(spell => (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) <= mana && (spell.name !== 'Conflagrate' || (debuffs.get('Immolate') || 0) > time));
+    const ready = priority.filter(spell => shardCostFor(spell, time) <= soulShards && (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) <= mana && (spell.name !== 'Conflagrate' || (debuffs.get('Immolate') || 0) > time));
     const conditionalReady = ready.find(spell => spell.conditional && conditionsMet(spell, time));
     let usable = channel ? null : (nightfallActive && ready.find(spell => spell.name === 'Shadow Bolt')) || conditionalReady || ready.find(spell => !spell.conditional);
     // Reserve recovered mana for missing/expiring DoTs instead of spending it
@@ -118,7 +139,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       && (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) <= maxManaCap);
     const tapForDot = !channel && dueDot && manaCostFor(dueDot) > mana;
     if (!channel && dueDot && !tapForDot) usable = dueDot;
-    const unaffordable = priority.some(spell => (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) > mana && manaCostFor(spell) <= maxManaCap);
+    const unaffordable = priority.some(spell => conditionsMet(spell, time) && shardCostFor(spell, time) <= soulShards && (cooldowns.get(spell.name) || 0) <= time && manaCostFor(spell) > mana && manaCostFor(spell) <= maxManaCap);
     if (!channel && canLifeTap && (tapForDot || (!usable && unaffordable)) && mana < maxManaCap) {
       const manaGained = Math.min(maxManaCap - mana, options.lifeTap.mana * (1 + 0.1 * rank(build, 'Improved Life Tap')));
       mana = Math.min(maxManaCap, mana + manaGained);
@@ -128,7 +149,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       mana = Math.min(maxManaCap, mana + (nextActionAt - time) * (passiveRegen + sacrificeManaPerSecond));
       casts++; time = nextActionAt;
     } else if (!usable) {
-      const future = priority.map(spell => Math.max(cooldowns.get(spell.name) || 0, time + manaWait(spell, time))).filter(at => at > time && Number.isFinite(at));
+      const future = priority.filter(spell => shardCostFor(spell, time) <= soulShards && conditionsMet(spell, time)).map(spell => Math.max(cooldowns.get(spell.name) || 0, time + manaWait(spell, time))).filter(at => at > time && Number.isFinite(at));
       const wakeAt = Math.min(next, ...future, duration);
       if (wakeAt <= time) break;
       const regenSeconds = Math.max(0, wakeAt - Math.max(time, lastCastAt + 5));
@@ -145,6 +166,8 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       let nextActionAt = time + (isChannel ? Math.min(channelTickInterval(usable), channelDuration) : Math.max(gcd, castTime));
       if (completion > duration) break;
       mana = Math.max(0, mana - manaCostFor(usable)); manaSpent += manaCostFor(usable); lastCastAt = time;
+      const shardCost = shardCostFor(usable, time);
+      soulShards -= shardCost; soulShardsSpent += shardCost;
       const event = events.get(usable.name) || { name: usable.name, damage: 0, casts: 0, crits: 0, ticks: 0 };
       const hit = roll() < Math.min(1, Math.max(0, baseHitChance / 100 + 0.01 * rank(build, 'Suppression')));
       if (isChannel && !hit) nextActionAt = time + 1.5;
@@ -152,9 +175,9 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       if (usable.name === 'Conflagrate') critChance += rankValue(build, 'Fire and Brimstone', [0.0833, 0.1667, 0.25]);
       let critBonus = 0.5 + (usable.specialization === 'Destruction' ? 0.1 * rank(build, 'Ruin') : 0);
       if (rank(build, 'Pandemic') && ['Corruption', 'Bane of Agony', 'Bane of Doom', 'Drain Soul', 'Drain Life', 'Siphon Life', 'Wrack'].includes(usable.name)) critBonus += 0.5 * rank(build, 'Pandemic') / 3;
-      const periodicFraction = usable.damage ? usable.periodicDamage / usable.damage : 0;
+      const periodicFraction = usable.damage ? (usable.periodicDamage || 0) / usable.damage : 0;
       const demonicPower = summonedPet ? (Number(options.talentLevel) || 60) * rank(build, 'Demonic Knowledge') / 3 : 0;
-      const execute = Number(options.targetHealthPercent) < 35 && rank(build, 'Decimation') > 0 && ['Shadow Bolt', 'Searing Pain'].includes(usable.name);
+      const execute = targetHealthAt(completion, duration, options) < 35 && rank(build, 'Decimation') > 0 && ['Shadow Bolt', 'Searing Pain'].includes(usable.name);
       const executeMultiplier = execute ? 1 + rankValue(build, 'Decimation', [0.03, 0.06]) : 1;
       const effectiveSpellPower = Math.max(0, spellPower) + demonicPower;
       const factor = spellDamageMultiplier(usable, completion);
@@ -185,6 +208,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       }
       event.casts++; if (critical) { event.crits++; crits++; } events.set(usable.name, event); casts++;
       const procs = isChannel && !hit ? ['Channel cancelled · 1.5s recovery'] : [];
+      if (usable.name === 'Shadowburn' && shardCost && rank(build, 'Shadow and Flame') > 0 && roll() < 0.2 * rank(build, 'Shadow and Flame')) { soulShards++; soulShardsRefunded++; procs.push('Soul Shard refunded'); }
       if (usable.name === 'Shadow Bolt' && critical && rank(build, 'Improved Shadow Bolt')) {
         applyDebuff('Improved Shadow Bolt', completion, completion + 12); procs.push('Improved Shadow Bolt · 12s');
       }
@@ -193,14 +217,14 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       if (usable.name === 'Wrack' && !isChannel && hit) applyDebuff('Wrack', completion, completion + 6);
       if (usable.name === 'Conflagrate' && hit && rank(build, 'Shadow and Flame')) applyDebuff('Shadow and Flame · Shadow', completion, completion + 20);
       if (usable.name === 'Shadowburn' && hit && rank(build, 'Shadow and Flame')) applyDebuff('Shadow and Flame · Fire', completion, completion + 20);
-      if (usable.name === 'Searing Pain' && hit && rank(build, 'Demonic Brand') && options.activePetId) {
-        demonicBrandUntil = completion + 10; effects.apply('Demonic Brand', 'buff', completion, demonicBrandUntil); demonicBrandAttacks = 2 * rank(build, 'Demonic Brand');
+      if (usable.name === 'Searing Pain' && hit && rank(build, 'Demonic Brand') && summonedPet) {
+        demonicBrandAppliedAt = completion; demonicBrandUntil = completion + 10; effects.apply('Demonic Brand', 'debuff', completion, demonicBrandUntil); demonicBrandAttacks = 2 * rank(build, 'Demonic Brand');
         procs.push(`Demonic Brand · ${demonicBrandAttacks} pet attacks`);
       }
       if (usable.name === 'Conflagrate' && hit && rank(build, 'Shadow and Flame') < 5) { debuffs.delete('Immolate'); effects.remove('Immolate', 'debuff', completion); }
       const cooldown = usable.name === 'Soul Fire' ? (usable.cooldown || 0) * (1 - 0.45 * rank(build, 'Decimation')) : (usable.cooldown || 0);
       cooldowns.set(usable.name, completion + cooldown);
-      castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: critical, activeBuffs: activeBuffs(), enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs: [], procs, damage: directAmount, type: 'cast' });
+      castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: critical, activeBuffs: activeBuffs(), enemyDebuffs: debuffsAtCast, currentMana: mana, soulShards, targetHealthPercent: targetHealthAt(completion, duration, options), consumedBuffs: [], procs, damage: directAmount, type: 'cast' });
       const advanceTo = isChannel && channel ? Math.min(nextActionAt, nextTick()) : nextActionAt;
       mana = Math.min(maxManaCap, mana + (advanceTo - time) * (passiveRegen + sacrificeManaPerSecond) + Math.max(0, advanceTo - (time + 5)) * spiritPerSecond);
       time = advanceTo;
@@ -255,13 +279,12 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       const hit = roll() < Math.min(1, Math.max(0, baseHitChance / 100));
       const crit = hit && roll() < baseCritChance;
       const petPower = (Number(options.talentLevel) || 60) * rank(build, 'Demonic Knowledge') / 3 * (petSpell.coefficient || 0);
-      const brandedDamage = demonicBrandAttacks > 0 && demonicBrandUntil >= nextPetAbilityAt ? 65 + roll() * 3 : 0;
-      const petDamage = hit ? (petSpell.damage + petPower + brandedDamage) * petMultiplier * (crit ? 1.5 : 1) : 0;
-      if (hit && brandedDamage && --demonicBrandAttacks === 0) effects.remove('Demonic Brand', 'buff', nextPetAbilityAt);
+      const petDamage = hit ? (petSpell.damage + petPower) * petMultiplier * (crit ? 1.5 : 1) : 0;
       damage += petDamage; casts++; if (crit) crits++;
       const petEvent = events.get(`${options.activePetId} · ${petSpell.name}`) || { name: `${options.activePetId} · ${petSpell.name}`, damage: 0, casts: 0, crits: 0, ticks: 0 };
       petEvent.damage += petDamage; petEvent.casts++; if (crit) petEvent.crits++; events.set(petEvent.name, petEvent);
       castLog.push({ time: nextPetAbilityAt, name: petEvent.name, school: petSpell.school, specialization: petSpell.specialization, hit, crit, activeBuffs: [], enemyDebuffs: activeEnemyDebuffs(nextPetAbilityAt), currentMana: mana, consumedBuffs: [], procs: [], damage: petDamage, type: 'pet' });
+      triggerDemonicBrand(nextPetAbilityAt, hit);
       nextPetAbilityAt += petAbilityInterval;
     }
     while (petProfile?.kind === 'melee' && nextPetSwingAt <= time + 1e-7 && nextPetSwingAt <= duration) {
@@ -270,16 +293,14 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
       const hit = roll() < Math.min(1, Math.max(0, baseHitChance / 100));
       const critChance = Math.max(0, Number(options.petCritChance ?? baseCritChance * 100)) / 100;
       const crit = hit && roll() < Math.min(1, critChance);
-      const branded = demonicBrandAttacks > 0 && demonicBrandUntil >= nextPetSwingAt;
-      const brandedDamage = branded ? 65 + roll() * 3 : 0;
-      const rawDamage = rollPetMeleeDamage(petProfile, roll) + brandedDamage;
+      const rawDamage = rollPetMeleeDamage(petProfile, roll);
       const petDamage = hit ? rawDamage * petMultiplier * (crit ? 1.5 : 1) : 0;
-      if (hit && branded && --demonicBrandAttacks === 0) effects.remove('Demonic Brand', 'buff', nextPetSwingAt);
       damage += petDamage; casts++; if (crit) crits++;
       const petName = `${options.activePetId} · Melee`;
       const petEvent = events.get(petName) || { name: petName, specialization: 'Demons', damage: 0, casts: 0, crits: 0, ticks: 0 };
       petEvent.damage += petDamage; petEvent.casts++; if (crit) petEvent.crits++; events.set(petName, petEvent);
-      castLog.push({ time: nextPetSwingAt, name: petName, school: petProfile.school, specialization: 'Demons', hit, crit, activeBuffs: [], enemyDebuffs: activeEnemyDebuffs(nextPetSwingAt), currentMana: mana, consumedBuffs: [], procs: branded ? ['Demonic Brand · bonus damage'] : [], damage: petDamage, type: 'pet' });
+      castLog.push({ time: nextPetSwingAt, name: petName, school: petProfile.school, specialization: 'Demons', hit, crit, activeBuffs: [], enemyDebuffs: activeEnemyDebuffs(nextPetSwingAt), currentMana: mana, consumedBuffs: [], procs: [], damage: petDamage, type: 'pet' });
+      triggerDemonicBrand(nextPetSwingAt, hit);
       nextPetSwingAt += petProfile.swingSpeed;
     }
     if (channel) {
@@ -290,6 +311,7 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
         const interruptingConditional = priority.slice(0, channelIndex < 0 ? priority.length : channelIndex).some(spell =>
           spell.conditional
           && (cooldowns.get(spell.name) || 0) <= time
+          && shardCostFor(spell, time) <= soulShards
           && (manaCostFor(spell) <= mana || (canLifeTap && needsDot(spell) && manaCostFor(spell) <= maxManaCap))
           && (spell.name !== 'Conflagrate' || (debuffs.get('Immolate') || 0) > time)
           && conditionsMet(spell, time));
@@ -303,5 +325,5 @@ export function simulateWarlock(priority, duration, maxMana, mp5, spirit, build,
     }
   }
   castLog.sort((a, b) => a.time - b.time);
-  return { damage, casts, crits, dps: duration ? damage / duration : 0, manaSpent, manaActions: {}, buffs: [], effectUptimes: effects.summary(), castLog, events: [...events.values()] };
+  return { damage, casts, crits, dps: duration ? damage / duration : 0, manaSpent, soulShards, startingSoulShards, soulShardsSpent, soulShardsRefunded, manaActions: {}, buffs: [], effectUptimes: effects.summary(), castLog, events: [...events.values()] };
 }

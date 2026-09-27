@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import { simulateWarlock } from '../src/sim/warlock.js';
+import { warlockPetState } from '../src/sim/warlock-pets.js';
+const spell = name => ({ name, school: name === 'Shadow Bolt' ? 'Shadow' : 'Fire', specialization: 'Destruction', cast: 0, mana: 0, damage: 100, directDamage: 100, coefficient: 0, cooldown: 0, tooltip: '' });
+const run = (priority, build = {}, options = {}, duration = 12) => simulateWarlock(priority, duration, 5000, 0, 0, build, 1, 100, 0, {}, options);
+for (const name of ['Soul Fire', 'Shadowburn']) {
+  assert.equal(run([spell(name)]).casts, 0, `${name} needs a shard`);
+  const result = run([spell(name)], {}, { soulShards: 2 });
+  assert.equal(result.casts, 2); assert.equal(result.soulShards, 0); assert.equal(result.soulShardsSpent, 2);
+}
+assert.ok(run([spell('Shadowburn')], { 'Shadow and Flame': 5 }).casts > 2);
+assert.equal(run([spell('Shadowburn')], { 'Shadow and Flame': 4 }).casts, 0);
+assert.equal(run([spell('Soul Fire')], { Decimation: 2 }).casts, 0, 'Talent alone does not waive Soul Fire cost');
+const conditional = { ...spell('Soul Fire'), conditional: true, conditions: ['decimation'], cooldown: 30 };
+assert.ok(!run([conditional, spell('Shadow Bolt')], { Decimation: 2 }, { soulShards: 10, targetHealthPercent: 100 }).castLog.some(entry => entry.name === 'Soul Fire'));
+const proc = run([conditional, spell('Shadow Bolt')], { Decimation: 2 }, { soulShards: 0, targetHealthPercent: 30 });
+assert.equal(proc.castLog[0].name, 'Shadow Bolt');
+assert.equal(proc.castLog[1].name, 'Soul Fire');
+assert.equal(proc.soulShardsSpent, 0);
+const expiry = run([{ ...spell('Shadow Bolt'), cooldown: 100 }, { ...spell('Soul Fire'), cast: 6 }], { Decimation: 2 }, { targetHealthPercent: 30 }, 30);
+assert.ok(expiry.castLog.filter(entry => entry.name === 'Soul Fire').every(entry => entry.time < 10));
+const build = { 'Demonic Sacrifice': 1, 'Demonic Pact': 1 };
+const options = { activePetId: 'felhunter', sacrificePet: true, sacrificedPetId: 'imp' };
+assert.deepEqual(warlockPetState(build, options), { activePetId: 'felhunter', sacrificedPetId: 'imp' });
+assert.deepEqual(warlockPetState(build, { ...options, activePetId: 'imp' }), { activePetId: 'imp', sacrificedPetId: '' });
+assert.deepEqual(warlockPetState({ 'Demonic Sacrifice': 1 }, options), { activePetId: '', sacrificedPetId: 'felhunter' });
+assert.deepEqual(warlockPetState({}, options), { activePetId: 'felhunter', sacrificedPetId: '' });
+const both = run([spell('Shadow Bolt')], build, options);
+assert.ok(both.castLog.some(entry => entry.type === 'pet'), 'Active pet attacks with Pact');
+const without = run([spell('Shadow Bolt')], build, { ...options, sacrificePet: false });
+const playerDamage = result => result.castLog.filter(entry => entry.name === 'Shadow Bolt').reduce((sum, entry) => sum + entry.damage, 0);
+assert.ok(Math.abs(playerDamage(both) / playerDamage(without) - 1.15) < 1e-9, 'Sacrifice bonus and pet damage coexist');
+const sacrificed = run([spell('Shadow Bolt')], { 'Demonic Sacrifice': 1 }, { activePetId: 'imp', sacrificePet: true, petSpell: spell('Firebolt') });
+assert.ok(!sacrificed.castLog.some(entry => entry.type === 'pet'), 'Sacrificed pet cannot attack without Pact');
+console.log('Passed shard consumption, exemptions, Decimation conditions/expiry, and sacrifice/active pet combinations');
