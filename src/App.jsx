@@ -1,4 +1,8 @@
+import { createEffectTracker } from './sim/effect-uptime.js';
+import { EffectUptimeSection } from './EffectUptimeSection.jsx';
+import { isDamageChannel, channelTickInterval } from './sim/channels.js';
 import { useEffect, useRef, useState } from 'react';
+import { TalentImport } from './TalentImport.jsx';
 import { classRegistry } from './data/classes.js';
 import { petsForClass } from './data/pets.js';
 import { simulateWarlock } from './sim/warlock.js';
@@ -38,7 +42,7 @@ function periodicDamageFromTooltip(text) {
       return sum + amount * (Number(hit[4]) || Math.max(1, Math.floor(duration / interval)));
     }, 0) + health.reduce((sum, match) => sum + numberFromText(match[1]) * Math.max(1, Math.floor(duration / Number(match[2] || 1))), 0);
 }
-function buildDamageSpellCatalog(classData, level = 60) {
+export function buildDamageSpellCatalog(classData, level = 60) {
   const className = classData.class;
   return classData.spellbook.tabs.flatMap(tab => {
     const byName = new Map();
@@ -66,8 +70,10 @@ function buildDamageSpellCatalog(classData, level = 60) {
       const damage = damageFromTooltip(tooltip);
       const periodicDamage = periodicDamageFromTooltip(tooltip);
       const periodicDuration = Number(tooltip.match(/(?:over|for|lasts)\s+(\d+)\s+sec/i)?.[1] || 0);
-      const periodInterval = Number(tooltip.match(/(?:every|each)\s+(\d+)\s+sec/i)?.[1] || (/every second|per second/i.test(tooltip) ? 1 : spell.name === 'Wrack' ? 1 : 3));
-      const periodicTicks = periodicDuration ? Math.ceil(periodicDuration / periodInterval) : 0;
+      const periodInterval = Number(tooltip.match(/(?:every|each)\s+(\d+)\s+sec/i)?.[1] || (/each second|every second|per second/i.test(tooltip) ? 1 : spell.name === 'Wrack' ? 1 : 3));
+      const channeled = /channeled/i.test(castText);
+      const channelInterval = channelTickInterval({ name: spell.name, periodicTickInterval: periodInterval });
+      const periodicTicks = periodicDuration ? Math.ceil(periodicDuration / (channeled ? channelInterval : periodInterval)) : 0;
       const coefficientText = spell.detail.co || '';
       const directCoefficient = Number(coefficientText.match(/([\d.]+)%\s+of spell power\s*\(direct\)/i)?.[1] || (!/per tick/i.test(coefficientText) ? coefficientText.match(/([\d.]+)%\s+of spell power/i)?.[1] : 0)) / 100;
       const periodicCoefficient = [...coefficientText.matchAll(/([\d.]+)%\s+of spell power\s*\(per tick\)/gi)].reduce((sum, match) => sum + Number(match[1]) / 100, 0);
@@ -86,7 +92,9 @@ function buildDamageSpellCatalog(classData, level = 60) {
         directDamage: Math.max(0, Math.round(damage - periodicDamage)),
         periodicDamage: Math.min(Math.round(damage), Math.round(periodicDamage)),
         periodicDuration,
-        periodicTickInterval: periodInterval,
+        periodicTickInterval: channeled ? channelInterval : periodInterval,
+        channeled,
+        channelTickInterval: channelInterval,
         directCoefficient: directCoefficient || (periodicCoefficient ? 0 : fallbackCoefficient),
         periodicCoefficient,
         cast: castMatch ? Number(castMatch[1]) : /channeled/i.test(castText) ? channelDuration : 0,
@@ -193,7 +201,8 @@ const manaGems = [
   { name: 'Mana Ruby', level: 58, minRestore: 1000, maxRestore: 1200 },
 ];
 const manaGemForLevel = level => manaGems.filter(gem => gem.level <= level).at(-1) || null;
-function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHitChance, spellPower, manaOptions) {
+export function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHitChance, spellPower, manaOptions) {
+  const effects = createEffectTracker(duration);
   const mp5PerSecond = Math.max(0, mp5) / 5;
   const spiritPerSecond = (Math.max(0, spirit) / 4 + 13) / 2;
   const GCD = 1.5;
@@ -203,6 +212,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   const castCounts = new Map();
   const spellDamage = new Map();
   const spellCrits = new Map();
+  const spellTicks = new Map();
   const missileBarrage = { active: false, since: null, procs: 0, uses: 0, uptime: 0 };
   const fingersOfFrost = { charges: 0, since: null, procs: 0, uses: 0, uptime: 0 };
   const clearcasting = { active: false, since: null, procs: 0, uses: 0 };
@@ -216,6 +226,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
   let arcaneBlastStacks = 0, arcaneBlastUntil = -1;
   let arcanePowerUntil = talentRank(build, 'Arcane Power') ? 15 : -1;
   let arcanePowerReadyAt = talentRank(build, 'Arcane Power') ? 180 : Infinity;
+  if (arcanePowerUntil > 0) effects.apply('Arcane Power', 'buff', 0, arcanePowerUntil);
   let presenceOfMindReadyAt = talentRank(build, 'Presence of Mind') ? 0 : Infinity;
   let combustionActive = false;
   let combustionFireCrits = 0, combustionCritBonus = 0;
@@ -307,8 +318,10 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     missileBarrage.procs++;
     if (!missileBarrage.active) missileBarrage.since = at;
     missileBarrage.active = true;
+    effects.apply('Missile Barrage', 'buff', at);
   };
   const procFingersOfFrost = at => {
+    effects.apply('Fingers of Frost', 'buff', at);
     fingersOfFrost.procs++;
     if (fingersOfFrost.charges === 0) fingersOfFrost.since = at;
     fingersOfFrost.charges = Math.min(Math.max(1, build['Fingers of Frost']), Math.max(fingersOfFrost.charges, build['Fingers of Frost']));
@@ -330,10 +343,10 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     if (spell.name === 'Frostbolt') castTime -= 0.1 * talentRank(build, 'Improved Frostbolt');
     if (['Fireball', 'Frostfire Bolt'].includes(spell.name)) castTime -= 0.1 * talentRank(build, 'Improved Fireball');
     if (spell.name === 'Pyroblast' && hotStreak.until >= at) castTime *= Math.max(0, 1 - 0.25 * hotStreak.stacks);
-    if (castTime > 0 && castTime < 10 && presenceOfMindReadyAt <= at) castTime = 0;
+    if (!isDamageChannel(spell) && castTime > 0 && castTime < 10 && presenceOfMindReadyAt <= at) castTime = 0;
     return Math.max(0, castTime);
   };
-  const usesPresenceOfMind = (spell, at) => (Number(spell.cast) || 0) > 0 && (Number(spell.cast) || 0) < 10 && presenceOfMindReadyAt <= at;
+  const usesPresenceOfMind = (spell, at) => !isDamageChannel(spell) && (Number(spell.cast) || 0) > 0 && (Number(spell.cast) || 0) < 10 && presenceOfMindReadyAt <= at;
   const damageMultiplierFor = (spell, at, frozenTarget, arcBlastBonusStacks = arcaneBlastStacks) => {
     let multiplier = 1 + 0.01 * talentRank(build, 'Arcane Instability');
     if (hasFireComponent(spell)) multiplier *= 1 + 0.02 * talentRank(build, 'Fire Power');
@@ -387,6 +400,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     if (arcaneBlastUntil < time) arcaneBlastStacks = 0;
     if (talentRank(build, 'Arcane Power') && time >= arcanePowerReadyAt) {
       arcanePowerUntil = time + 15;
+      effects.apply('Arcane Power', 'buff', time, arcanePowerUntil);
       arcanePowerReadyAt = time + 180;
     }
 
@@ -402,6 +416,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     const combustionReadyAt = cooldowns.get('Combustion') || 0;
     if (priority.some(spell => spell.offGcd && spell.name === 'Combustion') && talentRank(build, 'Combustion') && combustionReadyAt <= time && castUntil <= time && evocationUntil <= time) {
       combustionActive = true;
+      effects.apply('Combustion', 'buff', time);
       combustionCritBonus = 0;
       combustionFireCrits = 0;
       cooldowns.set('Combustion', time + combustionSpell.cooldown);
@@ -428,6 +443,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       lastSpellCastAt = time;
       if (usesClearcasting) {
         clearcasting.active = false;
+        effects.remove('Clearcasting', 'buff', time);
         clearcasting.uses++;
         clearcasting.since = null;
         consumedBuffs.push('Clearcasting');
@@ -439,11 +455,13 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       if (usesHotStreak) {
         hotStreak.stacks = 0;
         hotStreak.until = -1;
+        effects.remove('Hot Streak', 'buff', time);
         consumedBuffs.push('Hot Streak');
       }
       if (usable.name !== 'Arcane Blast' && arcaneBlastStacks) {
         arcaneBlastStacks = 0;
         arcaneBlastUntil = -1;
+        effects.remove('Arcane Blast stacks', 'buff', time);
         consumedBuffs.push('Arcane Blast charges');
       }
       cooldowns.set(usable.name, time + cooldown);
@@ -451,6 +469,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       gcdUntil = time + GCD;
       if (usesMissileBarrage) {
         missileBarrage.active = false;
+        effects.remove('Missile Barrage', 'buff', time);
         missileBarrage.uses++;
         missileBarrage.uptime += Math.max(0, time - missileBarrage.since);
         missileBarrage.since = null;
@@ -461,18 +480,29 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
         fingersOfFrost.uses++;
         consumedBuffs.push(`Fingers of Frost${fingersOfFrost.charges ? ` (${fingersOfFrost.charges} left)` : ''}`);
         if (fingersOfFrost.charges === 0) {
+          effects.remove('Fingers of Frost', 'buff', time);
           fingersOfFrost.uptime += Math.max(0, time - fingersOfFrost.since);
           fingersOfFrost.since = null;
         }
       }
-      if (time + castTime <= duration) {
-        const completionTime = time + castTime;
+      const channeled = isDamageChannel(usable);
+      const channelHit = channeled ? roll() < hitChanceFor(usable) : null;
+      const tickCount = channeled ? Math.max(1, Math.ceil((usable.cast || castTime) / channelTickInterval(usable))) : 1;
+      if (channeled) {
+        casts++;
+        castCounts.set(usable, (castCounts.get(usable) || 0) + 1);
+        castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit: channelHit, crit: false, activeBuffs: buffsAtCast, enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs, procs: channelHit ? [] : ['Channel cancelled · 1.5s recovery'], damage: 0, type: 'cast' });
+        if (!channelHit) { castUntil = time; gcdUntil = time + 1.5; continue; }
+      }
+      for (let tickIndex = 0; tickIndex < tickCount; tickIndex++) {
+        const completionTime = time + (channeled ? castTime * (tickIndex + 1) / tickCount : castTime);
+        if (completionTime > duration) break;
         advanceIgnite(completionTime);
         const spellPowerDamage = Math.max(0, Number(spellPower) || 0) * (Number(usable.coefficient) || 0);
         const baseDamage = (Math.max(0, Number(usable.damage) || 0) + spellPowerDamage) * damageMultiplierFor(usable, time, frozenTarget, arcBlastBonusStacks);
-        const hit = roll() < hitChanceFor(usable);
+        const hit = channeled && tickIndex === 0 ? channelHit : roll() < hitChanceFor(usable);
         const isCrit = hit && roll() < critChanceFor(usable, time, frozenTarget);
-        const castDamage = hit ? baseDamage * (isCrit ? critMultiplierFor(usable) : 1) : 0;
+        const castDamage = hit ? baseDamage / tickCount * (isCrit ? critMultiplierFor(usable) : 1) : 0;
         const totalCastDamage = castDamage;
         damage += totalCastDamage;
         spellDamage.set(usable, (spellDamage.get(usable) || 0) + totalCastDamage);
@@ -488,11 +518,12 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
           mana += actualManaRefund;
           manaSpent = Math.max(0, manaSpent - actualManaRefund);
         }
-        casts++;
-        castCounts.set(usable, (castCounts.get(usable) || 0) + 1);
+        if (!channeled) { casts++; castCounts.set(usable, (castCounts.get(usable) || 0) + 1); }
+        else spellTicks.set(usable, (spellTicks.get(usable) || 0) + 1);
         const procs = [];
         const naturalDuration = naturalDebuffDuration(usable);
         if (hit && naturalDuration > 0) {
+          effects.apply(`${usable.name} slow`, 'debuff', completionTime, completionTime + naturalDuration);
           naturalDebuffs.set(usable.name, { until: completionTime + naturalDuration, duration: naturalDuration });
           procs.push(`${usable.name} slow · ${naturalDuration}s`);
         }
@@ -500,6 +531,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
         const ignitePct = rankValue(talentRank(build, 'Ignite'), [0.08, 0.16, 0.24, 0.32, 0.4]);
         if (hit && isCrit && hasFireComponent(usable) && ignitePct > 0) {
           igniteApplied = castDamage * ignitePct;
+          effects.apply('Ignite', 'debuff', completionTime, completionTime + 4);
           const nextTickAt = (Math.floor((completionTime + 1e-8) / 2) + 1) * 2;
           ignites.push({ damage: igniteApplied, appliedAt: completionTime, lastTickAt: completionTime, nextTickAt, expiresAt: completionTime + 4 });
           procs.push(`Ignite · +${Math.round(igniteApplied)} damage, expires in 4s`);
@@ -518,11 +550,13 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
           clearcasting.procs++;
           if (!clearcasting.active) clearcasting.since = completionTime;
           clearcasting.active = true;
+          effects.apply('Clearcasting', 'buff', completionTime);
           procs.push('Clearcasting');
         }
         const frostbiteChance = rankValue(talentRank(build, 'Frostbite'), [0.05, 0.1, 0.15]);
         if (hit && frostbiteChance && appliesChill(usable) && roll() < frostbiteChance) {
           frozenUntil = completionTime + 5;
+          effects.apply('Frozen', 'debuff', completionTime, frozenUntil);
           procs.push('Frozen');
         }
         const winterChillChance = 0.2 * talentRank(build, "Winter's Chill");
@@ -530,6 +564,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
           winterChill.procs++;
           winterChill.stacks = Math.min(talentRank(build, "Winter's Chill"), winterChill.stacks + 1);
           winterChill.until = completionTime + 15;
+          effects.apply("Winter's Chill", 'debuff', completionTime, winterChill.until);
           procs.push(`Winter's Chill ×${winterChill.stacks}`);
         }
         const scorchChance = rankValue(talentRank(build, 'Improved Scorch'), [0.33, 0.67, 1]);
@@ -537,6 +572,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
           scorchVulnerability.procs++;
           scorchVulnerability.stacks = Math.min(5, scorchVulnerability.stacks + 1);
           scorchVulnerability.until = completionTime + 30;
+          effects.apply('Improved Scorch', 'debuff', completionTime, scorchVulnerability.until);
           procs.push(`Scorch vulnerability ×${scorchVulnerability.stacks}`);
         }
         const hotStreakEligible = ['Fireball', 'Frostfire Bolt', 'Fire Blast', 'Scorch'].includes(usable.name);
@@ -544,19 +580,21 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
           hotStreak.procs++;
           hotStreak.stacks = Math.min(3, hotStreak.stacks + 1);
           hotStreak.until = completionTime + 15;
+          effects.apply('Hot Streak', 'buff', completionTime, hotStreak.until);
           procs.push(`Hot Streak ×${hotStreak.stacks}`);
         }
         if (build['Arcane Blast'] && usable.name === 'Arcane Blast') {
           arcaneBlastStacks = Math.min(4, arcaneBlastStacks + 1);
           arcaneBlastUntil = completionTime + 8;
+          effects.apply('Arcane Blast stacks', 'buff', completionTime, arcaneBlastUntil);
           procs.push(`Arcane Blast ×${arcaneBlastStacks}`);
         }
         if (hit && build['Combustion'] && combustionActive && hasFireComponent(usable)) {
           combustionCritBonus += 0.1;
           if (isCrit) combustionFireCrits++;
-          if (combustionFireCrits >= 4) combustionActive = false;
+          if (combustionFireCrits >= 4) { combustionActive = false; effects.remove('Combustion', 'buff', completionTime); }
         }
-        castLog.push({ time, name: usable.name, school: usable.school, specialization: usable.specialization, hit, crit: isCrit, activeBuffs: buffsAtCast, enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs, procs, damage: totalCastDamage, igniteApplied, manaRefund: masterOfElementsRefund });
+        castLog.push({ time: channeled ? completionTime : time, name: channeled ? `${usable.name} tick` : usable.name, type: channeled ? 'tick' : 'cast', school: usable.school, specialization: usable.specialization, hit, crit: isCrit, activeBuffs: buffsAtCast, enemyDebuffs: debuffsAtCast, currentMana: mana, consumedBuffs: channeled ? [] : consumedBuffs, procs, damage: totalCastDamage, igniteApplied, manaRefund: masterOfElementsRefund });
       }
       continue;
     }
@@ -572,6 +610,7 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
       if (restored > 0 && maxMana - mana >= restored) {
         evocationStart = time;
         evocationUntil = time + 8;
+        effects.apply('Evocation', 'buff', time, evocationUntil);
         evocationReadyAt = time + 480;
         manaActions.evocationUses++;
         manaActions.evocationMana += restored;
@@ -634,12 +673,13 @@ function simulate(priority, duration, maxMana, mp5, spirit, build, seed, baseHit
     dps: duration ? damage / duration : 0,
     manaSpent,
     manaActions,
+    effectUptimes: effects.summary(),
     buffs: [
       { id: 'missileBarrage', name: 'Missile Barrage', procs: missileBarrage.procs, uses: missileBarrage.uses, uptime: missileBarrage.uptime, uptimePct: duration ? missileBarrage.uptime / duration * 100 : 0, activeAtEnd: missileBarrage.active, rank: build['Missile Barrage'] || 0 },
       { id: 'fingersOfFrost', name: 'Fingers of Frost', procs: fingersOfFrost.procs, uses: fingersOfFrost.uses, uptime: fingersOfFrost.uptime, uptimePct: duration ? fingersOfFrost.uptime / duration * 100 : 0, activeAtEnd: fingersOfFrost.charges > 0, chargesAtEnd: fingersOfFrost.charges, rank: build['Fingers of Frost'] || 0 },
     ],
     castLog,
-        events: [...priority.map(spell => ({ name: spell.name, specialization: spell.specialization, damage: spellDamage.get(spell) || 0, casts: castCounts.get(spell) || 0, crits: spellCrits.get(spell) || 0 })), ...(igniteTickCount ? [{ name: 'Ignite', specialization: 'Fire', damage: igniteDamage, casts: 0, crits: 0, ticks: igniteTickCount }] : [])],
+        events: [...priority.map(spell => ({ name: spell.name, specialization: spell.specialization, damage: spellDamage.get(spell) || 0, casts: castCounts.get(spell) || 0, crits: spellCrits.get(spell) || 0, ticks: spellTicks.get(spell) || 0 })), ...(igniteTickCount ? [{ name: 'Ignite', specialization: 'Fire', damage: igniteDamage, casts: 0, crits: 0, ticks: igniteTickCount }] : [])],
   };
 }
 
@@ -678,7 +718,7 @@ function ResultsPage({ id }) {
       <section className="report-panel"><div className="report-panel-heading"><div><span>OUTCOME SPREAD</span><h2>DPS distribution</h2></div><b>{report.runs.toLocaleString()} RUNS</b></div><div className="histogram">{histogram.map((bin, i) => <div className="histogram-bar" key={i} title={`${bin.count} runs · ${bin.from.toFixed(1)}–${bin.to.toFixed(1)} DPS`}><i style={{ height: `${Math.max(bin.count ? 3 : 0, bin.count / report.histogramMax * 100)}%` }}/></div>)}</div><div className="histogram-labels"><span>{metrics.minDps.toFixed(1)} DPS</span><span>MEDIAN {metrics.medianDps.toFixed(1)}</span><span>{metrics.maxDps.toFixed(1)} DPS</span></div></section>
       <div className="report-columns">
         <section className="report-panel"><div className="report-panel-heading"><div><span>MEDIAN RUN · {medianRun.casts} CASTS</span><h2>Damage by spell</h2></div><b>{Math.round(medianRun.damage).toLocaleString()} TOTAL</b></div><div className="report-spells"><div className="report-spell-head"><span>SPELL</span><span>CASTS / CRITS</span><span>DAMAGE</span></div>{medianRun.events.map(event => <div className="report-spell-row" key={event.name}><span>{event.name}</span><span>{event.ticks ? `${event.ticks} ticks` : `${event.casts} / ${event.crits}`}</span><div><i><b style={{ width: `${Math.max(event.damage ? 2 : 0, event.damage / maxEvents * 100)}%` }}/></i><strong>{Math.round(event.damage).toLocaleString()}</strong></div></div>)}</div></section>
-        <section className="report-panel"><div className="report-panel-heading"><div><span>MEDIAN RUN</span><h2>Encounter details</h2></div></div><div className="report-detail-grid"><div><span>HIT RATE</span><b>{(metrics.medianHitRate * 100).toFixed(1)}%</b></div><div><span>CRIT RATE</span><b>{(metrics.medianCritRate * 100).toFixed(1)}%</b></div><div><span>CRITICAL HITS</span><b>{medianRun.crits}</b></div><div><span>MANA SPENT</span><b>{Math.round(medianRun.manaSpent).toLocaleString()}</b></div></div><div className="report-buffs"><span>PROC BUFF ACTIVITY</span>{medianRun.buffs.map(buff => <div key={buff.id}><b>{buff.name}</b><small>{buff.procs} procs · {buff.uses} used · {buff.uptime.toFixed(1)}s uptime</small></div>)}</div>{config.classId === 'mage' && <div className="report-buffs"><span>MANA TOOL USE · MEDIAN RUN</span><div><b>Evocation</b><small>{medianRun.manaActions.evocationUses} uses · {Math.round(medianRun.manaActions.evocationMana).toLocaleString()} mana restored</small></div>{config.manaGem && <div><b>{config.manaGem.name}</b><small>{medianRun.manaActions.manaGemUses} uses · {Math.round(medianRun.manaActions.manaGemMana).toLocaleString()} mana restored</small></div>}</div>}<div className="report-build"><span>SELECTED TALENTS</span><p>{Object.entries(config.build).filter(([, rank]) => rank > 0).map(([name, rank]) => `${name} ${rank}`).join(' · ') || 'None'}</p></div></section>
+        <section className="report-panel"><div className="report-panel-heading"><div><span>MEDIAN RUN</span><h2>Encounter details</h2></div></div><div className="report-detail-grid"><div><span>HIT RATE</span><b>{(metrics.medianHitRate * 100).toFixed(1)}%</b></div><div><span>CRIT RATE</span><b>{(metrics.medianCritRate * 100).toFixed(1)}%</b></div><div><span>CRITICAL HITS</span><b>{medianRun.crits}</b></div><div><span>MANA SPENT</span><b>{Math.round(medianRun.manaSpent).toLocaleString()}</b></div></div><EffectUptimeSection effects={medianRun.effectUptimes}/><div className="report-buffs"><span>PROC BUFF ACTIVITY</span>{medianRun.buffs.map(buff => <div key={buff.id}><b>{buff.name}</b><small>{buff.procs} procs · {buff.uses} used · {buff.uptime.toFixed(1)}s uptime</small></div>)}</div>{config.classId === 'mage' && <div className="report-buffs"><span>MANA TOOL USE · MEDIAN RUN</span><div><b>Evocation</b><small>{medianRun.manaActions.evocationUses} uses · {Math.round(medianRun.manaActions.evocationMana).toLocaleString()} mana restored</small></div>{config.manaGem && <div><b>{config.manaGem.name}</b><small>{medianRun.manaActions.manaGemUses} uses · {Math.round(medianRun.manaActions.manaGemMana).toLocaleString()} mana restored</small></div>}</div>}<div className="report-build"><span>SELECTED TALENTS</span><p>{Object.entries(config.build).filter(([, rank]) => rank > 0).map(([name, rank]) => `${name} ${rank}`).join(' · ') || 'None'}</p></div></section>
       </div>
       <section className="report-panel report-timeline"><div className="report-panel-heading"><div><span>REPRESENTATIVE RUN · CLOSEST TO MEDIAN DPS</span><h2>Cast timeline</h2></div><div className="timeline-controls"><label className="log-toggle"><input type="checkbox" checked={showPetTimelineEvents} onChange={event => setShowPetTimelineEvents(event.target.checked)}/> SHOW PET EVENTS</label><b>{reportTimeline.filter(entry => entry.type !== 'tick').length} ACTIONS</b></div></div><div className="cast-timeline"><div className="cast-timeline-head"><span>TIME</span><span>CAST</span><span>DAMAGE</span><span>MANA</span><span>ACTIVE BUFFS</span><span>ENEMY DEBUFFS</span><span>BUFF CHANGES</span></div>{reportTimeline.map((entry, index) => <div className="cast-timeline-row" key={`${entry.time}-${entry.name}-${index}`}><time>{formatTime(entry.time)}</time><span className="cast-log-spell"><i className={`school-icon ${entry.school.toLowerCase()}`}>{entry.school === 'Frost' ? '❄' : entry.school === 'Fire' ? '♨' : '✧'}</i><b>{entry.name}</b>{entry.specialization && <small className="spell-specialization-tag">{entry.specialization}</small>}{entry.crit && <em>CRIT</em>}{!entry.hit && <em className="miss">MISS</em>}</span><span className="cast-log-damage">{Math.round(entry.damage ?? 0).toLocaleString()}</span><span className="cast-log-mana">{Math.round(entry.currentMana ?? 0).toLocaleString()}</span><span className="cast-log-buffs">{entry.activeBuffs.length ? entry.activeBuffs.map(buff => <EffectIcon key={buff.id} effect={buff}/>) : <small>—</small>}</span><span className="cast-log-debuffs">{entry.enemyDebuffs?.length ? entry.enemyDebuffs.map(debuff => <span className="debuff-effect" key={debuff.id}><EffectIcon effect={debuff}/><small>{debuff.remaining.toFixed(1)}s</small></span>) : <small>—</small>}</span><span className="cast-log-changes">{entry.procs.map((buff, i) => <EffectChange key={`p${i}`} label={buff} mode="proc"/> )}{entry.consumedBuffs.map((buff, i) => <EffectChange key={`u${i}`} label={buff} mode="used"/> )}{!entry.procs.length && !entry.consumedBuffs.length && <small>—</small>}</span></div>)}</div></section>
       <p className="report-footnote">Statistics summarize {report.runs.toLocaleString()} independent random simulations. Spell damage, casts, crits, proc activity, and timeline are from the run closest to the median DPS.</p>
@@ -834,14 +874,22 @@ function SimulatorApp() {
     });
     const dpsSorted = sorted.map(run => run.dps);
     const percentile = p => dpsSorted[Math.round((dpsSorted.length - 1) * p)];
+    const mageDamageAttempts = run => run.castLog.filter(entry => !['mana', 'off-gcd'].includes(entry.type) && entry.name !== 'Ignite' && !(isDamageChannel(entry) && entry.hit));
     const medianHitRate = medianOf(runs.map(run => {
+      if (selectedClass === 'mage') {
+        const attempts = mageDamageAttempts(run);
+        return attempts.length ? attempts.filter(entry => entry.hit).length / attempts.length : 0;
+      }
       if (selectedClass !== 'warlock') return run.casts ? run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type) && entry.hit).length / run.casts : 0;
       const attackAttempts = run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type));
       return attackAttempts.length ? attackAttempts.filter(entry => entry.hit).length / attackAttempts.length : 0;
     }));
     const medianCritRate = medianOf(runs.map(run => {
-      if (selectedClass !== 'warlock') return run.casts ? run.crits / run.casts : 0;
-      const landedAttacks = run.castLog.filter(entry => !['mana', 'tick', 'off-gcd'].includes(entry.type) && entry.hit);
+      if (selectedClass === 'mage') {
+        const attempts = mageDamageAttempts(run);
+        return attempts.length ? attempts.filter(entry => entry.crit).length / attempts.length : 0;
+      }
+      const landedAttacks = run.castLog.filter(entry => !['mana', 'off-gcd'].includes(entry.type) && entry.hit && entry.damage > 0);
       return landedAttacks.length ? landedAttacks.filter(entry => entry.crit).length / landedAttacks.length : 0;
     }));
     const id = `${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
@@ -974,6 +1022,7 @@ function SimulatorApp() {
         <footer>DATA FROM <a href="https://talentsforever.com/about" target="_blank" rel="noreferrer">TALENTS FOREVER</a> · CC BY 4.0 · BETA SNAPSHOT {classData.generated} · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">ATTRIBUTION</a></footer>
       </>}
       {active === activeTalentPage && <section className="talent-page">
+        <TalentImport key={selectedClass} classData={classData} onImport={({ build: importedBuild, level }) => { setCharacterLevel(level); setBuild(importedBuild); setSelectedSpecId(''); setSpecName(''); setSimulation(null); }}/>
         <div className="talent-toolbar"><strong>Talents</strong><span className="talent-level-readout">CHARACTER LEVEL {talentLevel}</span><span className="talent-save-note">TALENTS AUTO-SAVED IN THIS BROWSER</span><div className="unspent-label">Unspent Talents <b>{Math.max(0, pointsAvailable - totalPoints)}</b></div></div>
         <div className="talent-trees">{classData.talents.trees.map(tree => <section className={`talent-tree tree-${tree.name.toLowerCase()}`} key={tree.name}>
           <header className="tree-heading"><div className="tree-emblem"><img src={`https://wow.zamimg.com/images/wow/icons/medium/${tree.icon}.jpg`} alt=""/><b>{treePoints(tree)}</b></div><h2>{tree.name}</h2><button className="tree-reset" aria-label={`Reset ${tree.name} talents`} title={`Reset ${tree.name}`} onClick={() => setBuild(prev => Object.fromEntries(Object.entries(prev).filter(([name]) => !tree.talents.some(talent => talent.name === name))))}>↻</button></header>
