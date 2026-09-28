@@ -685,7 +685,7 @@ export function simulate(priority, duration, maxMana, mp5, spirit, build, seed, 
 }
 
 const resultStoragePrefix = '4esim_sim_result_';
-const batchSize = 1000;
+const batchSize = 10000;
 // Add a class data bundle and a simulator here to make it selectable and runnable.
 const simulatorByClass = Object.fromEntries(Object.keys(classDataLoaders).map(id => [id, id === 'mage' ? simulate : id === 'warlock' ? simulateWarlock : simulateGeneric]));
 const readSimulationReport = id => {
@@ -860,7 +860,7 @@ function SimulatorApp() {
   }, [selectedSpecId, selectedClass]);
   const configSignature = JSON.stringify({ rotation, duration, startingMana, regen, spirit, spellPower, baseHitChance, targetHealthPercent, scaleTargetHealth, activePetId, sacrificePet, sacrificedPetId, soulShards, useEvocation, useManaGem, talentLevel, build });
   const result = simulation?.signature === configSignature ? simulation.result : null;
-  const runSimulation = () => {
+  const runSimulation = async () => {
     if (!rotation.length) return;
     const resultTab = window.open('about:blank', '_blank');
     if (!resultTab) return;
@@ -868,7 +868,32 @@ function SimulatorApp() {
     const manaOptions = { useEvocation: useEvocation && talentLevel >= 20, useManaGem, manaGem };
     const simulateClass = simulatorByClass[selectedClass];
     if (!simulateClass) return;
-    const runs = Array.from({ length: batchSize }, () => simulateClass(rotation, Number(duration), Number(startingMana), Number(regen), Number(spirit), build, Math.floor(Math.random() * 0xffffffff), Number(baseHitChance), Number(spellPower), manaOptions, { classId: selectedClass, resourceType: resourceTypeForClass(selectedClass), resourceCap: resourceCapForClass(selectedClass), activePetId, sacrificePet, sacrificedPetId, soulShards, talentLevel, petSpell, lifeTap, targetHealthPercent: Number(targetHealthPercent), scaleTargetHealth }));
+    const totalRuns = batchSize;
+    const runOptions = { classId: selectedClass, resourceType: resourceTypeForClass(selectedClass), resourceCap: resourceCapForClass(selectedClass), activePetId, sacrificePet, sacrificedPetId, soulShards, talentLevel, petSpell, lifeTap, targetHealthPercent: Number(targetHealthPercent), scaleTargetHealth };
+    const yieldForProgress = () => new Promise(resolve => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = () => { channel.port1.close(); channel.port2.close(); resolve(); };
+      channel.port2.postMessage(null);
+    });
+    resultTab.document.open();
+    resultTab.document.write(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Simulating · Forever DPS lab</title><style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#101416;color:#edf0ed;font-family:system-ui,sans-serif}.card{width:min(460px,calc(100% - 40px));padding:28px;background:#171c1f;border:1px solid #293135;border-radius:8px}.eyebrow{color:#69ccf0;font:11px monospace;letter-spacing:1px}h1{margin:13px 0 8px;font-size:25px}p{color:#899397;font-size:14px}.count{margin:24px 0 9px;color:#edf0ed;font:15px monospace}.track{height:8px;overflow:hidden;border-radius:8px;background:#293135}.track i{display:block;width:0;height:100%;background:#69ccf0;transition:width .1s linear}.percent{margin-top:9px;text-align:right;color:#899397;font:12px monospace}</style></head><body><main class="card"><div class="eyebrow">MONTE CARLO SIMULATION</div><h1>Running your encounter</h1><p>Calculating independent outcomes. Your results will open here when the simulations finish.</p><div class="count" id="count">0 / ${totalRuns.toLocaleString()} runs</div><div class="track"><i id="bar"></i></div><div class="percent" id="percent">0%</div></main></body></html>`);
+    resultTab.document.close();
+    const runs = [];
+    let lastProgressUpdate = performance.now();
+    for (let index = 0; index < totalRuns; index++) {
+      runs.push(simulateClass(rotation, Number(duration), Number(startingMana), Number(regen), Number(spirit), build, Math.floor(Math.random() * 0xffffffff), Number(baseHitChance), Number(spellPower), manaOptions, runOptions));
+      const now = performance.now();
+      if (index + 1 < totalRuns && now - lastProgressUpdate < 1000) continue;
+      const completed = index + 1;
+      const percent = Math.round(completed / totalRuns * 100);
+      if (!resultTab.closed) {
+        resultTab.document.getElementById('count').textContent = `${completed.toLocaleString()} / ${totalRuns.toLocaleString()} runs`;
+        resultTab.document.getElementById('bar').style.width = `${percent}%`;
+        resultTab.document.getElementById('percent').textContent = `${percent}%`;
+      }
+      lastProgressUpdate = now;
+      if (completed < totalRuns) await yieldForProgress();
+    }
     const sorted = [...runs].sort((a, b) => a.dps - b.dps);
     const medianRun = sorted[Math.floor((sorted.length - 1) / 2)];
     const minimum = sorted[0].dps;
@@ -1014,7 +1039,7 @@ function SimulatorApp() {
     <main className="main">
       <header className="topbar"><div><span className="crumb">SIMULATOR /</span> <b>{active.toUpperCase()}</b></div><div className="top-right"><details className="class-switcher"><summary className="pill"><i/> {activeClass.name.toUpperCase()} <span>▾</span></summary><div className="class-menu" role="listbox" aria-label="Select character class">{classRegistry.map(characterClass => <button key={characterClass.id} type="button" role="option" aria-selected={selectedClass === characterClass.id} disabled={!characterClass.available} className={characterClass.available ? 'class-option available' : 'class-option locked'} onClick={event => { event.currentTarget.closest('details').open = false; setSelectedClass(characterClass.id); }}><span className="class-mark"><img src={characterClass.icon} alt=""/></span><span className="class-option-copy"><b>{characterClass.name}</b><small>{characterClass.available ? 'ACTIVE CLASS' : 'COMING LATER'}</small></span><span className="class-option-status">{characterClass.available ? '✓' : 'LOCKED'}</span></button>)}</div></details><span className="build-label">BUILD 0.1</span></div></header>
       {active === 'Rotation lab' && <>
-        <section className="page-head"><div><div className="eyebrow">THEORYCRAFT WORKSPACE <span>·</span> PATCH FOREVER</div><h1>Find your <em>next best cast.</em></h1><p>Choose spells, set their priority and conditions, then run the encounter simulation.</p></div><button className="run-btn" disabled={!rotation.length} onClick={runSimulation}><span>▶</span> {rotation.length ? 'SIMULATE 1,000 RUNS ↗' : 'SELECT SPELLS FIRST'}</button></section>
+        <section className="page-head"><div><div className="eyebrow">THEORYCRAFT WORKSPACE <span>·</span> PATCH FOREVER</div><h1>Find your <em>next best cast.</em></h1><p>Choose spells, set their priority and conditions, then run the encounter simulation.</p></div><button className="run-btn" disabled={!rotation.length} onClick={runSimulation}><span>▶</span> {rotation.length ? 'SIMULATE 10,000 RUNS ↗' : 'SELECT SPELLS FIRST'}</button></section>
         <section className="spec-manager" aria-label="Saved specs"><div className="spec-manager-title"><b>SAVED SPECS</b><span>Talent build · priority · stats</span></div><select aria-label="Load saved spec" value={selectedSpecId} onChange={event => { const spec = savedSpecs.find(item => item.id === event.target.value); if (spec) loadSpec(spec); else { setSelectedSpecId(''); setSpecName(''); } }}><option value="">Choose a saved spec…</option>{savedSpecs.map(spec => <option key={spec.id} value={spec.id}>{spec.name}</option>)}</select><input aria-label="Spec name" value={specName} onChange={event => setSpecName(event.target.value)} placeholder="Name this spec" maxLength={48}/><button className="spec-new" onClick={() => { setSelectedSpecId(''); setSpecName(''); }}>NEW</button><button onClick={saveSpec} disabled={!specName.trim()}>{savedSpecs.some(spec => spec.id === selectedSpecId) ? 'UPDATE SPEC' : 'SAVE SPEC'}</button><button className="spec-delete" onClick={deleteSpec} disabled={!selectedSpecId}>DELETE</button></section>
         <div className="grid-main">
           <section className="panel rotation-panel"><PanelTitle kicker="01 / ROTATION" title="Spell priority" right={<span className="loop-tag">READY CONDITIONALS FIRST · THEN PRIORITY ORDER</span>}/><p className="panel-desc">{selectedClass === 'mage' ? 'Add damage spells, set their priorities, and configure proc conditions. Ready conditional spells spend active buffs before the filler rotation.' : selectedClass === 'warlock' ? 'Add damage spells and order them by priority. Warlock uses the class specific talent model.' : 'Add damage spells and order them by priority. This class uses the neutral spell model; its talents are saved but do not modify results yet.'}</p>
